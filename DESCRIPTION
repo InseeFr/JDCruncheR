@@ -1,0 +1,17 @@
+Package: JDCruncheR
+Title: Interface entre le cruncher JDemetra+ et R
+Version: 0.1.0
+Date: septembre 2017
+Authors@R: c(person("Hien", "Pham", email = "trong-hien.pham@insee.fr", role = c("aut")),
+             person("Alain", "Quartier-la-Tente", email = "alain.quartier-la-tente@insee.fr", role = c("aut", "cre")))
+Authors: Hien Pham [aut],
+    Alain Quartier-la-Tente [aut, cre]
+Description: Permet de lancer rapidement le cruncher de JDemetra+ depuis R. La dernière version du cruncher peut être téléchargée sous https://github.com/jdemetra/jwsacruncher/releases.
+URL: https://github.com/AQLT/JDCruncheR
+BugReports: https://github.com/AQLT/JDCruncheR/issues
+Imports:
+    XML
+License: GPL-2
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
