@@ -8,7 +8,7 @@
 cruncher_and_param(workspace = NULL,
   cruncher_bin_directory = getOption("cruncher_bin_directory"),
   rename_multi_documents = TRUE, output = NULL,
-  delete_existing_file = NULL, ...)
+  delete_existing_file = NULL, log_file = NULL, ...)
 }
 \arguments{
 \item{workspace}{chemin vers le workspace. Par défaut une fenêtre s'ouvre pour sélectionner le workspace.}
@@ -25,6 +25,8 @@ Si \code{rename_multi_documents = FALSE} alors ce sont les noms des fichiers XML
 les dossiers existants lors du renommage des dossiers. Par défaut (\code{delete_existing_file = NULL}) une boîte de dialogue s'ouvre
 demandant l'action à réaliser.}
 
+\item{log_file}{nom du fichier qui contiendra la log du cruncher. Par défaut la log n'est pas exportée}
+
 \item{...}{autres paramètres de la fonction \link{create_param_file}.}
 }
 \value{
@@ -32,4 +34,8 @@ L'adresse du workspace.
 }
 \description{
 Fonction qui permet de lancer le cruncher sur un workspace tout en créant le fichier des paramètres.
+}
+\seealso{
+Other Cruncher functions: \code{\link{create_param_file}},
+  \code{\link{cruncher}}, \code{\link{update_workspace}}
 }

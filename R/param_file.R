@@ -22,6 +22,7 @@
 #' @param paths_path chemins vers les fichiers d'entrée (Excel, xml...).
 #' @return L'adresse du fichier de paramètres.
 #' @encoding UTF-8
+#' @family Cruncher functions
 #' @export
 create_param_file <- function(dir_file_param = getwd(), bundle = 10000, csv_layout = "list", csv_separator = ";",
                               ndecs = 6, policy = "parameters", output = NULL,
@@ -63,7 +64,7 @@ create_param_file <- function(dir_file_param = getwd(), bundle = 10000, csv_layo
                     "</wsaConfig>"
     )
     writeLines(file_param, con = paste0(dir_file_param,"/parametres.param"))
-    invisible(paste0(dir_file_param,"/parametres.param"))
+    return(invisible(paste0(dir_file_param,"/parametres.param")))
 }
 
 

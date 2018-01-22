@@ -46,3 +46,7 @@ L'adresse du fichier de paramètres.
 \description{
 Pour fonctionner, le cruncher a besoin d'un fichier de paramètres : \code{create_param_file} permet de le créer
 }
+\seealso{
+Other Cruncher functions: \code{\link{cruncher_and_param}},
+  \code{\link{cruncher}}, \code{\link{update_workspace}}
+}
