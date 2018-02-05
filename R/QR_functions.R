@@ -236,8 +236,8 @@ remove_indicators.QR_matrix <- function(x, ...){
     if(length(modalities_to_remove) > 0){
         x$modalities <- x$modalities[, - modalities_to_remove]
     }
-    if(length(values_to_retain) > 0){
-        x$values <- x$values[, - values_to_retain]
+    if(length(modalities_to_remove) > 0){
+        x$values <- x$values[, - modalities_to_remove]
     }
     return(x)
 }
