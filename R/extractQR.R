@@ -53,13 +53,6 @@ extract_QR <- function(matrix_output_file, sep = ";", dec = ","){
     if(!file.exists(matrix_output_file)|length(grep("\\.csv$",matrix_output_file))==0)
         stop("Le fichier n'existe pas ou n'est pas un fichier csv")
 
-#
-#     for (nom_fichier in c("demetra_m", "series_y")){
-#         table <- read.csv(file = paste0(data_dir,"/", nom_fichier, ".csv"),
-#                           sep = ";", dec = ",", stringsAsFactors = FALSE)
-#
-#         assign(nom_fichier, value = table)
-#     }
     demetra_m <- read.csv(file = matrix_output_file,
                       sep = sep, dec = dec, stringsAsFactors = FALSE,
                       na.strings = c("NA","?"))
@@ -76,11 +69,7 @@ extract_QR <- function(matrix_output_file, sep = ";", dec = ","){
     }
 
     demetra_m$series <- gsub("(^ *)|(* $)","",gsub("(^.* \\* )|(\\[frozen\\])","",demetra_m[,1]))
-    # years <- substr(series_y[,1],1,4)
     demetra_m$frequency <- extractFrequency(demetra_m)
-    # sapply(2:ncol(series_y),function(i){
-    #     max(table(years[!is.na(series_y[,i])]))
-    # })
 
     demetra_m <- cbind(demetra_m,
                        extractARIMA(demetra_m),

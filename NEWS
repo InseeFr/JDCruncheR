@@ -1,3 +1,7 @@
+JDCruncher 0.2.1
+================
+Correction d'un bug sur les fonctions `retain_indicators()` et `remove_indicator()`.
+
 JDCruncher 0.2.0
 ================
 

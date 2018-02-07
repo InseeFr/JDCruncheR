@@ -232,12 +232,12 @@ remove_indicators.default <- function(x, ...){
 remove_indicators.QR_matrix <- function(x, ...){
     indicators <- c(...)
     modalities_to_remove <- which(colnames(x$modalities) %in% indicators)
-    values_to_remove <- which(colnames(x$value) %in% indicators)
+    values_to_remove <- which(colnames(x$values) %in% indicators)
     if(length(modalities_to_remove) > 0){
         x$modalities <- x$modalities[, - modalities_to_remove]
     }
-    if(length(modalities_to_remove) > 0){
-        x$values <- x$values[, - modalities_to_remove]
+    if(length(values_to_remove) > 0){
+        x$values <- x$values[, - values_to_remove]
     }
     return(x)
 }
@@ -258,7 +258,7 @@ retain_indicators.default <- function(x, ...){
 retain_indicators.QR_matrix <- function(x, ...){
     indicators <- c(...)
     modalities_to_retain <- which(colnames(x$modalities) %in% indicators)
-    values_to_retain <- which(colnames(x$value) %in% indicators)
+    values_to_retain <- which(colnames(x$values) %in% indicators)
     if(length(modalities_to_retain) > 0){
         x$modalities <- x$modalities[, modalities_to_retain]
     }
