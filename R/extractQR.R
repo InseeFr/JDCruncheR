@@ -1,21 +1,19 @@
 #' Extraction d'un bilan qualité
 #'
-#' Permet d'extraire un bilan qualité à partir d'un dossier contenant les résultats.
+#' Permet d'extraire un bilan qualité à partir du fichier CSV contenant la matrice des diagnostics.
 #'
 #' @param matrix_output_file fichier CSV contenant la matrice des diagnostics. S'il n'est pas spécifié une fenêtre s'ouvre
 #' pour sélectionner le fichier.
 #' @param sep séparateur de caractères utilisé dans le fichier csv (par défaut \code{sep = ","})
 #' @param dec séparateur décimal utilisé dans le fichier csv (par défaut \code{dec = ","})
 #'
-#' @details La fonction permet d'extraire un bilan qualité à partir d'un dossier contenant l'ensemble des résultats.
-#' Ce dossier doit contenir : un fichier \emph{demetra_m.csv} contenant l'ensemble des diagnostics, un fichier
-#' \emph{series_y.csv} contenant les séries brutes (en colonnes) et un dossier \emph{series_sa.csv} contenant
-#' les séries CVS-CJO (en colonnes).
+#' @details La fonction permet d'extraire un bilan qualité à partir d'un fichier csv contenant l'ensemble des
+#' diagnostics (généralement fichier \emph{demetra_m.csv}).
 #'
-#' Ces fichiers peuvent être obtenus en lançant le cruncher (\code{\link{cruncher}} ou \code{\link{cruncher_and_param}}) avec
-#' l'ensemble des paramètres de base pour les paramètres à exporter, les séries "y" et "sa" dans les séries temporelles à exporter
-#' et l'option \code{csv_layout = "vtable"} pour le format de sortie des fichiers csv (option de
-#' \code{\link{cruncher_and_param}} ou de \code{\link{create_param_file}} lors de la création du
+#' Ce fichiers peut être obtenu en lançant le cruncher (\code{\link{cruncher}} ou \code{\link{cruncher_and_param}}) avec
+#' l'ensemble des paramètres de base pour les paramètres à exporter et l'option \code{csv_layout = "vtable"} (par défaut)
+#' pour le format de sortie des fichiers csv (option de \code{\link{cruncher_and_param}} ou de \code{\link{create_param_file}}
+#' lors de la création du
 #' fichier de paramètres).
 #'
 #' Le résultat de cette fonction est un objet \code{\link{QR_matrix}} qui est une liste de trois paramètres :
@@ -68,7 +66,8 @@ extract_QR <- function(matrix_output_file, sep = ";", dec = ","){
                     "\nRelancez l'export"))
     }
 
-    demetra_m$series <- gsub("(^ *)|(* $)","",gsub("(^.* \\* )|(\\[frozen\\])","",demetra_m[,1]))
+    demetra_m$series <- gsub("(^ *)|(* $)", "",
+                             gsub("(^.* \\* )|(\\[frozen\\])", "", demetra_m[,1]))
     demetra_m$frequency <- extractFrequency(demetra_m)
 
     demetra_m <- cbind(demetra_m,
@@ -88,7 +87,7 @@ extract_QR <- function(matrix_output_file, sep = ";", dec = ","){
                                              right = FALSE)
     demetra_m$pct_outliers_value <- demetra_m[,match("number.of.outliers",colnames(demetra_m))+1] * 100
     demetra_m$pct_outliers_modality <- demetra_m$number.of.outliers
-    demetra_m$m7_modality <- cut(demetra_m$m7,
+    demetra_m$m7_modality <- cut(demetra_m$m7+0, #+0 pour forcer en numeric si que des NA
                                  breaks = c(0, 1, 2, Inf),
                                  labels = c("Good", "Bad", "Severe"), right = FALSE)
 
@@ -139,16 +138,31 @@ extract_QR <- function(matrix_output_file, sep = ";", dec = ","){
 extractARIMA <- function(demetra_m){
     q_possibles <- grep("(^q$)|(^q\\.\\d$)",colnames(demetra_m))
     bp_possibles <- grep("(^bp$)|(^bp\\.\\d$)",colnames(demetra_m))
+
+    val_q <- demetra_m[, q_possibles]
+    val_bq <- demetra_m[,bp_possibles]
+
     if(length(q_possibles) > 1){
-        col_q_possibles <- demetra_m[,q_possibles]
-        val_q <- col_q_possibles[,which(sapply(col_q_possibles,is.integer))[1]]
+        integer_col <- which(sapply(val_q, is.integer))
+        if(length(integer_col) == 0){
+            val_q <- rep(NA, nrow(val_q))
+        }else{
+            val_q <- val_q[, integer_col[1]]
+        }
+
     }
     if(length(bp_possibles) > 1){
-        col_bq_possibles <- demetra_m[,bp_possibles]
-        val_bq <- col_bq_possibles[,which(sapply(col_bq_possibles,is.integer))[1]]
+        integer_col <- which(sapply(val_bq,is.integer))
+        if(length(integer_col) == 0){
+            val_bq <- rep(NA, nrow(val_bq))
+        }else{
+            val_bq <- val_bq[, integer_col[1]]
+        }
+
     }
 
-    if(!all(is.integer(val_q),is.integer(val_bq)))
+    if(!all(is.integer(val_q) || all(is.na(val_q)),
+           is.integer(val_bq) || all(is.na(val_q))))
         stop("Erreur dans l'extraction du paramètre q ou bq du modèle ARIMA : revoir l'extraction")
     arima <- data.frame(arima_p = demetra_m[,"p"], arima_d = demetra_m[,"d"], arima_q = val_q,
                         arima_bp = val_bq, arima_bd = demetra_m[,"bd"], arima_bq = demetra_m[,"bq"],
@@ -157,13 +171,26 @@ extractARIMA <- function(demetra_m){
 }
 extractOOS_test <- function(demetra_m){
     mean_possibles <- grep("(^mean$)|(^mean\\.\\d$)",colnames(demetra_m))
+    col_mean <- mean_possibles
     if(length(mean_possibles) > 1){
         col_mean_possibles <- demetra_m[,mean_possibles]
-        col_mean <- mean_possibles[sapply(col_mean_possibles,is.character)][1]
+        character_cols <- which(sapply(col_mean_possibles, is.character))
+        if(length(character_cols) == 0){
+            col_all_NA <- which(apply(is.na(col_mean_possibles),2,all))
+            if(length(col_all_NA) == 0){
+                stop("Erreur dans l'extraction des diagnostics en out of sample")
+            }else{
+                col_mean <- mean_possibles[col_all_NA[1]]
+            }
+        }else{
+            col_mean <- mean_possibles[character_cols[1]]
+        }
     }
     col_mse <- match("mse",colnames(demetra_m))[1]
-    if(!all(is.character(demetra_m[,col_mean]),is.double(demetra_m[,col_mean+1]),
-            is.character(demetra_m[,col_mse]),is.double(demetra_m[,col_mse+1])
+    if(!all(is.character(demetra_m[,col_mean]) || all(is.na(demetra_m[,col_mean])),
+            is.double(demetra_m[,col_mean+1]) || all(is.na(demetra_m[,col_mean+1])),
+            is.character(demetra_m[,col_mse]) || all(is.na(demetra_m[,col_mse])),
+            is.double(demetra_m[,col_mse+1]) || all(is.na(demetra_m[,col_mse+1]))
     ))
         stop("Erreur dans l'extraction des diagnostics en out of sample")
 
@@ -175,19 +202,45 @@ extractOOS_test <- function(demetra_m){
 extractStatQ <- function(demetra_m){
     q_possibles <- grep("(^q$)|(^q\\.\\d$)",colnames(demetra_m))
     q_m2_possibles <- grep("(^q\\.m2$)|(^q\\.m2\\.\\d$)",colnames(demetra_m))
+    col_q <- q_possibles
+    col_q_m2 <- q_m2_possibles
     if(length(q_possibles) > 1){
         col_q_possibles <- demetra_m[,q_possibles]
-        col_q <- q_possibles[sapply(col_q_possibles,is.character)][1]
+        # col_q <- q_possibles[sapply(col_q_possibles,is.character)][1]
+        character_cols <- which(sapply(col_q_possibles, is.character))
+        if(length(character_cols) == 0){
+            col_all_NA <- which(apply(is.na(col_q_possibles),2,all))
+            if(length(col_all_NA) == 0){
+                stop("Erreur dans l'extraction des stats Q et Q-M2")
+            }else{
+                col_q <- q_possibles[col_all_NA[1]]
+            }
+        }else{
+            col_q <- q_possibles[character_cols[1]]
+        }
     }
     if(length(q_m2_possibles) > 1){
         col_q_m2_possibles <- demetra_m[,q_m2_possibles]
-        col_q_m2 <- q_m2_possibles[sapply(col_q_m2_possibles,is.character)]
+        # col_q_m2 <- q_m2_possibles[sapply(col_q_m2_possibles,is.character)]
+        character_cols <- which(sapply(col_q_m2_possibles, is.character))
+        if(length(character_cols) == 0){
+            col_all_NA <- which(apply(is.na(col_q_m2_possibles),2,all))
+            if(length(col_all_NA) == 0){
+                stop("Erreur dans l'extraction des stats Q et Q-M2")
+            }else{
+                col_q_m2 <- q_m2_possibles[col_all_NA[1]]
+            }
+        }else{
+            col_q_m2 <- q_m2_possibles[character_cols[1]]
+        }
     }
-    if(!all(is.character(demetra_m[,col_q]),is.double(demetra_m[,col_q+1]),
-            is.character(demetra_m[,col_q_m2]),is.double(demetra_m[,col_q_m2+1])))
+    if(!all(is.character(demetra_m[,col_q]) || all(is.na(demetra_m[,col_q])),
+            is.double(demetra_m[,col_q+1]) || all(is.na(demetra_m[,col_q+1])),
+            is.character(demetra_m[,col_q_m2]) || all(is.na(demetra_m[,col_q_m2])),
+            is.double(demetra_m[,col_q_m2+1])) || all(is.na(demetra_m[,col_q_m2+1])))
         stop("Erreur dans l'extraction des stats Q et Q-M2")
 
-    stat_Q <- data.frame(demetra_m[,col_q+c(0,1)], demetra_m[,col_q+c(0,1)],
+    stat_Q <- data.frame(demetra_m[, col_q+c(0,1)], demetra_m[, col_q_m2+c(0,1)],
                          stringsAsFactors = FALSE)
     colnames(stat_Q) <- c("q_modality","q_value","q_m2_modality","q_m2_value")
 

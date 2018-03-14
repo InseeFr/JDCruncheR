@@ -135,7 +135,7 @@ print.QR_matrix <- function(x, print_variables = TRUE, print_score_formula = TRU
     }
 
 
-    score_value <- score(x)
+    score_value <- extract_score(x, format_output = "vector")
     if(is.null(score_value)){
         cat("Il n'y a aucun score de calculé")
     }else{
@@ -163,6 +163,7 @@ print.mQR_matrix <- function(x, score_statistics = TRUE, ...){
                 length(x)))
     cat("\n")
     bq_names <- names(x)
+    bq_names[is.na(bq_names)] <- ""
     if(is.null(bq_names) || all(is.na(bq_names))){
         cat("Aucun bilan qualité n'a de nom")
     }else{
@@ -173,17 +174,17 @@ print.mQR_matrix <- function(x, score_statistics = TRUE, ...){
                              "%d bilans qualité ont un nom : %s"),
                     length(bq_valid_names),paste(bq_valid_names, collapse ="  ")))
 
-        if(length(bq_names_na) > 0){
+        if(length(bq_names_na) > 1){
             cat("\n")
-            cat(sprintf(ngettext(length(bq_names_na),
+            cat(sprintf(ngettext(bq_names_na,
                                  "%d bilan qualité n'a pas de nom",
                                  "%d bilans qualité n'ont pas de nom"),
-                        length(bq_names_na)))
+                        bq_names_na))
         }
     }
     if(score_statistics){
         cat("\n")
-        score_values <- score(x)
+        score_values <- extract_score(x, format_output = "vector")
         all_score <- do.call(c,score_values)
         if(is.null(all_score)){
             cat("Aucun bilan qualité n'a de score de calculé")

@@ -26,10 +26,9 @@ weighted_score(QR, 2) # Tous les scores sont multipliÃ©s par 2
 }
 }
 \seealso{
-Other QR_matrix functions: \code{\link{QR_var_manipulation}},
-  \code{\link{compute_score}},
+Other QR_matrix functions: \code{\link{compute_score}},
   \code{\link{export_xlsx.QR_matrix}},
   \code{\link{export_xlsx.mQR_matrix}},
-  \code{\link{extract_QR}}, \code{\link{rbind.QR_matrix}},
-  \code{\link{score}}, \code{\link{sort}}
+  \code{\link{extract_QR}}, \code{\link{extract_score}},
+  \code{\link{rbind.QR_matrix}}, \code{\link{sort}}
 }

@@ -13,7 +13,7 @@ cruncher_and_param(workspace = NULL,
 \arguments{
 \item{workspace}{chemin vers le workspace. Par défaut une fenêtre s'ouvre pour sélectionner le workspace.}
 
-\item{cruncher_bin_directory}{répertoire contenant contenant le dossier "Bin" du cruncher.}
+\item{cruncher_bin_directory}{répertoire contenant contenant le dossier "bin" du cruncher.}
 
 \item{rename_multi_documents}{booléen indiquant s'il faut renommer les dossiers contenant les sorties en fonction
 des noms des multi-documents du workspace. Par défaut \code{rename_multi_documents = TRUE}.

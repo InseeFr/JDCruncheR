@@ -20,7 +20,7 @@ Par défaut le tri est effectué par ordre croissant.}
 
 \item{sort_variables}{variables à utiliser pour le tri qui sont présentes dans les tables des modalités.}
 
-\item{...}{autres paramètres de la fonction \code{\link[base]{order}}.}
+\item{...}{autres paramètres de la fonction \code{\link[base]{order}} (non utilisés pour l'instant).}
 }
 \value{
 L'objet en entrée avec les tables de bilan qualité triées.
@@ -35,10 +35,10 @@ sort(QR, sort_variables = "score") #Pour trier par ordre croissant sur le score
 }
 }
 \seealso{
-Other QR_matrix functions: \code{\link{QR_var_manipulation}},
-  \code{\link{compute_score}},
+Other QR_matrix functions: \code{\link{compute_score}},
   \code{\link{export_xlsx.QR_matrix}},
   \code{\link{export_xlsx.mQR_matrix}},
-  \code{\link{extract_QR}}, \code{\link{rbind.QR_matrix}},
-  \code{\link{score}}, \code{\link{weighted_score}}
+  \code{\link{extract_QR}}, \code{\link{extract_score}},
+  \code{\link{rbind.QR_matrix}},
+  \code{\link{weighted_score}}
 }

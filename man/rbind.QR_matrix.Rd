@@ -21,17 +21,16 @@ et \code{values}.
 \examples{
 \dontrun{
 QR <- extract_QR()
-QR1 <- compute_score(QR1, score_formula = 2 * m7 + 3 * q + 5 * qs_residual_sa_on_sa)
-QR2 <- compute_score(QR1, score_formula = 2 * m7 + 5 * qs_residual_sa_on_sa)
-cbind(QR1, QR2) # Une erreur est renvoyÃ©e
-cbind(QR1, QR2, check_formula = FALSE)
+QR1 <- compute_score(QR1, score_pond = c(m7 = 2, q = 3, qs_residual_sa_on_sa = 5))
+QR2 <- compute_score(QR1, score_pond = c(m7 = 2, qs_residual_sa_on_sa = 5))
+rbind(QR1, QR2) # Une erreur est renvoyÃ©e
+rbind(QR1, QR2, check_formula = FALSE)
 }
 }
 \seealso{
-Other QR_matrix functions: \code{\link{QR_var_manipulation}},
-  \code{\link{compute_score}},
+Other QR_matrix functions: \code{\link{compute_score}},
   \code{\link{export_xlsx.QR_matrix}},
   \code{\link{export_xlsx.mQR_matrix}},
-  \code{\link{extract_QR}}, \code{\link{score}},
+  \code{\link{extract_QR}}, \code{\link{extract_score}},
   \code{\link{sort}}, \code{\link{weighted_score}}
 }

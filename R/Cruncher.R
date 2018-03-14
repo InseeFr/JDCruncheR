@@ -3,7 +3,7 @@
 #' Fonction qui permet de lancer le cruncher sur un workspace à partir d'un fichier de paramètres.
 #'
 #' @param workspace chemin vers le workspace.
-#' @param cruncher_bin_directory répertoire contenant contenant le dossier "Bin" du cruncher. Pour voir la
+#' @param cruncher_bin_directory répertoire contenant contenant le dossier "bin" du cruncher. Pour voir la
 #' valeur par défaut exécuter le code \code{getOption("cruncher_bin_directory")}.
 #' @param param_file_path chemin vers le fichier des paramètres à utiliser pour lancer le workspace.
 #' Par défaut un fichier .params est recherché au même niveau que le workspace.
@@ -72,7 +72,7 @@ cruncher <- function(workspace,
 #' Fonction qui permet de lancer le cruncher sur un workspace tout en créant le fichier des paramètres.
 #'
 #' @param workspace chemin vers le workspace. Par défaut une fenêtre s'ouvre pour sélectionner le workspace.
-#' @param cruncher_bin_directory répertoire contenant contenant le dossier "Bin" du cruncher.
+#' @param cruncher_bin_directory répertoire contenant contenant le dossier "bin" du cruncher.
 #' @param rename_multi_documents booléen indiquant s'il faut renommer les dossiers contenant les sorties en fonction
 #' des noms des multi-documents du workspace. Par défaut \code{rename_multi_documents = TRUE}.
 #' Si \code{rename_multi_documents = FALSE} alors ce sont les noms des fichiers XML des multi_documents qui sont utilisés.
@@ -114,7 +114,7 @@ cruncher_and_param <- function(workspace = NULL,
             # Un des fichiers existe déjà !
             if(is.null(delete_existing_file)){
                 message <- paste("Un ou plusieurs dossiers présents sous",output,"existent déjà.\nVoulez-vous le(s) supprimer ?")
-                delete_existing_file <- winDialog(type = c("yesnocancel"),
+                delete_existing_file <- utils::winDialog(type = c("yesnocancel"),
                                                   message)
 
                 delete_existing_file <- isTRUE(delete_existing_file=="YES")
@@ -188,7 +188,7 @@ multiprocessing_names <- function(workspace){
 #' \code{"lastoutliers"} (les outliers sont ré-identifiés sur la dernière année et les paramètres re-estimés) ;
 #' \code{"stochastic"} (le modèle arima et les outliers sont identifiés et les paramètres re-estimés) ;
 #' \code{"complete"} (le modèle est complétement ré-estimé).
-#' @param cruncher_bin_directory répertoire contenant contenant le dossier "Bin" du cruncher.
+#' @param cruncher_bin_directory répertoire contenant contenant le dossier "bin" du cruncher.
 #' @encoding UTF-8
 #' @return L'adresse du workspace.
 #' @family Cruncher functions

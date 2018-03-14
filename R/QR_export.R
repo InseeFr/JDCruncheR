@@ -107,12 +107,16 @@ export_xlsx.mQR_matrix <- function(x, export_dir = "./",
     layout <- match.arg(layout)
 
     QR_matrix_names <- names(x)
+
     if(is.null(QR_matrix_names)){
         QR_matrix_names <- paste0("QR_",1:length(x))
-    }else if(!is.na(match("", QR_matrix_names))){
-        QR_matrix_names[match("", QR_matrix_names)] <- paste0("QR_",match("", QR_matrix_names))
-
+    }else{
+        QR_matrix_names[is.na(QR_matrix_names)] <- ""
+        if(!is.na(match("", QR_matrix_names)))
+            QR_matrix_names[match("", QR_matrix_names)] <- paste0("QR_",
+                                                                  match("", QR_matrix_names))
     }
+
 
     if(layout_file == "ByQRMatrix"){
         #On exporte un fichier par bilan :

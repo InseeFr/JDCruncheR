@@ -18,7 +18,7 @@ Les autres méthodes possibles sont :
 \code{"stochastic"} (le modèle arima et les outliers sont identifiés et les paramètres re-estimés) ;
 \code{"complete"} (le modèle est complétement ré-estimé).}
 
-\item{cruncher_bin_directory}{répertoire contenant contenant le dossier "Bin" du cruncher.}
+\item{cruncher_bin_directory}{répertoire contenant contenant le dossier "bin" du cruncher.}
 }
 \value{
 L'adresse du workspace.

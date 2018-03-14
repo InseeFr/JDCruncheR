@@ -19,18 +19,16 @@ pour sélectionner le fichier.}
 Un objet de type \code{\link{QR_matrix}}.
 }
 \description{
-Permet d'extraire un bilan qualité à partir d'un dossier contenant les résultats.
+Permet d'extraire un bilan qualité à partir du fichier CSV contenant la matrice des diagnostics.
 }
 \details{
-La fonction permet d'extraire un bilan qualité à partir d'un dossier contenant l'ensemble des résultats.
-Ce dossier doit contenir : un fichier \emph{demetra_m.csv} contenant l'ensemble des diagnostics, un fichier
-\emph{series_y.csv} contenant les séries brutes (en colonnes) et un dossier \emph{series_sa.csv} contenant
-les séries CVS-CJO (en colonnes).
+La fonction permet d'extraire un bilan qualité à partir d'un fichier csv contenant l'ensemble des
+diagnostics (généralement fichier \emph{demetra_m.csv}).
 
-Ces fichiers peuvent être obtenus en lançant le cruncher (\code{\link{cruncher}} ou \code{\link{cruncher_and_param}}) avec
-l'ensemble des paramètres de base pour les paramètres à exporter, les séries "y" et "sa" dans les séries temporelles à exporter
-et l'option \code{csv_layout = "vtable"} pour le format de sortie des fichiers csv (option de
-\code{\link{cruncher_and_param}} ou de \code{\link{create_param_file}} lors de la création du
+Ce fichiers peut être obtenu en lançant le cruncher (\code{\link{cruncher}} ou \code{\link{cruncher_and_param}}) avec
+l'ensemble des paramètres de base pour les paramètres à exporter et l'option \code{csv_layout = "vtable"} (par défaut)
+pour le format de sortie des fichiers csv (option de \code{\link{cruncher_and_param}} ou de \code{\link{create_param_file}}
+lors de la création du
 fichier de paramètres).
 
 Le résultat de cette fonction est un objet \code{\link{QR_matrix}} qui est une liste de trois paramètres :
@@ -55,10 +53,10 @@ QR[["modalities"]]
 }
 }
 \seealso{
-Other QR_matrix functions: \code{\link{QR_var_manipulation}},
-  \code{\link{compute_score}},
+Other QR_matrix functions: \code{\link{compute_score}},
   \code{\link{export_xlsx.QR_matrix}},
   \code{\link{export_xlsx.mQR_matrix}},
-  \code{\link{rbind.QR_matrix}}, \code{\link{score}},
-  \code{\link{sort}}, \code{\link{weighted_score}}
+  \code{\link{extract_score}},
+  \code{\link{rbind.QR_matrix}}, \code{\link{sort}},
+  \code{\link{weighted_score}}
 }

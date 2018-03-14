@@ -16,9 +16,11 @@
 #' \code{"complete"} (le modèle est complétement ré-estimé).
 #' @param output dossier où sont exportés les résultats. Par défaut (\code{output = NULL}) un dossier "Output" est créé à l'adresse du workspace.
 #' @param matrix_item chaîne de caractères contenant les noms des paramètres à exporter (voir le manuel de JDemetra+).
-#' Par défaut ce sont les mêmes paramètres que ceux de JDemetra+ : éxécuter \code{getOption("default_matrix_item")} pour les obtenir.
+#' Les paramètres par défaut sont obtenues en exécutant la commande \code{getOption("default_matrix_item")} (cette option
+#' est initialisée aux mêmes paramètres par défaut que ceux de JDemetra+).
 #' @param tsmatrix_series chaîne de caractères contenant les séries temporelles à exporter (voir le manuel de JDemetra+).
-#' Par défaut ce sont les mêmes paramètres que ceux de JDemetra+ : éxécuter \code{getOption("default_tsmatrix_series")} pour les obtenir.
+#'  Les paramètres par défaut sont obtenues en exécutant la commande \code{getOption("default_tsmatrix_series")} (cette option
+#' est initialisée aux mêmes paramètres par défaut que ceux de JDemetra+)
 #' @param paths_path chemins vers les fichiers d'entrée (Excel, xml...).
 #' @return L'adresse du fichier de paramètres.
 #' @encoding UTF-8

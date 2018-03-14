@@ -27,10 +27,9 @@ un fichier par bilan qualité dont chaque feuille correspond à la composante ex
 Permet d'exporter dans des fichiers Excel une liste de bilan qualité
 }
 \seealso{
-Other QR_matrix functions: \code{\link{QR_var_manipulation}},
-  \code{\link{compute_score}},
+Other QR_matrix functions: \code{\link{compute_score}},
   \code{\link{export_xlsx.QR_matrix}},
-  \code{\link{extract_QR}}, \code{\link{rbind.QR_matrix}},
-  \code{\link{score}}, \code{\link{sort}},
+  \code{\link{extract_QR}}, \code{\link{extract_score}},
+  \code{\link{rbind.QR_matrix}}, \code{\link{sort}},
   \code{\link{weighted_score}}
 }

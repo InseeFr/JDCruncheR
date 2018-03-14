@@ -12,7 +12,7 @@ cruncher(workspace,
 \arguments{
 \item{workspace}{chemin vers le workspace.}
 
-\item{cruncher_bin_directory}{répertoire contenant contenant le dossier "Bin" du cruncher. Pour voir la
+\item{cruncher_bin_directory}{répertoire contenant contenant le dossier "bin" du cruncher. Pour voir la
 valeur par défaut exécuter le code \code{getOption("cruncher_bin_directory")}.}
 
 \item{param_file_path}{chemin vers le fichier des paramètres à utiliser pour lancer le workspace.

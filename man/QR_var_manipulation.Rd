@@ -17,21 +17,18 @@ retain_indicators(x, ...)
 }
 \description{
 Permet de retirer des indicateurs (fonction \code{remove_indicators}) ou de n'en retenir que certains
-(fonction \code{retain_indicators}) d'objets \code{QR_matrix} ou \code{mQR_matrix}.
+(fonction \code{retain_indicators}) d'objets \code{QR_matrix} ou \code{mQR_matrix}. Le nom des séries
+(colonne "series") ne peut être enlevé.
 }
 \examples{
 \dontrun{
 QR <- compute_score(extract_QR())
-retain_indicators(QR,"score","m7") # On ne retiend que les variables score et m7
+retain_indicators(QR,"score","m7") # On ne retient que les variables score et m7
 retain_indicators(QR,c("score","m7")) #Ã©quivalent
 score(remove_indicator(QR,"score")) # Il n'y a plus de score
 }
 }
 \seealso{
-Other QR_matrix functions: \code{\link{compute_score}},
-  \code{\link{export_xlsx.QR_matrix}},
-  \code{\link{export_xlsx.mQR_matrix}},
-  \code{\link{extract_QR}}, \code{\link{rbind.QR_matrix}},
-  \code{\link{score}}, \code{\link{sort}},
-  \code{\link{weighted_score}}
+Other var QR_matrix manipulation: \code{\link{add_indicator}},
+  \code{\link{recode_indicator_num}}
 }

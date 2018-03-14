@@ -4,35 +4,34 @@
 \name{compute_score}
 \alias{compute_score}
 \alias{compute_score.QR_matrix}
-\alias{compute_score.mQR_matrix}
 \title{Calcul d'un score global}
 \usage{
-\method{compute_score}{QR_matrix}(x, score_formula = 6.66 *
-  qs_residual_sa_on_sa + 6.68 * f_residual_sa_on_sa + 6.66 *
-  combined_residual_sa_on_sa + 15 * combined_residual_sa_on_sa_last_years + 3.33
-  * combined_residual_sa_on_i + 3.33 * qs_residual_sa_on_i + 3.34 *
-  f_residual_sa_on_i + 10 * f_residual_td_on_sa + 10 * f_residual_td_on_i + 10 *
-  residuals_mean + 10 * residuals_independency + 5 * residuals_homoskedasticity
-  + 5 * residual_normality + 3 * m7 + 2 * q_m2, modalities = c("Good",
-  "Uncertain", "Bad", "Severe"), normalize_score_value, ...)
-
-\method{compute_score}{mQR_matrix}(x, ...)
+\method{compute_score}{QR_matrix}(x, score_pond = c(qs_residual_sa_on_sa =
+  6.66, f_residual_sa_on_sa = 6.68, combined_residual_sa_on_sa = 6.66,
+  combined_residual_sa_on_sa_last_years = 15, combined_residual_sa_on_i = 3.33,
+  qs_residual_sa_on_i = 3.33, f_residual_sa_on_i = 3.34, f_residual_td_on_sa =
+  10, f_residual_td_on_i = 10, residuals_mean = 10, residuals_independency = 10,
+  residuals_homoskedasticity = 5, residual_normality = 5, m7 = 3, q_m2 = 2),
+  modalities = c("Good", "Uncertain", "Bad", "Severe"), normalize_score_value,
+  na.rm = FALSE, n_contrib_score, ...)
 }
 \arguments{
 \item{x}{objet de type \code{QR_matrix} ou \code{mQR_matrix}.}
 
-\item{score_formula}{formule utilisée pour calculer le score global}
+\item{score_pond}{formule utilisée pour calculer le score global}
 
-\item{modalities}{modalités triées par leur ordre d'importance dans le calcul du score. Par défaut
-\code{modalities = c("Good", "Uncertain", "Bad","Severe")} : la valeur \code{"Good"} sera associée à la note 0,
-la valeur \code{"Uncertain"} sera associée à la note 1, la valeur \code{"Bad"} sera associée à la note 2, etc.}
+\item{modalities}{modalités triées par leur ordre d'importance dans le calcul du score (voir détails).}
 
 \item{normalize_score_value}{chiffre indiquant la valeur de référence pour la normalisation des pondérations utilisées lors du
-calcul du score. C'est-à-dire que s'il est renseigné alors la somme des pondérations utilisées sera égal à cette valeur.
-Si le paramètre n'est pas renseigné alors les poids ne seront pas normalisés.}
+calcul du score. Si le paramètre n'est pas renseigné alors les poids ne seront pas normalisés.}
 
-\item{...}{arguments de la fonction \code{compute_score} associées à la classe \code{QR_matrix}
-(ou paramètres non utilisées).}
+\item{na.rm}{booléen indiquant si les valeurs manquantes doivent être enlevées pour le calcul du score.}
+
+\item{n_contrib_score}{entier indiquant le nombre de variables à créer dans la matrice des valeurs du
+bilan qualité contenant les \code{n_contrib_score} plus grandes contributrices au score (voir détails).
+si non spécifié alors aucune variable n'est créée.}
+
+\item{...}{autres paramètres non utilisés.}
 }
 \value{
 Un objet de type \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}.
@@ -40,19 +39,53 @@ Un objet de type \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}.
 \description{
 Permet de calculer un score global à partir d'un bilan qualité
 }
+\details{
+La fonction \code{compute_score} permet de calculer un score à partir des modalités
+d'un bilan qualité. Pour cela chaque modalité est associée à un poids défini par le paramètre
+\code{modalities}. Ainsi, le paramètre par défaut étant \code{c("Good", "Uncertain", "Bad","Severe")},
+la valeur \code{"Good"} sera associée à la note 0, la valeur \code{"Uncertain"} sera associée
+à la note 1, la valeur \code{"Bad"} sera associée à la note 2 et la valeur \code{"Bad"} sera associée à la note 3.
+
+Le calcul du score se fait grâce au paramètre \code{score_pond} qui est un vecteur de numeriques
+nommé contenant des poids et dont les noms correspondent aux variables de la matrice des modalités
+à utiliser dans le score. Ainsi, avec le paramètre \code{score_pond =
+c(qs_residual_sa_on_sa = 10, f_residual_td_on_sa = 5)} le score sera calculé à partir des deux
+variables qs_residual_sa_on_sa et f_residual_td_on_sa. Les notes associées aux modalités de
+la variable qs_residual_sa_on_sa seront multipliées par 10 et celles associées à la variable
+f_residual_td_on_sa seront multipliées par 5. Dans le calcul du score, certaines variables
+peuvent être manquantes, pour ne pas prendre en compte ces valeurs dans le calcul il suffit
+d'utiliser le paramètre \code{na.rm = TRUE}.
+
+Le paramètre \code{normalize_score_value} permet de normaliser les scores. Par exemple,
+si l'on souhaite avoir des notes entre 0 et 20 il suffit d'utiliser le paramètre
+\code{normalize_score_value = 20}.
+
+Le paramètre \code{n_contrib_score} permet d'ajouter des nouvelles variables à la matrice des valeurs
+du bilan qualité dont les valeurs correspondent aux noms des variables qui contribuent le plus au score
+de la série. \code{n_contrib_score} est un entier qui est égal au nombre de variables contributrices
+que l'on souhaite exporter. Par exemple, pour \code{n_contrib_score = 3}, trois colonnes seront crées
+contenant les trois plus grandes contributrices au score. Les noms des nouvelles variables sont
+\emph{i}_highest_score, \emph{i} correspondant au rang en terme de contribution au score (1_highest_score
+contiendra les noms des plus grandes contributrices, 2_highest_score
+des deuxièmes plus grandes contributrices, etc.).
+Seules les variables qui ont une contribution non nulle au score sont
+prises en compte. Ainsi, si une série a un score nul alors toutes les colonnes \emph{i}_highest_score
+associées à cette série seront vides ; si une série a un score positif uniquement du fait
+de la variable "m7" alors la valeur correspondante de le variable 1_highest_score sera égale à
+"m7" et celle des autres variables \emph{i}_highest_score seront vides.
+}
 \examples{
 \dontrun{
 QR <- extract_QR()
-QR <- compute_score(QR)
+QR <- compute_score(QR,n_contrib_score = 2)
 QR
 QR$modalities$score
 }
 }
 \seealso{
-Other QR_matrix functions: \code{\link{QR_var_manipulation}},
-  \code{\link{export_xlsx.QR_matrix}},
+Other QR_matrix functions: \code{\link{export_xlsx.QR_matrix}},
   \code{\link{export_xlsx.mQR_matrix}},
-  \code{\link{extract_QR}}, \code{\link{rbind.QR_matrix}},
-  \code{\link{score}}, \code{\link{sort}},
+  \code{\link{extract_QR}}, \code{\link{extract_score}},
+  \code{\link{rbind.QR_matrix}}, \code{\link{sort}},
   \code{\link{weighted_score}}
 }

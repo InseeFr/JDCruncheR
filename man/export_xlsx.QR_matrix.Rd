@@ -35,10 +35,9 @@ Si le paramètre est spécifié alors les éventuelles feuilles contenant ces no
 Permet d'exporter un bilan qualité dans un fichier Excel.
 }
 \seealso{
-Other QR_matrix functions: \code{\link{QR_var_manipulation}},
-  \code{\link{compute_score}},
+Other QR_matrix functions: \code{\link{compute_score}},
   \code{\link{export_xlsx.mQR_matrix}},
-  \code{\link{extract_QR}}, \code{\link{rbind.QR_matrix}},
-  \code{\link{score}}, \code{\link{sort}},
+  \code{\link{extract_QR}}, \code{\link{extract_score}},
+  \code{\link{rbind.QR_matrix}}, \code{\link{sort}},
   \code{\link{weighted_score}}
 }
