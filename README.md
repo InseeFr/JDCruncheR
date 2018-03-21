@@ -8,7 +8,7 @@ Pour installer JDCruncheR rien de plus simple ! Deux solutions : soit utiliser l
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("AQLT/JDCruncheR")
+devtools::install_github("AQLT/JDCruncheR", build_vignettes = TRUE)
 ```
 
 Soit installer JDCruncheR à partir du **.zip** ou du **.tar.gz** du package qui peuvent être téléchargés à l'adresse <https://github.com/AQLT/JDCruncheR/releases>. Pour plus d'informations sur l'installation du package et la configuration du cruncher voir le [wiki](https://github.com/AQLT/JDCruncheR/wiki).
