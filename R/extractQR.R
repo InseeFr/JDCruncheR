@@ -4,7 +4,7 @@
 #'
 #' @param matrix_output_file fichier CSV contenant la matrice des diagnostics. S'il n'est pas spécifié une fenêtre s'ouvre
 #' pour sélectionner le fichier.
-#' @param sep séparateur de caractères utilisé dans le fichier csv (par défaut \code{sep = ","})
+#' @param sep séparateur de caractères utilisé dans le fichier csv (par défaut \code{sep = ";"})
 #' @param dec séparateur décimal utilisé dans le fichier csv (par défaut \code{dec = ","})
 #'
 #' @details La fonction permet d'extraire un bilan qualité à partir d'un fichier csv contenant l'ensemble des
