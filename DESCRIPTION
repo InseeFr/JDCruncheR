@@ -1,7 +1,7 @@
 Package: JDCruncheR
 Title: Interface entre le cruncher JDemetra+ et R
-Version: 0.2.2
-Date: 20/02/2017
+Version: 0.2.3
+Date: 20/02/2018
 Authors@R: c(person("Hien", "Pham", email = "trong-hien.pham@insee.fr", role = c("aut")),
              person("Alain", "Quartier-la-Tente", email = "alain.quartier-la-tente@insee.fr", role = c("aut", "cre")))
 Authors: Hien Pham [aut],

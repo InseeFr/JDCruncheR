@@ -12,8 +12,8 @@
   qs_residual_sa_on_i = 3.33, f_residual_sa_on_i = 3.34, f_residual_td_on_sa =
   10, f_residual_td_on_i = 10, residuals_mean = 10, residuals_independency = 10,
   residuals_homoskedasticity = 5, residual_normality = 5, m7 = 3, q_m2 = 2),
-  modalities = c("Good", "Uncertain", "Bad", "Severe"), normalize_score_value,
-  na.rm = FALSE, n_contrib_score, ...)
+  modalities = c("Good", "Uncertain", "", "Bad", "Severe"),
+  normalize_score_value, na.rm = FALSE, n_contrib_score, ...)
 }
 \arguments{
 \item{x}{objet de type \code{QR_matrix} ou \code{mQR_matrix}.}

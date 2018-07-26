@@ -161,7 +161,7 @@ compute_score.default <- function(x,  ...){
 
 #' Calcul d'un score pondéré pour chaque observation
 #'
-#' Permet de pondérer un score déjà calculé en fonction des variables
+#' Permet de pondérer un score déjà calculé en fonction des variables.
 #'
 #' @param x objet de type \code{QR_matrix} ou \code{mQR_matrix}.
 #' @param pond pondération à appliquer au score. Il peut s'agir d'un nombre, d'un vecteur de nombres, du nom
@@ -172,7 +172,7 @@ compute_score.default <- function(x,  ...){
 #' weighted_score(QR, 2) # Tous les scores sont multipliés par 2
 #' }
 #' @family QR_matrix functions
-#' @return L'objet en entrée avec le score recalculé.
+#' @return L'objet en entrée avec le score recalculé
 #' @name weighted_score
 #' @rdname weighted_score
 #' @export
@@ -191,10 +191,10 @@ weighted_score.QR_matrix <- function(x, pond = 1){
         pond <- x$values[,pond]
     }
     if(!is.na(match("score",  colnames(x$modalities)))){
-        x$modalities$score <- x$modalities$score * pond
+        x$modalities$score_pond <- x$modalities$score * pond
     }
     if(!is.na(match("score", colnames(x$values)))){
-        x$values$score <- x$values$score * pond
+        x$values$score_pond <- x$values$score * pond
     }
     return(x)
 }

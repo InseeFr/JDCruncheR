@@ -11,7 +11,7 @@ extract_QR(matrix_output_file, sep = ";", dec = ",")
 \item{matrix_output_file}{fichier CSV contenant la matrice des diagnostics. S'il n'est pas spécifié une fenêtre s'ouvre
 pour sélectionner le fichier.}
 
-\item{sep}{séparateur de caractères utilisé dans le fichier csv (par défaut \code{sep = ","})}
+\item{sep}{séparateur de caractères utilisé dans le fichier csv (par défaut \code{sep = ";"})}
 
 \item{dec}{séparateur décimal utilisé dans le fichier csv (par défaut \code{dec = ","})}
 }

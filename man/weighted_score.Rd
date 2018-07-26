@@ -13,10 +13,10 @@ weighted_score(x, pond = 1)
 d'une des variables du bilan qualité ou d'une liste de pondérations pour les objets \code{mQR_matrix}.}
 }
 \value{
-L'objet en entrée avec le score recalculé.
+L'objet en entrée avec le score recalculé
 }
 \description{
-Permet de pondérer un score déjà calculé en fonction des variables
+Permet de pondérer un score déjà calculé en fonction des variables.
 }
 \examples{
 \dontrun{
