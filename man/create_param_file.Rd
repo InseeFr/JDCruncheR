@@ -9,7 +9,8 @@ create_param_file(dir_file_param = getwd(), bundle = 10000,
   csv_layout = "list", csv_separator = ";", ndecs = 6,
   policy = "parameters", output = NULL,
   matrix_item = getOption("default_matrix_item"),
-  tsmatrix_series = getOption("default_tsmatrix_series"), paths_path = NULL)
+  tsmatrix_series = getOption("default_tsmatrix_series"),
+  paths_path = NULL)
 }
 \arguments{
 \item{dir_file_param}{répertoire du dossier qui contiendra le fichier parametres.param des paramètres.}
@@ -52,3 +53,4 @@ Pour fonctionner, le cruncher a besoin d'un fichier de paramètres : \code{creat
 Other Cruncher functions: \code{\link{cruncher_and_param}},
   \code{\link{cruncher}}, \code{\link{update_workspace}}
 }
+\concept{Cruncher functions}

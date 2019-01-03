@@ -39,3 +39,4 @@ Fonction qui permet de lancer le cruncher sur un workspace tout en créant le fi
 Other Cruncher functions: \code{\link{create_param_file}},
   \code{\link{cruncher}}, \code{\link{update_workspace}}
 }
+\concept{Cruncher functions}

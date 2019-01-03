@@ -4,13 +4,17 @@
 \alias{extract_score}
 \title{Extraction du score}
 \usage{
-extract_score(x, format_output = c("data.frame", "vector"))
+extract_score(x, format_output = c("data.frame", "vector"),
+  weighted_score = FALSE)
 }
 \arguments{
 \item{x}{objet de type \code{QR_matrix} ou \code{mQR_matrix}.}
 
 \item{format_output}{chaîne de caractères indiquant le format de l'objet en sortie :
 soit un \code{data.frame} soit un \code{vector}.}
+
+\item{weighted_score}{booléen indiquant s'il faut extraire le score pondéré (s'il existe) ou le score non pondéré.
+Par défaut c'es le score non pondéré qui est extrait.}
 }
 \description{
 Permet d'extraire le score des objets \code{QR_matrix} ou \code{mQR_matrix}.
@@ -34,3 +38,4 @@ Other QR_matrix functions: \code{\link{compute_score}},
   \code{\link{extract_QR}}, \code{\link{rbind.QR_matrix}},
   \code{\link{sort}}, \code{\link{weighted_score}}
 }
+\concept{QR_matrix functions}

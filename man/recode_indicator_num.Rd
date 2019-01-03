@@ -27,3 +27,4 @@ qui seront présentent dans la matrice des modalités.
 Other var QR_matrix manipulation: \code{\link{QR_var_manipulation}},
   \code{\link{add_indicator}}
 }
+\concept{var QR_matrix manipulation}

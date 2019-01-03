@@ -31,3 +31,4 @@ Other Cruncher functions: \code{\link{create_param_file}},
   \code{\link{cruncher_and_param}},
   \code{\link{update_workspace}}
 }
+\concept{Cruncher functions}

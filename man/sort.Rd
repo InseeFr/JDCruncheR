@@ -6,11 +6,11 @@
 \alias{sort.mQR_matrix}
 \title{Tri des objets QR_matrix et mQR_matrix}
 \usage{
-\method{sort}{QR_matrix}(x, decreasing = FALSE, sort_variables = "score",
-  ...)
+\method{sort}{QR_matrix}(x, decreasing = FALSE,
+  sort_variables = "score", ...)
 
-\method{sort}{mQR_matrix}(x, decreasing = FALSE, sort_variables = "score",
-  ...)
+\method{sort}{mQR_matrix}(x, decreasing = FALSE,
+  sort_variables = "score", ...)
 }
 \arguments{
 \item{x}{objet de type \code{QR_matrix} ou \code{mQR_matrix}.}
@@ -42,3 +42,4 @@ Other QR_matrix functions: \code{\link{compute_score}},
   \code{\link{rbind.QR_matrix}},
   \code{\link{weighted_score}}
 }
+\concept{QR_matrix functions}

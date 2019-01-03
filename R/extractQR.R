@@ -36,14 +36,16 @@
 #' # Ou :
 #' QR[["modalities"]]
 #' }
+#' @importFrom stats sd
+#' @importFrom utils read.csv choose.files
 #' @export
 extract_QR <- function(matrix_output_file, sep = ";", dec = ","){
     if(missing(matrix_output_file) || is.null(matrix_output_file)){
         if(Sys.info()[['sysname']] == "Windows"){
-            matrix_output_file <- utils::choose.files(caption = "Sélectionner le fichier contenant la matrice des paramètres",
+            matrix_output_file <- choose.files(caption = "Sélectionner le fichier contenant la matrice des paramètres",
                                              filters = c("Fichier CSV","*.csv"))
         }else{
-            matrix_output_file <- base::file.choose()
+            matrix_output_file <- file.choose()
         }
     }
     if(length(matrix_output_file) == 0)
@@ -54,15 +56,17 @@ extract_QR <- function(matrix_output_file, sep = ";", dec = ","){
     demetra_m <- read.csv(file = matrix_output_file,
                       sep = sep, dec = dec, stringsAsFactors = FALSE,
                       na.strings = c("NA","?"))
-    missing_variables <- which(is.na(match(c("qs.test.on.sa", "f.test.on.sa..seasonal.dummies.", "on.sa",
-                                             "on.sa..last.3.years.","on.irregular","qs.test.on.i","f.test.on.i..seasonal.dummies.",
-                                             "f.test.on.sa..td.", "f.test.on.i..td.","independence","normality"),
+    missing_variables <- which(is.na(match(c("qs.test.on.sa", "f.test.on.sa..seasonal.dummies.",
+                                             "qs.test.on.i","f.test.on.i..seasonal.dummies.",
+                                             "f.test.on.sa..td.", "f.test.on.i..td.","independence","normality",
+                                             "skewness","kurtosis"),
                                            colnames(demetra_m))))
     if(length(missing_variables)!=0){
         stop(paste0("Il manque le(s) variable(s) suivante(s) dans la matrice des diagnostics :\n"
-                    ,c("qs.test.on.sa", "f.test.on.sa..seasonal.dummies.", "on.sa",
-                       "on.sa..last.3.years.","on.irregular","qs.test.on.i","f.test.on.i..seasonal.dummies.",
-                       "f.test.on.sa..td.", "f.test.on.i..td.","independence","normality")[missing_variables],
+                    ,c("qs.test.on.sa", "f.test.on.sa..seasonal.dummies.",
+                       "qs.test.on.i","f.test.on.i..seasonal.dummies.",
+                       "f.test.on.sa..td.", "f.test.on.i..td.","independence","normality",
+                       "skewness","kurtosis")[missing_variables],
                     "\nRelancez l'export"))
     }
 
@@ -73,40 +77,33 @@ extract_QR <- function(matrix_output_file, sep = ";", dec = ","){
     demetra_m <- cbind(demetra_m,
                        extractARIMA(demetra_m),
                        extractStatQ(demetra_m),
-                       extractOOS_test(demetra_m))
-    homoskedasticity_df <- 2 * demetra_m$frequency - demetra_m$arima_p-demetra_m$arima_q-demetra_m$arima_bp-demetra_m$arima_bq
-    demetra_m$homoskedasticity_pvalue <- 1 - pchisq(demetra_m$lb2, df = homoskedasticity_df)
-    demetra_m$homoskedasticity_modality <- cut(demetra_m$homoskedasticity_pvalue,
-                                               breaks = c(0, 0.01, 0.1, 1),
-                                               labels = c("Bad", "Uncertain", "Good"),
-                                               right = FALSE)
-    demetra_m$mean_residuals_pvalue <- 2 * (1 - pt(abs(demetra_m$mean), demetra_m$neffectiveobs))
-    demetra_m$mean_residuals_modality <- cut(demetra_m$mean_residuals_pvalue,
-                                             breaks = c(0, 0.01, 0.1, 1),
-                                             labels = c("Bad", "Uncertain", "Good"),
-                                             right = FALSE)
+                       extractOOS_test(demetra_m),
+                       extractNormalityTests(demetra_m))
     demetra_m$pct_outliers_value <- demetra_m[,match("number.of.outliers",colnames(demetra_m))+1] * 100
     demetra_m$pct_outliers_modality <- demetra_m$number.of.outliers
     demetra_m$m7_modality <- cut(demetra_m$m7+0, #+0 pour forcer en numeric si que des NA
                                  breaks = c(0, 1, 2, Inf),
                                  labels = c("Good", "Bad", "Severe"), right = FALSE)
 
-    colnames(demetra_m)[match(c("qs.test.on.sa", "f.test.on.sa..seasonal.dummies.", "on.sa",
-                                "on.sa..last.3.years.","on.irregular","qs.test.on.i","f.test.on.i..seasonal.dummies.",
+    colnames(demetra_m)[match(c("qs.test.on.sa", "f.test.on.sa..seasonal.dummies."
+                                ,"qs.test.on.i","f.test.on.i..seasonal.dummies.",
                                 "f.test.on.sa..td.", "f.test.on.i..td.","independence","normality"),
-                              colnames(demetra_m))+1] <- paste0(c("qs.test.on.sa", "f.test.on.sa..seasonal.dummies.", "on.sa",
-                                                                  "on.sa..last.3.years.","on.irregular","qs.test.on.i","f.test.on.i..seasonal.dummies.",
+                              colnames(demetra_m))+1] <- paste0(c("qs.test.on.sa", "f.test.on.sa..seasonal.dummies.",
+                                                                  "qs.test.on.i","f.test.on.i..seasonal.dummies.",
                                                                   "f.test.on.sa..td.", "f.test.on.i..td.","independence","normality"),"_pvalue")
-    modalities_variables <- c("series","qs.test.on.sa", "f.test.on.sa..seasonal.dummies.", "on.sa",
-                              "on.sa..last.3.years.","on.irregular","qs.test.on.i","f.test.on.i..seasonal.dummies.",
-                              "f.test.on.sa..td.", "f.test.on.i..td.","mean_residuals_modality",
-                              "independence","homoskedasticity_modality","normality","oos_mean_modality",
+    modalities_variables <- c("series","qs.test.on.sa", "f.test.on.sa..seasonal.dummies.",
+                              "qs.test.on.i","f.test.on.i..seasonal.dummies.",
+                              "f.test.on.sa..td.", "f.test.on.i..td.",
+                              "independence","homoskedasticity_modality",
+                              "skewness_modality", "kurtosis_modality","normality","oos_mean_modality",
                               "oos_mse_modality","m7_modality","q_modality","q_m2_modality","pct_outliers_modality")
 
-    values_variables <- c("series","qs.test.on.sa_pvalue","f.test.on.sa..seasonal.dummies._pvalue","on.sa_pvalue",
-                          "on.sa..last.3.years._pvalue","on.irregular_pvalue","qs.test.on.i_pvalue","f.test.on.i..seasonal.dummies._pvalue",
-                          "f.test.on.sa..td._pvalue","f.test.on.i..td._pvalue","mean_residuals_pvalue",
-                          "independence_pvalue","homoskedasticity_pvalue","normality_pvalue","oos_mean_pvalue",
+    values_variables <- c("series","qs.test.on.sa_pvalue","f.test.on.sa..seasonal.dummies._pvalue",
+                          "qs.test.on.i_pvalue","f.test.on.i..seasonal.dummies._pvalue",
+                          "f.test.on.sa..td._pvalue","f.test.on.i..td._pvalue",
+                          "independence_pvalue","homoskedasticity_pvalue",
+                          "skewness_pvalue", "kurtosis_pvalue",
+                          "normality_pvalue","oos_mean_pvalue",
                           "oos_mse_pvalue","m7","q_value","q_m2_value","pct_outliers_value",
                           "frequency","arima_model")
 
@@ -119,11 +116,11 @@ extract_QR <- function(matrix_output_file, sep = ";", dec = ","){
                     ,missing_variables,"\nRelancez l'export"))
     }
 
-    names_QR_variables <- c("series","qs_residual_sa_on_sa","f_residual_sa_on_sa","combined_residual_sa_on_sa",
-                            "combined_residual_sa_on_sa_last_years","combined_residual_sa_on_i",
+    names_QR_variables <- c("series","qs_residual_sa_on_sa","f_residual_sa_on_sa",
                             "qs_residual_sa_on_i","f_residual_sa_on_i",
-                            "f_residual_td_on_sa","f_residual_td_on_i","residuals_mean",
-                            "residuals_independency","residuals_homoskedasticity","residual_normality",
+                            "f_residual_td_on_sa","f_residual_td_on_i",
+                            "residuals_independency","residuals_homoskedasticity",
+                            "residuals_skewness","residuals_kurtosis","residual_normality",
                             "oos_mean","oos_mse","m7","q","q_m2","pct_outliers")
     QR_modalities <- demetra_m[,modalities_variables]
     QR_values <- demetra_m[,values_variables]
@@ -168,6 +165,32 @@ extractARIMA <- function(demetra_m){
                         arima_bp = val_bq, arima_bd = demetra_m[,"bd"], arima_bq = demetra_m[,"bq"],
                         arima_model = demetra_m[,"arima"])
     return(arima)
+}
+extractNormalityTests <- function(demetra_m){
+    tests_possibles <- grep("(^skewness$)|(^kurtosis$)|(^lb2$)",colnames(demetra_m))
+    if(length(tests_possibles) != 3)
+        stop("Il manque au moins un des tests skewneess, kurtosis, lb2")
+
+    if(length(grep("^X\\.(\\d){1,}$",
+         colnames(demetra_m)[rep(tests_possibles, each = 2) + rep(1:2, 3)])) != 6)
+        stop("Relancer l'export du cruncher avec les options : residuals.skewness:3, residuals.kurtosis:3 et residuals.lb2:3")
+
+    normality <- data.frame(skewness_pvalue = demetra_m[, tests_possibles[1] + 2],
+                            kurtosis_pvalue = demetra_m[, tests_possibles[2] + 2],
+                            homoskedasticity_pvalue = demetra_m[, tests_possibles[3] + 2])
+    normality$skewness_modality <- cut(normality$skewness_pvalue,
+                                             breaks = c(0, 0.01, 0.1, 1),
+                                             labels = c("Bad", "Uncertain", "Good"),
+                                             right = FALSE)
+    normality$kurtosis_modality <- cut(normality$kurtosis_pvalue,
+                                       breaks = c(0, 0.01, 0.1, 1),
+                                       labels = c("Bad", "Uncertain", "Good"),
+                                       right = FALSE)
+    normality$homoskedasticity_modality <- cut(normality$homoskedasticity_pvalue,
+                                       breaks = c(0, 0.01, 0.1, 1),
+                                       labels = c("Bad", "Uncertain", "Good"),
+                                       right = FALSE)
+    return(normality)
 }
 extractOOS_test <- function(demetra_m){
     mean_possibles <- grep("(^mean$)|(^mean\\.\\d$)",colnames(demetra_m))

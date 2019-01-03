@@ -60,3 +60,4 @@ Other QR_matrix functions: \code{\link{compute_score}},
   \code{\link{rbind.QR_matrix}}, \code{\link{sort}},
   \code{\link{weighted_score}}
 }
+\concept{QR_matrix functions}

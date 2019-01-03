@@ -6,13 +6,12 @@
 \alias{compute_score.QR_matrix}
 \title{Calcul d'un score global}
 \usage{
-\method{compute_score}{QR_matrix}(x, score_pond = c(qs_residual_sa_on_sa =
-  6.66, f_residual_sa_on_sa = 6.68, combined_residual_sa_on_sa = 6.66,
-  combined_residual_sa_on_sa_last_years = 15, combined_residual_sa_on_i = 3.33,
-  qs_residual_sa_on_i = 3.33, f_residual_sa_on_i = 3.34, f_residual_td_on_sa =
-  10, f_residual_td_on_i = 10, residuals_mean = 10, residuals_independency = 10,
-  residuals_homoskedasticity = 5, residual_normality = 5, m7 = 3, q_m2 = 2),
-  modalities = c("Good", "Uncertain", "", "Bad", "Severe"),
+\method{compute_score}{QR_matrix}(x, score_pond = c(qs_residual_sa_on_sa
+  = 30, f_residual_sa_on_sa = 30, qs_residual_sa_on_i = 20,
+  f_residual_sa_on_i = 20, f_residual_td_on_sa = 30, f_residual_td_on_i =
+  20, oos_mean = 15, residuals_independency = 15,
+  residuals_homoskedasticity = 5, residuals_skewness = 5, m7 = 5, q_m2 =
+  5), modalities = c("Good", "Uncertain", "", "Bad", "Severe"),
   normalize_score_value, na.rm = FALSE, n_contrib_score, ...)
 }
 \arguments{
@@ -89,3 +88,4 @@ Other QR_matrix functions: \code{\link{export_xlsx.QR_matrix}},
   \code{\link{rbind.QR_matrix}}, \code{\link{sort}},
   \code{\link{weighted_score}}
 }
+\concept{QR_matrix functions}

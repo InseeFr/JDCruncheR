@@ -30,3 +30,4 @@ Fonction qui permet de mettre à jour un workspace sans exporter les résultats
 Other Cruncher functions: \code{\link{create_param_file}},
   \code{\link{cruncher_and_param}}, \code{\link{cruncher}}
 }
+\concept{Cruncher functions}

@@ -32,3 +32,4 @@ Other QR_matrix functions: \code{\link{compute_score}},
   \code{\link{extract_QR}}, \code{\link{extract_score}},
   \code{\link{rbind.QR_matrix}}, \code{\link{sort}}
 }
+\concept{QR_matrix functions}

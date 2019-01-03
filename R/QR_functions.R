@@ -58,20 +58,17 @@
 #' @rdname compute_score
 #' @export
 compute_score.QR_matrix <- function(x,
-                                    score_pond = c(qs_residual_sa_on_sa = 6.66,
-                                                   f_residual_sa_on_sa = 6.68,
-                                                   combined_residual_sa_on_sa = 6.66,
-                                                   combined_residual_sa_on_sa_last_years = 15,
-                                                   combined_residual_sa_on_i = 3.33,
-                                                   qs_residual_sa_on_i = 3.33,
-                                                   f_residual_sa_on_i = 3.34,
-                                                   f_residual_td_on_sa = 10,
-                                                   f_residual_td_on_i = 10,
-                                                   residuals_mean = 10,
-                                                   residuals_independency = 10,
+                                    score_pond = c(qs_residual_sa_on_sa = 30,
+                                                   f_residual_sa_on_sa = 30,
+                                                   qs_residual_sa_on_i = 20,
+                                                   f_residual_sa_on_i = 20,
+                                                   f_residual_td_on_sa = 30,
+                                                   f_residual_td_on_i = 20,
+                                                   oos_mean = 15,
+                                                   residuals_independency = 15,
                                                    residuals_homoskedasticity = 5,
-                                                   residual_normality = 5,
-                                                   m7 = 3,  q_m2 = 2),
+                                                   residuals_skewness = 5,
+                                                   m7 = 5,  q_m2 = 5),
                                     modalities = c("Good", "Uncertain", "", "Bad","Severe"),
                                     normalize_score_value,
                                     na.rm = FALSE,
@@ -260,6 +257,8 @@ sort.mQR_matrix <- function(x, decreasing = FALSE, sort_variables = "score", ...
 #' @param x objet de type \code{QR_matrix} ou \code{mQR_matrix}.
 #' @param format_output chaîne de caractères indiquant le format de l'objet en sortie :
 #' soit un \code{data.frame} soit un \code{vector}.
+#' @param weighted_score booléen indiquant s'il faut extraire le score pondéré (s'il existe) ou le score non pondéré.
+#' Par défaut c'es le score non pondéré qui est extrait.
 #' @details Pour les objets \code{QR_matrix}, le score renvoyé est soit l'objet \code{NULL} si aucun score n'a été calculé ou un vecteur.
 #' Pour les objets \code{mQR_matrix} il s'agit d'une liste de scores (\code{NULL} ou un vecteur).
 #' @examples \dontrun{
@@ -270,23 +269,35 @@ sort.mQR_matrix <- function(x, decreasing = FALSE, sort_variables = "score", ...
 #' }
 #' @family QR_matrix functions
 #' @export
-extract_score <- function(x, format_output = c("data.frame", "vector")){
+extract_score <- function(x, format_output = c("data.frame", "vector"), weighted_score = FALSE){
     UseMethod("extract_score", x)
 }
 
 #' @export
-extract_score.default <- function(x, format_output){
+extract_score.default <- function(x, format_output, weighted_score){
     stop("Il faut un objet de type QR_matrix ou mQR_matrix")
 }
 #' @export
-extract_score.QR_matrix <- function(x, format_output = c("data.frame", "vector")){
-    score <- x$modalities$score
+extract_score.QR_matrix <- function(x, format_output = c("data.frame", "vector"), weighted_score = FALSE){
+    if(weighted_score){
+        score <- x$modalities$score_pond
+        if(is.null(score)){
+            score <- x$modalities$score
+            score_variable <- "score"
+        }else{
+            score_variable <- "score_pond"
+        }
+    }else{
+        score <- x$modalities$score
+        score_variable <- "score"
+    }
+
     if(is.null(score))
         return(NULL)
 
     format_output <- match.arg(format_output)
     res <- switch (format_output,
-        data.frame = x$modalities[,c("series", "score")],
+        data.frame = x$modalities[,c("series", score_variable)],
         vector = {
             names(score) <- x$modalities$series
             score
@@ -295,28 +306,9 @@ extract_score.QR_matrix <- function(x, format_output = c("data.frame", "vector")
     return(res)
 }
 #' @export
-extract_score.mQR_matrix <- function(x, format_output = c("data.frame", "vector")){
-    return(lapply(x,extract_score, format_output = format_output))
+extract_score.mQR_matrix <- function(x, format_output = c("data.frame", "vector"), weighted_score = FALSE){
+    return(lapply(x,extract_score, format_output = format_output, weighted_score = weighted_score))
 }
-#' @export
-score <- function(x){
-    .Deprecated("extract_score")
-    UseMethod("score", x)
-}
-
-#' @export
-score.default <- function(x){
-    stop("Il faut un objet de type QR_matrix ou mQR_matrix")
-}
-#' @export
-score.QR_matrix <- function(x){
-    return(x$modalities$score)
-}
-#' @export
-score.mQR_matrix <- function(x){
-    return(lapply(x,score))
-}
-
 
 #' Manipulation de la liste des indicateurs
 #'

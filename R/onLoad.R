@@ -5,7 +5,7 @@
                                                                "noutso", "td(*)", "out(*)")),
                                         paste0("likelihood.",c("neffectiveobs", "np", "logvalue", "adjustedlogvalue", "ssqerr", "aic",
                                                                "aicc", "bic", "bicc")),
-                                        paste0("residuals.",c("ser", "ser-ml", "mean", "skewness", "kurtosis", "dh", "lb", "lb2",
+                                        paste0("residuals.",c("ser", "ser-ml", "mean", "skewness:3", "kurtosis:3", "dh", "lb", "lb2:3",
                                                               "seaslb", "bp", "bp2", "seasbp", "nruns", "lruns")),
                                         paste0("arima",c("", ".mean", ".p", ".d", ".q", ".bp", ".bd", ".bq", ".phi(*)", ".bphi(*)",
                                                          ".th(*)", ".bth(*)")),
