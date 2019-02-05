@@ -11,6 +11,10 @@
 #' @param n_contrib_score entier indiquant le nombre de variables à créer dans la matrice des valeurs du
 #' bilan qualité contenant les \code{n_contrib_score} plus grandes contributrices au score (voir détails).
 #' si non spécifié alors aucune variable n'est créée.
+#' @param conditional_indicator une \code{list} contenant des listes ayant 3 éléments : "indicator", "conditions" et
+#' "condition_modalities". Permet de réduire à 1 le poids de certains indicateurs en fonction des valeurs
+#' d'autres variables (voir détails).
+#'
 #' @param ... autres paramètres non utilisés.
 #' @details La fonction \code{compute_score} permet de calculer un score à partir des modalités
 #' d'un bilan qualité. Pour cela chaque modalité est associée à un poids défini par le paramètre
@@ -45,6 +49,19 @@
 #' associées à cette série seront vides ; si une série a un score positif uniquement du fait
 #' de la variable "m7" alors la valeur correspondante de le variable 1_highest_score sera égale à
 #' "m7" et celle des autres variables *i*_highest_score seront vides.
+#'
+#' Certains indicateurs peuvent n'avoir de sens que sous certaines conditions. Par exemple, le test
+#' d'homoscédasticité n'est valide que si les résidus sont indépendants et les tests de normalité que
+#' si les résidus sont indépendants et homoscédastiques. Le paramètre \code{conditional_indicator}
+#' permet de prendre en compte cela en réduisant, sous certaines conditions, à 1 le poids de certains variables.
+#' C'est une liste une \code{list} contenant des listes ayant 3 éléments :
+#' - "indicator" : nom de la variable pour laquelle on veut ajouter des conditions
+#' - "conditions" : nom des variables que l'on utilise pour conditionner
+#' - "conditions_modalities" : modalités qui doivent être vérifiées pour modifier le poids
+#' Ainsi, avec le paramètre \code{conditional_indicator = list(list(indicator = "residuals_skewness", conditions = c("residuals_independency", "residuals_homoskedasticity"), conditions_modalities = c("Bad","Severe")))}
+#' on réduit à 1 le poids de la variable "residuals_skewness" lorsque les modalités du test d'indépendance
+#' ("residuals_independency") ou du test d'homoscédasticité ("residuals_homoskedasticity") valent "Bad" ou "Severe".
+#'
 #' @encoding UTF-8
 #' @return Un objet de type \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}.
 #' @examples \dontrun{
@@ -65,6 +82,7 @@ compute_score.QR_matrix <- function(x,
                                                    f_residual_td_on_sa = 30,
                                                    f_residual_td_on_i = 20,
                                                    oos_mean = 15,
+                                                   oos_mse = 10,
                                                    residuals_independency = 15,
                                                    residuals_homoskedasticity = 5,
                                                    residuals_skewness = 5,
@@ -73,6 +91,7 @@ compute_score.QR_matrix <- function(x,
                                     normalize_score_value,
                                     na.rm = FALSE,
                                     n_contrib_score,
+                                    conditional_indicator,
                                     ...){
     # score_formula_exp <- as.expression(substitute(score_formula))
 
@@ -85,7 +104,41 @@ compute_score.QR_matrix <- function(x,
                            length(modalities) - 1)
     if(!all(names(score_pond) %in% colnames(QR_modalities)))
         stop("Il manque des variables : vérifiez le paramètre score_pond")
+
+    # Conditionnement des variables
+    if(!missing(conditional_indicator) && length(conditional_indicator) > 0){
+        # conditional_indicator <- list(list(indicator = "residuals_skewness",
+        #                                    conditions = c("residuals_independency",
+        #                                                  "residuals_homoskedasticity"),
+        #                                    conditions_modalities = c("Bad","Severe")))
+        for (i in 1:length(conditional_indicator)){
+            indicator_condition <- conditional_indicator[[i]]
+
+            if(any(is.na(match(c("indicator", "conditions", "conditions_modalities"),
+                               names(indicator_condition)))))
+                stop("Mauvaise spécification de la variable indicator_condition")
+
+            indicator_variables <- c(indicator_condition$indicator,
+                                     indicator_condition$conditions)
+            if(!all(indicator_variables %in% colnames(x$modalities)))
+                stop("Il manque des variables : vérifiez le paramètre indicator_variables")
+
+            # Séries qui vérifient au moins une des conditions
+            series_to_change <- rowSums(sapply(indicator_condition$conditions,
+                                               function(name) {
+                                                   x$modalities[, name] %in% indicator_condition$conditions_modalities
+                                               }), na.rm = TRUE)
+            series_to_change <- which(series_to_change > 0)
+            if(indicator_condition$indicator[1] %in% names(score_pond)){
+                QR_modalities[series_to_change, indicator_condition$indicator[1]] <-
+                    QR_modalities[series_to_change, indicator_condition$indicator[1]] /
+                    score_pond[indicator_condition$indicator[1]]
+            }
+        }
+    }
+
     QR_modalities <- QR_modalities[, names(score_pond)]
+
     for(nom_var in names(score_pond)){
         QR_modalities[, nom_var] <- QR_modalities[, nom_var] * score_pond[nom_var]
     }
@@ -100,12 +153,10 @@ compute_score.QR_matrix <- function(x,
     }
     score <- score[- total_pond_id]
 
-
     x$modalities[,grep("(_highest_contrib_score$)|(score)",
                        colnames(x$modalities))] <- NULL
     x$values[,grep("(_highest_contrib_score$)|(score)",
                        colnames(x$values))] <- NULL
-
 
     x$modalities$score <- score
     x$values$score <- score

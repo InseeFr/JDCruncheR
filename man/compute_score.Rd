@@ -9,10 +9,11 @@
 \method{compute_score}{QR_matrix}(x, score_pond = c(qs_residual_sa_on_sa
   = 30, f_residual_sa_on_sa = 30, qs_residual_sa_on_i = 20,
   f_residual_sa_on_i = 20, f_residual_td_on_sa = 30, f_residual_td_on_i =
-  20, oos_mean = 15, residuals_independency = 15,
+  20, oos_mean = 15, oos_mse = 10, residuals_independency = 15,
   residuals_homoskedasticity = 5, residuals_skewness = 5, m7 = 5, q_m2 =
   5), modalities = c("Good", "Uncertain", "", "Bad", "Severe"),
-  normalize_score_value, na.rm = FALSE, n_contrib_score, ...)
+  normalize_score_value, na.rm = FALSE, n_contrib_score,
+  conditional_indicator, ...)
 }
 \arguments{
 \item{x}{objet de type \code{QR_matrix} ou \code{mQR_matrix}.}
@@ -29,6 +30,10 @@ calcul du score. Si le paramètre n'est pas renseigné alors les poids ne seront
 \item{n_contrib_score}{entier indiquant le nombre de variables à créer dans la matrice des valeurs du
 bilan qualité contenant les \code{n_contrib_score} plus grandes contributrices au score (voir détails).
 si non spécifié alors aucune variable n'est créée.}
+
+\item{conditional_indicator}{une \code{list} contenant des listes ayant 3 éléments : "indicator", "conditions" et
+"condition_modalities". Permet de réduire à 1 le poids de certains indicateurs en fonction des valeurs
+d'autres variables (voir détails).}
 
 \item{...}{autres paramètres non utilisés.}
 }
@@ -72,6 +77,20 @@ prises en compte. Ainsi, si une série a un score nul alors toutes les colonnes 
 associées à cette série seront vides ; si une série a un score positif uniquement du fait
 de la variable "m7" alors la valeur correspondante de le variable 1_highest_score sera égale à
 "m7" et celle des autres variables \emph{i}_highest_score seront vides.
+
+Certains indicateurs peuvent n'avoir de sens que sous certaines conditions. Par exemple, le test
+d'homoscédasticité n'est valide que si les résidus sont indépendants et les tests de normalité que
+si les résidus sont indépendants et homoscédastiques. Le paramètre \code{conditional_indicator}
+permet de prendre en compte cela en réduisant, sous certaines conditions, à 1 le poids de certains variables.
+C'est une liste une \code{list} contenant des listes ayant 3 éléments :
+\itemize{
+\item "indicator" : nom de la variable pour laquelle on veut ajouter des conditions
+\item "conditions" : nom des variables que l'on utilise pour conditionner
+\item "conditions_modalities" : modalités qui doivent être vérifiées pour modifier le poids
+Ainsi, avec le paramètre \code{conditional_indicator = list(list(indicator = "residuals_skewness", conditions = c("residuals_independency", "residuals_homoskedasticity"), conditions_modalities = c("Bad","Severe")))}
+on réduit à 1 le poids de la variable "residuals_skewness" lorsque les modalités du test d'indépendance
+("residuals_independency") ou du test d'homoscédasticité ("residuals_homoskedasticity") valent "Bad" ou "Severe".
+}
 }
 \examples{
 \dontrun{

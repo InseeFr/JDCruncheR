@@ -120,7 +120,7 @@ extract_QR <- function(matrix_output_file, sep = ";", dec = ","){
                             "qs_residual_sa_on_i","f_residual_sa_on_i",
                             "f_residual_td_on_sa","f_residual_td_on_i",
                             "residuals_independency","residuals_homoskedasticity",
-                            "residuals_skewness","residuals_kurtosis","residual_normality",
+                            "residuals_skewness","residuals_kurtosis","residuals_normality",
                             "oos_mean","oos_mse","m7","q","q_m2","pct_outliers")
     QR_modalities <- demetra_m[,modalities_variables]
     QR_values <- demetra_m[,values_variables]

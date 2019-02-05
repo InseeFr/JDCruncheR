@@ -1,7 +1,8 @@
 # JDCruncher 0.2.3
 
- * la fonction `weighted_score()` crée maintenant une nouvelle variable `score_pond` plutôt que de remplacer l'ancienne.
+ * la fonction `weighted_score()` crée maintenant une nouvelle variable `score_pond` plutôt que de remplacer l'ancienne. La fonction `extract_score()` permet d'extraire les deux scores.
  * changement des paramètres d'export par défaut du cruncher et des indicateurs utilisés pour le calcul du score dans la fonction `compute_score()`.
+ * ajout d'un paramètre `conditional_indicator` à la fonction `compute_score()` permettant de réduire à 1 le poids de certains indicateurs en fonction des valeurs d'autres variables.
 
 # JDCruncher 0.2.2
 

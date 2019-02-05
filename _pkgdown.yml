@@ -1,0 +1,63 @@
+navbar:
+  structure:
+    left:
+    - home
+    - intro
+    - reference
+    - articles
+    - tutorials
+    - news
+    - jdemetra
+    right: github
+  components:
+    home:
+      icon: fa-home fa-lg
+      href: index.html
+    reference:
+      text: Fonctions du package
+      href: reference/index.html
+    articles:
+      text: Vignette
+      href: articles/Lancement_cruncher.html
+    news:
+      text: News
+      href: news/index.html
+    jdemetra:
+      text: JDemetra+
+      menu:
+      - text: Télécharger JDemetra+
+        href: https://github.com/jdemetra/jdemetra-app/releases
+      - text: Télécharger le cruncher de JDemetra+
+        href: https://github.com/jdemetra/jwsacruncher/releases
+      - text: Configuration avec une version portable de Java
+        href: https://github.com/AQLT/JDCruncheR/wiki/Installation-et-configuration-de-JDemetra--et-du-cruncher
+    github:
+      icon: fa-github fa-lg
+      href: https://github.com/nbbrd/rjdemetra
+
+reference:
+- title: Bilan qualité
+  desc: Fonctions pour créer, manipuler et exporter le bilan qualité
+  contents:
+  - '`extract_QR`'
+  - '`compute_score`'
+  - '`weighted_score`'
+  - '`export_xlsx.mQR_matrix`'
+  - '`export_xlsx.QR_matrix`'
+  - '`extract_score`'
+  - '`QR_matrix`'
+  - '`QR_var_manipulation`'
+  - '`rbind.QR_matrix`'
+  - '`add_indicator`'
+  - '`recode_indicator_num`'
+  - '`sort`'
+  - '`compute_score`'
+  - '`print.QR_matrix`'
+- title: Cruncher
+  desc: Fonctions pour utiliser le cruncher
+  contents:
+  - '`cruncher`'
+  - '`cruncher_and_param`'
+  - '`create_param_file`'
+  - '`multiprocessing_names`'
+  - '`update_workspace`'
