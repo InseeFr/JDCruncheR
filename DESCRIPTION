@@ -1,5 +1,5 @@
 Package: JDCruncheR
-Title: Interface entre le cruncher JDemetra+ et R
+Title: Interface entre le cruncher JDemetra+ et R et création de bilans qualité
 Version: 0.2.3
 Date: 05/02/2019
 Authors@R: c(person("Alain", "Quartier-la-Tente", email = "alain.quartier-la-tente@insee.fr", role = c("aut", "cre")))
