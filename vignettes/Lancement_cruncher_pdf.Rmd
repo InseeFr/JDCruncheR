@@ -10,14 +10,14 @@ header-includes:
   - \usepackage{longtable}
   - \usepackage{array}
   - \usepackage{multirow}
-  - \usepackage[table]{xcolor}
   - \usepackage{wrapfig}
   - \usepackage{float}
-  - \usepackage{colortbl}
   - \usepackage{pdflscape}
   - \usepackage{tabu}
   - \usepackage{threeparttable}
+  - \usepackage{threeparttablex}
   - \usepackage[normalem]{ulem}
+  - \usepackage{makecell}
 vignette: >
   %\VignetteIndexEntry{Lancement du cruncher}
   %\VignetteEngine{knitr::rmarkdown}
