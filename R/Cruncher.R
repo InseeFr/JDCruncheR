@@ -4,10 +4,10 @@
 #'
 #' @param workspace chemin vers le workspace.
 #' @param cruncher_bin_directory répertoire contenant contenant le dossier "bin" du cruncher. Pour voir la
-#' valeur par défaut exécuter le code \code{getOption("cruncher_bin_directory")}.
+#' valeur par défaut, exécuter le code \code{getOption("cruncher_bin_directory")}.
 #' @param param_file_path chemin vers le fichier des paramètres à utiliser pour lancer le workspace.
-#' Par défaut un fichier .params est recherché au même niveau que le workspace.
-#' @param log_file nom du fichier qui contiendra la log du cruncher. Par défaut la log n'est pas exportée
+#' Par défaut, un fichier .params est recherché au même niveau que le workspace.
+#' @param log_file nom du fichier qui contiendra la log du cruncher. Par défaut, la log n'est pas exportée.
 #' @encoding UTF-8
 #' @return L'adresse du workspace.
 #' @family Cruncher functions
@@ -32,7 +32,7 @@ cruncher <- function(workspace,
 
     #Il faut l'adresse entière du workspace et non pas l'adresse relative
     workspace <- normalizePath(workspace, mustWork = FALSE)
-    workspace <- sub("\\.xml$","",workspace) #On enlève le .xml s'il existe dans l'adresse du workspace
+    workspace <- sub("\\.xml$","",workspace) # On enlève le .xml s'il existe dans l'adresse du workspace
 
     if(missing(param_file_path) || is.null(param_file_path)){
         param_file_path <- list.files(path = workspace,
@@ -71,16 +71,16 @@ cruncher <- function(workspace,
 #'
 #' Fonction qui permet de lancer le cruncher sur un workspace tout en créant le fichier des paramètres.
 #'
-#' @param workspace chemin vers le workspace. Par défaut une fenêtre s'ouvre pour sélectionner le workspace.
+#' @param workspace chemin vers le workspace. Par défaut, une fenêtre s'ouvre pour sélectionner le workspace.
 #' @param cruncher_bin_directory répertoire contenant contenant le dossier "bin" du cruncher.
 #' @param rename_multi_documents booléen indiquant s'il faut renommer les dossiers contenant les sorties en fonction
 #' des noms des multi-documents du workspace. Par défaut \code{rename_multi_documents = TRUE}.
-#' Si \code{rename_multi_documents = FALSE} alors ce sont les noms des fichiers XML des multi_documents qui sont utilisés.
-#' @param output dossier contenant les résultats du cruncher. Par défaut (\code{output = NULL}) un dossier "Output" est créé à l'adresse du workspace.
+#' Si \code{rename_multi_documents = FALSE}, alors ce sont les noms des fichiers XML des multi_documents qui sont utilisés.
+#' @param output dossier contenant les résultats du cruncher. Par défaut, (\code{output = NULL}) et un dossier "Output" est créé à l'adresse du workspace.
 #' @param delete_existing_file utile uniquement si \code{rename_multi_documents = TRUE}, booléen indiquant s'il faut supprimer
-#' les dossiers existants lors du renommage des dossiers. Par défaut (\code{delete_existing_file = NULL}) une boîte de dialogue s'ouvre
+#' les dossiers existants lors du renommage des dossiers. Par défaut, (\code{delete_existing_file = NULL}) et une boîte de dialogue s'ouvre
 #' demandant l'action à réaliser.
-#' @param log_file nom du fichier qui contiendra la log du cruncher. Par défaut la log n'est pas exportée
+#' @param log_file nom du fichier qui contiendra la log du cruncher. Par défaut, la log n'est pas exportée.
 #' @param ... autres paramètres de la fonction \link{create_param_file}.
 #' @encoding UTF-8
 #' @return L'adresse du workspace.
@@ -113,7 +113,7 @@ cruncher_and_param <- function(workspace = NULL,
         if(any(file.exists(noms_multi_documents$name))){
             # Un des fichiers existe déjà !
             if(is.null(delete_existing_file)){
-                message <- paste("Un ou plusieurs dossiers présents sous",output,"existent déjà.\nVoulez-vous le(s) supprimer ?")
+                message <- paste("Un ou plusieurs dossiers présents sous",output,"existe(nt) déjà.\nVoulez-vous le(s) supprimer ?")
                 delete_existing_file <- utils::winDialog(type = c("yesnocancel"),
                                                   message)
 
@@ -141,7 +141,7 @@ cruncher_and_param <- function(workspace = NULL,
 #'
 #' Fonction qui permet d'extraire le nom des multiprocessings sous JDemetra+ et les noms des fichiers XML associés.
 #'
-#' @param workspace chemin vers le workspace. Par défaut une fenêtre s'ouvre pour sélectionner le workspace.
+#' @param workspace chemin vers le workspace. Par défaut, une fenêtre s'ouvre pour sélectionner le workspace.
 #' @encoding UTF-8
 #' @return Un \code{data.frame} contenant le nom des multiprocessings sous JDemetra+ (colonne \code{name}) et
 #' le nom des fichiers XML associés (colonne \code{file})
@@ -181,12 +181,12 @@ multiprocessing_names <- function(workspace){
 #'
 #' Fonction qui permet de mettre à jour un workspace sans exporter les résultats
 #'
-#' @param workspace chemin vers le workspace. Par défaut une fenêtre s'ouvre pour sélectionner le workspace.
-#' @param policy méthode de rafraîchissement utilisée. Par défaut \code{policy = "parameters"} (paramètres re-estimés).
+#' @param workspace chemin vers le workspace. Par défaut, une fenêtre s'ouvre pour sélectionner le workspace.
+#' @param policy méthode de rafraîchissement utilisée. Par défaut, \code{policy = "parameters"} (paramètres re-estimés).
 #' Les autres méthodes possibles sont :
-#' \code{"outliers"} (les outliers sont identifiés et les paramètres re-estimés) ;
-#' \code{"lastoutliers"} (les outliers sont ré-identifiés sur la dernière année et les paramètres re-estimés) ;
-#' \code{"stochastic"} (le modèle arima et les outliers sont identifiés et les paramètres re-estimés) ;
+#' \code{"outliers"} (les outliers sont identifiés et les paramètres ré-estimés) ;
+#' \code{"lastoutliers"} (les outliers sont ré-identifiés sur la dernière année et les paramètres ré-estimés) ;
+#' \code{"stochastic"} (le modèle arima et les outliers sont identifiés et les paramètres ré-estimés) ;
 #' \code{"complete"} (le modèle est complétement ré-estimé).
 #' @param cruncher_bin_directory répertoire contenant contenant le dossier "bin" du cruncher.
 #' @encoding UTF-8
