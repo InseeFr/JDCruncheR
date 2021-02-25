@@ -4,22 +4,22 @@
 #'
 #' @param dir_file_param répertoire du dossier qui contiendra le fichier parametres.param des paramètres.
 #' @param bundle nombre maximum de séries dans un fichier de sortie. Par défaut \code{bundle = 10000}.
-#' @param csv_layout mise en page du fichier de sortie. Par défaut \code{csv_layout = "list"}. Autres
+#' @param csv_layout mise en page du fichier de sortie. Par défaut, \code{csv_layout = "list"}. Autres
 #' options : \code{csv_layout = "vtable"} ou \code{csv_layout = "htable"}.
-#' @param csv_separator séparateur de colonnes utilisé dans le fichier csv. Par défaut \code{csv_separator = ";"}.
+#' @param csv_separator séparateur de colonnes utilisé dans le fichier csv. Par défaut, \code{csv_separator = ";"}.
 #' @param ndecs nombre de décimales dans les sorties (6 par défaut).
-#' @param policy méthode de rafraîchissement utilisée. Par défaut \code{policy = "parameters"} (paramètres re-estimés).
+#' @param policy méthode de rafraîchissement utilisée. Par défaut, \code{policy = "parameters"} (paramètres re-estimés).
 #' Les autres méthodes possibles sont :
-#' \code{"outliers"} (les outliers sont identifiés et les paramètres re-estimés) ;
-#' \code{"lastoutliers"} (les outliers sont ré-identifiés sur la dernière année et les paramètres re-estimés) ;
-#' \code{"stochastic"} (le modèle arima et les outliers sont identifiés et les paramètres re-estimés) ;
+#' \code{"outliers"} (les outliers sont identifiés et les paramètres ré-estimés) ;
+#' \code{"lastoutliers"} (les outliers sont ré-identifiés sur la dernière année et les paramètres ré-estimés) ;
+#' \code{"stochastic"} (le modèle arima et les outliers sont identifiés et les paramètres ré-estimés) ;
 #' \code{"complete"} (le modèle est complétement ré-estimé).
-#' @param output dossier où sont exportés les résultats. Par défaut (\code{output = NULL}) un dossier "Output" est créé à l'adresse du workspace.
+#' @param output dossier où sont exportés les résultats. Par défaut, (\code{output = NULL}) et un dossier "Output" est créé à l'adresse du workspace.
 #' @param matrix_item chaîne de caractères contenant les noms des paramètres à exporter (voir le manuel de JDemetra+).
-#' Les paramètres par défaut sont obtenues en exécutant la commande \code{getOption("default_matrix_item")} (cette option
+#' Les paramètres par défaut sont obtenus en exécutant la commande \code{getOption("default_matrix_item")} (cette option
 #' est initialisée aux mêmes paramètres par défaut que ceux de JDemetra+).
 #' @param tsmatrix_series chaîne de caractères contenant les séries temporelles à exporter (voir le manuel de JDemetra+).
-#'  Les paramètres par défaut sont obtenues en exécutant la commande \code{getOption("default_tsmatrix_series")} (cette option
+#'  Les paramètres par défaut sont obtenus en exécutant la commande \code{getOption("default_tsmatrix_series")} (cette option
 #' est initialisée aux mêmes paramètres par défaut que ceux de JDemetra+)
 #' @param paths_path chemins vers les fichiers d'entrée (Excel, xml...).
 #' @return L'adresse du fichier de paramètres.

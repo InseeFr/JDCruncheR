@@ -10,7 +10,7 @@
 #' @param modalities un \code{data.frame} contenant les modalités (Good, Bad, etc.)
 #' associées aux variables.
 #' @param values un \code{data.frame} contenant les valeurs (p-valeurs des tests, statistiques, etc.)
-#' associées aux variables. Peut donc contenir plus de variables que le paramètre \code{modalities}.
+#' associées aux variables. Peut donc contenir plus de variables que le data.frame \code{modalities}.
 #' @param score_formula formule utilisée pour calculer le score global (s'il existe).
 #' @param x un objet de type \code{QR_matrix}, \code{mQR_matrix} ou une liste d'objets \code{QR_matrix}.
 #' @param ... des objets du même type que \code{x}.
@@ -18,8 +18,8 @@
 #' * le paramètre \code{modalities} est un \code{data.frame} contenant un ensemble de variables sous forme catégorielle
 #'   (par défaut : Good, Uncertain, Bad, Severe).
 #' * le paramètre \code{values}  est un \code{data.frame} contenant les valeurs associées aux indicateurs présents dans
-#'   \code{modalities} (i.e. : p-valeurs, statistiques, etc.) ainsi que des variables qui n'ont pas
-#'   de modalité (e.g. : fréquence de la série, modèle ARIMA, etc.).
+#'   \code{modalities} (i.e. : p-valeurs, statistiques, etc.), ainsi que des variables qui n'ont pas
+#'   de modalité (i.e. : fréquence de la série, modèle ARIMA, etc).
 #' * le paramètre \code{score_formula} contient la formule utilisée pour calculer le score (une fois le calcul réalisé).
 #'
 #' @encoding UTF-8
@@ -67,14 +67,14 @@ is.mQR_matrix <- function(x){
 }
 
 
-#' Printing QR_matrix and mQR_matrix
+#' Affichage des objets QR_matrix et mQR_matrix
 #'
-#' Print a QR_matrix or a mQR_matrix.
+#' Pour afficher un objet QR_matrix ou mQR_matrix.
 #'
-#' @param x object of class code{mQR_matrix} or \code{mQR_matrix}.
-#' @param print_variables logical, indicating whether or not the variables names should be printed.
-#' @param print_score_formula logical, indicating whether or not the score formula should be printed.
-#' @param score_statistics logical, indicating whether or not the scores statistics should be printed.
+#' @param x objet de type \code{mQR_matrix} ou \code{mQR_matrix}.
+#' @param print_variables booléen pour imprimer ou non les noms des indicateurs (supplémentaire inclus).
+#' @param print_score_formula booléen pour imprimer ou non la formule qui a servi à calculer le score (le cas échéant).
+#' @param score_statistics booléen pour imprimer ou non des statistiques sur les scores de la \code{mQR_matrix} (le cas échéant).
 #' @param ... autres arguments non utilisés.
 #' @encoding UTF-8
 #' @name print.QR_matrix
@@ -137,11 +137,11 @@ print.QR_matrix <- function(x, print_variables = TRUE, print_score_formula = TRU
 
     score_value <- extract_score(x, format_output = "vector")
     if(is.null(score_value)){
-        cat("Il n'y a aucun score de calculé")
+        cat("Aucun score n'a été calculé")
     }else{
-        cat(sprintf("Le plus petit score est de %1g et le plus grand est de %2g\n",
+        cat(sprintf("Le plus petit score est %1g et le plus grand est %2g\n",
                     min(score_value, na.rm = TRUE),max(score_value, na.rm = TRUE)))
-        cat(sprintf("La moyenne des scores est de %1g et l'écart-type est de %2g",
+        cat(sprintf("La moyenne des scores est %1g et l'écart-type est %2g",
                     mean(score_value, na.rm = TRUE),sd(score_value, na.rm = TRUE)))
     }
     if(print_score_formula && !is.null(x$score_formula)){
@@ -187,11 +187,11 @@ print.mQR_matrix <- function(x, score_statistics = TRUE, ...){
         score_values <- extract_score(x, format_output = "vector")
         all_score <- do.call(c,score_values)
         if(is.null(all_score)){
-            cat("Aucun bilan qualité n'a de score de calculé")
+            cat("Aucun bilan qualité n'a de score calculé")
         }else{
-            cat(sprintf("Le moyenne des scores sur l'ensemble des bilans qualité est %g\n",
+            cat(sprintf("La moyenne des scores sur l'ensemble des bilans qualité est %g\n",
                         mean(all_score, na.rm=TRUE)))
-            cat(sprintf("Le plus petit score est de %1g et le plus grand est de %2g\n",
+            cat(sprintf("Le plus petit score est %1g et le plus grand est %2g\n",
                         min(all_score, na.rm = TRUE),max(all_score, na.rm = TRUE)))
 
             for(i in 1 : length(score_values)){
@@ -210,7 +210,7 @@ print.mQR_matrix <- function(x, score_statistics = TRUE, ...){
                 }else{
                     cat(sprintf("Le score moyen du bilan qualité n°%d%s est %g\n",i,bq_name,
                                 mean(score_value, na.rm=TRUE)))
-                    cat(sprintf("Le plus petit score est de %1g et le plus grand est de %2g\n",
+                    cat(sprintf("Le plus petit score est %1g et le plus grand est %2g\n",
                                 min(score_value, na.rm = TRUE),max(score_value, na.rm = TRUE)))
                 }
             }

@@ -2,7 +2,7 @@
 #'
 #' Permet d'extraire un bilan qualité à partir du fichier CSV contenant la matrice des diagnostics.
 #'
-#' @param matrix_output_file fichier CSV contenant la matrice des diagnostics. S'il n'est pas spécifié une fenêtre s'ouvre
+#' @param matrix_output_file fichier CSV contenant la matrice des diagnostics. S'il n'est pas spécifié, une fenêtre s'ouvre
 #' pour sélectionner le fichier.
 #' @param sep séparateur de caractères utilisé dans le fichier csv (par défaut \code{sep = ";"})
 #' @param dec séparateur décimal utilisé dans le fichier csv (par défaut \code{dec = ","})
@@ -10,7 +10,7 @@
 #' @details La fonction permet d'extraire un bilan qualité à partir d'un fichier csv contenant l'ensemble des
 #' diagnostics (généralement fichier \emph{demetra_m.csv}).
 #'
-#' Ce fichiers peut être obtenu en lançant le cruncher (\code{\link{cruncher}} ou \code{\link{cruncher_and_param}}) avec
+#' Ce fichier peut être obtenu en lançant le cruncher (\code{\link{cruncher}} ou \code{\link{cruncher_and_param}}) avec
 #' l'ensemble des paramètres de base pour les paramètres à exporter et l'option \code{csv_layout = "vtable"} (par défaut)
 #' pour le format de sortie des fichiers csv (option de \code{\link{cruncher_and_param}} ou de \code{\link{create_param_file}}
 #' lors de la création du
@@ -169,7 +169,7 @@ extractARIMA <- function(demetra_m){
 extractNormalityTests <- function(demetra_m){
     tests_possibles <- grep("(^skewness$)|(^kurtosis$)|(^lb2$)",colnames(demetra_m))
     if(length(tests_possibles) != 3)
-        stop("Il manque au moins un des tests skewneess, kurtosis, lb2")
+        stop("Il manque au moins un des tests skewness, kurtosis, lb2")
 
     if(length(grep("^X\\.(\\d){1,}$",
          colnames(demetra_m)[rep(tests_possibles, each = 2) + rep(1:2, 3)])) != 6)
