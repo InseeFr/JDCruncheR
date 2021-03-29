@@ -9,11 +9,10 @@ Authors@R:
              email = "alain.quartier-la-tente@insee.fr"),
       person(given = "Institut national de la statistique et des études économiques",
              role = "cph",
-             email = c("anna.smyk@insee.fr","alice.tchang@insee.fr")
+             email = c("anna.smyk@insee.fr","alice.tchang@insee.fr"),
              comment = "https://www.insee.fr/"))
 Description: Permet de lancer rapidement le cruncher de JDemetra+ depuis R et de construire d'autres outils 
-liés à la désaisonnalisation. La dernière version du cruncher peut être téléchargée sous 
-https://github.com/jdemetra/jwsacruncher/releases.
+    liés à la désaisonnalisation. La dernière version du cruncher peut être téléchargée sous https://github.com/jdemetra/jwsacruncher/releases.
 URL: https://github.com/InseeFr/JDCruncheR
 BugReports: https://github.com/InseeFr/JDCruncheR/issues
 Imports:
