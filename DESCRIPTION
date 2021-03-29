@@ -1,11 +1,21 @@
 Package: JDCruncheR
-Title: Interface entre le cruncher JDemetra+ et R et création de bilans qualité
+Title: Interface entre le cruncher JDemetra+ et R, et création de bilans qualité
 Version: 0.2.3
 Date: 05/02/2019
-Authors@R: c(person("Alain", "Quartier-la-Tente", email = "alain.quartier-la-tente@insee.fr", role = c("aut", "cre")))
-Description: Permet de lancer rapidement le cruncher de JDemetra+ depuis R et de construire d'autres outils liés à la désaisonnalisation. La dernière version du cruncher peut être téléchargée sous https://github.com/jdemetra/jwsacruncher/releases.
-URL: https://github.com/AQLT/JDCruncheR
-BugReports: https://github.com/AQLT/JDCruncheR/issues
+Authors@R: 
+    c(person(given = "Alain",
+             family = "Quartier-la-Tente",
+             role = c("aut", "cre"),
+             email = "alain.quartier-la-tente@insee.fr"),
+      person(given = "Institut national de la statistique et des études économiques",
+             role = "cph",
+             email = c("anna.smyk@insee.fr","alice.tchang@insee.fr")
+             comment = "https://www.insee.fr/"))
+Description: Permet de lancer rapidement le cruncher de JDemetra+ depuis R et de construire d'autres outils 
+liés à la désaisonnalisation. La dernière version du cruncher peut être téléchargée sous 
+https://github.com/jdemetra/jwsacruncher/releases.
+URL: https://github.com/InseeFr/JDCruncheR
+BugReports: https://github.com/InseeFr/JDCruncheR/issues
 Imports:
     XML,
     XLConnect
@@ -13,7 +23,7 @@ Suggests:
     knitr,
     kableExtra,
     rmarkdown
-License: GPL-3
+License: EUROPEAN UNION PUBLIC LICENCE v. 1.2
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true
