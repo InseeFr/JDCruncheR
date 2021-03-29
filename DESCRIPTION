@@ -23,7 +23,7 @@ Suggests:
     knitr,
     kableExtra,
     rmarkdown
-License: EUPL
+License: EUROPEAN UNION PUBLIC LICENCE v. 1.2
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true
