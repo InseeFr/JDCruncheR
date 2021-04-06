@@ -1,5 +1,5 @@
 ---
-title: "Introduction à JDCruncheR : lancement du cruncher depuis JDCruncheR"
+title: "Le lancement du cruncher avec JDCruncheR"
 date: "`r Sys.Date()`"
 output:
   pdf_document:
@@ -19,7 +19,7 @@ header-includes:
   - \usepackage[normalem]{ulem}
   - \usepackage{makecell}
 vignette: >
-  %\VignetteIndexEntry{Lancement du cruncher}
+  %\VignetteIndexEntry{Le lancement du cruncher avec JDCruncheR}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
