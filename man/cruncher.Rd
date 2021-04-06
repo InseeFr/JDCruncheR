@@ -13,12 +13,12 @@ cruncher(workspace,
 \item{workspace}{chemin vers le workspace.}
 
 \item{cruncher_bin_directory}{répertoire contenant contenant le dossier "bin" du cruncher. Pour voir la
-valeur par défaut exécuter le code \code{getOption("cruncher_bin_directory")}.}
+valeur par défaut, exécuter le code \code{getOption("cruncher_bin_directory")}.}
 
 \item{param_file_path}{chemin vers le fichier des paramètres à utiliser pour lancer le workspace.
-Par défaut un fichier .params est recherché au même niveau que le workspace.}
+Par défaut, un fichier .params est recherché au même niveau que le workspace.}
 
-\item{log_file}{nom du fichier qui contiendra la log du cruncher. Par défaut la log n'est pas exportée}
+\item{log_file}{nom du fichier qui contiendra la log du cruncher. Par défaut, la log n'est pas exportée.}
 }
 \value{
 L'adresse du workspace.

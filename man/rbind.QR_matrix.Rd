@@ -9,7 +9,7 @@
 \arguments{
 \item{...}{objets \code{QR_matrix} à combiner.}
 
-\item{check_formula}{booléen indiquant s'il faut vérifier la cohérence dans les formule du calcul du score.
+\item{check_formula}{booléen indiquant s'il faut vérifier la cohérence dans les formules de calcul du score.
 Par défaut \code{check_formula = TRUE} : la fonction renvoie une erreur si des scores sont calculés avec des formules différentes.
 Si \code{check_formula = FALSE} alors il n'y a pas de vérification et le paramètre \code{score_formula} de l'objet
 en sortie est \code{NULL}.}

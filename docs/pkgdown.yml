@@ -1,7 +1,8 @@
-pandoc: '2.5'
-pkgdown: 1.3.0.9000
-pkgdown_sha: 2f40b4769ea9ad2312aa4cc93f27ab116461543b
+pandoc: '2.6'
+pkgdown: 1.6.1
+pkgdown_sha: ~
 articles:
   Lancement_cruncher: Lancement_cruncher.html
   Lancement_cruncher_pdf: Lancement_cruncher_pdf.html
+last_built: 2021-03-29T18:31Z
 

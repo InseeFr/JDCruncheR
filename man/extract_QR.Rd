@@ -8,7 +8,7 @@
 extract_QR(matrix_output_file, sep = ";", dec = ",")
 }
 \arguments{
-\item{matrix_output_file}{fichier CSV contenant la matrice des diagnostics. S'il n'est pas spécifié une fenêtre s'ouvre
+\item{matrix_output_file}{fichier CSV contenant la matrice des diagnostics. S'il n'est pas spécifié, une fenêtre s'ouvre
 pour sélectionner le fichier.}
 
 \item{sep}{séparateur de caractères utilisé dans le fichier csv (par défaut \code{sep = ";"})}
@@ -25,7 +25,7 @@ Permet d'extraire un bilan qualité à partir du fichier CSV contenant la matric
 La fonction permet d'extraire un bilan qualité à partir d'un fichier csv contenant l'ensemble des
 diagnostics (généralement fichier \emph{demetra_m.csv}).
 
-Ce fichiers peut être obtenu en lançant le cruncher (\code{\link{cruncher}} ou \code{\link{cruncher_and_param}}) avec
+Ce fichier peut être obtenu en lançant le cruncher (\code{\link{cruncher}} ou \code{\link{cruncher_and_param}}) avec
 l'ensemble des paramètres de base pour les paramètres à exporter et l'option \code{csv_layout = "vtable"} (par défaut)
 pour le format de sortie des fichiers csv (option de \code{\link{cruncher_and_param}} ou de \code{\link{create_param_file}}
 lors de la création du

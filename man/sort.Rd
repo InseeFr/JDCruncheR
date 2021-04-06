@@ -16,9 +16,9 @@
 \item{x}{objet de type \code{QR_matrix} ou \code{mQR_matrix}.}
 
 \item{decreasing}{booléen indiquant si les bilans qualité doivent être triés par ordre croissant ou décroissant.
-Par défaut le tri est effectué par ordre croissant.}
+Par défaut, le tri est effectué par ordre croissant.}
 
-\item{sort_variables}{variables à utiliser pour le tri qui sont présentes dans les tables des modalités.}
+\item{sort_variables}{variables à utiliser pour le tri. Elles doivent être présentes dans les tables de modalités.}
 
 \item{...}{autres paramètres de la fonction \code{\link[base]{order}} (non utilisés pour l'instant).}
 }
@@ -31,7 +31,7 @@ Permet de trier les bilans qualité en fonction d'une ou plusieurs variables.
 \examples{
 \dontrun{
 QR <- compute_score(extract_QR())
-sort(QR, sort_variables = "score") #Pour trier par ordre croissant sur le score
+sort(QR, sort_variables = "score") # Pour trier par ordre croissant sur le score
 }
 }
 \seealso{

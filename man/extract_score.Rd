@@ -14,14 +14,14 @@ extract_score(x, format_output = c("data.frame", "vector"),
 soit un \code{data.frame} soit un \code{vector}.}
 
 \item{weighted_score}{booléen indiquant s'il faut extraire le score pondéré (s'il existe) ou le score non pondéré.
-Par défaut c'es le score non pondéré qui est extrait.}
+Par défaut, c'est le score non pondéré qui est extrait.}
 }
 \description{
 Permet d'extraire le score des objets \code{QR_matrix} ou \code{mQR_matrix}.
 }
 \details{
-Pour les objets \code{QR_matrix}, le score renvoyé est soit l'objet \code{NULL} si aucun score n'a été calculé ou un vecteur.
-Pour les objets \code{mQR_matrix} il s'agit d'une liste de scores (\code{NULL} ou un vecteur).
+Pour les objets \code{QR_matrix}, le score renvoyé est soit l'objet \code{NULL} si aucun score n'a été calculé, soit un vecteur.
+Pour les objets \code{mQR_matrix}, c'est une liste de scores (\code{NULL} ou un vecteur).
 }
 \examples{
 \dontrun{

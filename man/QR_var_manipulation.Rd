@@ -24,7 +24,7 @@ Permet de retirer des indicateurs (fonction \code{remove_indicators}) ou de n'en
 \dontrun{
 QR <- compute_score(extract_QR())
 retain_indicators(QR,"score","m7") # On ne retient que les variables score et m7
-retain_indicators(QR,c("score","m7")) #Ã©quivalent
+retain_indicators(QR,c("score","m7")) # Ã©quivalent
 score(remove_indicator(QR,"score")) # Il n'y a plus de score
 }
 }

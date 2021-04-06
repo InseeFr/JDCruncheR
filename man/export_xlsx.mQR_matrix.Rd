@@ -14,8 +14,8 @@
 
 \item{export_dir}{dossier d'export des résultats.}
 
-\item{layout_file}{paramètre d'export. Par défaut (\code{layout_file = "ByComponent"}) on a un fichier Excel par composante
-de la matrice bilan qualité (matrice des modalités ou des valeurs) dont chaque feuille correspond à un bilan qualité. Pour avoir
+\item{layout_file}{paramètre d'export. Par défaut, (\code{layout_file = "ByComponent"}) et un fichier Excel est exporté par composante
+de la matrice bilan qualité (matrice des modalités ou des valeurs), dont chaque feuille correspond à un bilan qualité. Pour avoir
 un fichier par bilan qualité dont chaque feuille correspond à la composante exportée, utiliser \code{layout_file = "ByQRMatrix"}.}
 
 \item{file_extension}{extension des fichiers (\code{".xls"} ou \code{".xlsx"}).}

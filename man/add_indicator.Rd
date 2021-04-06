@@ -16,19 +16,19 @@ add_indicator(x, indicator, variable_name, ...)
 \item{...}{autres paramètres de la fonction \code{\link[base]{merge}}.}
 }
 \description{
-Permet de rajouter un indicateur dans les objets \code{QR_matrix}. Le nom des séries
+Permet d'ajouter un indicateur dans les objets \code{QR_matrix}. Le nom des séries
 (colonne "series") ne peut être enlevé.
 }
 \details{
 La fonction \code{add_indicator()} permet d'ajouter un indicateur dans la matrice des valeurs du bilan qualité.
-Il n'est donc pas rajouté dans la matrice des modalités et ne peut être utilisée dans le calcul du score
-(sauf pour le pondérer). Pour l'utiliser dans le calcul du score, il faudra d'abord la recoder avec la fonction
+L'indicateur n'est donc pas ajouté dans la matrice des modalités et ne peut être utilisé dans le calcul du score
+(sauf pour le pondérer). Pour l'utiliser dans le calcul du score, il faudra d'abord le recoder avec la fonction
 \code{\link{recode_indicator_num}}.
 
-L'indicateur à rajouter peut être sous deux formats : \code{vector} ou \code{data.frame}. Dans les deux
-cas il faut que les valeurs à rajouter puissent être associées aux bonnes séries dans la matrice du bilan qualité :
+L'indicateur à ajouter peut être sous deux formats : \code{vector} ou \code{data.frame}. Dans les deux cas,
+il faut que les valeurs à ajouter puissent être associées aux bonnes séries dans la matrice du bilan qualité :
 \itemize{
-\item dans le cas d'un \code{vector}, les éléments devront être nommés et les noms doivent correspondre ceux présents dans le
+\item dans le cas d'un \code{vector}, les éléments devront être nommés et les noms doivent correspondre à ceux présents dans le
 bilan qualité (variable "series") ;
 \item dans le cas d'un \code{data.frame}, il devra contenir une colonne "series" avec les noms des séries
 correspondantes.
