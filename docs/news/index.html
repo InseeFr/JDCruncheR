@@ -9,20 +9,26 @@
 <title>Changelog • JDCruncheR</title>
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -44,9 +50,10 @@
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -95,7 +102,7 @@
       <a href="https://github.com/jdemetra/jwsacruncher/releases">Télécharger le cruncher de JDemetra+</a>
     </li>
     <li>
-      <a href="https://github.com/AQLT/JDCruncheR/wiki/Installation-et-configuration-de-JDemetra--et-du-cruncher">Configuration avec une version portable de Java</a>
+      <a href="https://github.com/InseeFr/JDCruncheR/wiki/Installation-et-configuration-de-JDemetra--et-du-cruncher">Configuration avec une version portable de Java</a>
     </li>
   </ul>
 </li>
@@ -115,17 +122,18 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Changelog <small></small></h1>
-      <small>Source: <a href='https://github.com/AQLT/JDCruncheR/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
+      <h1 data-toc-skip>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/InseeFr/JDCruncheR/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
     <div id="jdcruncher-023" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.2.3">
 <a href="#jdcruncher-023" class="anchor"></a>JDCruncher 0.2.3</h1>
 <ul>
 <li>la fonction <code><a href="../reference/weighted_score.html">weighted_score()</a></code> crée maintenant une nouvelle variable <code>score_pond</code> plutôt que de remplacer l’ancienne. La fonction <code><a href="../reference/extract_score.html">extract_score()</a></code> permet d’extraire les deux scores.</li>
@@ -134,36 +142,36 @@
 </ul>
 </div>
     <div id="jdcruncher-022" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.2.2">
 <a href="#jdcruncher-022" class="anchor"></a>JDCruncher 0.2.2</h1>
 <div id="nouvelles-fonctions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#nouvelles-fonctions" class="anchor"></a>Nouvelles fonctions</h2>
 <ul>
-<li>la fonction <code>score()</code> devient maintenant la fonction <code><a href="../reference/extract_score.html">extract_score()</a></code> et contient un nouveau paramètres pour contrôler le format en sortie. La fonction <code>score()</code> sera enlevée dans la prochaine version du package.</li>
-<li>ajout de la fonction <code><a href="../reference/add_indicator.html">add_indicator()</a></code> pour ajouter des variables dans la matrice des valeurs le bilan qualité.</li>
-<li>ajout de la fonction <code><a href="../reference/recode_indicator_num.html">recode_indicator_num()</a></code> pour recoder les modalités d’une variable dans les bilans qualité.</li>
+<li>la fonction <code>score()</code> devient maintenant la fonction <code><a href="../reference/extract_score.html">extract_score()</a></code> et contient un nouveau paramètre pour contrôler le format en sortie. La fonction <code>score()</code> sera enlevée dans la prochaine version du package.</li>
+<li>ajout de la fonction <code><a href="../reference/add_indicator.html">add_indicator()</a></code> pour ajouter des variables dans la matrice des valeurs du bilan qualité.</li>
+<li>ajout de la fonction <code><a href="../reference/recode_indicator_num.html">recode_indicator_num()</a></code> pour recoder les modalités d’une variable dans le bilan qualité.</li>
 </ul>
 </div>
 <div id="modification-des-fonctions-déjà-existantes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#modification-des-fonctions-d%C3%A9j%C3%A0-existantes" class="anchor"></a>Modification des fonctions déjà existantes</h2>
 <ul>
-<li>désormais on ne peut plus retirer la colonne contenant le nom des séries avec <code><a href="../reference/QR_var_manipulation.html">remove_indicators()</a></code> ou <code><a href="../reference/QR_var_manipulation.html">retain_indicators()</a></code>
+<li>désormais, on ne peut plus retirer la colonne contenant le nom des séries avec <code><a href="../reference/QR_var_manipulation.html">remove_indicators()</a></code> ou <code><a href="../reference/QR_var_manipulation.html">retain_indicators()</a></code>
 </li>
 <li>correction de bugs dans les fonctions <code><a href="../reference/print.QR_matrix.html">print.QR_matrix()</a></code> et <code><a href="../reference/print.QR_matrix.html">print.QR_matrix()</a></code>.</li>
-<li>modification de la fonction <code><a href="../reference/compute_score.html">compute_score()</a></code> : desormais le paramètre score_formula n’existe plus et est remplacé par score_pond. Le score n’est plus calculé à partir d’une formule mais à partir d’un vecteur dont les noms correspondent aux variables à pondérer. Ajout également d’un paramètre n_contrib_score pour extraire les variables qui contribuent aux score et du paramètre na.rm pour prendre en compte les valeurs manquantes dans le calcul du score.</li>
+<li>modification de la fonction <code><a href="../reference/compute_score.html">compute_score()</a></code> : désormais, le paramètre score_formula n’existe plus et est remplacé par score_pond. Le score n’est plus calculé à partir d’une formule mais à partir d’un vecteur dont les noms correspondent aux variables à pondérer. Ajout également d’un paramètre n_contrib_score pour extraire les variables qui contribuent au score et du paramètre na.rm pour prendre en compte les valeurs manquantes dans le calcul du score.</li>
 <li>correction d’un bug dans la fonction <code><a href="../reference/extract_QR.html">extract_QR()</a></code> : la stat q-m2 était égale à la stat Q.</li>
 </ul>
 </div>
 </div>
     <div id="jdcruncher-021" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.2.1">
 <a href="#jdcruncher-021" class="anchor"></a>JDCruncher 0.2.1</h1>
 <p>Correction d’un bug sur les fonctions <code><a href="../reference/QR_var_manipulation.html">retain_indicators()</a></code> et <code>remove_indicator()</code>.</p>
 </div>
     <div id="jdcruncher-020" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.2.0">
 <a href="#jdcruncher-020" class="anchor"></a>JDCruncher 0.2.0</h1>
 <div id="nouvelles-fonctions-1" class="section level2">
 <h2 class="hasAnchor">
@@ -185,25 +193,20 @@
 <h2 class="hasAnchor">
 <a href="#autres-modifications" class="anchor"></a>Autres modifications</h2>
 <ul>
-<li>mise à jour des options <code>default_matrix_item</code> et <code>default_tsmatrix_series</code> avec les paramètres de la version 2.2.0 de JDemetra+</li>
+<li>mise à jour des options <code>default_matrix_item</code> et <code>default_tsmatrix_series</code> avec les paramètres de la version 2.2.0 de JDemetra+.</li>
 </ul>
 </div>
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#jdcruncher-023">0.2.3</a></li>
-        <li><a href="#jdcruncher-022">0.2.2</a></li>
-        <li><a href="#jdcruncher-021">0.2.1</a></li>
-        <li><a href="#jdcruncher-020">0.2.0</a></li>
-      </ul>
-    </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -211,13 +214,16 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 
