@@ -5,19 +5,20 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Introduction à JDCruncheR : lancement du cruncher depuis JDCruncheR • JDCruncheR</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Introduction à JDCruncheR : lancement du cruncher depuis JDCruncheR">
-<meta property="og:description" content="">
-<meta name="twitter:card" content="summary">
+<title>Le lancement du cruncher avec JDCruncheR • JDCruncheR</title>
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Le lancement du cruncher avec JDCruncheR">
+<meta property="og:description" content="JDCruncheR">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -65,7 +66,7 @@
       <a href="https://github.com/jdemetra/jwsacruncher/releases">Télécharger le cruncher de JDemetra+</a>
     </li>
     <li>
-      <a href="https://github.com/AQLT/JDCruncheR/wiki/Installation-et-configuration-de-JDemetra--et-du-cruncher">Configuration avec une version portable de Java</a>
+      <a href="https://github.com/InseeFr/JDCruncheR/wiki/Installation-et-configuration-de-JDemetra--et-du-cruncher">Configuration avec une version portable de Java</a>
     </li>
   </ul>
 </li>
@@ -86,14 +87,15 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Introduction à JDCruncheR : lancement du cruncher depuis JDCruncheR</h1>
+      <h1 data-toc-skip>Le lancement du cruncher avec JDCruncheR</h1>
             
-            <h4 class="date">2019-02-05</h4>
+            <h4 class="date">2021-04-08</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/AQLT/JDCruncheR/blob/master/vignettes/Lancement_cruncher.Rmd"><code>vignettes/Lancement_cruncher.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/InseeFr/JDCruncheR/blob/master/vignettes/Lancement_cruncher.Rmd"><code>vignettes/Lancement_cruncher.Rmd</code></a></small>
       <div class="hidden name"><code>Lancement_cruncher.Rmd</code></div>
 
     </div>
@@ -104,19 +106,19 @@
 <ul>
 <li>lancer facilement le cruncher de JDemetra+ (<a href="https://github.com/jdemetra/jwsacruncher/releases">JWSACruncher</a>) pour mettre à jour un workspace et en exporter les résultats.<br>
 </li>
-<li>calculer un <em>bilan qualité</em> qui permet de synthétiser l’ensemble des diagnostics liés aux séries désaisonnalisée afin de repérer rapidement les séries les plus problématiques sur lesquelles il faut concentrer son analyse. Il est surtout utile dans le cas de la désaisonnalisation d’un grand nombre de séries puisqu’il est dans ce cas impossible de regarder l’ensemble des diagnostics pour chaque série dans un temps raisonnable.</li>
+<li>calculer un <em>bilan qualité</em> qui permet de synthétiser l’ensemble des diagnostics liés aux séries désaisonnalisées, afin de repérer rapidement les séries les plus problématiques sur lesquelles il faut concentrer son analyse. Ce bilan est surtout utile dans le cas de la désaisonnalisation d’un grand nombre de séries puisqu’il est dans ce cas impossible de regarder l’ensemble des diagnostics pour chaque série dans un temps raisonnable.</li>
 </ul>
-<div id="lancement-de-cruncher" class="section level1">
+<div id="lancement-du-cruncher" class="section level1">
 <h1 class="hasAnchor">
-<a href="#lancement-de-cruncher" class="anchor"></a>Lancement de cruncher</h1>
-<p>Pour éviter que le package soit trop volumineux, le cruncher de JDemetra+ n’est pas intégré dans ce celui-ci. Il est donc à télécharger sous <a href="https://github.com/jdemetra/jdemetra-app/releases" class="uri">https://github.com/jdemetra/jdemetra-app/releases</a>. Pour plus d’informations sur l’installation du cruncher et sa configuration avec une version portable de Java, voir le wiki de JDCruncheR : <a href="https://github.com/AQLT/JDCruncheR/wiki/Installation-et-configuration-de-JDemetra--et-du-cruncher" class="uri">https://github.com/AQLT/JDCruncheR/wiki/Installation-et-configuration-de-JDemetra--et-du-cruncher</a>.</p>
-<p>Pour lancer le cruncher de JDemetra+ il faut trois fichiers :</p>
+<a href="#lancement-du-cruncher" class="anchor"></a>Lancement du cruncher</h1>
+<p>Pour éviter que le présent package (JDCruncheR) ne soit trop volumineux, il ne contient pas le cruncher de JDemetra+. Ce dernier peut être téléchargé à l’adresse suivante: <a href="https://github.com/jdemetra/jdemetra-app/releases" class="uri">https://github.com/jdemetra/jdemetra-app/releases</a>. Pour plus d’informations sur l’installation du cruncher et sa configuration avec une version portable de Java, voir le wiki de JDCruncheR : <a href="https://github.com/InseeFr/JDCruncheR/wiki/Installation-et-configuration-de-JDemetra--et-du-cruncher" class="uri">https://github.com/InseeFr/JDCruncheR/wiki/Installation-et-configuration-de-JDemetra--et-du-cruncher</a>.</p>
+<p>Pour lancer le cruncher de JDemetra+, il faut trois éléments :</p>
 <ul>
-<li>un fichier contenant les paramètres sur la méthode de rafraîchissement à utilisée pour mettre à jour le workspace ;<br>
+<li>un fichier contenant les paramètres sur la méthode de rafraîchissement à utiliser pour mettre le workspace à jour ;<br>
 </li>
 <li>un workspace valide de JDemetra+ ;<br>
 </li>
-<li>l’adresse vers le cruncher.</li>
+<li>le chemin d’accès au cruncher.</li>
 </ul>
 <p>Dans le package JDCruncheR, il existe trois fonctions associées au lancement du cruncher :</p>
 <ul>
@@ -129,18 +131,18 @@
 <li>
 <code><a href="../reference/cruncher_and_param.html">cruncher_and_param()</a></code> qui permet de lancer le cruncher tout en créant le fichier de paramètres et de personnaliser certaines sorties du cruncher.</li>
 </ul>
-<div id="creation-du-fichier-de-parametres-avec-create_param_file" class="section level2">
+<div id="création-du-fichier-de-paramètres-avec-create_param_file" class="section level2">
 <h2 class="hasAnchor">
-<a href="#creation-du-fichier-de-parametres-avec-create_param_file" class="anchor"></a>Création du fichier de paramètres avec <code><a href="../reference/create_param_file.html">create_param_file()</a></code>
+<a href="#cr%C3%A9ation-du-fichier-de-param%C3%A8tres-avec-create_param_file" class="anchor"></a>Création du fichier de paramètres avec <code>create_param_file()</code>
 </h2>
-<p>Les paramètres de la fonction <code><a href="../reference/create_param_file.html">create_param_file()</a></code> sont les mêmes que ceux décrits dans le wiki du cruncher de JDemetra+ : <a href="https://github.com/jdemetra/jwsacruncher/wiki" class="uri">https://github.com/jdemetra/jwsacruncher/wiki</a>. Les trois paramètres les plus importants de <code><a href="../reference/create_param_file.html">create_param_file()</a></code> sont :</p>
+<p>Les paramètres de la fonction <code><a href="../reference/create_param_file.html">create_param_file()</a></code> sont les mêmes que ceux décrits dans le wiki du cruncher de JDemetra+ (<a href="https://github.com/jdemetra/jwsacruncher/wiki" class="uri">https://github.com/jdemetra/jwsacruncher/wiki</a>). Les trois paramètres les plus importants de <code><a href="../reference/create_param_file.html">create_param_file()</a></code> sont :</p>
 <ol style="list-style-type: decimal">
 <li>
-<code>policy</code> qui est la méthode de rafraichissement utilisée (voir tableau ci-dessous).</li>
+<code>policy</code> qui est la méthode de rafraîchissement utilisée (voir tableau ci-dessous).</li>
 </ol>
 <table class="table">
 <caption>
-Les différentes politiques de rafraichissement
+Les différentes politiques de rafraîchissement
 </caption>
 <thead><tr>
 <th style="text-align:left;">
@@ -162,7 +164,7 @@ Partial concurrent adjustment -&gt; Fixed model
 current
 </td>
 <td style="text-align:left;">
-Le modèle ARIMA, les outliers et les autres paramètres du modèle de régression ne sont ni re-identifiés ni re-estimés. Le schéma de décomposition est inchangé.
+Le modèle ARIMA, les outliers et les autres paramètres du modèle de régression ne sont ni ré-identifiés ni ré-estimés. Le schéma de décomposition est inchangé.
 </td>
 </tr>
 <tr>
@@ -173,7 +175,7 @@ Partial concurrent adjustment -&gt; Estimate regression coefficients
 fixedparameters (ou fixed)
 </td>
 <td style="text-align:left;">
-Le modèle ARIMA, les outliers et les autres paramètres du modèle regARIMA ne sont pas re-identifiés. Les coefficients du modèle ARIMA sont fixés et les autres paramètres du modèle de régression sont re-estimés. Le schéma de décomposition est inchangé.
+Le modèle ARIMA, les outliers et les autres paramètres du modèle regARIMA ne sont pas ré-identifiés. Les coefficients du modèle ARIMA sont fixés et les autres paramètres du modèle de régression sont ré-estimés. Le schéma de décomposition est inchangé.
 </td>
 </tr>
 <tr>
@@ -184,7 +186,7 @@ Partial concurrent adjustment -&gt; Estimate regression coefficients + Arima par
 parameters (paramètre par défaut)
 </td>
 <td style="text-align:left;">
-Le modèle ARIMA, les outliers et les autres paramètres du modèle de régression ne sont pas re-identifiés mais sont tous re-estimés. Le schéma de décomposition est inchangé.
+Le modèle ARIMA, les outliers et les autres paramètres du modèle de régression ne sont pas ré-identifiés mais sont tous ré-estimés. Le schéma de décomposition est inchangé.
 </td>
 </tr>
 <tr>
@@ -195,7 +197,7 @@ Partial concurrent adjustment -&gt; Estimate regression coefficients + Last outl
 lastoutliers
 </td>
 <td style="text-align:left;">
-Le modèle ARIMA, les outliers (sauf ceux sur la dernière année) et les autres paramètres du modèle de régression ne sont pas re-identifiés mais sont tous re-estimés. Les outliers sont re-identifiés sur la dernière année. Le schéma de décomposition est inchangé.
+Le modèle ARIMA, les outliers (sauf ceux de la dernière année) et les autres paramètres du modèle de régression ne sont pas ré-identifiés mais sont tous ré-estimés. Les outliers de la dernière année sont ré-identifiés. Le schéma de décomposition est inchangé.
 </td>
 </tr>
 <tr>
@@ -206,7 +208,7 @@ Partial concurrent adjustment -&gt; Estimate regression coefficients + all outli
 outliers
 </td>
 <td style="text-align:left;">
-Le modèle ARIMA et les paramètres du modèle regARIMA autres que les outliers ne sont pas re-identifiés mais re-estimés. Tous les outliers sont re-identifiés. Le schéma de décomposition est inchangé.
+Le modèle ARIMA et les paramètres du modèle regARIMA autres que les outliers ne sont pas ré-identifiés mais ré-estimés. Tous les outliers sont ré-identifiés. Le schéma de décomposition est inchangé.
 </td>
 </tr>
 <tr>
@@ -217,7 +219,7 @@ Partial concurrent adjustment -&gt; Estimate regression coefficients + Arima mod
 stochastic
 </td>
 <td style="text-align:left;">
-Re-identification de tous les paramètres du modèle regARIMA sauf les variables calendaires. Le schéma de décomposition est inchangé.
+Ré-identification de tous les paramètres du modèle regARIMA hormis les variables calendaires. Le schéma de décomposition est inchangé.
 </td>
 </tr>
 <tr>
@@ -228,104 +230,100 @@ Concurrent
 complete ou concurrent
 </td>
 <td style="text-align:left;">
-Re-identification de tout le modèle regARIMA.
+Ré-identification de tout le modèle regARIMA.
 </td>
 </tr>
 </tbody>
 </table>
 <ol start="2" style="list-style-type: decimal">
 <li>
-<code>matrix_item</code> qui est une chaîne de caractères contenant les noms des paramètres à exporter. Par défaut ce sont ceux de l’option <code>default_matrix_item</code>. On peut donc au choix modifier l’option <code>default_matrix_item</code> ou le paramètre <code>matrix_item</code> :</li>
+<code>matrix_item</code> qui est une chaîne de caractères contenant les noms des paramètres à exporter. Par défaut, ce sont ceux de l’option <code>default_matrix_item</code>. On peut donc au choix modifier l’option <code>default_matrix_item</code> ou le paramètre <code>matrix_item</code> :</li>
 </ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(JDCruncheR)</a>
-<a class="sourceLine" id="cb1-2" title="2"> <span class="co"># Pour afficher les paramètres par défaut :</span></a>
-<a class="sourceLine" id="cb1-3" title="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/options">getOption</a></span>(<span class="st">"default_matrix_item"</span>)</a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="co"># Pour modifier les paramètres par défaut pour n'exporter par exemple</span></a>
-<a class="sourceLine" id="cb1-5" title="5"><span class="co"># que les critères d'information :</span></a>
-<a class="sourceLine" id="cb1-6" title="6"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/options">options</a></span>(<span class="dt">default_matrix_item =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"likelihood.aic"</span>,</a>
-<a class="sourceLine" id="cb1-7" title="7">                                <span class="st">"likelihood.aicc"</span>,</a>
-<a class="sourceLine" id="cb1-8" title="8">                                <span class="st">"likelihood.bic"</span>,</a>
-<a class="sourceLine" id="cb1-9" title="9">                                <span class="st">"likelihood.bicc"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/AQLT/JDCruncheR">JDCruncheR</a></span><span class="op">)</span>
+ <span class="co"># Pour afficher les paramètres par défaut :</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html">getOption</a></span><span class="op">(</span><span class="st">"default_matrix_item"</span><span class="op">)</span>
+<span class="co"># Pour modifier les paramètres par défaut pour n'exporter par exemple</span>
+<span class="co"># que les critères d'information :</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>default_matrix_item <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"likelihood.aic"</span>,
+                                <span class="st">"likelihood.aicc"</span>,
+                                <span class="st">"likelihood.bic"</span>,
+                                <span class="st">"likelihood.bicc"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
 <li>
-<code>tsmatrix_series</code> qui est une chaîne de caractères contenant les noms des paramètres à exporter. Par défaut ce sont ceux de l’option <code>default_tsmatrix_series</code>. On peut donc au choix modifier l’option <code>default_tsmatrix_series</code> ou le paramètre <code>tsmatrix_series</code> :</li>
+<code>tsmatrix_series</code> qui est une chaîne de caractères contenant les noms des paramètres à exporter. Par défaut, ce sont ceux de l’option <code>default_tsmatrix_series</code>. On peut donc au choix modifier l’option <code>default_tsmatrix_series</code> ou le paramètre <code>tsmatrix_series</code> :</li>
 </ol>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"> <span class="co"># Pour afficher les paramètres par défaut :</span></a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/options">getOption</a></span>(<span class="st">"default_tsmatrix_series"</span>)</a>
-<a class="sourceLine" id="cb2-3" title="3"><span class="co"># Pour modifier les paramètres par défaut pour n'exporter par exemple que</span></a>
-<a class="sourceLine" id="cb2-4" title="4"><span class="co"># la série désaisonnalisées et ses prévisions :</span></a>
-<a class="sourceLine" id="cb2-5" title="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/options">options</a></span>(<span class="dt">default_tsmatrix_series =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"sa"</span>, <span class="st">"sa_f"</span>))</a></code></pre></div>
-<p>Pour voir l’ensemble des paramètres il suffit d’utiliser sous R la commande <code><a href="../reference/create_param_file.html">?create_param_file</a></code>.</p>
-<p>Une fois les différents choix de spécifications réalisés, il ne reste plus qu’à créer le fichier de paramètres. Ci-dessous quelques exemples.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># Un fichier parametres.param sera créé sous D:/ avec la politique de rafraichissement</span></a>
-<a class="sourceLine" id="cb3-2" title="2"><span class="co"># "lastoutliers" et les autres paramètres par défaut</span></a>
-<a class="sourceLine" id="cb3-3" title="3"><span class="kw"><a href="../reference/create_param_file.html">create_param_file</a></span>(<span class="dt">dir_file_param =</span> <span class="st">"D:/"</span>,</a>
-<a class="sourceLine" id="cb3-4" title="4">                  <span class="dt">policy =</span> <span class="st">"lastoutliers"</span>)</a>
-<a class="sourceLine" id="cb3-5" title="5"></a>
-<a class="sourceLine" id="cb3-6" title="6"><span class="co"># Si l'on a modifié les options "default_matrix_item" et "default_tsmatrix_series" pour</span></a>
-<a class="sourceLine" id="cb3-7" title="7"><span class="co"># n'exporter que les critères d'information, la série désaisonnalisées et ses</span></a>
-<a class="sourceLine" id="cb3-8" title="8"><span class="co"># prévisions, la commande précédente est équivalent à : </span></a>
-<a class="sourceLine" id="cb3-9" title="9"><span class="kw"><a href="../reference/create_param_file.html">create_param_file</a></span>(<span class="dt">dir_file_param =</span> <span class="st">"D:/"</span>,</a>
-<a class="sourceLine" id="cb3-10" title="10">                  <span class="dt">policy =</span> <span class="st">"lastoutliers"</span>,</a>
-<a class="sourceLine" id="cb3-11" title="11">                  <span class="dt">matrix_item =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"likelihood.aic"</span>, <span class="st">"likelihood.aicc"</span>,</a>
-<a class="sourceLine" id="cb3-12" title="12">                                  <span class="st">"likelihood.bic"</span>, <span class="st">"likelihood.bicc"</span>),</a>
-<a class="sourceLine" id="cb3-13" title="13">                  <span class="dt">tsmatrix_series =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"sa"</span>, <span class="st">"sa_f"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"> <span class="co"># Pour afficher les paramètres par défaut :</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html">getOption</a></span><span class="op">(</span><span class="st">"default_tsmatrix_series"</span><span class="op">)</span>
+<span class="co"># Pour modifier les paramètres par défaut pour n'exporter par exemple que</span>
+<span class="co"># la série désaisonnalisée et ses prévisions :</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>default_tsmatrix_series <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"sa"</span>, <span class="st">"sa_f"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>Pour voir l’ensemble des paramètres, il suffit d’utiliser sous R la commande <code><a href="../reference/create_param_file.html">?create_param_file</a></code>.</p>
+<p>Après cela, il ne reste plus qu’à créer le fichier de paramètres. Ci-dessous quelques exemples.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Un fichier parametres.param sera créé sous D:/ avec la politique de rafraîchissement</span>
+<span class="co"># "lastoutliers" et les autres paramètres par défaut</span>
+<span class="fu"><a href="../reference/create_param_file.html">create_param_file</a></span><span class="op">(</span>dir_file_param <span class="op">=</span> <span class="st">"D:/"</span>,
+                  policy <span class="op">=</span> <span class="st">"lastoutliers"</span><span class="op">)</span>
+
+<span class="co"># Si l'on a modifié les options "default_matrix_item" et "default_tsmatrix_series" pour</span>
+<span class="co"># n'exporter que les critères d'information, la série désaisonnalisée et ses</span>
+<span class="co"># prévisions, la commande précédente est équivalent à : </span>
+<span class="fu"><a href="../reference/create_param_file.html">create_param_file</a></span><span class="op">(</span>dir_file_param <span class="op">=</span> <span class="st">"D:/"</span>,
+                  policy <span class="op">=</span> <span class="st">"lastoutliers"</span>,
+                  matrix_item <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"likelihood.aic"</span>, <span class="st">"likelihood.aicc"</span>,
+                                  <span class="st">"likelihood.bic"</span>, <span class="st">"likelihood.bicc"</span><span class="op">)</span>,
+                  tsmatrix_series <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"sa"</span>, <span class="st">"sa_f"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="lancement-du-cruncher" class="section level2">
+<div id="lancement-du-cruncher-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#lancement-du-cruncher" class="anchor"></a>Lancement du cruncher</h2>
-<p>Pour lancer le cruncher avec <code><a href="../reference/cruncher.html">cruncher()</a></code> ou <code><a href="../reference/cruncher_and_param.html">cruncher_and_param()</a></code>, il faut spécifier le chemin vers le cruncher (paramètre <code>cruncher_bin_directory</code>) et le chemin vers le workspace (paramètre <code>workspace</code>).</p>
-<p>Par défaut le chemin vers le cruncher est celui de l’option <code>cruncher_bin_directory</code> : il suffit donc de modifier une seule fois cette option afin qu’elle s’applique à toutes les exécutions du cruncher. Le chemin à indiquer est celui du dossier contenant le fichier <em>jwsacruncher.bat</em> qui est situé dans le dossier “Bin” du dossier d’installation du cruncher. Ainsi, s’il a été installé sous <code>D:\jdemetra-cli-2.2.0</code>, le fichier <em>jwsacruncher.bat</em> sera présent sous <code>D:\jdemetra-cli-2.2.0\bin</code>. Il faut donc modifier l’option <code>cruncher_bin_directory</code> de la façon suivante :</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/options">options</a></span>(<span class="dt">cruncher_bin_directory =</span> <span class="st">"D:/jdemetra-cli-2.2.0/bin/"</span>)</a></code></pre></div>
-<p>Si aucun workspace n’est selectionné alors une fenêtre s’ouvre invitant à sélectionner le workspace sur lequel on souhaite lancer le cruncher.</p>
-<p>La fonction <code><a href="../reference/cruncher_and_param.html">cruncher_and_param()</a></code> permet de créer un fichier temporaire de paramètres via la fonction <code><a href="../reference/create_param_file.html">create_param_file()</a></code> et pour ensuite lancer le cruncher via la fonction <code><a href="../reference/cruncher.html">cruncher()</a></code>. En plus des paramètres disponibles dans ces deux fonctions, <code><a href="../reference/cruncher_and_param.html">cruncher_and_param()</a></code> permet de renommer le dossier contenant les résultats du workspace afin qu’ils soient égaux aux noms des multi-documents affichés dans l’application JDemetra+ grâce au paramètre <code>rename_multi_documents</code> (par défaut <code>rename_multi_documents = TRUE</code> : les dossiers sont renommés). Ci-dessous quelques exemples d’utilisation.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># La commande suivante permet de mettre à jour le workspace "ipi"" présent sous</span></a>
-<a class="sourceLine" id="cb5-2" title="2"><span class="co"># D:/Campagne_CVS/ avec l'option de rafraîchissement "lastoutliers". Les autres</span></a>
-<a class="sourceLine" id="cb5-3" title="3"><span class="co"># options de lancement du cruncher sont ceux par défaut de la fonction create_param_file().</span></a>
-<a class="sourceLine" id="cb5-4" title="4"><span class="co"># En particulier, les paramètres exportées sont ceux des options "default_matrix_item"</span></a>
-<a class="sourceLine" id="cb5-5" title="5"><span class="co"># et "default_tsmatrix_series" et les résultats seront sous D:/Campagne_CVS/Output/.</span></a>
-<a class="sourceLine" id="cb5-6" title="6"><span class="kw"><a href="../reference/cruncher_and_param.html">cruncher_and_param</a></span>(<span class="dt">workspace =</span> <span class="st">"D:/Campagne_CVS/ipi.xml"</span>,</a>
-<a class="sourceLine" id="cb5-7" title="7">                   <span class="dt">rename_multi_documents =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb5-8" title="8">                   <span class="dt">policy =</span> <span class="st">"lastoutliers"</span>)</a>
-<a class="sourceLine" id="cb5-9" title="9"></a>
-<a class="sourceLine" id="cb5-10" title="10"><span class="co"># Utililser le paramètre "outpout" pour changer le dossier contenant les résultats :</span></a>
-<a class="sourceLine" id="cb5-11" title="11"><span class="kw"><a href="../reference/cruncher_and_param.html">cruncher_and_param</a></span>(<span class="dt">workspace =</span> <span class="st">"D:/Campagne_CVS/ipi.xml"</span>,</a>
-<a class="sourceLine" id="cb5-12" title="12">                   <span class="dt">output =</span> <span class="st">"D:/Resultats campagne/"</span>,</a>
-<a class="sourceLine" id="cb5-13" title="13">                   <span class="dt">rename_multi_documents =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb5-14" title="14">                   <span class="dt">policy =</span> <span class="st">"lastoutliers"</span>)</a>
-<a class="sourceLine" id="cb5-15" title="15"></a>
-<a class="sourceLine" id="cb5-16" title="16"><span class="co"># Pour modifier les noms des dossiers contenant les sorties afin qu'ils soient égaux</span></a>
-<a class="sourceLine" id="cb5-17" title="17"><span class="co"># aux noms des multi-documents affichés dans l'application JDemetra+ il suffit </span></a>
-<a class="sourceLine" id="cb5-18" title="18"><span class="co"># d'utiliser le paramètre "rename_multi_documents = TRUE" (valeur par défaut).</span></a>
-<a class="sourceLine" id="cb5-19" title="19"><span class="co"># Le paramètre "delete_existing_file = TRUE" permet lui de supprimer éventuels</span></a>
-<a class="sourceLine" id="cb5-20" title="20"><span class="co"># dossiers existants portant le même nom qu'un des multi-documents.</span></a>
-<a class="sourceLine" id="cb5-21" title="21"><span class="kw"><a href="../reference/cruncher_and_param.html">cruncher_and_param</a></span>(<span class="dt">workspace =</span> <span class="st">"D:/Campagne_CVS/ipi.xml"</span>,</a>
-<a class="sourceLine" id="cb5-22" title="22">                   <span class="dt">rename_multi_documents =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb5-23" title="23">                   <span class="dt">delete_existing_file =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb5-24" title="24">                   <span class="dt">policy =</span> <span class="st">"lastoutliers"</span>)</a>
-<a class="sourceLine" id="cb5-25" title="25"></a>
-<a class="sourceLine" id="cb5-26" title="26"><span class="co"># Pour voir les autres paramètres de la fonction :</span></a>
-<a class="sourceLine" id="cb5-27" title="27">?cruncher_and_param</a></code></pre></div>
+<a href="#lancement-du-cruncher-1" class="anchor"></a>Lancement du cruncher</h2>
+<p>Pour lancer le cruncher avec <code><a href="../reference/cruncher.html">cruncher()</a></code> ou <code><a href="../reference/cruncher_and_param.html">cruncher_and_param()</a></code>, il faut spécifier le chemin d’accès au dossier contenant le cruncher (paramètre <code>cruncher_bin_directory</code>) ainsi que celui du workspace à traiter (paramètre <code>workspace</code>).</p>
+<p>Par défaut, le chemin d’accès au dossier du cruncher est celui contenu dans le paramètre <code>cruncher_bin_directory</code> : il suffit donc de modifier une seule fois cette option afin qu’elle s’applique à toutes les exécutions du cruncher. Le chemin à indiquer est celui du dossier contenant le fichier <em>jwsacruncher.bat</em>, situé dans le dossier “Bin” du dossier d’installation du cruncher. Ainsi, s’il a été installé sous <code>D:\jdemetra-cli-2.2.3</code>, le fichier <em>jwsacruncher.bat</em> sera présent sous <code>D:\jdemetra-cli-2.2.3\bin</code>. Il faut donc modifier l’option <code>cruncher_bin_directory</code> de la façon suivante :</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>cruncher_bin_directory <span class="op">=</span> <span class="st">"D:/jdemetra-cli-2.2.3/bin/"</span><span class="op">)</span></code></pre></div>
+<p>Si aucun chemin de workspace n’est renseigné, une fenêtre s’ouvre, invitant à sélectionner le workspace sur lequel on souhaite lancer le cruncher.</p>
+<p>La fonction <code><a href="../reference/cruncher_and_param.html">cruncher_and_param()</a></code> permet de créer un fichier temporaire de paramètres via la fonction <code><a href="../reference/create_param_file.html">create_param_file()</a></code>, pour ensuite lancer le cruncher via la fonction <code><a href="../reference/cruncher.html">cruncher()</a></code>. En plus des paramètres disponibles dans ces deux fonctions, <code><a href="../reference/cruncher_and_param.html">cruncher_and_param()</a></code> permet de renommer le dossier contenant les résultats du workspace afin qu’ils soient égaux aux noms des multi-documents affichés dans l’application JDemetra+ grâce au paramètre <code>rename_multi_documents</code> (par défaut <code>rename_multi_documents = TRUE</code> : les dossiers sont renommés). Ci-dessous quelques exemples d’utilisation.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># La commande suivante permet de mettre à jour le workspace "ipi" présent sous</span>
+<span class="co"># D:/Campagne_CVS/ avec l'option de rafraîchissement "lastoutliers". Les autres</span>
+<span class="co"># options de lancement du cruncher sont ceux par défaut de la fonction create_param_file().</span>
+<span class="co"># En particulier, les paramètres exportés sont ceux des options "default_matrix_item"</span>
+<span class="co"># et "default_tsmatrix_series", et les résultats sortent sous D:/Campagne_CVS/Output/.</span>
+<span class="fu"><a href="../reference/cruncher_and_param.html">cruncher_and_param</a></span><span class="op">(</span>workspace <span class="op">=</span> <span class="st">"D:/Campagne_CVS/ipi.xml"</span>,
+                   rename_multi_documents <span class="op">=</span> <span class="cn">FALSE</span>,
+                   policy <span class="op">=</span> <span class="st">"lastoutliers"</span><span class="op">)</span>
+
+<span class="co"># Utilisation du paramètre "output" pour changer le dossier contenant les résultats :</span>
+<span class="fu"><a href="../reference/cruncher_and_param.html">cruncher_and_param</a></span><span class="op">(</span>workspace <span class="op">=</span> <span class="st">"D:/Campagne_CVS/ipi.xml"</span>,
+                   output <span class="op">=</span> <span class="st">"D:/Resultats campagne/"</span>,
+                   rename_multi_documents <span class="op">=</span> <span class="cn">FALSE</span>,
+                   policy <span class="op">=</span> <span class="st">"lastoutliers"</span><span class="op">)</span>
+
+<span class="co"># Pour modifier les noms des dossiers contenant les sorties afin qu'ils soient égaux</span>
+<span class="co"># aux noms des multi-documents affichés dans l'application JDemetra+, il suffit </span>
+<span class="co"># d'utiliser le paramètre "rename_multi_documents = TRUE" (valeur par défaut).</span>
+<span class="co"># Le paramètre "delete_existing_file = TRUE" permet, lui, de supprimer les éventuels</span>
+<span class="co"># dossiers existants portant le même nom qu'un des multi-documents.</span>
+<span class="fu"><a href="../reference/cruncher_and_param.html">cruncher_and_param</a></span><span class="op">(</span>workspace <span class="op">=</span> <span class="st">"D:/Campagne_CVS/ipi.xml"</span>,
+                   rename_multi_documents <span class="op">=</span> <span class="cn">TRUE</span>,
+                   delete_existing_file <span class="op">=</span> <span class="cn">TRUE</span>,
+                   policy <span class="op">=</span> <span class="st">"lastoutliers"</span><span class="op">)</span>
+
+<span class="co"># Pour voir les autres paramètres de la fonction :</span>
+<span class="op">?</span><span class="va">cruncher_and_param</span></code></pre></div>
 </div>
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-        <div id="tocnav">
-      <h2 class="hasAnchor">
-<a href="#tocnav" class="anchor"></a>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-<li>
-<a href="#lancement-de-cruncher">Lancement de cruncher</a><ul class="nav nav-pills nav-stacked">
-<li><a href="#creation-du-fichier-de-parametres-avec-create_param_file">Création du fichier de paramètres avec <code><a href="--/reference/create_param_file-html">create_param_file()</a></code></a></li>
-      <li><a href="#lancement-du-cruncher">Lancement du cruncher</a></li>
-      </ul>
-</li>
-      </ul>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
 </div>
-      </div>
 
 </div>
+
 
 
       <footer><div class="copyright">
@@ -333,12 +331,14 @@ Re-identification de tout le modèle regARIMA.
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>
