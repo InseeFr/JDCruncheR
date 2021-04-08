@@ -5,9 +5,12 @@
 \alias{cruncher}
 \title{Lanceur de cruncher}
 \usage{
-cruncher(workspace,
+cruncher(
+  workspace,
   cruncher_bin_directory = getOption("cruncher_bin_directory"),
-  param_file_path, log_file)
+  param_file_path,
+  log_file
+)
 }
 \arguments{
 \item{workspace}{chemin vers le workspace.}
@@ -27,8 +30,9 @@ L'adresse du workspace.
 Fonction qui permet de lancer le cruncher sur un workspace à partir d'un fichier de paramètres.
 }
 \seealso{
-Other Cruncher functions: \code{\link{create_param_file}},
-  \code{\link{cruncher_and_param}},
-  \code{\link{update_workspace}}
+Other Cruncher functions: 
+\code{\link{create_param_file}()},
+\code{\link{cruncher_and_param}()},
+\code{\link{update_workspace}()}
 }
 \concept{Cruncher functions}

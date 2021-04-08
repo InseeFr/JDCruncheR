@@ -4,8 +4,11 @@
 \alias{extract_score}
 \title{Extraction du score}
 \usage{
-extract_score(x, format_output = c("data.frame", "vector"),
-  weighted_score = FALSE)
+extract_score(
+  x,
+  format_output = c("data.frame", "vector"),
+  weighted_score = FALSE
+)
 }
 \arguments{
 \item{x}{objet de type \code{QR_matrix} ou \code{mQR_matrix}.}
@@ -32,10 +35,13 @@ extract_score(mQR) # liste dont le premier Ã©lÃ©ment est NULL
 }
 }
 \seealso{
-Other QR_matrix functions: \code{\link{compute_score}},
-  \code{\link{export_xlsx.QR_matrix}},
-  \code{\link{export_xlsx.mQR_matrix}},
-  \code{\link{extract_QR}}, \code{\link{rbind.QR_matrix}},
-  \code{\link{sort}}, \code{\link{weighted_score}}
+Other QR_matrix functions: 
+\code{\link{compute_score}()},
+\code{\link{export_xlsx.QR_matrix}()},
+\code{\link{export_xlsx.mQR_matrix}()},
+\code{\link{extract_QR}()},
+\code{\link{rbind.QR_matrix}()},
+\code{\link{sort}()},
+\code{\link{weighted_score}()}
 }
 \concept{QR_matrix functions}

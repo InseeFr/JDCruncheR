@@ -6,14 +6,19 @@
 \alias{compute_score.QR_matrix}
 \title{Calcul d'un score global}
 \usage{
-\method{compute_score}{QR_matrix}(x, score_pond = c(qs_residual_sa_on_sa
-  = 30, f_residual_sa_on_sa = 30, qs_residual_sa_on_i = 20,
-  f_residual_sa_on_i = 20, f_residual_td_on_sa = 30, f_residual_td_on_i =
-  20, oos_mean = 15, oos_mse = 10, residuals_independency = 15,
-  residuals_homoskedasticity = 5, residuals_skewness = 5, m7 = 5, q_m2 =
-  5), modalities = c("Good", "Uncertain", "", "Bad", "Severe"),
-  normalize_score_value, na.rm = FALSE, n_contrib_score,
-  conditional_indicator, ...)
+\method{compute_score}{QR_matrix}(
+  x,
+  score_pond = c(qs_residual_sa_on_sa = 30, f_residual_sa_on_sa = 30,
+    qs_residual_sa_on_i = 20, f_residual_sa_on_i = 20, f_residual_td_on_sa = 30,
+    f_residual_td_on_i = 20, oos_mean = 15, oos_mse = 10, residuals_independency = 15,
+    residuals_homoskedasticity = 5, residuals_skewness = 5, m7 = 5, q_m2 = 5),
+  modalities = c("Good", "Uncertain", "", "Bad", "Severe"),
+  normalize_score_value,
+  na.rm = FALSE,
+  n_contrib_score,
+  conditional_indicator,
+  ...
+)
 }
 \arguments{
 \item{x}{objet de type \code{QR_matrix} ou \code{mQR_matrix}.}
@@ -101,10 +106,13 @@ QR$modalities$score
 }
 }
 \seealso{
-Other QR_matrix functions: \code{\link{export_xlsx.QR_matrix}},
-  \code{\link{export_xlsx.mQR_matrix}},
-  \code{\link{extract_QR}}, \code{\link{extract_score}},
-  \code{\link{rbind.QR_matrix}}, \code{\link{sort}},
-  \code{\link{weighted_score}}
+Other QR_matrix functions: 
+\code{\link{export_xlsx.QR_matrix}()},
+\code{\link{export_xlsx.mQR_matrix}()},
+\code{\link{extract_QR}()},
+\code{\link{extract_score}()},
+\code{\link{rbind.QR_matrix}()},
+\code{\link{sort}()},
+\code{\link{weighted_score}()}
 }
 \concept{QR_matrix functions}

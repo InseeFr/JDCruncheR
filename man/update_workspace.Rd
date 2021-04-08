@@ -5,8 +5,11 @@
 \alias{update_workspace}
 \title{Mise à jour d'un workspace}
 \usage{
-update_workspace(workspace = NULL, policy = "parameters",
-  cruncher_bin_directory = getOption("cruncher_bin_directory"))
+update_workspace(
+  workspace = NULL,
+  policy = "parameters",
+  cruncher_bin_directory = getOption("cruncher_bin_directory")
+)
 }
 \arguments{
 \item{workspace}{chemin vers le workspace. Par défaut, une fenêtre s'ouvre pour sélectionner le workspace.}
@@ -27,7 +30,9 @@ L'adresse du workspace.
 Fonction qui permet de mettre à jour un workspace sans exporter les résultats
 }
 \seealso{
-Other Cruncher functions: \code{\link{create_param_file}},
-  \code{\link{cruncher_and_param}}, \code{\link{cruncher}}
+Other Cruncher functions: 
+\code{\link{create_param_file}()},
+\code{\link{cruncher_and_param}()},
+\code{\link{cruncher}()}
 }
 \concept{Cruncher functions}

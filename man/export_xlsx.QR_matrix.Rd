@@ -4,9 +4,16 @@
 \alias{export_xlsx.QR_matrix}
 \title{Export des objets QR_matrix dans un fichier Excel}
 \usage{
-\method{export_xlsx}{QR_matrix}(x, layout = c("all", "modalities",
-  "values", "combined"), create = TRUE, clear_sheet = TRUE,
-  auto_format = TRUE, file_name, sheet_names, ...)
+\method{export_xlsx}{QR_matrix}(
+  x,
+  layout = c("all", "modalities", "values", "combined"),
+  create = TRUE,
+  clear_sheet = TRUE,
+  auto_format = TRUE,
+  file_name,
+  sheet_names,
+  ...
+)
 }
 \arguments{
 \item{x}{objet de type \code{QR_matrix}.}
@@ -35,10 +42,13 @@ Si le paramètre est spécifié, les éventuelles feuilles contenant ces noms so
 Permet d'exporter un bilan qualité dans un fichier Excel.
 }
 \seealso{
-Other QR_matrix functions: \code{\link{compute_score}},
-  \code{\link{export_xlsx.mQR_matrix}},
-  \code{\link{extract_QR}}, \code{\link{extract_score}},
-  \code{\link{rbind.QR_matrix}}, \code{\link{sort}},
-  \code{\link{weighted_score}}
+Other QR_matrix functions: 
+\code{\link{compute_score}()},
+\code{\link{export_xlsx.mQR_matrix}()},
+\code{\link{extract_QR}()},
+\code{\link{extract_score}()},
+\code{\link{rbind.QR_matrix}()},
+\code{\link{sort}()},
+\code{\link{weighted_score}()}
 }
 \concept{QR_matrix functions}

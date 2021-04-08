@@ -35,7 +35,8 @@ correspondantes.
 }
 }
 \seealso{
-Other var QR_matrix manipulation: \code{\link{QR_var_manipulation}},
-  \code{\link{recode_indicator_num}}
+Other var QR_matrix manipulation: 
+\code{\link{QR_var_manipulation}},
+\code{\link{recode_indicator_num}()}
 }
 \concept{var QR_matrix manipulation}

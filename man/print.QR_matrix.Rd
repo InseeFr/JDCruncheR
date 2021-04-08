@@ -6,8 +6,7 @@
 \alias{print.mQR_matrix}
 \title{Affichage des objets QR_matrix et mQR_matrix}
 \usage{
-\method{print}{QR_matrix}(x, print_variables = TRUE,
-  print_score_formula = TRUE, ...)
+\method{print}{QR_matrix}(x, print_variables = TRUE, print_score_formula = TRUE, ...)
 
 \method{print}{mQR_matrix}(x, score_statistics = TRUE, ...)
 }

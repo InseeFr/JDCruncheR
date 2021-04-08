@@ -6,11 +6,9 @@
 \alias{sort.mQR_matrix}
 \title{Tri des objets QR_matrix et mQR_matrix}
 \usage{
-\method{sort}{QR_matrix}(x, decreasing = FALSE,
-  sort_variables = "score", ...)
+\method{sort}{QR_matrix}(x, decreasing = FALSE, sort_variables = "score", ...)
 
-\method{sort}{mQR_matrix}(x, decreasing = FALSE,
-  sort_variables = "score", ...)
+\method{sort}{mQR_matrix}(x, decreasing = FALSE, sort_variables = "score", ...)
 }
 \arguments{
 \item{x}{objet de type \code{QR_matrix} ou \code{mQR_matrix}.}
@@ -35,11 +33,13 @@ sort(QR, sort_variables = "score") # Pour trier par ordre croissant sur le score
 }
 }
 \seealso{
-Other QR_matrix functions: \code{\link{compute_score}},
-  \code{\link{export_xlsx.QR_matrix}},
-  \code{\link{export_xlsx.mQR_matrix}},
-  \code{\link{extract_QR}}, \code{\link{extract_score}},
-  \code{\link{rbind.QR_matrix}},
-  \code{\link{weighted_score}}
+Other QR_matrix functions: 
+\code{\link{compute_score}()},
+\code{\link{export_xlsx.QR_matrix}()},
+\code{\link{export_xlsx.mQR_matrix}()},
+\code{\link{extract_QR}()},
+\code{\link{extract_score}()},
+\code{\link{rbind.QR_matrix}()},
+\code{\link{weighted_score}()}
 }
 \concept{QR_matrix functions}
