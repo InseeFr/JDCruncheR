@@ -21,7 +21,7 @@ is.mQR_matrix(x)
 associées aux variables.}
 
 \item{values}{un \code{data.frame} contenant les valeurs (p-valeurs des tests, statistiques, etc.)
-associées aux variables. Peut donc contenir plus de variables que le paramètre \code{modalities}.}
+associées aux variables. Peut donc contenir plus de variables que le data.frame \code{modalities}.}
 
 \item{score_formula}{formule utilisée pour calculer le score global (s'il existe).}
 
@@ -42,8 +42,8 @@ Un objet  de type \code{\link{QR_matrix}} est une liste de trois paramètres :
 \item le paramètre \code{modalities} est un \code{data.frame} contenant un ensemble de variables sous forme catégorielle
 (par défaut : Good, Uncertain, Bad, Severe).
 \item le paramètre \code{values}  est un \code{data.frame} contenant les valeurs associées aux indicateurs présents dans
-\code{modalities} (i.e. : p-valeurs, statistiques, etc.) ainsi que des variables qui n'ont pas
-de modalité (e.g. : fréquence de la série, modèle ARIMA, etc.).
+\code{modalities} (i.e. : p-valeurs, statistiques, etc.), ainsi que des variables qui n'ont pas
+de modalité (i.e. : fréquence de la série, modèle ARIMA, etc).
 \item le paramètre \code{score_formula} contient la formule utilisée pour calculer le score (une fois le calcul réalisé).
 }
 }

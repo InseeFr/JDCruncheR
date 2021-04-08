@@ -5,17 +5,20 @@
 \alias{update_workspace}
 \title{Mise à jour d'un workspace}
 \usage{
-update_workspace(workspace = NULL, policy = "parameters",
-  cruncher_bin_directory = getOption("cruncher_bin_directory"))
+update_workspace(
+  workspace = NULL,
+  policy = "parameters",
+  cruncher_bin_directory = getOption("cruncher_bin_directory")
+)
 }
 \arguments{
-\item{workspace}{chemin vers le workspace. Par défaut une fenêtre s'ouvre pour sélectionner le workspace.}
+\item{workspace}{chemin vers le workspace. Par défaut, une fenêtre s'ouvre pour sélectionner le workspace.}
 
-\item{policy}{méthode de rafraîchissement utilisée. Par défaut \code{policy = "parameters"} (paramètres re-estimés).
+\item{policy}{méthode de rafraîchissement utilisée. Par défaut, \code{policy = "parameters"} (paramètres re-estimés).
 Les autres méthodes possibles sont :
-\code{"outliers"} (les outliers sont identifiés et les paramètres re-estimés) ;
-\code{"lastoutliers"} (les outliers sont ré-identifiés sur la dernière année et les paramètres re-estimés) ;
-\code{"stochastic"} (le modèle arima et les outliers sont identifiés et les paramètres re-estimés) ;
+\code{"outliers"} (les outliers sont identifiés et les paramètres ré-estimés) ;
+\code{"lastoutliers"} (les outliers sont ré-identifiés sur la dernière année et les paramètres ré-estimés) ;
+\code{"stochastic"} (le modèle arima et les outliers sont identifiés et les paramètres ré-estimés) ;
 \code{"complete"} (le modèle est complétement ré-estimé).}
 
 \item{cruncher_bin_directory}{répertoire contenant contenant le dossier "bin" du cruncher.}
@@ -27,7 +30,9 @@ L'adresse du workspace.
 Fonction qui permet de mettre à jour un workspace sans exporter les résultats
 }
 \seealso{
-Other Cruncher functions: \code{\link{create_param_file}},
-  \code{\link{cruncher_and_param}}, \code{\link{cruncher}}
+Other Cruncher functions: 
+\code{\link{create_param_file}()},
+\code{\link{cruncher_and_param}()},
+\code{\link{cruncher}()}
 }
 \concept{Cruncher functions}

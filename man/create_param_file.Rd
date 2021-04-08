@@ -5,40 +5,46 @@
 \alias{create_param_file}
 \title{Création du fichier des paramètres du cruncher}
 \usage{
-create_param_file(dir_file_param = getwd(), bundle = 10000,
-  csv_layout = "list", csv_separator = ";", ndecs = 6,
-  policy = "parameters", output = NULL,
+create_param_file(
+  dir_file_param = getwd(),
+  bundle = 10000,
+  csv_layout = "list",
+  csv_separator = ";",
+  ndecs = 6,
+  policy = "parameters",
+  output = NULL,
   matrix_item = getOption("default_matrix_item"),
   tsmatrix_series = getOption("default_tsmatrix_series"),
-  paths_path = NULL)
+  paths_path = NULL
+)
 }
 \arguments{
 \item{dir_file_param}{répertoire du dossier qui contiendra le fichier parametres.param des paramètres.}
 
 \item{bundle}{nombre maximum de séries dans un fichier de sortie. Par défaut \code{bundle = 10000}.}
 
-\item{csv_layout}{mise en page du fichier de sortie. Par défaut \code{csv_layout = "list"}. Autres
+\item{csv_layout}{mise en page du fichier de sortie. Par défaut, \code{csv_layout = "list"}. Autres
 options : \code{csv_layout = "vtable"} ou \code{csv_layout = "htable"}.}
 
-\item{csv_separator}{séparateur de colonnes utilisé dans le fichier csv. Par défaut \code{csv_separator = ";"}.}
+\item{csv_separator}{séparateur de colonnes utilisé dans le fichier csv. Par défaut, \code{csv_separator = ";"}.}
 
 \item{ndecs}{nombre de décimales dans les sorties (6 par défaut).}
 
-\item{policy}{méthode de rafraîchissement utilisée. Par défaut \code{policy = "parameters"} (paramètres re-estimés).
+\item{policy}{méthode de rafraîchissement utilisée. Par défaut, \code{policy = "parameters"} (paramètres re-estimés).
 Les autres méthodes possibles sont :
-\code{"outliers"} (les outliers sont identifiés et les paramètres re-estimés) ;
-\code{"lastoutliers"} (les outliers sont ré-identifiés sur la dernière année et les paramètres re-estimés) ;
-\code{"stochastic"} (le modèle arima et les outliers sont identifiés et les paramètres re-estimés) ;
+\code{"outliers"} (les outliers sont identifiés et les paramètres ré-estimés) ;
+\code{"lastoutliers"} (les outliers sont ré-identifiés sur la dernière année et les paramètres ré-estimés) ;
+\code{"stochastic"} (le modèle arima et les outliers sont identifiés et les paramètres ré-estimés) ;
 \code{"complete"} (le modèle est complétement ré-estimé).}
 
-\item{output}{dossier où sont exportés les résultats. Par défaut (\code{output = NULL}) un dossier "Output" est créé à l'adresse du workspace.}
+\item{output}{dossier où sont exportés les résultats. Par défaut, (\code{output = NULL}) et un dossier "Output" est créé à l'adresse du workspace.}
 
 \item{matrix_item}{chaîne de caractères contenant les noms des paramètres à exporter (voir le manuel de JDemetra+).
-Les paramètres par défaut sont obtenues en exécutant la commande \code{getOption("default_matrix_item")} (cette option
+Les paramètres par défaut sont obtenus en exécutant la commande \code{getOption("default_matrix_item")} (cette option
 est initialisée aux mêmes paramètres par défaut que ceux de JDemetra+).}
 
 \item{tsmatrix_series}{chaîne de caractères contenant les séries temporelles à exporter (voir le manuel de JDemetra+).
-Les paramètres par défaut sont obtenues en exécutant la commande \code{getOption("default_tsmatrix_series")} (cette option
+Les paramètres par défaut sont obtenus en exécutant la commande \code{getOption("default_tsmatrix_series")} (cette option
 est initialisée aux mêmes paramètres par défaut que ceux de JDemetra+)}
 
 \item{paths_path}{chemins vers les fichiers d'entrée (Excel, xml...).}
@@ -50,7 +56,9 @@ L'adresse du fichier de paramètres.
 Pour fonctionner, le cruncher a besoin d'un fichier de paramètres : \code{create_param_file} permet de le créer
 }
 \seealso{
-Other Cruncher functions: \code{\link{cruncher_and_param}},
-  \code{\link{cruncher}}, \code{\link{update_workspace}}
+Other Cruncher functions: 
+\code{\link{cruncher_and_param}()},
+\code{\link{cruncher}()},
+\code{\link{update_workspace}()}
 }
 \concept{Cruncher functions}

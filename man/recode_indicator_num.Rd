@@ -2,10 +2,15 @@
 % Please edit documentation in R/QR_functions.R
 \name{recode_indicator_num}
 \alias{recode_indicator_num}
-\title{Re-encodage en modalités des variables}
+\title{Ré-encodage en modalités des variables}
 \usage{
-recode_indicator_num(x, variable_name, breaks = c(0, 0.01, 0.05, 0.1, 1),
-  labels = c("Good", "Uncertain", "Bad", "Severe"), ...)
+recode_indicator_num(
+  x,
+  variable_name,
+  breaks = c(0, 0.01, 0.05, 0.1, 1),
+  labels = c("Good", "Uncertain", "Bad", "Severe"),
+  ...
+)
 }
 \arguments{
 \item{x}{objet de type \code{QR_matrix} ou \code{mQR_matrix}.}
@@ -20,11 +25,12 @@ variables à recoder.}
 \item{...}{autres paramètres de la fonction \code{\link[base]{cut}}.}
 }
 \description{
-Permet d'encoder des variables présentes dans la matrice des valeurs en des modalités
-qui seront présentent dans la matrice des modalités.
+Permet d'encoder des variables présentes dans la matrice des valeurs en modalités
+ajoutables à la matrice des modalités.
 }
 \seealso{
-Other var QR_matrix manipulation: \code{\link{QR_var_manipulation}},
-  \code{\link{add_indicator}}
+Other var QR_matrix manipulation: 
+\code{\link{QR_var_manipulation}},
+\code{\link{add_indicator}()}
 }
 \concept{var QR_matrix manipulation}

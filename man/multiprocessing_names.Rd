@@ -8,7 +8,7 @@
 multiprocessing_names(workspace)
 }
 \arguments{
-\item{workspace}{chemin vers le workspace. Par défaut une fenêtre s'ouvre pour sélectionner le workspace.}
+\item{workspace}{chemin vers le workspace. Par défaut, une fenêtre s'ouvre pour sélectionner le workspace.}
 }
 \value{
 Un \code{data.frame} contenant le nom des multiprocessings sous JDemetra+ (colonne \code{name}) et

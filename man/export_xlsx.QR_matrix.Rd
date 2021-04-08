@@ -4,30 +4,37 @@
 \alias{export_xlsx.QR_matrix}
 \title{Export des objets QR_matrix dans un fichier Excel}
 \usage{
-\method{export_xlsx}{QR_matrix}(x, layout = c("all", "modalities",
-  "values", "combined"), create = TRUE, clear_sheet = TRUE,
-  auto_format = TRUE, file_name, sheet_names, ...)
+\method{export_xlsx}{QR_matrix}(
+  x,
+  layout = c("all", "modalities", "values", "combined"),
+  create = TRUE,
+  clear_sheet = TRUE,
+  auto_format = TRUE,
+  file_name,
+  sheet_names,
+  ...
+)
 }
 \arguments{
 \item{x}{objet de type \code{QR_matrix}.}
 
-\item{layout}{composantes du bilan à exporter. Par défaut \code{layout = "all"} : la matrice des modalités
+\item{layout}{composantes du bilan à exporter. Par défaut, \code{layout = "all"} : la matrice des modalités
 (\code{"modalities"}) et celle des valeurs (\code{"values"}) sont exportées. Pour exporter la matrice
 des modalités avec en plus les variables supplémentaires de la matrice des valeurs, utiliser
 \code{layout = "combined"}.}
 
-\item{create}{booléen indiquant s'il faut créer le fichier excel ou non (\code{create = TRUE} par défaut)}
+\item{create}{booléen indiquant s'il faut créer le fichier Excel ou non (\code{create = TRUE} par défaut)}
 
 \item{clear_sheet}{booléen indiquant s'il faut nettoyer les feuilles du fichier Excel avant l'export (
 \code{clear_sheet = TRUE} par défaut).}
 
 \item{auto_format}{booléen indiquant s'il faut formatter la sortie (\code{auto_format = TRUE} par défaut).}
 
-\item{file_name}{argument optionnel indiquant chemin vers le fichier à exporter. Si no spécifié
-alors un fichier \emph{export.xls} est créé dans le working directory.}
+\item{file_name}{argument optionnel permettant de choisir le chemin et le nom du fichier à exporter. S'il n'est pas spécifié,
+un fichier \emph{export.xls} sera créé dans le working directory.}
 
-\item{sheet_names}{nom des feuilles Excel en sortie. Si non spécifié alors le nom correspond à la composante exportée.
-Si le paramètre est spécifié alors les éventuelles feuilles contenant ces noms sont supprimées.}
+\item{sheet_names}{nom des feuilles Excel en sortie. S'il n'est pas spécifié, le nom sera celui de la composante exportée.
+Si le paramètre est spécifié, les éventuelles feuilles contenant ces noms sont supprimées.}
 
 \item{...}{autres paramètres non utilisés.}
 }
@@ -35,10 +42,13 @@ Si le paramètre est spécifié alors les éventuelles feuilles contenant ces no
 Permet d'exporter un bilan qualité dans un fichier Excel.
 }
 \seealso{
-Other QR_matrix functions: \code{\link{compute_score}},
-  \code{\link{export_xlsx.mQR_matrix}},
-  \code{\link{extract_QR}}, \code{\link{extract_score}},
-  \code{\link{rbind.QR_matrix}}, \code{\link{sort}},
-  \code{\link{weighted_score}}
+Other QR_matrix functions: 
+\code{\link{compute_score}()},
+\code{\link{export_xlsx.mQR_matrix}()},
+\code{\link{extract_QR}()},
+\code{\link{extract_score}()},
+\code{\link{rbind.QR_matrix}()},
+\code{\link{sort}()},
+\code{\link{weighted_score}()}
 }
 \concept{QR_matrix functions}

@@ -4,18 +4,22 @@
 \alias{export_xlsx.mQR_matrix}
 \title{Export des objets mQR_matrix dans des fichiers Excel}
 \usage{
-\method{export_xlsx}{mQR_matrix}(x, export_dir = "./",
+\method{export_xlsx}{mQR_matrix}(
+  x,
+  export_dir = "./",
   layout_file = c("ByComponent", "ByQRMatrix"),
-  file_extension = c(".xls", ".xlsx"), layout = c("all", "modalities",
-  "values", "combined"), ...)
+  file_extension = c(".xls", ".xlsx"),
+  layout = c("all", "modalities", "values", "combined"),
+  ...
+)
 }
 \arguments{
 \item{x}{objet de type \code{mQR_matrix} à exporter.}
 
 \item{export_dir}{dossier d'export des résultats.}
 
-\item{layout_file}{paramètre d'export. Par défaut (\code{layout_file = "ByComponent"}) on a un fichier Excel par composante
-de la matrice bilan qualité (matrice des modalités ou des valeurs) dont chaque feuille correspond à un bilan qualité. Pour avoir
+\item{layout_file}{paramètre d'export. Par défaut, (\code{layout_file = "ByComponent"}) et un fichier Excel est exporté par composante
+de la matrice bilan qualité (matrice des modalités ou des valeurs), dont chaque feuille correspond à un bilan qualité. Pour avoir
 un fichier par bilan qualité dont chaque feuille correspond à la composante exportée, utiliser \code{layout_file = "ByQRMatrix"}.}
 
 \item{file_extension}{extension des fichiers (\code{".xls"} ou \code{".xlsx"}).}
@@ -28,10 +32,13 @@ un fichier par bilan qualité dont chaque feuille correspond à la composante ex
 Permet d'exporter dans des fichiers Excel une liste de bilan qualité
 }
 \seealso{
-Other QR_matrix functions: \code{\link{compute_score}},
-  \code{\link{export_xlsx.QR_matrix}},
-  \code{\link{extract_QR}}, \code{\link{extract_score}},
-  \code{\link{rbind.QR_matrix}}, \code{\link{sort}},
-  \code{\link{weighted_score}}
+Other QR_matrix functions: 
+\code{\link{compute_score}()},
+\code{\link{export_xlsx.QR_matrix}()},
+\code{\link{extract_QR}()},
+\code{\link{extract_score}()},
+\code{\link{rbind.QR_matrix}()},
+\code{\link{sort}()},
+\code{\link{weighted_score}()}
 }
 \concept{QR_matrix functions}
