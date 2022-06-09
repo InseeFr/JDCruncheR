@@ -3,7 +3,7 @@
 \encoding{UTF-8}
 \name{cruncher}
 \alias{cruncher}
-\title{Lanceur de cruncher}
+\title{The Cruncher launcher}
 \usage{
 cruncher(
   workspace,
@@ -13,21 +13,19 @@ cruncher(
 )
 }
 \arguments{
-\item{workspace}{chemin vers le workspace.}
+\item{workspace}{path to the workspace.}
 
-\item{cruncher_bin_directory}{répertoire contenant contenant le dossier "bin" du cruncher. Pour voir la
-valeur par défaut, exécuter le code \code{getOption("cruncher_bin_directory")}.}
+\item{cruncher_bin_directory}{path to the "bin" folder of the cruncher. To see the default value, compile \code{getOption("cruncher_bin_directory")}.}
 
-\item{param_file_path}{chemin vers le fichier des paramètres à utiliser pour lancer le workspace.
-Par défaut, un fichier .params est recherché au même niveau que le workspace.}
+\item{param_file_path}{path to the settings file. By default, a ".params" file is searched for in the same folder the workspace is stored in.}
 
-\item{log_file}{nom du fichier qui contiendra la log du cruncher. Par défaut, la log n'est pas exportée.}
+\item{log_file}{name of the log file. By default, no log file is exported.}
 }
 \value{
-L'adresse du workspace.
+The workspace path
 }
 \description{
-Fonction qui permet de lancer le cruncher sur un workspace à partir d'un fichier de paramètres.
+Function to launch the cruncher on a workspace from a settings file.
 }
 \seealso{
 Other Cruncher functions: 

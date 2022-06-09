@@ -1,26 +1,21 @@
-#' Export des objets QR_matrix dans un fichier Excel
+#' Exporting QR_matrix objects in an Excel file
 #'
-#' Permet d'exporter un bilan qualité dans un fichier Excel.
+#' To export a quality report in an Excel file.
 #'
-#' @param x objet de type \code{QR_matrix}.
-#' @param layout composantes du bilan à exporter. Par défaut, \code{layout = "all"} : la matrice des modalités
-#' (\code{"modalities"}) et celle des valeurs (\code{"values"}) sont exportées. Pour exporter la matrice
-#' des modalités avec en plus les variables supplémentaires de la matrice des valeurs, utiliser
-#' \code{layout = "combined"}.
-#' @param create booléen indiquant s'il faut créer le fichier Excel ou non (\code{create = TRUE} par défaut)
-#' @param clear_sheet booléen indiquant s'il faut nettoyer les feuilles du fichier Excel avant l'export (
-#' \code{clear_sheet = TRUE} par défaut).
-#' @param auto_format booléen indiquant s'il faut formatter la sortie (\code{auto_format = TRUE} par défaut).
-#' @param file_name argument optionnel permettant de choisir le chemin et le nom du fichier à exporter. S'il n'est pas spécifié,
-#' un fichier *export.xls* sera créé dans le working directory.
-#' @param sheet_names nom des feuilles Excel en sortie. S'il n'est pas spécifié, le nom sera celui de la composante exportée.
-#' Si le paramètre est spécifié, les éventuelles feuilles contenant ces noms sont supprimées.
-#' @param ... autres paramètres non utilisés.
+#' @param x a \code{QR_matrix} object.
+#' @param layout the components of the report to export. By default, \code{layout = "all"}: the matrices modalities
+#' (\code{"modalities"}) and values (\code{"values"}) are exported in separate files. To export them in a single file (in two sheets),
+#' use \code{layout = "combined"}.
+#' @param create logical indicating whether to create an Excel file if it doesn't exist yet (\code{create = TRUE} by default)
+#' @param clear_sheet logical indicating whether to clear the Excel sheets before the export (\code{clear_sheet = TRUE} by default).
+#' @param auto_format logical indicating whether to format the output (\code{auto_format = TRUE} by default).
+#' @param file_name optional argument to choose the path and name of the file to export. If not specified, an *export.xls* will be created in the working directory.
+#' @param sheet_names names of the exported Excel sheets. If not specified, the sheets will be named after the exported components.
+#' If specified, existing sheets with these names will be overwritten.
+#' @param ... other unused parameters.
 #' @family QR_matrix functions
 #' @export
-export_xlsx.QR_matrix <- function(x, layout = c("all","modalities", "values", "combined"),
-                                  create = TRUE, clear_sheet = TRUE, auto_format = TRUE,
-                                  file_name, sheet_names, ...) {
+export_xlsx.QR_matrix <- function(x, layout = c("all","modalities", "values", "combined"), file_name, sheet_names, ...) {
     layout <- match.arg(layout)
     file_name <- ifelse(missing(file_name), "export.xls", file_name)
     wb <- XLConnect::loadWorkbook(filename = file_name, create = create)
@@ -78,21 +73,20 @@ export_xlsx <- function(x, ...){
 }
 #' @export
 export_xlsx.default <- function(x, ...){
-    stop("Il faut un objet de type QR_matrix ou mQR_matrix")
+    stop("A QR_matrix or mQR_matrix object is required!")
 }
 
-#' Export des objets mQR_matrix dans des fichiers Excel
+#' Exporting mQR_matrix objects in Excel files
 #'
-#' Permet d'exporter dans des fichiers Excel une liste de bilan qualité
+#' To export several quality reports in Excel files
 #'
-#' @param x objet de type \code{mQR_matrix} à exporter.
-#' @param export_dir dossier d'export des résultats.
-#' @param layout_file paramètre d'export. Par défaut, (\code{layout_file = "ByComponent"}) et un fichier Excel est exporté par composante
-#' de la matrice bilan qualité (matrice des modalités ou des valeurs), dont chaque feuille correspond à un bilan qualité. Pour avoir
-#' un fichier par bilan qualité dont chaque feuille correspond à la composante exportée, utiliser \code{layout_file = "ByQRMatrix"}.
-#' @param file_extension extension des fichiers (\code{".xls"} ou \code{".xlsx"}).
-#' @param layout composantes du bilan à exporter : voir \code{\link{export_xlsx.QR_matrix}} .
-#' @param ... autres paramètres de la fonction \code{\link{export_xlsx.QR_matrix}}.
+#' @param x a\code{mQR_matrix} object to export.
+#' @param export_dir export directory.
+#' @param layout_file export parameter. By default, (\code{layout_file = "ByComponent"}) and an Excel file is exported for each part of the
+#' quality report matrix (modalities and values matrices). To group both modalities and values reports/sheets into a single Excel file, use the option \code{layout_file = "ByQRMatrix"}.
+#' @param file_extension possible values are (\code{".xls"} and \code{".xlsx"}).
+#' @param layout elements of the report to export: see \code{\link{export_xlsx.QR_matrix}} .
+#' @param ... other parameters of the function \code{\link{export_xlsx.QR_matrix}}.
 #' @family QR_matrix functions
 #' @export
 export_xlsx.mQR_matrix <- function(x, export_dir = "./",
@@ -119,7 +113,7 @@ export_xlsx.mQR_matrix <- function(x, export_dir = "./",
 
 
     if(layout_file == "ByQRMatrix"){
-        # On exporte un fichier par bilan :
+        # To export a quality report per file:
         files_name <- normalizePath(file.path(export_dir,
                                              paste0(QR_matrix_names, file_extension)),
             mustWork = FALSE)
@@ -127,7 +121,7 @@ export_xlsx.mQR_matrix <- function(x, export_dir = "./",
             export_xlsx(x[[i]],layout = layout, file_name = files_name[i], ...)
         }
     }else{
-        # On rassemble les bilans dans un fichier par composante
+        # To export a file per element of the quality report
         files_name <- switch(layout,
                              all = c("modalities", "values"),
                              combined = "values",
@@ -140,9 +134,9 @@ export_xlsx.mQR_matrix <- function(x, export_dir = "./",
             file.path(export_dir,paste0(files_name, file_extension)),
             mustWork = FALSE)
         for(i in 1:length(x)){
-            # Indice sur les QR_matrix
+            # Index on the QR_matrix
             for(j in 1:length(final_layout)){
-                # Indice sur les composantes
+                # Index on the elements
                 export_xlsx(x[[i]],layout = final_layout[j], file_name = files[j],
                             sheet_names = QR_matrix_names[i],
                             ...)

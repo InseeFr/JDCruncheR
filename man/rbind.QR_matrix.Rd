@@ -2,28 +2,26 @@
 % Please edit documentation in R/QR_functions.R
 \name{rbind.QR_matrix}
 \alias{rbind.QR_matrix}
-\title{Combiner par ligne des objets QR_matrix}
+\title{Combining QR_matrix objects}
 \usage{
 \method{rbind}{QR_matrix}(..., check_formula = TRUE)
 }
 \arguments{
-\item{...}{objets \code{QR_matrix} à combiner.}
+\item{...}{\code{QR_matrix} objects to combine.}
 
-\item{check_formula}{booléen indiquant s'il faut vérifier la cohérence dans les formules de calcul du score.
-Par défaut \code{check_formula = TRUE} : la fonction renvoie une erreur si des scores sont calculés avec des formules différentes.
-Si \code{check_formula = FALSE} alors il n'y a pas de vérification et le paramètre \code{score_formula} de l'objet
-en sortie est \code{NULL}.}
+\item{check_formula}{logical indicating whether to check the score formulas' coherency.
+By default, \code{check_formula = TRUE}: an error is returned if the scores were calculated with different formulas.
+If \code{check_formula = FALSE}, no check is performed and the \code{score_formula} of the output is \code{NULL}.}
 }
 \description{
-Permet de combiner plusieurs objets \code{QR_matrix} en combinant par ligne les paramètres \code{modalities}
-et \code{values}.
+Function to combine multiple \code{QR_matrix} objects: line by line, both for the \code{modalities} and the \code{values} table.
 }
 \examples{
 \dontrun{
 QR <- extract_QR()
 QR1 <- compute_score(QR1, score_pond = c(m7 = 2, q = 3, qs_residual_sa_on_sa = 5))
 QR2 <- compute_score(QR1, score_pond = c(m7 = 2, qs_residual_sa_on_sa = 5))
-rbind(QR1, QR2) # Une erreur est renvoyÃ©e
+rbind(QR1, QR2) # Returns an error
 rbind(QR1, QR2, check_formula = FALSE)
 }
 }

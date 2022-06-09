@@ -4,32 +4,32 @@
 \alias{sort}
 \alias{sort.QR_matrix}
 \alias{sort.mQR_matrix}
-\title{Tri des objets QR_matrix et mQR_matrix}
+\title{QR_matrix and mQR_matrix sorting}
 \usage{
 \method{sort}{QR_matrix}(x, decreasing = FALSE, sort_variables = "score", ...)
 
 \method{sort}{mQR_matrix}(x, decreasing = FALSE, sort_variables = "score", ...)
 }
 \arguments{
-\item{x}{objet de type \code{QR_matrix} ou \code{mQR_matrix}.}
+\item{x}{a \code{QR_matrix} or \code{mQR_matrix} object}
 
-\item{decreasing}{booléen indiquant si les bilans qualité doivent être triés par ordre croissant ou décroissant.
-Par défaut, le tri est effectué par ordre croissant.}
+\item{decreasing}{logical indicating whether the quality reports must be sorted in ascending or decreasing order.
+By default, the sorting is done in ascending order.}
 
-\item{sort_variables}{variables à utiliser pour le tri. Elles doivent être présentes dans les tables de modalités.}
+\item{sort_variables}{They must be present in the modalities table.}
 
-\item{...}{autres paramètres de la fonction \code{\link[base]{order}} (non utilisés pour l'instant).}
+\item{...}{other parameters of the function \code{\link[base]{order}} (unused for now)}
 }
 \value{
-L'objet en entrée avec les tables de bilan qualité triées.
+the input with sorted quality reports
 }
 \description{
-Permet de trier les bilans qualité en fonction d'une ou plusieurs variables.
+To sort the quality reports on one or several variables
 }
 \examples{
 \dontrun{
 QR <- compute_score(extract_QR())
-sort(QR, sort_variables = "score") # Pour trier par ordre croissant sur le score
+sort(QR, sort_variables = "score") # To sort by ascending values of the score
 }
 }
 \seealso{

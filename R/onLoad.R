@@ -78,6 +78,6 @@
     if(is.null(getOption("default_tsmatrix_series")))
         options(default_tsmatrix_series = c("y", "t","sa","s","i","ycal"))
     if(is.null(getOption("cruncher_bin_directory")))
-        options(cruncher_bin_directory = "Y:/Logiciels/jwsacruncher-2.2.0/jdemetra-cli-2.2.0/bin")
+        options(cruncher_bin_directory = "Y:/Logiciels/jwsacruncher-2.2.3/jdemetra-cli-2.2.3/bin")
 
 }

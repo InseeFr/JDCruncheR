@@ -6,7 +6,7 @@
 \alias{mQR_matrix}
 \alias{is.QR_matrix}
 \alias{is.mQR_matrix}
-\title{Objets bilan qualité}
+\title{Quality report objects}
 \usage{
 QR_matrix(modalities = NULL, values = NULL, score_formula = NULL)
 
@@ -17,33 +17,30 @@ is.QR_matrix(x)
 is.mQR_matrix(x)
 }
 \arguments{
-\item{modalities}{un \code{data.frame} contenant les modalités (Good, Bad, etc.)
-associées aux variables.}
+\item{modalities}{a \code{data.frame} containing the output variables' modalities (Good, Bad, etc.)}
 
-\item{values}{un \code{data.frame} contenant les valeurs (p-valeurs des tests, statistiques, etc.)
-associées aux variables. Peut donc contenir plus de variables que le data.frame \code{modalities}.}
+\item{values}{a \code{data.frame} containing the output variables' values (test p-values, test statistics, etc.) Therefore, the values data frame can contain more variables
+than the data frame \code{modalities}.}
 
-\item{score_formula}{formule utilisée pour calculer le score global (s'il existe).}
+\item{score_formula}{the formula used to calculate the series score (if defined).}
 
-\item{x}{un objet de type \code{QR_matrix}, \code{mQR_matrix} ou une liste d'objets \code{QR_matrix}.}
+\item{x}{a \code{QR_matrix} object, a \code{mQR_matrix} object or a list of \code{QR_matrix} objects.}
 
-\item{...}{des objets du même type que \code{x}.}
+\item{...}{objects f the same type as \code{x}.}
 }
 \description{
-\code{QR_matrix} permet de créer un objet de type \code{QR_matrix} contenant un bilan qualité.
+\code{QR_matrix} creates a \code{QR_matrix} object containing a quality report.
 }
 \details{
-\code{mQR_matrix} permet de créer un objet de type \code{mQR_matrix} qui est une liste de bilans qualité (donc d'objets \code{QR_matrix}).
+\code{mQR_matrix} creates a \code{mQR_matrix} object containing a list of quality reports (ie. a list of \code{QR_matrix} objects).
 
-\code{is.QR_matrix} et \code{is.mQR_matrix} permettent de tester si un objet est un bilan qualité ou une liste de bilans qualité.
+\code{is.QR_matrix} and \code{is.mQR_matrix} are functions to test whether an object is a quality report or a list of quality reports.
 
-Un objet  de type \code{\link{QR_matrix}} est une liste de trois paramètres :
+A\code{\link{QR_matrix}} object is a list of three items:
 \itemize{
-\item le paramètre \code{modalities} est un \code{data.frame} contenant un ensemble de variables sous forme catégorielle
-(par défaut : Good, Uncertain, Bad, Severe).
-\item le paramètre \code{values}  est un \code{data.frame} contenant les valeurs associées aux indicateurs présents dans
-\code{modalities} (i.e. : p-valeurs, statistiques, etc.), ainsi que des variables qui n'ont pas
-de modalité (i.e. : fréquence de la série, modèle ARIMA, etc).
-\item le paramètre \code{score_formula} contient la formule utilisée pour calculer le score (une fois le calcul réalisé).
+\item \code{modalities}, a \code{data.frame} containing a set of categorical variables (by default: Good, Uncertain, Bad, Severe).
+\item \code{values}, a \code{data.frame} containing the values corresponding to the \code{modalities} indicators (i.e. p-values, statistics, etc.),
+as well as variables for which a modality cannot be defined (e.g. the series frequency, the ARIMA model, etc).
+\item \code{score_formula} contains the formula used to calculate the series score (once the calculus is done).
 }
 }

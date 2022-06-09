@@ -15,17 +15,18 @@ knitr::opts_chunk$set(
 
 # JDCruncheR
 
-L'objectif premier du package JDCruncheR est de permettre de lancer rapidement et plus facilement le cruncher (JWSACruncher) de JDemetra+. Le cruncher est un outil qui permet de mettre à jour un workspace de JDemetra+ à partir de la console, sans devoir ouvrir JDemetra+. La dernière version du cruncher est téléchargeable sous <https://github.com/jdemetra/jwsacruncher/releases>. Pour plus d'informations, consulter le lien github du cruncher <https://github.com/jdemetra/jwsacruncher/wiki>.
+The primary objective of the JDCruncheR package is to provide a quick and easy access to the JDemetra+ cruncher (JWSACruncher) from R. The cruncher is a tool to update a JDemetra+ workspace, without having to open the software itself. 
+The latest version can be downloaded here: <https://github.com/jdemetra/jwsacruncher/releases>. Fore more information, please refer to the wiki page: <https://github.com/jdemetra/jwsacruncher/wiki>.
 
-JDCruncheR permet également de calculer un *bilan qualité* à partir des résultats du cruncher. Ce bilan synthétise l'ensemble des diagnostics liés aux séries désaisonnalisées afin de repérer rapidement les séries les plus problématiques sur lesquelles il faut concentrer son analyse. Il est surtout utile dans le cas de la désaisonnalisation d'un grand nombre de séries, puisqu'il est dans ce cas impossible de regarder l'ensemble des diagnostics pour chaque série dans un temps raisonnable.
+With JDCruncheR, you can also generate a *quality report* based on the cruncher output. This report is a summary of the seasonal adjustment diagnostics. It can be used to spot the most problematic series which will require a finer analysis. This is most useful when dealing with a great number of series, which renders impossible the examination of every diagnostic for every series in a reasonable time. 
 
-Pour installer JDCruncheR rien de plus simple ! Deux solutions. 
+There are two ways to install the JDCruncheR package: 
 
-Soit utiliser le package devtools : 
+- using the devtools package: 
 ```{r gh-installation, eval = FALSE}
 # install.packages("devtools")
 devtools::install_github("InseeFr/JDCruncheR", build_vignettes = TRUE)
 ```
-Soit installer JDCruncheR à partir du **.zip** ou du **.tar.gz** du package qui peuvent être téléchargés à l'adresse <https://github.com/InseeFr/JDCruncheR/releases>. Pour plus d'informations sur l'installation du package et la configuration du cruncher voir le [wiki](https://github.com/InseeFr/JDCruncheR/wiki).
+- from the **.zip** or **.tar.gz** file, that can both be found here: <https://github.com/InseeFr/JDCruncheR/releases>. For more info on the package installation and the cruncher configuration, please refer to the [wiki](https://github.com/InseeFr/JDCruncheR/wiki).
 
 

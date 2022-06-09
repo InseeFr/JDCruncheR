@@ -2,27 +2,27 @@
 % Please edit documentation in R/QR_functions.R
 \name{weighted_score}
 \alias{weighted_score}
-\title{Calcul d'un score pondéré pour chaque observation}
+\title{Weighted score calculation}
 \usage{
 weighted_score(x, pond = 1)
 }
 \arguments{
-\item{x}{objet de type \code{QR_matrix} ou \code{mQR_matrix}.}
+\item{x}{a \code{QR_matrix} or \code{mQR_matrix} object}
 
-\item{pond}{pondération à appliquer au score. Il peut s'agir d'un nombre, d'un vecteur de nombres, du nom
-d'une des variables du bilan qualité ou d'une liste de pondérations pour les objets \code{mQR_matrix}.}
+\item{pond}{the weights to use. Can be an integer, a vector of integers, the name of one of the quality report variables
+or a list of weights for the \code{mQR_matrix} objects.}
 }
 \value{
-L'objet en entrée avec le score recalculé
+the input with additionnal weighted score
 }
 \description{
-Permet de pondérer un score déjà calculé en fonction des variables.
+To weight a pre-calculated score
 }
 \examples{
 \dontrun{
 QR <- extract_QR()
 QR <- compute_score(QR)
-weighted_score(QR, 2) # Tous les scores sont multipliÃ©s par 2
+weighted_score(QR, 2) # All scores are multiplied by 2
 }
 }
 \seealso{

@@ -2,7 +2,7 @@
 % Please edit documentation in R/QR_export.R
 \name{export_xlsx.mQR_matrix}
 \alias{export_xlsx.mQR_matrix}
-\title{Export des objets mQR_matrix dans des fichiers Excel}
+\title{Exporting mQR_matrix objects in Excel files}
 \usage{
 \method{export_xlsx}{mQR_matrix}(
   x,
@@ -14,22 +14,21 @@
 )
 }
 \arguments{
-\item{x}{objet de type \code{mQR_matrix} à exporter.}
+\item{x}{a\code{mQR_matrix} object to export.}
 
-\item{export_dir}{dossier d'export des résultats.}
+\item{export_dir}{export directory.}
 
-\item{layout_file}{paramètre d'export. Par défaut, (\code{layout_file = "ByComponent"}) et un fichier Excel est exporté par composante
-de la matrice bilan qualité (matrice des modalités ou des valeurs), dont chaque feuille correspond à un bilan qualité. Pour avoir
-un fichier par bilan qualité dont chaque feuille correspond à la composante exportée, utiliser \code{layout_file = "ByQRMatrix"}.}
+\item{layout_file}{export parameter. By default, (\code{layout_file = "ByComponent"}) and an Excel file is exported for each part of the
+quality report matrix (modalities and values matrices). To group both modalities and values reports/sheets into a single Excel file, use the option \code{layout_file = "ByQRMatrix"}.}
 
-\item{file_extension}{extension des fichiers (\code{".xls"} ou \code{".xlsx"}).}
+\item{file_extension}{possible values are (\code{".xls"} and \code{".xlsx"}).}
 
-\item{layout}{composantes du bilan à exporter : voir \code{\link{export_xlsx.QR_matrix}} .}
+\item{layout}{elements of the report to export: see \code{\link{export_xlsx.QR_matrix}} .}
 
-\item{...}{autres paramètres de la fonction \code{\link{export_xlsx.QR_matrix}}.}
+\item{...}{other parameters of the function \code{\link{export_xlsx.QR_matrix}}.}
 }
 \description{
-Permet d'exporter dans des fichiers Excel une liste de bilan qualité
+To export several quality reports in Excel files
 }
 \seealso{
 Other QR_matrix functions: 

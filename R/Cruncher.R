@@ -3,21 +3,39 @@
 #' Fonction qui permet de lancer le cruncher sur un workspace à partir d'un fichier de paramètres.
 #'
 #' @param workspace chemin vers le workspace.
-#' @param cruncher_bin_directory répertoire contenant contenant le dossier "bin" du cruncher. Pour voir la
-#' valeur par défaut, exécuter le code \code{getOption("cruncher_bin_directory")}.
+#' @param cruncher_bin_directory répertoire contenant contenant le dossier "bin" du cruncher. Pour voir la valeur par défaut,
+#' exécuter le code \code{getOption("cruncher_bin_directory")}.
 #' @param param_file_path chemin vers le fichier des paramètres à utiliser pour lancer le workspace.
 #' Par défaut, un fichier .params est recherché au même niveau que le workspace.
 #' @param log_file nom du fichier qui contiendra la log du cruncher. Par défaut, la log n'est pas exportée.
 #' @encoding UTF-8
 #' @return L'adresse du workspace.
 #' @family Cruncher functions
+#' @keywords internal
+#' @name fr-cruncher
+NULL
+#> NULL
+
+
+#' The Cruncher launcher
+#'
+#' Function to launch the cruncher on a workspace from a settings file.
+#'
+#' @param workspace path to the workspace.
+#' @param cruncher_bin_directory path to the "bin" folder of the cruncher. To see the default value, compile \code{getOption("cruncher_bin_directory")}.
+#' @param param_file_path path to the settings file. By default, a ".params" file is searched for in the same folder the workspace is stored in.
+#' @param log_file name of the log file. By default, no log file is exported.
+#' @encoding UTF-8
+#' @return The workspace path
+#' @family Cruncher functions
+#' @seealso [Traduction française][fr-cruncher()]
 #' @export
 cruncher <- function(workspace,
                      cruncher_bin_directory = getOption("cruncher_bin_directory"),
                      param_file_path, log_file){
     if(missing(workspace) || is.null(workspace)){
         if(Sys.info()[['sysname']] == "Windows"){
-            workspace <- utils::choose.files(caption = "Sélectionner un workspace",
+            workspace <- utils::choose.files(caption = "Please select a workspace",
                                              filters = c("Fichier XML","*.xml"))
         }else{
             workspace <- base::file.choose()
@@ -25,14 +43,14 @@ cruncher <- function(workspace,
     }
 
     if(length(workspace) == 0)
-        stop("Il faut sélectionner un workspace")
+        stop("The first argument must be a workspace")
 
     if(length(workspace) > 1)
-        stop("Il ne faut sélectionner qu'un workspace")
+        stop("Please select only one workspace")
 
-    #Il faut l'adresse entière du workspace et non pas l'adresse relative
+    # The path to the workspace must be "whole", not relative/from the setwd.
     workspace <- normalizePath(workspace, mustWork = FALSE)
-    workspace <- sub("\\.xml$","",workspace) # On enlève le .xml s'il existe dans l'adresse du workspace
+    workspace <- sub("\\.xml$","",workspace) # To remove the .xml from the workspace name, if needed
 
     if(missing(param_file_path) || is.null(param_file_path)){
         param_file_path <- list.files(path = workspace,
@@ -40,14 +58,14 @@ cruncher <- function(workspace,
                                       pattern = "\\.params$",
                                       full.names = TRUE)
         if(length(param_file_path)!=0)
-            stop("Aucun ou au moins 2 fichiers .param sont trouvés")
+            stop("No or more than one .param file was found")
     }
     workspace <- paste0(workspace,".xml")
 
     if(!all(file.exists(paste0(cruncher_bin_directory,"/jwsacruncher"),
                         workspace,
                         param_file_path)))
-        stop("Il y a une erreur dans l'adresse des paramètres, dans l'adresse du cruncher ou dans l'adresse du workspace")
+        stop("There is an error in the path to the .params file, the cruncher bin folder or the workspace.")
 
     wd <- getwd()
     setwd(cruncher_bin_directory)
@@ -67,6 +85,9 @@ cruncher <- function(workspace,
     return(invisible(workspace))
 }
 
+
+
+
 #' Lanceur rapide de cruncher
 #'
 #' Fonction qui permet de lancer le cruncher sur un workspace tout en créant le fichier des paramètres.
@@ -85,6 +106,29 @@ cruncher <- function(workspace,
 #' @encoding UTF-8
 #' @return L'adresse du workspace.
 #' @family Cruncher functions
+#' @keywords internal
+#' @name fr-cruncher_and_param
+NULL
+#> NULL
+
+
+#' Combined cruncher launcher
+#'
+#' Function to simultaneously crunch a workspace and create its .params file
+#'
+#' @param workspace path to the workspace. If not specified, a window opens so the user can select a workspace.
+#' @param cruncher_bin_directory path to the cruncher "bin" folder.
+#' @param rename_multi_documents boolean indicating whether to rename the output folders to the crunched multiprocessings' names. By default, \code{rename_multi_documents = TRUE}.
+#' If \code{rename_multi_documents = FALSE}, the multiprocessings' xml files' names are used.
+#' @param output folder containing the cruncher results. By default, (\code{output = NULL}) and an "Output" folder is created within the workspace folder.
+#' @param delete_existing_file boolean indicating whether to delete pre-existing files when renaming the folders. Only used when \code{rename_multi_documents = TRUE}.
+#' By default, (\code{delete_existing_file = NULL}) and a dialogue box opens, asking whether to delete the files.
+#' @param log_file log file name. By default, no log file is generated.
+#' @param ... other parameters of the function \link{create_param_file}.
+#' @encoding UTF-8
+#' @return The workspace path.
+#' @family Cruncher functions
+#' @seealso [Traduction française][fr-cruncher_and_param()]
 #' @export
 cruncher_and_param <- function(workspace = NULL,
                                cruncher_bin_directory = getOption("cruncher_bin_directory"),
@@ -105,15 +149,15 @@ cruncher_and_param <- function(workspace = NULL,
 
         noms_multi_documents <- multiprocessing_names(workspace)
         if (nrow(noms_multi_documents) == 0)
-            stop("Aucun multi-document dans le workspace")
+            stop("There is no multiprocessing in the workspace!")
         noms_multi_documents$name <- paste0(output,"\\",noms_multi_documents$name)
         noms_multi_documents$file <- paste0(output,"\\",noms_multi_documents$file)
         noms_multi_documents <- noms_multi_documents[noms_multi_documents$name != noms_multi_documents$file,]
 
         if(any(file.exists(noms_multi_documents$name))){
-            # Un des fichiers existe déjà !
+
             if(is.null(delete_existing_file)){
-                message <- paste("Un ou plusieurs dossiers présents sous",output,"existe(nt) déjà.\nVoulez-vous le(s) supprimer ?")
+                message <- paste("There is already at least one file in ",output,".\nDo you want to clear the output folder ?")
                 delete_existing_file <- utils::winDialog(type = c("yesnocancel"),
                                                   message)
 
@@ -125,7 +169,7 @@ cruncher_and_param <- function(workspace = NULL,
                        recursive = TRUE)
                 file.rename(from = noms_multi_documents$file, to = noms_multi_documents$name)
             }else{
-                warning("Certains dossiers existent déjà : aucun dossier n'est renommé")
+                warning("There were pre-existing files in the output folder: none were removed or renamed.")
             }
 
         }else{
@@ -137,6 +181,9 @@ cruncher_and_param <- function(workspace = NULL,
     return(invisible(workspace))
 }
 
+
+
+
 #' Noms multiprocessings JDemetra+/XML
 #'
 #' Fonction qui permet d'extraire le nom des multiprocessings sous JDemetra+ et les noms des fichiers XML associés.
@@ -145,11 +192,25 @@ cruncher_and_param <- function(workspace = NULL,
 #' @encoding UTF-8
 #' @return Un \code{data.frame} contenant le nom des multiprocessings sous JDemetra+ (colonne \code{name}) et
 #' le nom des fichiers XML associés (colonne \code{file})
+#' @keywords internal
+#' @name fr-multiprocessing_names
+NULL
+#> NULL
+
+
+#' JDemetra+/XML multiprocessings names
+#'
+#' Function to extract multiprocessings names as seen in the JDemetra+ interface as well as from their xml files'.
+#'
+#' @param workspace path to the workspace. When missing, a window to select the workspace opens.
+#' @encoding UTF-8
+#' @return a \code{data.frame} with the multiprocessing name as seen in the JDemetra+ interface (column \code{name}) and the corresponding xml files' title (column \code{file}).
+#' @seealso [Traduction française][fr-multiprocessing_names()]
 #' @export
 multiprocessing_names <- function(workspace){
     if(missing(workspace) || is.null(workspace)){
         if(Sys.info()[['sysname']] == "Windows"){
-            workspace <- utils::choose.files(caption = "Sélectionner un workspace",
+            workspace <- utils::choose.files(caption = "Please select a workspace",
                                              filters = c("Fichier XML","*.xml"))
         }else{
             workspace <- base::file.choose()
@@ -157,15 +218,15 @@ multiprocessing_names <- function(workspace){
     }
 
     if(length(workspace) == 0)
-        stop("Il faut sélectionner un workspace")
+        stop("Please select a workspace")
     if(length(workspace) > 1)
-        stop("Il ne faut sélectionner qu'un workspace")
+        stop("Please select only one workspace")
 
     workspace <- normalizePath(workspace, mustWork = FALSE)
     workspace <- paste0(sub("\\.xml$","",workspace),".xml")
 
     if(!file.exists(workspace))
-        stop("Le workspace n'existe pas")
+        stop("The workspace doesn't exist")
 
     xml_workspace <- suppressWarnings(XML::xmlParse(workspace, error = function(...){}))
     noms_objets <- XML::xmlToDataFrame(nodes = XML::getNodeSet(xml_workspace,
@@ -176,6 +237,9 @@ multiprocessing_names <- function(workspace){
 
     return(noms_multi_documents)
 }
+
+
+
 
 #' Mise à jour d'un workspace
 #'
@@ -192,6 +256,32 @@ multiprocessing_names <- function(workspace){
 #' @encoding UTF-8
 #' @return L'adresse du workspace.
 #' @family Cruncher functions
+#' @keywords internal
+#' @name fr-update_workspace
+NULL
+#> NULL
+
+
+#' Workspace update
+#'
+#' Function to update a workspace without exporting the results
+#'
+#' @param workspace path to the workspace. By default, a window opens to select the workspace.
+#' @param policy refresh policy. By default, \code{policy = "parameters"}.
+#' The other methods available are:
+#' \code{"current"} or \code{"n"} (fixed model + all new data are classified as dditive outliers)
+#' \code{"fixed"} or \code{"f"} (fixed model: the model is unchanged)
+#' \code{"fixedparameters"} or \code{"fp"} (re-estimation of the regression coefficients)
+#' \code{"parameters"} or \code{"p"} (above + re-estimation of the arima coefficients)
+#' \code{"lastoutliers"} or \code{"l"} (above + re-identification of the outliers over the last year) ;
+#' \code{"outliers"} or \code{"o"} (above + re-identification of the outliers over the whole series span) ;
+#' \code{"stochastic"} or \code{"s"} (above + re-estimation of the arima model (orders)) ;
+#' \code{"complete"} or \code{"c"} (the model is completely re-estimated).
+#' @param cruncher_bin_directory path to the cuncher "bin" folder.
+#' @encoding UTF-8
+#' @return The workspace address.
+#' @family Cruncher functions
+#' @seealso [Traduction française][fr-update_workspace()]
 #' @export
 update_workspace <- function(workspace = NULL,
                              policy = "parameters",

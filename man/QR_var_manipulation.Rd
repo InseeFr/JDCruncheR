@@ -4,28 +4,27 @@
 \alias{QR_var_manipulation}
 \alias{remove_indicators}
 \alias{retain_indicators}
-\title{Manipulation de la liste des indicateurs}
+\title{Editing the indicators list}
 \usage{
 remove_indicators(x, ...)
 
 retain_indicators(x, ...)
 }
 \arguments{
-\item{x}{objet de type \code{QR_matrix} ou \code{mQR_matrix}.}
+\item{x}{a \code{QR_matrix} or \code{mQR_matrix} object.}
 
-\item{...}{noms des variables à retirer (ou conserver).}
+\item{...}{names of the variable to remove (or keep)}
 }
 \description{
-Permet de retirer des indicateurs (fonction \code{remove_indicators}) ou de n'en retenir que certains
-(fonction \code{retain_indicators}) d'objets \code{QR_matrix} ou \code{mQR_matrix}. Le nom des séries
-(colonne "series") ne peut être enlevé.
+Functions to remove indicators (\code{remove_indicators}) or retrain some indicators only (\code{retain_indicators})
+from \code{QR_matrix} or \code{mQR_matrix} objects. The series names (column "series") cannot be removed.
 }
 \examples{
 \dontrun{
 QR <- compute_score(extract_QR())
-retain_indicators(QR,"score","m7") # On ne retient que les variables score et m7
-retain_indicators(QR,c("score","m7")) # Ã©quivalent
-score(remove_indicator(QR,"score")) # Il n'y a plus de score
+retain_indicators(QR,"score","m7")    # Only the score and the m7 variables are kept
+retain_indicators(QR,c("score","m7")) # equivalent syntax
+score(remove_indicator(QR,"score"))   # The score is removed
 }
 }
 \seealso{

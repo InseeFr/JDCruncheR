@@ -2,7 +2,7 @@
 % Please edit documentation in R/QR_functions.R
 \name{recode_indicator_num}
 \alias{recode_indicator_num}
-\title{Ré-encodage en modalités des variables}
+\title{Converting "values variables" into "modalities variables"}
 \usage{
 recode_indicator_num(
   x,
@@ -13,20 +13,18 @@ recode_indicator_num(
 )
 }
 \arguments{
-\item{x}{objet de type \code{QR_matrix} ou \code{mQR_matrix}.}
+\item{x}{a \code{QR_matrix} or \code{mQR_matrix} object.}
 
-\item{variable_name}{vecteur de chaînes de caractères contenant les noms des
-variables à recoder.}
+\item{variable_name}{a vector of strings containing the names of the variables to convert.}
 
-\item{breaks}{voir fonction \code{\link[base]{cut}}.}
+\item{breaks}{see function \code{\link[base]{cut}}.}
 
-\item{labels}{voir fonction \code{\link[base]{cut}}.}
+\item{labels}{see function \code{\link[base]{cut}}.}
 
-\item{...}{autres paramètres de la fonction \code{\link[base]{cut}}.}
+\item{...}{other parameters of the function \code{\link[base]{cut}}.}
 }
 \description{
-Permet d'encoder des variables présentes dans la matrice des valeurs en modalités
-ajoutables à la matrice des modalités.
+To transform variables from the values matrix into categorical variables that can be added into the modalities matrix.
 }
 \seealso{
 Other var QR_matrix manipulation: 

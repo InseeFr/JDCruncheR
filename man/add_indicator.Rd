@@ -2,36 +2,31 @@
 % Please edit documentation in R/QR_functions.R
 \name{add_indicator}
 \alias{add_indicator}
-\title{Ajout d'un indicateur dans les objets QR_matrix}
+\title{Adding an indicator in QR_matrix objects}
 \usage{
 add_indicator(x, indicator, variable_name, ...)
 }
 \arguments{
-\item{x}{objet de type \code{QR_matrix} ou \code{mQR_matrix}.}
+\item{x}{a \code{QR_matrix} or \code{mQR_matrix} object}
 
-\item{indicator}{un \code{vector} ou un \code{data.frame} (voir détails).}
+\item{indicator}{a \code{vector} or a \code{data.frame} (cf. details).}
 
-\item{variable_name}{chaîne de caractères contenant les noms des nouvelles variables.}
+\item{variable_name}{a string containing the name of the variables to add.}
 
-\item{...}{autres paramètres de la fonction \code{\link[base]{merge}}.}
+\item{...}{other parameters of the function \code{\link[base]{merge}}.}
 }
 \description{
-Permet d'ajouter un indicateur dans les objets \code{QR_matrix}. Le nom des séries
-(colonne "series") ne peut être enlevé.
+Function to add indicators in \code{QR_matrix} objects.
 }
 \details{
-La fonction \code{add_indicator()} permet d'ajouter un indicateur dans la matrice des valeurs du bilan qualité.
-L'indicateur n'est donc pas ajouté dans la matrice des modalités et ne peut être utilisé dans le calcul du score
-(sauf pour le pondérer). Pour l'utiliser dans le calcul du score, il faudra d'abord le recoder avec la fonction
-\code{\link{recode_indicator_num}}.
+The function \code{add_indicator()} adds a chosen indicator in the values matrix of a quality report.
+Therefore, because said indicator isn't added in the modalities matrix, it cannot be used to calculate a score (except for weighting).
+Before using the added variable for score calculation, the function \code{\link{recode_indicator_num}} will have to be adapted.
 
-L'indicateur à ajouter peut être sous deux formats : \code{vector} ou \code{data.frame}. Dans les deux cas,
-il faut que les valeurs à ajouter puissent être associées aux bonnes séries dans la matrice du bilan qualité :
+The new indicator can be a \code{vector} or a \code{data.frame}. In both cases, its format must allow for pairing:
 \itemize{
-\item dans le cas d'un \code{vector}, les éléments devront être nommés et les noms doivent correspondre à ceux présents dans le
-bilan qualité (variable "series") ;
-\item dans le cas d'un \code{data.frame}, il devra contenir une colonne "series" avec les noms des séries
-correspondantes.
+\item a \code{vector}'s elements must be named and these names must match those of the quality report (variable "series");
+\item a \code{data.frame} must contain a "series" column that matches with the quality report's series.
 }
 }
 \seealso{

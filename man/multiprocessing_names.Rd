@@ -3,17 +3,16 @@
 \encoding{UTF-8}
 \name{multiprocessing_names}
 \alias{multiprocessing_names}
-\title{Noms multiprocessings JDemetra+/XML}
+\title{JDemetra+/XML multiprocessings' names}
 \usage{
 multiprocessing_names(workspace)
 }
 \arguments{
-\item{workspace}{chemin vers le workspace. Par défaut, une fenêtre s'ouvre pour sélectionner le workspace.}
+\item{workspace}{path to the workspace. When missing, a window to select the workspace opens.}
 }
 \value{
-Un \code{data.frame} contenant le nom des multiprocessings sous JDemetra+ (colonne \code{name}) et
-le nom des fichiers XML associés (colonne \code{file})
+a \code{data.frame} with the SAPs' name in the JDemetra+ interface (column \code{name}) and the corresponding xml files' title (column \code{file}).
 }
 \description{
-Fonction qui permet d'extraire le nom des multiprocessings sous JDemetra+ et les noms des fichiers XML associés.
+Function to extract SAPs' names as seen in the JDemetra+ interface as well as from their xml files'.
 }

@@ -4,23 +4,23 @@
 \name{print.QR_matrix}
 \alias{print.QR_matrix}
 \alias{print.mQR_matrix}
-\title{Affichage des objets QR_matrix et mQR_matrix}
+\title{Printing QR_matrix and mQR_matrix objects}
 \usage{
 \method{print}{QR_matrix}(x, print_variables = TRUE, print_score_formula = TRUE, ...)
 
 \method{print}{mQR_matrix}(x, score_statistics = TRUE, ...)
 }
 \arguments{
-\item{x}{objet de type \code{mQR_matrix} ou \code{mQR_matrix}.}
+\item{x}{a \code{mQR_matrix} or \code{mQR_matrix} object.}
 
-\item{print_variables}{booléen pour imprimer ou non les noms des indicateurs (supplémentaire inclus).}
+\item{print_variables}{logical indicating whether to print the indicators' name (including additionnal variables).}
 
-\item{print_score_formula}{booléen pour imprimer ou non la formule qui a servi à calculer le score (le cas échéant).}
+\item{print_score_formula}{logical indicating whether to print the formula with which the score was calculated (when calculated).}
 
-\item{...}{autres arguments non utilisés.}
+\item{...}{other unused arguments.}
 
-\item{score_statistics}{booléen pour imprimer ou non des statistiques sur les scores de la \code{mQR_matrix} (le cas échéant).}
+\item{score_statistics}{logical indicating whether to print the statistics in the \code{mQR_matrix} scores (when calculated).}
 }
 \description{
-Pour afficher un objet QR_matrix ou mQR_matrix.
+To print information on a QR_matrix or mQR_matrix object.
 }
