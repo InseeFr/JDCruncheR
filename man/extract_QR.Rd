@@ -3,7 +3,7 @@
 \encoding{UTF-8}
 \name{extract_QR}
 \alias{extract_QR}
-\title{Extraction of a quality report}
+\title{#' Extraction of a quality report}
 \usage{
 extract_QR(matrix_output_file, sep = ";", dec = ",")
 }
@@ -46,13 +46,20 @@ QR[["modalities"]]
 }
 }
 \seealso{
+\link[=fr-extract_QR]{Traduction française}
+
 Other QR_matrix functions: 
-\code{\link{compute_score}()},
 \code{\link{export_xlsx.QR_matrix}()},
 \code{\link{export_xlsx.mQR_matrix}()},
 \code{\link{extract_score}()},
-\code{\link{rbind.QR_matrix}()},
-\code{\link{sort}()},
-\code{\link{weighted_score}()}
+\code{\link{fr-compute_score}},
+\code{\link{fr-export_xlsx.QR_matrix}},
+\code{\link{fr-export_xlsx.mQR_matrix}},
+\code{\link{fr-extract_QR}},
+\code{\link{fr-extract_score}},
+\code{\link{fr-rbind.QR_matrix}},
+\code{\link{fr-sort.QR_matrix}},
+\code{\link{fr-weighted_score}},
+\code{\link{rbind.QR_matrix}()}
 }
 \concept{QR_matrix functions}

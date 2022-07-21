@@ -27,8 +27,12 @@ recode_indicator_num(
 To transform variables from the values matrix into categorical variables that can be added into the modalities matrix.
 }
 \seealso{
+\link[=fr-recode_indicator_num]{Traduction française}
+
 Other var QR_matrix manipulation: 
-\code{\link{QR_var_manipulation}},
-\code{\link{add_indicator}()}
+\code{\link{add_indicator}()},
+\code{\link{fr-add_indicator}},
+\code{\link{fr-recode_indicator_num}},
+\code{\link{fr-remove_indicators}}
 }
 \concept{var QR_matrix manipulation}

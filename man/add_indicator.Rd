@@ -30,8 +30,12 @@ The new indicator can be a \code{vector} or a \code{data.frame}. In both cases, 
 }
 }
 \seealso{
+\link[=fr-add_indicator]{Traduction française}
+
 Other var QR_matrix manipulation: 
-\code{\link{QR_var_manipulation}},
+\code{\link{fr-add_indicator}},
+\code{\link{fr-recode_indicator_num}},
+\code{\link{fr-remove_indicators}},
 \code{\link{recode_indicator_num}()}
 }
 \concept{var QR_matrix manipulation}

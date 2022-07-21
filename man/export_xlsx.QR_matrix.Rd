@@ -7,6 +7,9 @@
 \method{export_xlsx}{QR_matrix}(
   x,
   layout = c("all", "modalities", "values", "combined"),
+  create = TRUE,
+  clear_sheet = TRUE,
+  auto_format = TRUE,
   file_name,
   sheet_names,
   ...
@@ -19,30 +22,37 @@
 (\code{"modalities"}) and values (\code{"values"}) are exported in separate files. To export them in a single file (in two sheets),
 use \code{layout = "combined"}.}
 
+\item{create}{logical indicating whether to create an Excel file if it doesn't exist yet (\code{create = TRUE} by default)}
+
+\item{clear_sheet}{logical indicating whether to clear the Excel sheets before the export (\code{clear_sheet = TRUE} by default).}
+
+\item{auto_format}{logical indicating whether to format the output (\code{auto_format = TRUE} by default).}
+
 \item{file_name}{optional argument to choose the path and name of the file to export. If not specified, an \emph{export.xls} will be created in the working directory.}
 
 \item{sheet_names}{names of the exported Excel sheets. If not specified, the sheets will be named after the exported components.
 If specified, existing sheets with these names will be overwritten.}
 
 \item{...}{other unused parameters.}
-
-\item{create}{logical indicating whether to create an Excel file if it doesn't exist yet (\code{create = TRUE} by default)}
-
-\item{clear_sheet}{logical indicating whether to clear the Excel sheets before the export (\code{clear_sheet = TRUE} by default).}
-
-\item{auto_format}{logical indicating whether to format the output (\code{auto_format = TRUE} by default).}
 }
 \description{
 To export a quality report in an Excel file.
 }
 \seealso{
+\link[=fr-export_xlsx.QR_matrix]{Traduction française}
+
 Other QR_matrix functions: 
-\code{\link{compute_score}()},
 \code{\link{export_xlsx.mQR_matrix}()},
 \code{\link{extract_QR}()},
 \code{\link{extract_score}()},
-\code{\link{rbind.QR_matrix}()},
-\code{\link{sort}()},
-\code{\link{weighted_score}()}
+\code{\link{fr-compute_score}},
+\code{\link{fr-export_xlsx.QR_matrix}},
+\code{\link{fr-export_xlsx.mQR_matrix}},
+\code{\link{fr-extract_QR}},
+\code{\link{fr-extract_score}},
+\code{\link{fr-rbind.QR_matrix}},
+\code{\link{fr-sort.QR_matrix}},
+\code{\link{fr-weighted_score}},
+\code{\link{rbind.QR_matrix}()}
 }
 \concept{QR_matrix functions}

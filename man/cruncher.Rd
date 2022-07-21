@@ -28,9 +28,15 @@ The workspace path
 Function to launch the cruncher on a workspace from a settings file.
 }
 \seealso{
+\link[=fr-cruncher]{Traduction française}
+
 Other Cruncher functions: 
 \code{\link{create_param_file}()},
 \code{\link{cruncher_and_param}()},
+\code{\link{fr-create_param_file}},
+\code{\link{fr-cruncher_and_param}},
+\code{\link{fr-cruncher}},
+\code{\link{fr-update_workspace}},
 \code{\link{update_workspace}()}
 }
 \concept{Cruncher functions}

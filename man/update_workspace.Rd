@@ -16,7 +16,7 @@ update_workspace(
 
 \item{policy}{refresh policy. By default, \code{policy = "parameters"}.
 The other methods available are:
-\code{"current"} or \code{"n"} (fixed model + all new data are classified as AOs)
+\code{"current"} or \code{"n"} (fixed model + all new data are classified as dditive outliers)
 \code{"fixed"} or \code{"f"} (fixed model: the model is unchanged)
 \code{"fixedparameters"} or \code{"fp"} (re-estimation of the regression coefficients)
 \code{"parameters"} or \code{"p"} (above + re-estimation of the arima coefficients)
@@ -34,9 +34,15 @@ The workspace address.
 Function to update a workspace without exporting the results
 }
 \seealso{
+\link[=fr-update_workspace]{Traduction française}
+
 Other Cruncher functions: 
 \code{\link{create_param_file}()},
 \code{\link{cruncher_and_param}()},
-\code{\link{cruncher}()}
+\code{\link{cruncher}()},
+\code{\link{fr-create_param_file}},
+\code{\link{fr-cruncher_and_param}},
+\code{\link{fr-cruncher}},
+\code{\link{fr-update_workspace}}
 }
 \concept{Cruncher functions}

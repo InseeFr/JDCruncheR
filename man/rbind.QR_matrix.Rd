@@ -26,13 +26,20 @@ rbind(QR1, QR2, check_formula = FALSE)
 }
 }
 \seealso{
+\link[=fr-rbind.QR_matrix]{Traduction française}
+
 Other QR_matrix functions: 
-\code{\link{compute_score}()},
 \code{\link{export_xlsx.QR_matrix}()},
 \code{\link{export_xlsx.mQR_matrix}()},
 \code{\link{extract_QR}()},
 \code{\link{extract_score}()},
-\code{\link{sort}()},
-\code{\link{weighted_score}()}
+\code{\link{fr-compute_score}},
+\code{\link{fr-export_xlsx.QR_matrix}},
+\code{\link{fr-export_xlsx.mQR_matrix}},
+\code{\link{fr-extract_QR}},
+\code{\link{fr-extract_score}},
+\code{\link{fr-rbind.QR_matrix}},
+\code{\link{fr-sort.QR_matrix}},
+\code{\link{fr-weighted_score}}
 }
 \concept{QR_matrix functions}

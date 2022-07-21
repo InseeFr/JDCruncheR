@@ -1,29 +1,45 @@
 ---
-title: "Using the cruncher with JDCruncheR"
+title: "Using the cruncher with JDCruncheR pdf"
 date: "`r Sys.Date()`"
-output: 
-  html_document:
+output:
+  pdf_document:
     toc: true
     toc_depth: 2
-    toc_float: true
+header-includes:
+  - \usepackage{booktabs}
+  - \usepackage{longtable}
+  - \usepackage{array}
+  - \usepackage{multirow}
+  - \usepackage{wrapfig}
+  - \usepackage{float}
+  - \usepackage{pdflscape}
+  - \usepackage{tabu}
+  - \usepackage{threeparttable}
+  - \usepackage{threeparttablex}
+  - \usepackage[normalem]{ulem}
+  - \usepackage{makecell}
 vignette: >
-  %\VignetteIndexEntry{Using the cruncher with JDCruncheR}
+  %\VignetteIndexEntry{Using the cruncher with JDCruncheR pdf}
   %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
+  %\VignetteEncoding{UTF-8}
 ---
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, size = "small")
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE, size = "small"
+)
 library(JDCruncheR)
 library(kableExtra)
 library(knitr)
 ```
+
 
 With the current version of the JDCruncheR package (`r utils::packageVersion("JDCruncheR")`), you can:
 
 - easily launch the JDemetra+ cruncher ([JWSACruncher](https://github.com/jdemetra/jwsacruncher/releases)) to update a workspace and export the results;  
 - generate a *quality report* to synthesise seasonal adjustment diagnostics. It can be used to spot the most problematic series which will require a finer analysis. This is most useful when dealing with a great number of series, which renders impossible the examination of every diagnostic for every series in a reasonable time. 
 
-# Launching the cruncher
+# About the cruncher
 
 To prevent the package from being too voluminous, it does not contain the JDemetra+ cruncher. Said cruncher can be downloaded here: <https://github.com/jdemetra/jdemetra-app/releases>. For more information on the cruncher installation and its set up with a portable version of Java, please refer to the JDCruncheR wiki: <https://github.com/InseeFr/JDCruncheR/wiki/Installation-and-set-up-of-JDemetra-and-the-cruncher>.
 
@@ -39,13 +55,13 @@ In the JDCruncheR package, three functions are cruncher-related:
 - `cruncher()` crunches a workspace from a pre-generated settings file;  
 - `cruncher_and_param()` both generates the settings file and crunches the workspace. With this function, some of the cruncher output can also be customised.
 
-## Generating the settings file with `create_param_file()`
+# Generating the settings file with `create_param_file()`
 
-The arguments of the function `create_param_file()` are described in the JDemetra+ cruncher wiki (<https://github.com/jdemetra/jwsacruncher/wiki>). The three main arguments are:   
+The arguments of the function `create_param_file()` are described in the JDemetra+ cruncher wiki (<https://github.com/jdemetra/jwsacruncher/wiki>). The three main arguments are:  
 
 1. `policy`, the refresh policy:
 
-```{r,echo=FALSE}
+```{r,echo=FALSE, eval=FALSE}
 refresh_policy <- structure(list(`Option in JDemetra+` = c("Current adjustment (AO approach)",
 "Fixed model", 
 "Estimate regression coefficients", 
@@ -66,30 +82,47 @@ Description = c("The ARIMA model, outliers and other regression variables are no
 "Complete re-identification of the whole RegARIMA model, all regression variables and ARIMA model orders.")), 
 .Names = c("Option in JDemetra+", "Cruncher option", "Description"), class = "data.frame", row.names = c(NA, -7L))
 
-if (opts_knit$get("rmarkdown.pandoc.to") == "latex"){
-    kable(refresh_policy, caption = "The refresh/revision policies",
-          booktabs = TRUE, format = "latex") %>% 
-        kable_styling(full_width = T,
-                      latex_options = "hold_position") %>% 
-        group_rows("Current adjustment (AO approach)", 1, 1) %>% 
-        group_rows("Partial concurrent adjustment", 2, 7) %>% 
-        group_rows("Concurrent", 8, 8) %>% 
-        column_spec(1, width = "4cm") %>% 
-        column_spec(2, width = "2.5cm")
-}else{
-    refresh_policy[2:7, 1] <-  paste("Partial concurrent adjustment ->", refresh_policy[2:7, 1])
-    kable(refresh_policy, caption = "The refresh/revision policies",
-             booktabs = TRUE)
-}
-
+kable(refresh_policy, caption = "The refresh/revision policies",
+      booktabs = TRUE, format = "latex") %>% 
+    kable_styling(full_width = T,
+                  latex_options = "hold_position") %>% 
+    group_rows("Current adjustment (AO approach)", 1, 1) %>% 
+    group_rows("Partial concurrent adjustment", 2, 7) %>% 
+    group_rows("Concurrent", 8, 8) %>% 
+    column_spec(1, width = "4cm") %>% 
+    column_spec(2, width = "2.5cm")
 
 
 ```
 
-2. `matrix_item` is a list containing the names of the parameters to export. By default, such names are those contained in the `default_matrix_item` option. Thus, the user can either modify the `default_matrix_item` option or the `matrix_item` option:
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-1}The refresh policies}
+\centering
+\begin{tabu} to \linewidth {>{\raggedright\arraybackslash}p{4cm}>{\raggedright\arraybackslash}p{2.5cm}>{\raggedright}X}
+\toprule
+Option in JDemetra+ & Cruncher option & Description\\
+\midrule
+\addlinespace[0.3em]
+\hspace{1em}Current adjustment (AO approach) & current & The ARIMA model, outliers and other regression variables are not re-identified, and the values of all associated coefficients are fixed. All new observations are classified as additive outliers and corresponding coefficients are estimated during the regression phase. The transformation type remains unchanged..\\
+\multicolumn{3}{l}{\textbf{Partial concurrent adjustment}}\\
+\hspace{1em}Fixed model & fixed & The ARIMA model, outliers and other regression variables are not re-identified and the values of all coefficients are fixed. The transformation type remains unchanged.\\
+\hspace{1em}Estimate regression coefficients & fixedparameters & The ARIMA model, outliers and other regression variables are not re-identified. The coefficients of the ARIMA model are fixed but the regression variables coefficients are re-estimated. The transformation type remains unchanged.\\
+\hspace{1em}Estimate regression coefficients + Arima parameters & parameters (default policy) & The ARIMA model, outliers and other regression variables are not re-identified. All coefficients of the RegARIMA model are re-estimated, for regression variables and ARIMA parameters. The transformation type remains unchanged.\\
+\hspace{1em}Estimate regression coefficients + Last outliers & lastoutliers & Outliers in the last year of the sample are re-identified. All coefficients of the RegARIMA model, regression variables and ARIMA parameters, are re-estimated. The transformation type remains unchanged.\\
+\hspace{1em}Estimate regression coefficients + all outliers & outliers & All outliers are re-identified. All coefficients of the RegARIMA model, regression variables and ARIMA parameters, are re-estimated. The transformation type remains unchanged.\\
+\hspace{1em}Estimate regression coefficients + Arima model & stochastic & Re-identification of the ARIMA model, outliers and regression variables, except the calendar variables. The transformation type remains unchanged.\\
+\addlinespace[0.3em]
+\multicolumn{3}{l}{\textbf{Concurrent}}\\
+\hspace{1em}Concurrent & complete or concurrent & Complete re-identification of the whole RegARIMA model, all regression variables and ARIMA model orders.\\
+\bottomrule
+\end{tabu}
+\end{table}
+
+2. `matrix_item`, a list containing the names of the parameters to export. By default, such names are those contained in the `default_matrix_item` option. Thus, the user can either modify the `default_matrix_item` option or the `matrix_item` option:
 ```{r, eval = FALSE}
 library(JDCruncheR)
- # To see the default parameters:
+# To see the default parameters:
 getOption("default_matrix_item")
 # To customise the parameter selection (here, only the information criteria are exported):
 options(default_matrix_item = c("likelihood.aic",
@@ -98,9 +131,9 @@ options(default_matrix_item = c("likelihood.aic",
                                 "likelihood.bicc"))
 ```
 
-3. `tsmatrix_series` is a list containing the names of the parameters to export. By default, such names are those contained in the `default_tsmatrix_series` option. Thus, the user can either modify the `default_tsmatrix_series` option or the  `tsmatrix_series` option:
+3. `tsmatrix_series`, a list containing the names of the parameters to export. By default, such names are those contained in the `default_tsmatrix_series` option. Thus, the user can either modify the `default_tsmatrix_series` option or the  `tsmatrix_series` option:
 ```{r, eval = FALSE}
- # To see the default parameters:
+# To see the default parameters:
 getOption("default_tsmatrix_series")
 # To customise the parameter selection (here, only the seasonaly adjusted series and its previsions are exported):
 options(default_tsmatrix_series = c("sa", "sa_f"))
@@ -128,7 +161,7 @@ create_param_file(dir_file_param = "D:/",
 
 
 
-## Launching the cruncher
+# Launching the cruncher
 
 To crunch a workspace with the functions `cruncher()` or `cruncher_and_param()`, the paths to the cruncher and the workspace must be specified via two parameters, `cruncher_bin_directory` and `workspace`.
 
@@ -167,5 +200,4 @@ cruncher_and_param(workspace = "D:/Campagne_CVS/ipi.xml",
 # To see all the function parameters:
 ?cruncher_and_param
 ```
-
 

@@ -1,135 +1,135 @@
-LICENCE PUBLIQUE DE L'UNION EUROPÉENNE v. 1.2
+EUROPEAN UNION PUBLIC LICENCE v. 1.2
 
-EUPL © Union européenne 2007, 2016
+EUPL © the European Union 2007, 2016
 
-La présente licence publique de l'Union européenne («EUPL») s'applique à toute œuvre (telle que définie ci-dessous) fournie aux conditions prévues par la présente licence. Toute utilisation de l'œuvre autre que ce qu'autorise la présente licence est interdite (dans la mesure où pareille utilisation est couverte par un droit du titulaire des droits d'auteur sur l'œuvre).
+This European Union Public Licence (the ‘EUPL’) applies to the Work (as defined below) which is provided under the terms of this Licence. Any use of the Work, other than as authorised under this Licence is prohibited (to the extent such use is covered by a right of the copyright holder of the Work).
 
-L'œuvre est fournie aux conditions prévues par la présente licence quand le donneur de licence (tel que défini ci-dessous) a placé la mention suivante immédiatement après la déclaration relative au droit d'auteur sur l'œuvre:
+The Work is provided under the terms of this Licence when the Licensor (as defined below) has placed the following notice immediately following the copyright notice for the Work:
 
-Sous licence EUPL
+Licensed under the EUPL
 
-ou a exprimé de toute autre manière sa volonté de fournir l'œuvre sous licence EUPL.
-1. Définitions
+or has expressed by any other means his willingness to license under the EUPL.
+1. Definitions
 
-Dans la présente licence, on entend par:
+In this Licence, the following terms have the following meaning:
 
-— «licence», la présente licence,
+— ‘The Licence’: this Licence.
 
-— «œuvre originale», l'œuvre ou le logiciel distribué ou communiqué par le donneur de licence en vertu de la présente licence, sous forme de code source ou de code objet, selon le cas,
+— ‘The Original Work’: the work or software distributed or communicated by the Licensor under this Licence, available as Source Code and also as Executable Code as the case may be.
 
-— «œuvres dérivées», les œuvres ou logiciels qui pourraient être créés par le licencié sur la base de l'œuvre originale ou des modifications qui y auraient été appliquées. La présente licence ne définit pas le degré de modification ou de dépendance requis par rapport à l'œuvre originale pour qu'une œuvre soit qualifiée d'œuvre dérivée; cette question est réglée par la loi applicable en matière de droit d'auteur dans le pays visé à l'article 15,
+— ‘Derivative Works’: the works or software that could be created by the Licensee, based upon the Original Work or modifications thereof. This Licence does not define the extent of modification or dependence on the Original Work required in order to classify a work as a Derivative Work; this extent is determined by copyright law applicable in the country mentioned in Article 15.
 
-— «œuvre», l'œuvre originale ou ses œuvres dérivées,
+— ‘The Work’: the Original Work or its Derivative Works.
 
-— «code source», la forme de l'œuvre, lisible par l'homme, la plus appropriée pour que des personnes puissent l'examiner et la modifier,
+— ‘The Source Code’: the human-readable form of the Work which is the most convenient for people to study and modify.
 
-— «code objet», l'œuvre codée, généralement après compilation, destinée à être exécutée en tant que programme par un ordinateur,
+— ‘The Executable Code’: any code which has generally been compiled and which is meant to be interpreted by a computer as a program.
 
-— «donneur de licence», la personne physique ou morale qui distribue ou communique l'œuvre sous licence,
+— ‘The Licensor’: the natural or legal person that distributes or communicates the Work under the Licence.
 
-— «contributeur», toute personne physique ou morale qui modifie l'œuvre sous licence, ou contribue de toute autre manière à en faire une œuvre dérivée,
+— ‘Contributor(s)’: any natural or legal person who modifies the Work under the Licence, or otherwise contributes to the creation of a Derivative Work.
 
-— «licencié» ou «vous», toute personne physique ou morale qui utilise l'œuvre conformément à la licence,
+— ‘The Licensee’ or ‘You’: any natural or legal person who makes any usage of the Work under the terms of the Licence.
 
-— «distribution» ou «communication», tout acte de vente, don, prêt, location, distribution, communication, transmission ou mise à disposition, en ligne ou hors ligne, de copies de l'œuvre, et tout acte donnant accès à ses fonctions essentielles à toute autre personne physique ou morale.
-2. Portée des droits accordés par la licence
+— ‘Distribution’ or ‘Communication’: any act of selling, giving, lending, renting, distributing, communicating, transmitting, or otherwise making available, online or offline, copies of the Work or providing access to its essential functionalities at the disposal of any other natural or legal person.
+2. Scope of the rights granted by the Licence
 
-Par la présente, le donneur de licence vous concède, pour la durée de la protection de son droit d'auteur sur l'œuvre originale, une licence mondiale, libre de redevances, non exclusive et pouvant faire l'objet de sous-licences, en vertu de laquelle vous pouvez:
+The Licensor hereby grants You a worldwide, royalty-free, non-exclusive, sublicensable licence to do the following, for the duration of copyright vested in the Original Work:
 
-— utiliser l'œuvre en toute circonstance et pour tout usage,
+— use the Work in any circumstance and for all usage,
 
-— reproduire l'œuvre,
+— reproduce the Work,
 
-— modifier l'œuvre et créer des œuvres dérivées sur la base de l'œuvre,
+— modify the Work, and make Derivative Works based upon the Work,
 
-— communiquer l'œuvre au public, ce qui inclut le droit de mettre à disposition du public ou de lui présenter l'œuvre ou des copies de l'œuvre et d'en effectuer des représentations publiques, le cas échéant,
+— communicate to the public, including the right to make available or display the Work or copies thereof to the public and perform publicly, as the case may be, the Work,
 
-— distribuer l'œuvre ou des copies de celle-ci,
+— distribute the Work or copies thereof,
 
-— prêter et louer l'œuvre ou des copies de celles-ci,
+— lend and rent the Work or copies thereof,
 
-— accorder en sous-licence des droits sur l'œuvre ou sur des copies de celle-ci.
+— sublicense rights in the Work or copies thereof.
 
-Ces droits peuvent être exercés sur tout support et format, connu ou encore à inventer, dans la mesure où le droit applicable le permet.
+Those rights can be exercised on any media, supports and formats, whether now known or later invented, as far as the applicable law permits so.
 
-Dans les pays où des droits moraux s'appliquent, le donneur de licence renonce à son droit d'exercer son droit moral dans la mesure permise par la loi afin que la licence sur les droits patrimoniaux susmentionnés produise ses effets.
+In the countries where moral rights apply, the Licensor waives his right to exercise his moral right to the extent allowed by law in order to make effective the licence of the economic rights here above listed.
 
-Le donneur de licence vous concède un droit d'usage libre de redevances et non exclusif sur tout brevet qu'il détient, dans la mesure nécessaire à l'exercice des droits qui vous sont concédés sur l'œuvre sous licence.
-3. Communication du code source
+The Licensor grants to the Licensee royalty-free, non-exclusive usage rights to any patents held by the Licensor, to the extent necessary to make use of the rights granted on the Work under this Licence.
+3. Communication of the Source Code
 
-Le donneur de licence fournit l'œuvre sous forme de code source ou de code objet. Si l'œuvre est fournie sous forme de code objet, le donneur de licence accompagne chacune des copies de l'œuvre qu'il distribue d'une copie lisible par machine du code source de l'œuvre ou indique, dans un avis qui suit la déclaration relative au droit d'auteur jointe à l'œuvre, l'endroit où le code source est aisément et gratuitement accessible aussi longtemps que le donneur de licence continue à distribuer ou communiquer l'œuvre.
-4. Limitations du droit d'auteur
+The Licensor may provide the Work either in its Source Code form, or as Executable Code. If the Work is provided as Executable Code, the Licensor provides in addition a machine-readable copy of the Source Code of the Work along with each copy of the Work that the Licensor distributes or indicates, in a notice following the copyright notice attached to the Work, a repository where the Source Code is easily and freely accessible for as long as the Licensor continues to distribute or communicate the Work.
+4. Limitations on copyright
 
-Rien dans la présente licence n'a pour but de priver le licencié des avantages résultant de toute exception ou limitation aux droits exclusifs des titulaires de droits sur l'œuvre, de l'épuisement de ces droits ou de toute autre limitation qui s'y applique.
-5. Obligations du licencié
+Nothing in this Licence is intended to deprive the Licensee of the benefits from any exception or limitation to the exclusive rights of the rights owners in the Work, of the exhaustion of those rights or of other applicable limitations thereto.
+5. Obligations of the Licensee
 
-La concession des droits susmentionnés est soumise à des restrictions et à des obligations pour le licencié. Ces obligations sont les suivantes:
+The grant of the rights mentioned above is subject to some restrictions and obligations imposed on the Licensee. Those obligations are the following:
 
-    Droit d'attribution: le licencié laisse intactes toutes les déclarations concernant le droit d'auteur, le brevet ou les marques et toutes les déclarations concernant la licence et l'exclusion de garantie. Le licencié assortit chaque copie de l'œuvre qu'il distribue ou communique d'une copie de ces déclarations et d'une copie de la licence. Le licencié veille à ce que toute œuvre dérivée soit assortie d'un avis bien visible indiquant que l'œuvre a été modifiée et mentionnant la date de la modification.
-    Clause copyleft: si le licencié distribue ou communique des copies d'œuvres originales ou d'œuvres dérivées, cette distribution ou cette communication est effectuée dans les conditions prévues par la présente licence ou une version ultérieure de cette licence, sauf si l'œuvre originale est expressément distribuée en vertu de la présente version de la licence uniquement, par exemple au moyen de la mention «EUPL v. 1.2 seulement». Le licencié (qui devient donneur de licence) ne peut pas, en ce qui concerne l'œuvre ou les œuvres dérivées, offrir ou imposer des conditions supplémentaires qui restreignent ou modifient les conditions de la licence.
-    Clause de compatibilité: si le licencié distribue ou communique des œuvres dérivées ou des copies de telles œuvres basées à la fois sur l'œuvre et sur une autre œuvre concédée sous une licence compatible, la distribution ou la communication peut être faite aux conditions de cette licence compatible. Aux fins de la présente clause, une «licence compatible» est l'une des licences énumérées dans l'appendice de la présente licence. Dans le cas où les obligations du licencié au titre de la licence compatible entrent en conflit avec les obligations du licencié au titre de la présente licence, les premières prévalent.
-    Fourniture du code source: lorsqu'il distribue ou communique des copies de l'œuvre, le licencié fournit une copie lisible par machine du code source ou indique l'endroit où ce code source restera aisément et gratuitement accessible aussi longtemps que le donneur de licence continuera à distribuer ou communiquer l'œuvre.
-    Protection des droits: la présente licence ne donne pas le droit d'utiliser les noms commerciaux, les marques commerciales, les marques de service ou les noms du donneur de licence, sauf dans la mesure nécessaire, conformément à une utilisation raisonnable et aux pratiques habituelles, pour décrire l'origine de l'œuvre et reproduire la déclaration concernant le droit d'auteur.
+    Attribution right: The Licensee shall keep intact all copyright, patent or trademarks notices and all notices that refer to the Licence and to the disclaimer of warranties. The Licensee must include a copy of such notices and a copy of the Licence with every copy of the Work he/she distributes or communicates. The Licensee must cause any Derivative Work to carry prominent notices stating that the Work has been modified and the date of modification.
+    Copyleft clause: If the Licensee distributes or communicates copies of the Original Works or Derivative Works, this Distribution or Communication will be done under the terms of this Licence or of a later version of this Licence unless the Original Work is expressly distributed only under this version of the Licence — for example by communicating ‘EUPL v. 1.2 only’. The Licensee (becoming Licensor) cannot offer or impose any additional terms or conditions on the Work or Derivative Work that alter or restrict the terms of the Licence.
+    Compatibility clause: If the Licensee Distributes or Communicates Derivative Works or copies thereof based upon both the Work and another work licensed under a Compatible Licence, this Distribution or Communication can be done under the terms of this Compatible Licence. For the sake of this clause, ‘Compatible Licence’ refers to the licences listed in the appendix attached to this Licence. Should the Licensee's obligations under the Compatible Licence conflict with his/her obligations under this Licence, the obligations of the Compatible Licence shall prevail.
+    Provision of Source Code: When distributing or communicating copies of the Work, the Licensee will provide a machine-readable copy of the Source Code or indicate a repository where this Source will be easily and freely available for as long as the Licensee continues to distribute or communicate the Work.
+    Legal Protection: This Licence does not grant permission to use the trade names, trademarks, service marks, or names of the Licensor, except as required for reasonable and customary use in describing the origin of the Work and reproducing the content of the copyright notice.
 
-6. Chaîne d'auteurs
+6. Chain of Authorship
 
-Le donneur de licence initial garantit que les droits d'auteur sur l'œuvre originale concédés par la présente licence lui appartiennent ou lui ont été donnés sous licence, et qu'il a le pouvoir et la capacité de concéder la licence.
+The original Licensor warrants that the copyright in the Original Work granted hereunder is owned by him/her or licensed to him/her and that he/she has the power and authority to grant the Licence.
 
-Tout contributeur garantit que les droits d'auteur sur les modifications qu'il apporte à l'œuvre lui appartiennent ou lui ont été donnés sous licence, et qu'il a le pouvoir et la capacité de concéder la licence.
+Each Contributor warrants that the copyright in the modifications he/she brings to the Work are owned by him/her or licensed to him/her and that he/she has the power and authority to grant the Licence.
 
-Chaque fois que vous acceptez la licence, le donneur de licence initial et les contributeurs successifs vous concèdent une licence sur leurs contributions à l'œuvre selon les conditions de la présente licence.
-7. Exclusion de garantie
+Each time You accept the Licence, the original Licensor and subsequent Contributors grant You a licence to their contri� butions to the Work, under the terms of this Licence.
+7. Disclaimer of Warranty
 
-L'œuvre est un travail en cours, amélioré de manière continue par de nombreux contributeurs. Elle constitue un travail inachevé et peut dès lors contenir des défauts ou bogues inhérents à ce type de développement.
+The Work is a work in progress, which is continuously improved by numerous Contributors. It is not a finished work and may therefore contain defects or ‘bugs’ inherent to this type of development.
 
-Pour cette raison, l'œuvre est fournie sous licence telle quelle, sans aucune garantie d'aucune sorte la concernant, y compris, sans que cette liste soit exhaustive, eu égard à sa qualité marchande, son aptitude à un usage particulier, l'absence de défauts ou d'erreurs, l'exactitude ou la non-violation de droits de propriété intellectuelle autres que le droit d'auteur comme prévu à l'article 6 de la présente licence.
+For the above reason, the Work is provided under the Licence on an ‘as is’ basis and without warranties of any kind concerning the Work, including without limitation merchantability, fitness for a particular purpose, absence of defects or errors, accuracy, non-infringement of intellectual property rights other than copyright as stated in Article 6 of this Licence.
 
-Cette exclusion de garantie est une partie essentielle de la licence et une condition de la concession de droits sur l'œuvre.
-8. Exclusion de responsabilité
+This disclaimer of warranty is an essential part of the Licence and a condition for the grant of any rights to the Work.
+8. Disclaimer of Liability
 
-Sauf dans les cas de faute intentionnelle ou de dommages directement causés à des personnes physiques, le donneur de licence n'est en aucun cas responsable des dommages, quelle qu'en soit la nature, directs ou indirects, matériels ou moraux, résultant de la licence ou de l'utilisation de l'œuvre, y compris, sans que cette liste soit exhaustive, des dommages causés par les atteintes à la réputation, les interruptions de travail, les défaillances ou le mauvais fonctionnement de matériel informatique, les pertes de données ou tout autre dommage économique, même si le donneur de licence a été informé de la possibilité de tels dommages. Cependant, le donneur de licence est responsable en vertu des dispositions législatives et réglementaires relatives à la responsabilité du fait des produits, dans la mesure où celles-ci sont applicables à l'œuvre.
-9. Accords additionnels
+Except in the cases of wilful misconduct or damages directly caused to natural persons, the Licensor will in no event be liable for any direct or indirect, material or moral, damages of any kind, arising out of the Licence or of the use of the Work, including without limitation, damages for loss of goodwill, work stoppage, computer failure or malfunction, loss of data or any commercial damage, even if the Licensor has been advised of the possibility of such damage. However, the Licensor will be liable under statutory product liability laws as far such laws apply to the Work.
+9. Additional agreements
 
-Lorsque vous distribuez l'œuvre, vous pouvez choisir de conclure un accord additionnel définissant des obligations ou des services compatibles avec la présente licence. Cependant, si vous acceptez des obligations, vous ne pouvez agir qu'en votre nom et sous votre seule responsabilité, et non au nom du donneur de licence initial ou de tout autre contributeur, et seulement si vous acceptez d'indemniser, de défendre et de mettre hors de cause tous les contributeurs s'ils encourent une responsabilité quelconque ou si des réclamations sont formulées à leur encontre du fait que vous avez accepté des garanties ou des responsabilités additionnelles.
-10. Acceptation de la licence
+While distributing the Work, You may choose to conclude an additional agreement, defining obligations or services consistent with this Licence. However, if accepting obligations, You may act only on your own behalf and on your sole responsibility, not on behalf of the original Licensor or any other Contributor, and only if You agree to indemnify, defend, and hold each Contributor harmless for any liability incurred by, or claims asserted against such Contributor by the fact You have accepted any warranty or additional liability.
+10. Acceptance of the Licence
 
-Vous pouvez exprimer votre accord sur le contenu de la présente licence en cliquant sur l'icône «J'accepte» placée au bas d'une fenêtre faisant apparaître le texte de la présente licence, ou par toute autre manifestation de consentement similaire, conformément à la loi applicable. Le fait de cliquer sur cette icône indique votre acceptation claire et irrévocable de la présente licence et de toutes ses conditions.
+The provisions of this Licence can be accepted by clicking on an icon ‘I agree’ placed under the bottom of a window displaying the text of this Licence or by affirming consent in any other similar way, in accordance with the rules of applicable law. Clicking on that icon indicates your clear and irrevocable acceptance of this Licence and all of its terms and conditions.
 
-De même, vous acceptez irrévocablement la présente licence et toutes ses conditions dès lors que vous exercez un des droits qui vous sont concédés par l'article 2 de la présente licence, tels que l'utilisation de l'œuvre, la création d'une œuvre dérivée ou la distribution ou la communication de l'œuvre ou de copies de l'œuvre.
-11. Information du public
+Similarly, you irrevocably accept this Licence and all of its terms and conditions by exercising any rights granted to You by Article 2 of this Licence, such as the use of the Work, the creation by You of a Derivative Work or the Distribution or Communication by You of the Work or copies thereof.
+11. Information to the public
 
-En cas de distribution ou de communication électronique de l'œuvre (par exemple en permettant son téléchargement à distance), le canal de distribution ou le support (par exemple un site web) doit au minimum fournir au public les informations requises par le droit applicable en ce qui concerne le donneur de licence et la licence ainsi que la manière dont le licencié peut accéder à celle-ci, la conclure, la stocker et la reproduire.
-12. Fin de la licence
+In case of any Distribution or Communication of the Work by means of electronic communication by You (for example, by offering to download the Work from a remote location) the distribution channel or media (for example, a website) must at least provide to the public the information requested by the applicable law regarding the Licensor, the Licence and the way it may be accessible, concluded, stored and reproduced by the Licensee.
+12. Termination of the Licence
 
-La licence et les droits qu'elle concède prennent automatiquement fin dès que le licencié viole l'une de ses conditions.
+The Licence and the rights granted hereunder will terminate automatically upon any breach by the Licensee of the terms of the Licence.
 
-Un tel événement ne met pas fin aux licences des personnes ayant reçu l'œuvre sous licence de la part du licencié, pour autant que ces personnes respectent pleinement la licence.
-13. Divers
+Such a termination will not terminate the licences of any person who has received the Work from the Licensee under the Licence, provided such persons remain in full compliance with the Licence.
+13. Miscellaneous
 
-Sous réserve de l'article 9, la licence représente l'entièreté de l'accord entre les parties quant à l'œuvre.
+Without prejudice of Article 9 above, the Licence represents the complete agreement between the Parties as to the Work.
 
-Le fait qu'une clause quelconque de la licence soit invalide ou inapplicable en vertu du droit applicable n'affecte pas la validité ou l'applicabilité de la licence dans son ensemble. Une telle clause sera interprétée ou modifiée dans la mesure nécessaire pour la rendre valide ou applicable.
+If any provision of the Licence is invalid or unenforceable under applicable law, this will not affect the validity or enforceability of the Licence as a whole. Such provision will be construed or reformed so as necessary to make it valid and enforceable.
 
-La Commission européenne peut publier d'autres versions linguistiques ou de nouvelles versions de la présente licence ou des versions actualisées de son appendice, dans la mesure de ce qui est nécessaire et raisonnable, sans réduire la portée des droits accordés par la licence. Les nouvelles versions de la licence seront publiées avec un numéro de version unique.
+The European Commission may publish other linguistic versions or new versions of this Licence or updated versions of the Appendix, so far this is required and reasonable, without reducing the scope of the rights granted by the Licence. New versions of the Licence will be published with a unique version number.
 
-Toutes les versions linguistiques de la présente licence, approuvées par la Commission européenne, ont la même valeur. Les parties peuvent se prévaloir de la version linguistique de leur choix.
-14. Juridiction compétente
+All linguistic versions of this Licence, approved by the European Commission, have identical value. Parties can take advantage of the linguistic version of their choice.
+14. Jurisdiction
 
-Sans préjudice d'accords spécifiques entre les parties,
+Without prejudice to specific agreement between parties,
 
-— tout litige résultant de l'interprétation de la présente licence survenant entre des institutions, organes, bureaux ou agences de l'Union européenne en tant que donneurs de licence et un licencié relève de la juridiction de la Cour de justice de l'Union européenne, conformément à l'article 272 du traité sur le fonctionnement de l'Union européenne,
+— any litigation resulting from the interpretation of this License, arising between the European Union institutions, bodies, offices or agencies, as a Licensor, and any Licensee, will be subject to the jurisdiction of the Court of Justice of the European Union, as laid down in article 272 of the Treaty on the Functioning of the European Union,
 
-— tout litige survenant entre d'autres parties et résultant de l'interprétation de la présente licence relève de la compétence exclusive de la juridiction compétente du lieu où le donneur de licence réside ou exerce son activité principale.
-15. Droit applicable
+— any litigation arising between other parties and resulting from the interpretation of this License, will be subject to the exclusive jurisdiction of the competent court where the Licensor resides or conducts its primary business.
+15. Applicable Law
 
-Sans préjudice d'accords spécifiques entre les parties,
+Without prejudice to specific agreement between parties,
 
-— la présente licence est régie par le droit de l'État membre de l'Union européenne où le donneur de licence réside ou a son siège social ou statutaire,
+— this Licence shall be governed by the law of the European Union Member State where the Licensor has his seat, resides or has his registered office,
 
-— la présente licence est régie par le droit belge si le donneur de licence ne réside pas et n'a pas son siège social ou statutaire dans un État membre de l'Union européenne.
-Appendice
+— this licence shall be governed by Belgian law if the Licensor has no seat, residence or registered office inside a European Union Member State.
+Appendix
 
-Aux fins de l'article 5 de l'EUPL, les licences compatibles sont les suivantes:
+‘Compatible Licences’ according to Article 5 EUPL are:
 
 — GNU General Public License (GPL) v. 2, v. 3
 
@@ -141,16 +141,16 @@ Aux fins de l'article 5 de l'EUPL, les licences compatibles sont les suivantes:
 
 — CeCILL v. 2.0, v. 2.1
 
-— Mozilla Public licence (MPL) v. 2
+— Mozilla Public Licence (MPL) v. 2
 
-— GNU Lesser General Public licence (LGPL) v. 2.1, v. 3
+— GNU Lesser General Public Licence (LGPL) v. 2.1, v. 3
 
-— Creative Commons Attribution-ShareAlike v. 3.0 Unported (CC BY-SA 3.0) pour les œuvres autres que logicielles
+— Creative Commons Attribution-ShareAlike v. 3.0 Unported (CC BY-SA 3.0) for works other than software
 
-— Licence publique de l'Union européenne (EUPL) v. 1.1, v. 1.2
+— European Union Public Licence (EUPL) v. 1.1, v. 1.2
 
-— Licence libre du Québec — Réciprocité (LiLiQ-R) ou Réciprocité forte (LiLiQ-R+)
+— Québec Free and Open-Source Licence — Reciprocity (LiLiQ-R) or Strong Reciprocity (LiLiQ-R+)
 
-La Commission européenne pourra actualiser le présent appendice afin d'y inclure des versions ultérieures des licences ci-dessus sans produire de nouvelle version de l'EUPL, dès lors que ces versions prévoient la concession des droits visés à l'article 2 de la présente licence et empêchent l'appropriation exclusive du code source couvert.
+The European Commission may update this Appendix to later versions of the above licences without producing a new version of the EUPL, as long as they provide the rights granted in Article 2 of this Licence and protect the covered Source Code from exclusive appropriation.
 
-Tout autre changement ou ajout au présent appendice requiert la production d'une nouvelle version de l'EUPL.
+All other changes or additions to this Appendix require the production of a new EUPL version.

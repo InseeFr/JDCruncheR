@@ -20,8 +20,8 @@ cruncher_and_param(
 
 \item{cruncher_bin_directory}{path to the cruncher "bin" folder.}
 
-\item{rename_multi_documents}{boolean indicating whether to rename the output folders to the crunched SAPs' names. By default, \code{rename_multi_documents = TRUE}.
-If \code{rename_multi_documents = FALSE}, the SAPs' xml files' names are used.}
+\item{rename_multi_documents}{boolean indicating whether to rename the output folders to the crunched multiprocessings' names. By default, \code{rename_multi_documents = TRUE}.
+If \code{rename_multi_documents = FALSE}, the multiprocessings' xml files' names are used.}
 
 \item{output}{folder containing the cruncher results. By default, (\code{output = NULL}) and an "Output" folder is created within the workspace folder.}
 
@@ -39,9 +39,15 @@ The workspace path.
 Function to simultaneously crunch a workspace and create its .params file
 }
 \seealso{
+\link[=fr-cruncher_and_param]{Traduction française}
+
 Other Cruncher functions: 
 \code{\link{create_param_file}()},
 \code{\link{cruncher}()},
+\code{\link{fr-create_param_file}},
+\code{\link{fr-cruncher_and_param}},
+\code{\link{fr-cruncher}},
+\code{\link{fr-update_workspace}},
 \code{\link{update_workspace}()}
 }
 \concept{Cruncher functions}

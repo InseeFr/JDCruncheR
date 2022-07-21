@@ -1,5 +1,5 @@
 ---
-title: "Using the cruncher with JDCruncheR"
+title: "Using the cruncher with JDCruncheR pdf"
 date: "`r Sys.Date()`"
 output:
   pdf_document:
@@ -19,7 +19,7 @@ header-includes:
   - \usepackage[normalem]{ulem}
   - \usepackage{makecell}
 vignette: >
-  %\VignetteIndexEntry{Launching the cruncher with JDCruncheR}
+  %\VignetteIndexEntry{Using the cruncher with JDCruncheR pdf}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -39,7 +39,7 @@ With the current version of the JDCruncheR package (`r utils::packageVersion("JD
 - easily launch the JDemetra+ cruncher ([JWSACruncher](https://github.com/jdemetra/jwsacruncher/releases)) to update a workspace and export the results;  
 - generate a *quality report* to synthesise seasonal adjustment diagnostics. It can be used to spot the most problematic series which will require a finer analysis. This is most useful when dealing with a great number of series, which renders impossible the examination of every diagnostic for every series in a reasonable time. 
 
-# Launching the cruncher
+# About the cruncher
 
 To prevent the package from being too voluminous, it does not contain the JDemetra+ cruncher. Said cruncher can be downloaded here: <https://github.com/jdemetra/jdemetra-app/releases>. For more information on the cruncher installation and its set up with a portable version of Java, please refer to the JDCruncheR wiki: <https://github.com/InseeFr/JDCruncheR/wiki/Installation-and-set-up-of-JDemetra-and-the-cruncher>.
 
@@ -55,7 +55,7 @@ In the JDCruncheR package, three functions are cruncher-related:
 - `cruncher()` crunches a workspace from a pre-generated settings file;  
 - `cruncher_and_param()` both generates the settings file and crunches the workspace. With this function, some of the cruncher output can also be customised.
 
-## Generating the settings file with `create_param_file()`
+# Generating the settings file with `create_param_file()`
 
 The arguments of the function `create_param_file()` are described in the JDemetra+ cruncher wiki (<https://github.com/jdemetra/jwsacruncher/wiki>). The three main arguments are:  
 
@@ -161,7 +161,7 @@ create_param_file(dir_file_param = "D:/",
 
 
 
-## Launching the cruncher
+# Launching the cruncher
 
 To crunch a workspace with the functions `cruncher()` or `cruncher_and_param()`, the paths to the cruncher and the workspace must be specified via two parameters, `cruncher_bin_directory` and `workspace`.
 
