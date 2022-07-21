@@ -1,3 +1,8 @@
+# JDCruncher 0.2.4
+
+* The functions'help pages as well as the package vignettes are now available both in French and English.  
+* The function choose.file, not compatible with all OS, has been replaced by an error message.  
+
 # JDCruncher 0.2.3
 
  * the function `weighted_score()` now creates a new `score_pond` variable, rather than replacing it. The function `extract_score()` extracts both weighted and unweighted scores.
