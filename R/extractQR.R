@@ -1,4 +1,48 @@
-#' Extraction of a quality report
+#' Extraction d'un bilan qualité
+#'
+#' Permet d'extraire un bilan qualité à partir du fichier CSV contenant la matrice des diagnostics.
+#'
+#' @param matrix_output_file fichier CSV contenant la matrice des diagnostics. S'il n'est pas spécifié, une fenêtre s'ouvre
+#' pour sélectionner le fichier.
+#' @param sep séparateur de caractères utilisé dans le fichier csv (par défaut \code{sep = ";"})
+#' @param dec séparateur décimal utilisé dans le fichier csv (par défaut \code{dec = ","})
+#'
+#' @details La fonction permet d'extraire un bilan qualité à partir d'un fichier csv contenant l'ensemble des
+#' diagnostics (généralement fichier \emph{demetra_m.csv}).
+#'
+#' Ce fichier peut être obtenu en lançant le cruncher (\code{\link{cruncher}} ou \code{\link{cruncher_and_param}}) avec
+#' l'ensemble des paramètres de base pour les paramètres à exporter et l'option \code{csv_layout = "vtable"} (par défaut)
+#' pour le format de sortie des fichiers csv (option de \code{\link{cruncher_and_param}} ou de \code{\link{create_param_file}}
+#' lors de la création du
+#' fichier de paramètres).
+#'
+#' Le résultat de cette fonction est un objet \code{\link{QR_matrix}} qui est une liste de trois paramètres :
+#' * le paramètre \code{modalities} est un \code{data.frame} contenant un ensemble de variables sous forme catégorielle
+#'   (Good, Uncertain, Bad, Severe).
+#' * le paramètre \code{values} est un \code{data.frame} contenant les valeurs associées aux indicateurs présents dans
+#'   \code{modalities} (i.e. : p-valeurs, statistiques, etc.) ainsi que des variables qui n'ont pas
+#'   de modalité (fréquence de la série et modèle ARIMA).
+#' * le paramètre \code{score_formula} est initié à \code{NULL} : il contiendra la formule utilisée pour
+#'   calculer le score (si le calcul est fait).
+#'
+#' @encoding UTF-8
+#' @return Un objet de type \code{\link{QR_matrix}}.
+#' @family QR_matrix functions
+#' @examples \dontrun{
+#' QR <- extract_QR()
+#' print(QR)
+#' # Pour extraire la matrice des modalités :
+#' QR$modalities
+#' # Ou :
+#' QR[["modalities"]]
+#' }
+#' @keywords internal
+#' @name fr-extract_QR
+NULL
+#> NULL
+
+
+#' #' Extraction of a quality report
 #'
 #' To extract a quality report from the csv file containing the diagnostics matrix.
 #'
@@ -29,21 +73,18 @@
 #' # Or:
 #' QR[["modalities"]]
 #' }
-#' @importFrom stats sd utils read.csv choose.files
+#' @importFrom stats sd
+#' @importFrom utils read.csv
+#' @seealso [Traduction française][fr-extract_QR()]
 #' @export
 extract_QR <- function(matrix_output_file, sep = ";", dec = ","){
     if(missing(matrix_output_file) || is.null(matrix_output_file)){
-        if(Sys.info()[['sysname']] == "Windows"){
-            matrix_output_file <- choose.files(caption = "Please select the file containing the diagnostics matrix",
-                                             filters = c("Fichier CSV","*.csv"))
-        }else{
-            matrix_output_file <- file.choose()
-        }
+        stop("The first argument must be a csv file containing the diagnostics matrix")
     }
     if(length(matrix_output_file) == 0)
-        stop("Please choose a csv file")
+        stop("The chosen csv file is empty")
     if(!file.exists(matrix_output_file)|length(grep("\\.csv$",matrix_output_file))==0)
-        stop("The file desn't exist or isn't a csv file")
+        stop("The chosen file desn't exist or isn't a csv file")
 
     demetra_m <- read.csv(file = matrix_output_file,
                       sep = sep, dec = dec, stringsAsFactors = FALSE,

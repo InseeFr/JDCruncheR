@@ -1,3 +1,35 @@
+#' Objets bilan qualité
+#'
+#' \code{QR_matrix} permet de créer un objet de type \code{QR_matrix} contenant un bilan qualité.
+#'
+#' \code{mQR_matrix} permet de créer un objet de type \code{mQR_matrix} qui est une liste de bilans qualité (donc d'objets \code{QR_matrix}).
+#'
+#' \code{is.QR_matrix} et \code{is.mQR_matrix} permettent de tester si un objet est un bilan qualité ou une liste de bilans qualité.
+#'
+#'
+#' @param modalities un \code{data.frame} contenant les modalités (Good, Bad, etc.)
+#' associées aux variables.
+#' @param values un \code{data.frame} contenant les valeurs (p-valeurs des tests, statistiques, etc.)
+#' associées aux variables. Peut donc contenir plus de variables que le data.frame \code{modalities}.
+#' @param score_formula formule utilisée pour calculer le score global (s'il existe).
+#' @param x un objet de type \code{QR_matrix}, \code{mQR_matrix} ou une liste d'objets \code{QR_matrix}.
+#' @param ... des objets du même type que \code{x}.
+#' @details Un objet  de type \code{\link{QR_matrix}} est une liste de trois paramètres :
+#' * le paramètre \code{modalities} est un \code{data.frame} contenant un ensemble de variables sous forme catégorielle
+#'   (par défaut : Good, Uncertain, Bad, Severe).
+#' * le paramètre \code{values}  est un \code{data.frame} contenant les valeurs associées aux indicateurs présents dans
+#'   \code{modalities} (i.e. : p-valeurs, statistiques, etc.), ainsi que des variables qui n'ont pas
+#'   de modalité (i.e. : fréquence de la série, modèle ARIMA, etc).
+#' * le paramètre \code{score_formula} contient la formule utilisée pour calculer le score (une fois le calcul réalisé).
+#'
+#' @encoding UTF-8
+#' @rdname QR_matrix
+#' @keywords internal
+#' @name fr-QR_matrix
+NULL
+#> NULL
+
+
 #' Quality report objects
 #'
 #' \code{QR_matrix} creates a \code{QR_matrix} object containing a quality report.
@@ -22,6 +54,7 @@
 #' @encoding UTF-8
 #' @name QR_matrix
 #' @rdname QR_matrix
+#' @seealso [Traduction française][fr-QR_matrix()]
 #' @export
 QR_matrix <- function(modalities = NULL, values = NULL, score_formula = NULL){
     QR <- list(modalities = modalities, values = values,
@@ -64,6 +97,24 @@ is.mQR_matrix <- function(x){
 }
 
 
+
+#' Affichage des objets QR_matrix et mQR_matrix
+#'
+#' Pour afficher un objet QR_matrix ou mQR_matrix.
+#'
+#' @param x objet de type \code{mQR_matrix} ou \code{mQR_matrix}.
+#' @param print_variables booléen pour imprimer ou non les noms des indicateurs (supplémentaire inclus).
+#' @param print_score_formula booléen pour imprimer ou non la formule qui a servi à calculer le score (le cas échéant).
+#' @param score_statistics booléen pour imprimer ou non des statistiques sur les scores de la \code{mQR_matrix} (le cas échéant).
+#' @param ... autres arguments non utilisés.
+#' @encoding UTF-8
+#' @rdname print.QR_matrix
+#' @keywords internal
+#' @name fr-print.QR_matrix
+NULL
+#> NULL
+
+
 #' Printing QR_matrix and mQR_matrix objects
 #'
 #' To print information on a QR_matrix or mQR_matrix object.
@@ -76,6 +127,7 @@ is.mQR_matrix <- function(x){
 #' @encoding UTF-8
 #' @name print.QR_matrix
 #' @rdname print.QR_matrix
+#' @seealso [Traduction française][fr-print.QR_matrix()]
 #' @export
 print.QR_matrix <- function(x, print_variables = TRUE, print_score_formula = TRUE, ...){
     nb_var <- nrow(x$modalities)
@@ -148,6 +200,7 @@ print.QR_matrix <- function(x, print_variables = TRUE, print_score_formula = TRU
     }
     return(invisible(x))
 }
+
 #' @rdname print.QR_matrix
 #' @export
 print.mQR_matrix <- function(x, score_statistics = TRUE, ...){
@@ -203,9 +256,9 @@ print.mQR_matrix <- function(x, score_statistics = TRUE, ...){
                 }
 
                 if(is.null(score_value)){
-                    cat(sprintf("There is no calculated score for the quality report n°%d%s",i,bq_name))
+                    cat(sprintf("There is no calculated score for the quality report n.%d%s",i,bq_name))
                 }else{
-                    cat(sprintf("The quality report n°%d%s has an average score of %g\n",i,bq_name,
+                    cat(sprintf("The quality report n.%d%s has an average score of %g\n",i,bq_name,
                                 mean(score_value, na.rm=TRUE)))
                     cat(sprintf("The smallest score is %1g and the greatest is %2g\n",
                                 min(score_value, na.rm = TRUE),max(score_value, na.rm = TRUE)))

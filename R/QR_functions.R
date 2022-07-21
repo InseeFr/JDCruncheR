@@ -1,3 +1,83 @@
+#' Calcul d'un score global
+#'
+#' Permet de calculer un score global à partir d'un bilan qualité
+#'
+#' @param x objet de type \code{QR_matrix} ou \code{mQR_matrix}.
+#' @param score_pond formule utilisée pour calculer le score global.
+#' @param modalities modalités triées par ordre d'importance dans le calcul du score (voir détails).
+#' @param normalize_score_value chiffre indiquant la valeur de référence pour la normalisation des pondérations utilisées lors du
+#' calcul du score. Si le paramètre n'est pas renseigné, les poids ne seront pas normalisés.
+#' @param na.rm booléen indiquant si les valeurs manquantes doivent être enlevées pour le calcul du score.
+#' @param n_contrib_score entier indiquant le nombre de variables à créer dans la matrice des valeurs du
+#' bilan qualité contenant les \code{n_contrib_score} plus grandes contributrices au score (voir détails).
+#' S'il n'est pas spécifié, aucune variable n'est créée.
+#' @param conditional_indicator une \code{list} contenant des listes ayant 3 éléments : "indicator", "conditions" et
+#' "condition_modalities". Permet de réduire à 1 le poids de certains indicateurs en fonction des valeurs
+#' d'autres variables (voir détails).
+#'
+#' @param ... autres paramètres non utilisés.
+#' @details La fonction \code{compute_score} permet de calculer un score à partir des modalités
+#' d'un bilan qualité. Pour cela, chaque modalité est associée à un poids défini par le paramètre
+#' \code{modalities}. Ainsi, le paramètre par défaut étant \code{c("Good", "Uncertain", "Bad","Severe")},
+#' la valeur \code{"Good"} sera associée à la note 0, la valeur \code{"Uncertain"} sera associée
+#' à la note 1, la valeur \code{"Bad"} sera associée à la note 2 et la valeur \code{"Bad"} sera associée à la note 3.
+#'
+#' Le calcul du score se fait grâce au paramètre \code{score_pond}, qui est un vecteur numérique
+#' nommé contenant des poids et dont les noms correspondent aux variables de la matrice des modalités
+#' à utiliser dans le score. Ainsi, avec le paramètre \code{score_pond =
+#' c(qs_residual_sa_on_sa = 10, f_residual_td_on_sa = 5)} le score sera calculé à partir des deux
+#' variables qs_residual_sa_on_sa et f_residual_td_on_sa. Les notes associées aux modalités de
+#' la variable qs_residual_sa_on_sa seront multipliées par 10 et celles associées à la variable
+#' f_residual_td_on_sa seront multipliées par 5.
+#' Dans le calcul du score, certaines variables#' peuvent être manquantes: pour ne pas prendre en compte
+#' ces valeurs dans le calcul, il suffit d'utiliser le paramètre \code{na.rm = TRUE}.
+#'
+#' Le paramètre \code{normalize_score_value} permet de normaliser les scores. Par exemple,
+#' si l'on souhaite avoir des notes entre 0 et 20, il suffit d'utiliser le paramètre
+#' \code{normalize_score_value = 20}.
+#'
+#' Le paramètre \code{n_contrib_score} permet d'ajouter de nouvelles variables à la matrice des valeurs
+#' du bilan qualité dont les valeurs correspondent aux noms des variables qui contribuent le plus au score
+#' de la série. \code{n_contrib_score} est un entier égal au nombre de variables contributrices
+#' que l'on souhaite exporter. Par exemple, pour \code{n_contrib_score = 3}, trois colonnes seront créées
+#' et elles contiendront les trois plus grandes contributrices au score. Les noms des nouvelles variables
+#' sont *i*_highest_score, *i* correspondant au rang en terme de contribution au score (1_highest_score
+#' contiendra les noms des plus grandes contributrices, 2_highest_score
+#' des deuxièmes plus grandes contributrices, etc).
+#' Seules les variables qui ont une contribution non nulle au score sont
+#' prises en compte. Ainsi, si une série a un score nul, toutes les colonnes *i*_highest_score
+#' associées à cette série seront vides. Et si une série a un score positif uniquement du fait
+#' de la variable "m7", alors la valeur correspondante à la variable 1_highest_score sera égale à
+#' "m7" et celle des autres variables *i*_highest_score seront vides.
+#'
+#' Certains indicateurs peuvent n'avoir de sens que sous certaines conditions. Par exemple, le test
+#' d'homoscédasticité n'est valide que si les résidus sont indépendants et les tests de normalité, que
+#' si les résidus sont indépendants et homoscédastiques. Le paramètre \code{conditional_indicator}
+#' permet de prendre cela en compte en réduisant, sous certaines conditions, à 1 le poids de certains variables.
+#' C'est une \code{list} contenant des listes ayant 3 éléments :
+#' - "indicator" : nom de la variable pour laquelle on veut ajouter des conditions
+#' - "conditions" : nom des variables que l'on utilise pour conditionner
+#' - "conditions_modalities" : modalités qui doivent être vérifiées pour modifier le poids
+#' Ainsi, avec le paramètre \code{conditional_indicator = list(list(indicator = "residuals_skewness", conditions = c("residuals_independency", "residuals_homoskedasticity"), conditions_modalities = c("Bad","Severe")))},
+#' on réduit à 1 le poids de la variable "residuals_skewness" lorsque les modalités du test d'indépendance
+#' ("residuals_independency") ou du test d'homoscédasticité ("residuals_homoskedasticity") valent "Bad" ou "Severe".
+#'
+#' @encoding UTF-8
+#' @return Un objet de type \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}.
+#' @examples \dontrun{
+#' QR <- extract_QR()
+#' QR <- compute_score(QR,n_contrib_score = 2)
+#' QR
+#' QR$modalities$score
+#' }
+#' @family QR_matrix functions
+#' @rdname compute_score
+#' @keywords internal
+#' @name fr-compute_score
+NULL
+#> NULL
+
+
 #' Score calculation
 #'
 #' To calculate a score for each series from a quality report
@@ -58,6 +138,7 @@
 #' @family QR_matrix functions
 #' @name compute_score
 #' @rdname compute_score
+#' @seealso [Traduction française][fr-compute_score()]
 #' @export
 compute_score.QR_matrix <- function(x,
                                     score_pond = c(qs_residual_sa_on_sa = 30,
@@ -170,7 +251,6 @@ compute_score.QR_matrix <- function(x,
                    "_highest_contrib_score")
     }
 
-
     return(x)
 }
 #' @export
@@ -186,6 +266,29 @@ compute_score <- function(x, ...){
 compute_score.default <- function(x,  ...){
     stop("The function requires a QR_matrix or mQR_matrix object!")
 }
+
+
+
+
+#' Calcul d'un score pondéré pour chaque observation
+#'
+#' Permet de pondérer un score déjà calculé en fonction des variables.
+#'
+#' @param x objet de type \code{QR_matrix} ou \code{mQR_matrix}.
+#' @param pond pondération à appliquer au score. Il peut s'agir d'un nombre, d'un vecteur de nombres, du nom
+#' d'une des variables du bilan qualité ou d'une liste de pondérations pour les objets \code{mQR_matrix}.
+#' @examples \dontrun{
+#' QR <- extract_QR()
+#' QR <- compute_score(QR)
+#' weighted_score(QR, 2) # Tous les scores sont multipliés par 2
+#' }
+#' @family QR_matrix functions
+#' @return L'objet en entrée avec le score recalculé
+#' @rdname weighted_score
+#' @keywords internal
+#' @name fr-weighted_score
+NULL
+#> NULL
 
 
 #' Weighted score calculation
@@ -204,6 +307,7 @@ compute_score.default <- function(x,  ...){
 #' @return the input with additionnal weighted score
 #' @name weighted_score
 #' @rdname weighted_score
+#' @seealso [Traduction française][fr-weighted_score()]
 #' @export
 weighted_score <- function(x, pond = 1){
     UseMethod("weighted_score", x)
@@ -233,7 +337,7 @@ weighted_score.mQR_matrix <- function(x, pond = 1){
         result <- lapply(x, weighted_score, pond = pond)
     }else{
         if(length(pond) < length(x))
-            stop("Il y a moins de pondérations que de bilans qualité !")
+            stop("There are fewer weight sets than quality reports!")
         result <- lapply(1:length(x),
                          function(i) weighted_score(x[[i]], pond = pond[[i]]))
 
@@ -242,6 +346,31 @@ weighted_score.mQR_matrix <- function(x, pond = 1){
     result <- mQR_matrix(result)
     return(result)
 }
+
+
+
+
+#' Tri des objets QR_matrix et mQR_matrix
+#'
+#' Permet de trier les bilans qualité en fonction d'une ou plusieurs variables.
+#'
+#' @param x objet de type \code{QR_matrix} ou \code{mQR_matrix}.
+#' @param decreasing booléen indiquant si les bilans qualité doivent être triés par ordre croissant ou décroissant.
+#' Par défaut, le tri est effectué par ordre croissant.
+#' @param sort_variables variables à utiliser pour le tri. Elles doivent être présentes dans les tables de modalités.
+#' @param ... autres paramètres de la fonction \code{\link[base]{order}} (non utilisés pour l'instant).
+#' @return L'objet en entrée avec les tables de bilan qualité triées.
+#' @examples \dontrun{
+#' QR <- compute_score(extract_QR())
+#' sort(QR, sort_variables = "score") # Pour trier par ordre croissant sur le score
+#' }
+#' @family QR_matrix functions
+#' @rdname sort
+#' @keywords internal
+#' @name fr-sort.QR_matrix
+NULL
+#> NULL
+
 
 #' QR_matrix and mQR_matrix sorting
 #'
@@ -260,6 +389,7 @@ weighted_score.mQR_matrix <- function(x, pond = 1){
 #' @family QR_matrix functions
 #' @name sort
 #' @rdname sort
+#' @seealso [Traduction française][fr-sort.QR_matrix()]
 #' @export
 sort.QR_matrix <- function(x, decreasing = FALSE, sort_variables = "score", ...){
     modalities <- x$modalities
@@ -282,6 +412,32 @@ sort.mQR_matrix <- function(x, decreasing = FALSE, sort_variables = "score", ...
 
 
 
+
+
+#' Extraction du score
+#'
+#' Permet d'extraire le score des objets \code{QR_matrix} ou \code{mQR_matrix}.
+#'
+#' @param x objet de type \code{QR_matrix} ou \code{mQR_matrix}.
+#' @param format_output chaîne de caractères indiquant le format de l'objet en sortie :
+#' soit un \code{data.frame} soit un \code{vector}.
+#' @param weighted_score booléen indiquant s'il faut extraire le score pondéré (s'il existe) ou le score non pondéré.
+#' Par défaut, c'est le score non pondéré qui est extrait.
+#' @details Pour les objets \code{QR_matrix}, le score renvoyé est soit l'objet \code{NULL} si aucun score n'a été calculé, soit un vecteur.
+#' Pour les objets \code{mQR_matrix}, c'est une liste de scores (\code{NULL} ou un vecteur).
+#' @examples \dontrun{
+#' QR <- extract_QR()
+#' mQR <- mQR_matrix(QR, compute_score(QR))
+#' extract_score(QR) # NULL
+#' extract_score(mQR) # liste dont le premier élément est NULL
+#' }
+#' @family QR_matrix functions
+#' @keywords internal
+#' @name fr-extract_score
+NULL
+#> NULL
+
+
 #' Score extraction
 #'
 #' To extract score variables from \code{QR_matrix} or \code{mQR_matrix} objects.
@@ -299,6 +455,7 @@ sort.mQR_matrix <- function(x, decreasing = FALSE, sort_variables = "score", ...
 #' extract_score(mQR) # List whose first element is NULL
 #' }
 #' @family QR_matrix functions
+#' @seealso [Traduction française][fr-extract_score()]
 #' @export
 extract_score <- function(x, format_output = c("data.frame", "vector"), weighted_score = FALSE){
     UseMethod("extract_score", x)
@@ -341,6 +498,32 @@ extract_score.mQR_matrix <- function(x, format_output = c("data.frame", "vector"
     return(lapply(x,extract_score, format_output = format_output, weighted_score = weighted_score))
 }
 
+
+
+
+
+#' Manipulation de la liste des indicateurs
+#'
+#' Permet de retirer des indicateurs (fonction \code{remove_indicators}) ou de n'en retenir que certains
+#' (fonction \code{retain_indicators}) d'objets \code{QR_matrix} ou \code{mQR_matrix}. Le nom des séries
+#' (colonne "series") ne peut être enlevé.
+#'
+#' @param x objet de type \code{QR_matrix} ou \code{mQR_matrix}.
+#' @param ... noms des variables à retirer (ou conserver).
+#' @examples \dontrun{
+#' QR <- compute_score(extract_QR())
+#' retain_indicators(QR,"score","m7") # On ne retient que les variables score et m7
+#' retain_indicators(QR,c("score","m7")) # équivalent
+#' score(remove_indicator(QR,"score")) # Il n'y a plus de score
+#' }
+#' @family var QR_matrix manipulation
+#' @rdname QR_var_manipulation
+#' @keywords internal
+#' @name fr-remove_indicators
+NULL
+#> NULL
+
+
 #' Editing the indicators list
 #'
 #' Functions to remove indicators (\code{remove_indicators}) or retrain some indicators only (\code{retain_indicators})
@@ -357,6 +540,7 @@ extract_score.mQR_matrix <- function(x, format_output = c("data.frame", "vector"
 #' @family var QR_matrix manipulation
 #' @name QR_var_manipulation
 #' @rdname QR_var_manipulation
+#' @seealso [Traduction française][fr-remove_indicators()]
 #' @export
 remove_indicators <- function(x, ...){
     UseMethod("remove_indicators", x)
@@ -414,6 +598,33 @@ retain_indicators.mQR_matrix <- function(x, ...){
 }
 
 
+
+
+
+#' Combiner par ligne des objets QR_matrix
+#'
+#' Permet de combiner plusieurs objets \code{QR_matrix} en combinant par ligne les paramètres \code{modalities}
+#' et \code{values}.
+#'
+#' @param ... objets \code{QR_matrix} à combiner.
+#' @param check_formula booléen indiquant s'il faut vérifier la cohérence dans les formules de calcul du score.
+#' Par défaut \code{check_formula = TRUE} : la fonction renvoie une erreur si des scores sont calculés avec des formules différentes.
+#' Si \code{check_formula = FALSE} alors il n'y a pas de vérification et le paramètre \code{score_formula} de l'objet
+#' en sortie est \code{NULL}.
+#' @examples \dontrun{
+#' QR <- extract_QR()
+#' QR1 <- compute_score(QR1, score_pond = c(m7 = 2, q = 3, qs_residual_sa_on_sa = 5))
+#' QR2 <- compute_score(QR1, score_pond = c(m7 = 2, qs_residual_sa_on_sa = 5))
+#' rbind(QR1, QR2) # Une erreur est renvoyée
+#' rbind(QR1, QR2, check_formula = FALSE)
+#' }
+#' @family QR_matrix functions
+#' @keywords internal
+#' @name fr-rbind.QR_matrix
+NULL
+#> NULL
+
+
 #' Combining QR_matrix objects
 #'
 #' Function to combine multiple \code{QR_matrix} objects: line by line, both for the \code{modalities} and the \code{values} table.
@@ -430,6 +641,7 @@ retain_indicators.mQR_matrix <- function(x, ...){
 #' rbind(QR1, QR2, check_formula = FALSE)
 #' }
 #' @family QR_matrix functions
+#' @seealso [Traduction française][fr-rbind.QR_matrix()]
 #' @export
 rbind.QR_matrix <- function(..., check_formula = TRUE){
     list_QR_matrix <- list(...)
@@ -466,6 +678,38 @@ rbind.QR_matrix <- function(..., check_formula = TRUE){
     return(QR)
 }
 
+
+
+
+#' Ajout d'un indicateur dans les objets QR_matrix
+#'
+#' Permet d'ajouter un indicateur dans les objets \code{QR_matrix}. Le nom des séries
+#' (colonne "series") ne peut être enlevé.
+#'
+#' @param x objet de type \code{QR_matrix} ou \code{mQR_matrix}.
+#' @param indicator un \code{vector} ou un \code{data.frame} (voir détails).
+#' @param variable_name chaîne de caractères contenant les noms des nouvelles variables.
+#' @param ... autres paramètres de la fonction \code{\link[base]{merge}}.
+#'
+#' @details La fonction \code{add_indicator()} permet d'ajouter un indicateur dans la matrice des valeurs du bilan qualité.
+#' L'indicateur n'est donc pas ajouté dans la matrice des modalités et ne peut être utilisé dans le calcul du score
+#' (sauf pour le pondérer). Pour l'utiliser dans le calcul du score, il faudra d'abord le recoder avec la fonction
+#' \code{\link{recode_indicator_num}}.
+#'
+#' L'indicateur à ajouter peut être sous deux formats : \code{vector} ou \code{data.frame}. Dans les deux cas,
+#' il faut que les valeurs à ajouter puissent être associées aux bonnes séries dans la matrice du bilan qualité :
+#'  * dans le cas d'un \code{vector}, les éléments devront être nommés et les noms doivent correspondre à ceux présents dans le
+#'   bilan qualité (variable "series") ;
+#'  * dans le cas d'un \code{data.frame}, il devra contenir une colonne "series" avec les noms des séries
+#'  correspondantes.
+#'
+#' @family var QR_matrix manipulation
+#' @keywords internal
+#' @name fr-add_indicator
+NULL
+#> NULL
+
+
 #' Adding an indicator in QR_matrix objects
 #'
 #' Function to add indicators in \code{QR_matrix} objects.
@@ -484,6 +728,7 @@ rbind.QR_matrix <- function(..., check_formula = TRUE){
 #'  * a \code{data.frame} must contain a "series" column that matches with the quality report's series.
 #'
 #' @family var QR_matrix manipulation
+#' @seealso [Traduction française][fr-add_indicator()]
 #' @export
 add_indicator <- function(x, indicator, variable_name, ...){
     UseMethod("add_indicator", x)
@@ -533,6 +778,30 @@ add_indicator.mQR_matrix <- function(x, indicator, variable_name, ...){
     return(mQR_matrix(lapply(x, add_indicator, variable_name = variable_name, ...)))
 }
 
+
+
+
+
+
+#' Ré-encodage en modalités des variables
+#'
+#' Permet d'encoder des variables présentes dans la matrice des valeurs en modalités
+#' ajoutables à la matrice des modalités.
+#'
+#' @param x objet de type \code{QR_matrix} ou \code{mQR_matrix}.
+#' @param variable_name vecteur de chaînes de caractères contenant les noms des
+#'  variables à recoder.
+#' @param breaks voir fonction \code{\link[base]{cut}}.
+#' @param labels voir fonction \code{\link[base]{cut}}.
+#' @param ... autres paramètres de la fonction \code{\link[base]{cut}}.
+#'
+#' @family var QR_matrix manipulation
+#' @keywords internal
+#' @name fr-recode_indicator_num
+NULL
+#> NULL
+
+
 #' Converting "values variables" into "modalities variables"
 #'
 #' To transform variables from the values matrix into categorical variables that can be added into the modalities matrix.
@@ -544,6 +813,7 @@ add_indicator.mQR_matrix <- function(x, indicator, variable_name, ...){
 #' @param ... other parameters of the function \code{\link[base]{cut}}.
 #'
 #' @family var QR_matrix manipulation
+#' @seealso [Traduction française][fr-recode_indicator_num()]
 #' @export
 recode_indicator_num <- function(x,
                                  variable_name,

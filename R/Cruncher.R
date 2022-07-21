@@ -34,19 +34,14 @@ cruncher <- function(workspace,
                      cruncher_bin_directory = getOption("cruncher_bin_directory"),
                      param_file_path, log_file){
     if(missing(workspace) || is.null(workspace)){
-        if(Sys.info()[['sysname']] == "Windows"){
-            workspace <- utils::choose.files(caption = "Please select a workspace",
-                                             filters = c("Fichier XML","*.xml"))
-        }else{
-            workspace <- base::file.choose()
-        }
+        stop("The first argument must be a valid workspace path")
     }
 
     if(length(workspace) == 0)
-        stop("The first argument must be a workspace")
+        stop("The first argument must be a non-null workspace path")
 
     if(length(workspace) > 1)
-        stop("Please select only one workspace")
+        stop("Please select only one workspace path")
 
     # The path to the workspace must be "whole", not relative/from the setwd.
     workspace <- normalizePath(workspace, mustWork = FALSE)
@@ -209,18 +204,14 @@ NULL
 #' @export
 multiprocessing_names <- function(workspace){
     if(missing(workspace) || is.null(workspace)){
-        if(Sys.info()[['sysname']] == "Windows"){
-            workspace <- utils::choose.files(caption = "Please select a workspace",
-                                             filters = c("Fichier XML","*.xml"))
-        }else{
-            workspace <- base::file.choose()
-        }
+        stop("The first argument must be a valid workspace path")
     }
 
     if(length(workspace) == 0)
-        stop("Please select a workspace")
+        stop("The first argument must be a non-null workspace path")
+
     if(length(workspace) > 1)
-        stop("Please select only one workspace")
+        stop("Please select only one workspace path")
 
     workspace <- normalizePath(workspace, mustWork = FALSE)
     workspace <- paste0(sub("\\.xml$","",workspace),".xml")
