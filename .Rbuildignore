@@ -7,3 +7,5 @@
 .travis.yml
 ^pkgdown$
 ^doc$
+^\.github$
+^Meta$
