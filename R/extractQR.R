@@ -41,7 +41,7 @@ NULL
 #> NULL
 
 
-#' #' Extraction of a quality report
+#' Extraction of a quality report
 #'
 #' To extract a quality report from the csv file containing the diagnostics matrix.
 #'
