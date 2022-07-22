@@ -257,7 +257,7 @@ NULL
 #'
 #' Function to update a workspace without exporting the results
 #'
-#' @param workspace path to the workspace. By default, a window opens to select the workspace.
+#' @param workspace path to the workspace.
 #' @param policy refresh policy. By default, \code{policy = "parameters"}.
 #' The other methods available are:
 #' \code{"current"} or \code{"n"} (fixed model + all new data are classified as dditive outliers)

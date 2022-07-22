@@ -2,8 +2,7 @@
 #'
 #' Permet d'extraire un bilan qualité à partir du fichier CSV contenant la matrice des diagnostics.
 #'
-#' @param matrix_output_file fichier CSV contenant la matrice des diagnostics. S'il n'est pas spécifié, une fenêtre s'ouvre
-#' pour sélectionner le fichier.
+#' @param matrix_output_file fichier CSV contenant la matrice des diagnostics.
 #' @param sep séparateur de caractères utilisé dans le fichier csv (par défaut \code{sep = ";"})
 #' @param dec séparateur décimal utilisé dans le fichier csv (par défaut \code{dec = ","})
 #'
@@ -46,7 +45,7 @@ NULL
 #'
 #' To extract a quality report from the csv file containing the diagnostics matrix.
 #'
-#' @param matrix_output_file the csv file containing the diagnostics matrix. When missing, a window opens to select a csv file.
+#' @param matrix_output_file the csv file containing the diagnostics matrix.
 #' @param sep the separator used in the csv file (by default, \code{sep = ";"})
 #' @param dec the decimal separator used in the csv file (by default, \code{dec = ","})
 #'
