@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">JDCruncheR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.4</span>
       </span>
     </div>
 
@@ -49,8 +49,20 @@
 <li>
   <a href="reference/index.html">Package functions</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Vignette
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
 <li>
-  <a href="articles/Using_the_cruncher_with_JDCruncheR.html">Vignette</a>
+      <a href="articles/Using_the_cruncher_with_JDCruncheR.html">Using the cruncher with JDCruncheR</a>
+    </li>
+    <li>
+      <a href="articles/Lancement_cruncher.html">Utiliser le cruncher avec JDCruncheR</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="news/index.html">News</a>
@@ -96,14 +108,14 @@
 <div class="section level1">
 <div class="page-header"><h1 id="jdcruncher">JDCruncheR<a class="anchor" aria-label="anchor" href="#jdcruncher"></a>
 </h1></div>
-<p>L’objectif premier du package JDCruncheR est de permettre de lancer rapidement et plus facilement le cruncher (JWSACruncher) de JDemetra+. Le cruncher est un outil qui permet de mettre à jour un workspace de JDemetra+ à partir de la console, sans devoir ouvrir JDemetra+. La dernière version du cruncher est téléchargeable sous <a href="https://github.com/jdemetra/jwsacruncher/releases" class="external-link uri">https://github.com/jdemetra/jwsacruncher/releases</a>. Pour plus d’informations, consulter le lien github du cruncher <a href="https://github.com/jdemetra/jwsacruncher/wiki" class="external-link uri">https://github.com/jdemetra/jwsacruncher/wiki</a>.</p>
-<p>JDCruncheR permet également de calculer un <em>bilan qualité</em> à partir des résultats du cruncher. Ce bilan synthétise l’ensemble des diagnostics liés aux séries désaisonnalisées afin de repérer rapidement les séries les plus problématiques sur lesquelles il faut concentrer son analyse. Il est surtout utile dans le cas de la désaisonnalisation d’un grand nombre de séries, puisqu’il est dans ce cas impossible de regarder l’ensemble des diagnostics pour chaque série dans un temps raisonnable.</p>
-<p>Pour installer JDCruncheR rien de plus simple ! Deux solutions.</p>
-<p>Soit utiliser le package devtools :</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<p>The primary objective of the JDCruncheR package is to provide a quick and easy access to the JDemetra+ cruncher (JWSACruncher) from R. The cruncher is a tool to update a JDemetra+ workspace, without having to open the software itself. The latest version can be downloaded here: <a href="https://github.com/jdemetra/jwsacruncher/releases" class="external-link uri">https://github.com/jdemetra/jwsacruncher/releases</a>. Fore more information, please refer to the wiki page: <a href="https://github.com/jdemetra/jwsacruncher/wiki" class="external-link uri">https://github.com/jdemetra/jwsacruncher/wiki</a>.</p>
+<p>With JDCruncheR, you can also generate a <em>quality report</em> based on the cruncher output. This report is a summary of the seasonal adjustment diagnostics. It can be used to spot the most problematic series which will require a finer analysis. This is most useful when dealing with a great number of series, which renders impossible the examination of every diagnostic for every series in a reasonable time.</p>
+<p>There are two ways to install the JDCruncheR package:</p>
+<ul><li>using the devtools package:</li></ul>
+<!-- end list --><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"InseeFr/JDCruncheR"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p>Soit installer JDCruncheR à partir du <strong>.zip</strong> ou du <strong>.tar.gz</strong> du package qui peuvent être téléchargés à l’adresse <a href="https://github.com/InseeFr/JDCruncheR/releases" class="external-link uri">https://github.com/InseeFr/JDCruncheR/releases</a>. Pour plus d’informations sur l’installation du package et la configuration du cruncher voir le <a href="https://github.com/InseeFr/JDCruncheR/wiki" class="external-link">wiki</a>.</p>
+<ul><li>from the <strong>.zip</strong> or <strong>.tar.gz</strong> file, that can both be found here: <a href="https://github.com/InseeFr/JDCruncheR/releases" class="external-link uri">https://github.com/InseeFr/JDCruncheR/releases</a>. For more info on the package installation and the cruncher configuration, please refer to the <a href="https://github.com/InseeFr/JDCruncheR/wiki" class="external-link">wiki</a>.</li></ul>
 </div>
   </div>
 
@@ -119,7 +131,8 @@
 <div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li>EUPL</li>
+<li>file <a href="LICENSE-text.html">LICENSE</a>
+</li>
 </ul>
 </div>
 
