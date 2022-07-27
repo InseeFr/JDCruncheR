@@ -16,7 +16,6 @@
 #' @param sheet_names nom des feuilles Excel en sortie. S'il n'est pas spécifié, le nom sera celui de la composante exportée.
 #' Si le paramètre est spécifié, les éventuelles feuilles contenant ces noms sont supprimées.
 #' @param ... autres paramètres non utilisés.
-#' @family QR_matrix functions
 #' @keywords internal
 #' @name fr-export_xlsx.QR_matrix
 NULL
@@ -98,10 +97,12 @@ export_xlsx.QR_matrix <- function(x, layout = c("all","modalities", "values", "c
 #' The function to call in practice
 #' @param x a \code{QR_matrix} or \code{mQR_matrix} object.
 #' @param ... other parameters of the function \code{\link{export_xlsx.QR_matrix}}.
+#' @family QR_matrix functions
 #' @export
 export_xlsx <- function(x, ...){
     UseMethod("export_xlsx", x)
 }
+#' @family QR_matrix functions
 #' @export
 export_xlsx.default <- function(x, ...){
     stop("A QR_matrix or mQR_matrix object is required!")
@@ -122,7 +123,6 @@ export_xlsx.default <- function(x, ...){
 #' @param file_extension extension des fichiers (\code{".xls"} ou \code{".xlsx"}).
 #' @param layout composantes du bilan à exporter : voir \code{\link{export_xlsx.QR_matrix}} .
 #' @param ... autres paramètres de la fonction \code{\link{export_xlsx.QR_matrix}}.
-#' @family QR_matrix functions
 #' @keywords internal
 #' @name fr-export_xlsx.mQR_matrix
 NULL
@@ -137,7 +137,7 @@ NULL
 #' @param export_dir export directory.
 #' @param layout_file export parameter. By default, (\code{layout_file = "ByComponent"}) and an Excel file is exported for each part of the
 #' quality report matrix (modalities and values matrices). To group both modalities and values reports/sheets into a single Excel file, use the option \code{layout_file = "ByQRMatrix"}.
-#' @param file_extension possible values are (\code{".xls"} and \code{".xlsx"}).
+#' @param file_extension possible values are \code{".xls"} and \code{".xlsx"}.
 #' @param layout elements of the report to export: see \code{\link{export_xlsx.QR_matrix}} .
 #' @param ... other parameters of the function \code{\link{export_xlsx.QR_matrix}}.
 #' @family QR_matrix functions

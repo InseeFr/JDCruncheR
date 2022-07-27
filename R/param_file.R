@@ -24,7 +24,6 @@
 #' @param paths_path chemins vers les fichiers d'entrée (Excel, xml...).
 #' @return L'adresse du fichier de paramètres.
 #' @encoding UTF-8
-#' @family Cruncher functions
 #' @keywords internal
 #' @name fr-create_param_file
 NULL
@@ -42,14 +41,23 @@ NULL
 #' @param ndecs number of decimals in the output (6 by default).
 #' @param policy refresh policy used. By default, \code{policy = "parameters"} (the model coefficients are re-estimated).
 #' The other methods available are:
+#'
 #' \code{"current"} or \code{"n"} (fixed model + all new data are classified as additive outliers)
+#'
 #' \code{"fixed"} or \code{"f"} (fixed model: the model is stictly unchanged)
+#'
 #' \code{"fixedparameters"} or \code{"fp"} (re-estimation of the regression coefficients)
+#'
 #' \code{"parameters"} or \code{"p"} (above + re-estimation of the arima coefficients)
-#' \code{"lastoutliers"} or \code{"l"} (above + re-identification of the outliers over the last year) ;
-#' \code{"outliers"} or \code{"o"} (above + re-identification of the outliers over the whole series span) ;
-#' \code{"stochastic"} or \code{"s"} (above + re-estimation of the arima model (orders)) ;
+#'
+#' \code{"lastoutliers"} or \code{"l"} (above + re-identification of the outliers over the last year)
+#'
+#' \code{"outliers"} or \code{"o"} (above + re-identification of the outliers over the whole series span)
+#'
+#' \code{"stochastic"} or \code{"s"} (above + re-estimation of the arima model (orders))
+#'
 #' \code{"complete"} or \code{"c"} (the model is completely re-estimated).
+#'
 #' @param output folder where the results are stored. By default, (\code{output = NULL}) and a new "Output" folder is created in the workspace folder.
 #' @param matrix_item string speciying the parameters to export (cf. JDemetra+ documentation).
 #' To get the default parameters, compile \code{getOption("default_matrix_item")}. This option is initially set to JDemetra+'s default value.

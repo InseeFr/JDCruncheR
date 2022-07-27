@@ -9,8 +9,7 @@
 #' Par défaut, un fichier .params est recherché au même niveau que le workspace.
 #' @param log_file nom du fichier qui contiendra la log du cruncher. Par défaut, la log n'est pas exportée.
 #' @encoding UTF-8
-#' @return L'adresse du workspace.
-#' @family Cruncher functions
+#' @return l'adresse du workspace
 #' @keywords internal
 #' @name fr-cruncher
 NULL
@@ -23,7 +22,7 @@ NULL
 #'
 #' @param workspace path to the workspace.
 #' @param cruncher_bin_directory path to the "bin" folder of the cruncher. To see the default value, compile \code{getOption("cruncher_bin_directory")}.
-#' @param param_file_path path to the settings file. By default, a ".params" file is searched for in the same folder the workspace is stored in.
+#' @param param_file_path path to the settings file. By default, a .params file is searched for in the same folder the workspace is stored in.
 #' @param log_file name of the log file. By default, no log file is exported.
 #' @encoding UTF-8
 #' @return The workspace path
@@ -34,14 +33,19 @@ cruncher <- function(workspace,
                      cruncher_bin_directory = getOption("cruncher_bin_directory"),
                      param_file_path, log_file){
     if(missing(workspace) || is.null(workspace)){
-        stop("The first argument must be a valid workspace path")
+        if(Sys.info()[['sysname']] == "Windows"){
+            workspace <- utils::choose.files(caption = "Please select a workspace",
+                                             filters = c("Fichier XML","*.xml"))
+        }else{
+            workspace <- base::file.choose()
+        }
     }
 
     if(length(workspace) == 0)
         stop("The first argument must be a non-null workspace path")
 
     if(length(workspace) > 1)
-        stop("Please select only one workspace path")
+        stop("Please specify only one workspace path")
 
     # The path to the workspace must be "whole", not relative/from the setwd.
     workspace <- normalizePath(workspace, mustWork = FALSE)
@@ -87,7 +91,7 @@ cruncher <- function(workspace,
 #'
 #' Fonction qui permet de lancer le cruncher sur un workspace tout en créant le fichier des paramètres.
 #'
-#' @param workspace chemin vers le workspace. Par défaut, une fenêtre s'ouvre pour sélectionner le workspace.
+#' @param workspace chemin vers le workspace.
 #' @param cruncher_bin_directory répertoire contenant contenant le dossier "bin" du cruncher.
 #' @param rename_multi_documents booléen indiquant s'il faut renommer les dossiers contenant les sorties en fonction
 #' des noms des multi-documents du workspace. Par défaut \code{rename_multi_documents = TRUE}.
@@ -100,7 +104,6 @@ cruncher <- function(workspace,
 #' @param ... autres paramètres de la fonction \link{create_param_file}.
 #' @encoding UTF-8
 #' @return L'adresse du workspace.
-#' @family Cruncher functions
 #' @keywords internal
 #' @name fr-cruncher_and_param
 NULL
@@ -111,7 +114,7 @@ NULL
 #'
 #' Function to simultaneously crunch a workspace and create its .params file
 #'
-#' @param workspace path to the workspace. If not specified, a window opens so the user can select a workspace.
+#' @param workspace path to the workspace.
 #' @param cruncher_bin_directory path to the cruncher "bin" folder.
 #' @param rename_multi_documents boolean indicating whether to rename the output folders to the crunched multiprocessings' names. By default, \code{rename_multi_documents = TRUE}.
 #' If \code{rename_multi_documents = FALSE}, the multiprocessings' xml files' names are used.
@@ -152,7 +155,7 @@ cruncher_and_param <- function(workspace = NULL,
         if(any(file.exists(noms_multi_documents$name))){
 
             if(is.null(delete_existing_file)){
-                message <- paste("There is already at least one file in ",output,".\nDo you want to clear the output folder ?")
+                message <- paste("There is already at least one file in ",output,".\nDo you want to clear the output folder?")
                 delete_existing_file <- utils::winDialog(type = c("yesnocancel"),
                                                   message)
 
@@ -181,12 +184,11 @@ cruncher_and_param <- function(workspace = NULL,
 
 #' Noms multiprocessings JDemetra+/XML
 #'
-#' Fonction qui permet d'extraire le nom des multiprocessings sous JDemetra+ et les noms des fichiers XML associés.
+#' Fonction qui permet d'extraire le nom des multiprocessings visibles sous JDemetra+ ainsi que celui des fichiers XML associés.
 #'
-#' @param workspace chemin vers le workspace. Par défaut, une fenêtre s'ouvre pour sélectionner le workspace.
+#' @param workspace chemin vers le workspace.
 #' @encoding UTF-8
-#' @return Un \code{data.frame} contenant le nom des multiprocessings sous JDemetra+ (colonne \code{name}) et
-#' le nom des fichiers XML associés (colonne \code{file})
+#' @return Un \code{data.frame} contenant le nom des multiprocessings (colonne \code{name}) et celui des fichiers XML associés (colonne \code{file}).
 #' @keywords internal
 #' @name fr-multiprocessing_names
 NULL
@@ -195,23 +197,28 @@ NULL
 
 #' JDemetra+/XML multiprocessings names
 #'
-#' Function to extract multiprocessings names as seen in the JDemetra+ interface as well as from their xml files'.
+#' Function to extract multiprocessings names as seen in the JDemetra+ interface as well as their xml files' names.
 #'
-#' @param workspace path to the workspace. When missing, a window to select the workspace opens.
+#' @param workspace path to the workspace.
 #' @encoding UTF-8
-#' @return a \code{data.frame} with the multiprocessing name as seen in the JDemetra+ interface (column \code{name}) and the corresponding xml files' title (column \code{file}).
+#' @return a \code{data.frame} with the multiprocessing names as seen in the JDemetra+ interface (column \code{name}) and the corresponding xml files names (column \code{file}).
 #' @seealso [Traduction française][fr-multiprocessing_names()]
 #' @export
 multiprocessing_names <- function(workspace){
     if(missing(workspace) || is.null(workspace)){
-        stop("The first argument must be a valid workspace path")
+        if(Sys.info()[['sysname']] == "Windows"){
+            workspace <- utils::choose.files(caption = "Please select a workspace",
+                                             filters = c("Fichier XML","*.xml"))
+        }else{
+            workspace <- base::file.choose()
+        }
     }
 
     if(length(workspace) == 0)
         stop("The first argument must be a non-null workspace path")
 
     if(length(workspace) > 1)
-        stop("Please select only one workspace path")
+        stop("Please specify only one workspace path")
 
     workspace <- normalizePath(workspace, mustWork = FALSE)
     workspace <- paste0(sub("\\.xml$","",workspace),".xml")
@@ -236,17 +243,21 @@ multiprocessing_names <- function(workspace){
 #'
 #' Fonction qui permet de mettre à jour un workspace sans exporter les résultats
 #'
-#' @param workspace chemin vers le workspace. Par défaut, une fenêtre s'ouvre pour sélectionner le workspace.
+#' @param workspace chemin vers le workspace.
 #' @param policy méthode de rafraîchissement utilisée. Par défaut, \code{policy = "parameters"} (paramètres re-estimés).
 #' Les autres méthodes possibles sont :
+#'
 #' \code{"outliers"} (les outliers sont identifiés et les paramètres ré-estimés) ;
+#'
 #' \code{"lastoutliers"} (les outliers sont ré-identifiés sur la dernière année et les paramètres ré-estimés) ;
+#'
 #' \code{"stochastic"} (le modèle arima et les outliers sont identifiés et les paramètres ré-estimés) ;
+#'
 #' \code{"complete"} (le modèle est complétement ré-estimé).
+#'
 #' @param cruncher_bin_directory répertoire contenant contenant le dossier "bin" du cruncher.
 #' @encoding UTF-8
 #' @return L'adresse du workspace.
-#' @family Cruncher functions
 #' @keywords internal
 #' @name fr-update_workspace
 NULL
@@ -260,14 +271,23 @@ NULL
 #' @param workspace path to the workspace.
 #' @param policy refresh policy. By default, \code{policy = "parameters"}.
 #' The other methods available are:
-#' \code{"current"} or \code{"n"} (fixed model + all new data are classified as dditive outliers)
+#'
+#' \code{"current"} or \code{"n"} (fixed model + all new data are classified as additive outliers)
+#'
 #' \code{"fixed"} or \code{"f"} (fixed model: the model is unchanged)
+#'
 #' \code{"fixedparameters"} or \code{"fp"} (re-estimation of the regression coefficients)
+#'
 #' \code{"parameters"} or \code{"p"} (above + re-estimation of the arima coefficients)
-#' \code{"lastoutliers"} or \code{"l"} (above + re-identification of the outliers over the last year) ;
-#' \code{"outliers"} or \code{"o"} (above + re-identification of the outliers over the whole series span) ;
-#' \code{"stochastic"} or \code{"s"} (above + re-estimation of the arima model (orders)) ;
+#'
+#' \code{"lastoutliers"} or \code{"l"} (above + re-identification of the outliers over the last year)
+#'
+#' \code{"outliers"} or \code{"o"} (above + re-identification of the outliers over the whole series span)
+#'
+#' \code{"stochastic"} or \code{"s"} (above + re-estimation of the arima model (orders))
+#'
 #' \code{"complete"} or \code{"c"} (the model is completely re-estimated).
+#'
 #' @param cruncher_bin_directory path to the cuncher "bin" folder.
 #' @encoding UTF-8
 #' @return The workspace address.

@@ -70,8 +70,6 @@
 #' QR
 #' QR$modalities$score
 #' }
-#' @family QR_matrix functions
-#' @rdname compute_score
 #' @keywords internal
 #' @name fr-compute_score
 NULL
@@ -135,9 +133,7 @@ NULL
 #' QR
 #' QR$modalities$score
 #' }
-#' @family QR_matrix functions
 #' @name compute_score
-#' @rdname compute_score
 #' @seealso [Traduction française][fr-compute_score()]
 #' @export
 compute_score.QR_matrix <- function(x,
@@ -272,7 +268,7 @@ compute_score.default <- function(x,  ...){
 
 #' Calcul d'un score pondéré pour chaque observation
 #'
-#' Permet de pondérer un score déjà calculé en fonction des variables.
+#' Permet de pondérer un score déjà calculé en fonction de variables.
 #'
 #' @param x objet de type \code{QR_matrix} ou \code{mQR_matrix}.
 #' @param pond pondération à appliquer au score. Il peut s'agir d'un nombre, d'un vecteur de nombres, du nom
@@ -282,9 +278,7 @@ compute_score.default <- function(x,  ...){
 #' QR <- compute_score(QR)
 #' weighted_score(QR, 2) # Tous les scores sont multipliés par 2
 #' }
-#' @family QR_matrix functions
 #' @return L'objet en entrée avec le score recalculé
-#' @rdname weighted_score
 #' @keywords internal
 #' @name fr-weighted_score
 NULL
@@ -293,7 +287,7 @@ NULL
 
 #' Weighted score calculation
 #'
-#' To weight a pre-calculated score
+#' Function to weight a pre-calculated score
 #'
 #' @param x a \code{QR_matrix} or \code{mQR_matrix} object
 #' @param pond the weights to use. Can be an integer, a vector of integers, the name of one of the quality report variables
@@ -304,7 +298,7 @@ NULL
 #' weighted_score(QR, 2) # All scores are multiplied by 2
 #' }
 #' @family QR_matrix functions
-#' @return the input with additionnal weighted score
+#' @return the input with an additionnal weighted score
 #' @name weighted_score
 #' @rdname weighted_score
 #' @seealso [Traduction française][fr-weighted_score()]
@@ -364,8 +358,6 @@ weighted_score.mQR_matrix <- function(x, pond = 1){
 #' QR <- compute_score(extract_QR())
 #' sort(QR, sort_variables = "score") # Pour trier par ordre croissant sur le score
 #' }
-#' @family QR_matrix functions
-#' @rdname sort
 #' @keywords internal
 #' @name fr-sort.QR_matrix
 NULL
@@ -431,7 +423,6 @@ sort.mQR_matrix <- function(x, decreasing = FALSE, sort_variables = "score", ...
 #' extract_score(QR) # NULL
 #' extract_score(mQR) # liste dont le premier élément est NULL
 #' }
-#' @family QR_matrix functions
 #' @keywords internal
 #' @name fr-extract_score
 NULL
@@ -454,7 +445,6 @@ NULL
 #' extract_score(QR)  # NULL
 #' extract_score(mQR) # List whose first element is NULL
 #' }
-#' @family QR_matrix functions
 #' @seealso [Traduction française][fr-extract_score()]
 #' @export
 extract_score <- function(x, format_output = c("data.frame", "vector"), weighted_score = FALSE){
@@ -504,8 +494,8 @@ extract_score.mQR_matrix <- function(x, format_output = c("data.frame", "vector"
 
 #' Manipulation de la liste des indicateurs
 #'
-#' Permet de retirer des indicateurs (fonction \code{remove_indicators}) ou de n'en retenir que certains
-#' (fonction \code{retain_indicators}) d'objets \code{QR_matrix} ou \code{mQR_matrix}. Le nom des séries
+#' Permet de retirer des indicateurs (fonction \code{remove_indicators()}) ou de n'en retenir que certains
+#' (fonction \code{retain_indicators()}) d'objets \code{QR_matrix} ou \code{mQR_matrix}. Le nom des séries
 #' (colonne "series") ne peut être enlevé.
 #'
 #' @param x objet de type \code{QR_matrix} ou \code{mQR_matrix}.
@@ -516,8 +506,6 @@ extract_score.mQR_matrix <- function(x, format_output = c("data.frame", "vector"
 #' retain_indicators(QR,c("score","m7")) # équivalent
 #' score(remove_indicator(QR,"score")) # Il n'y a plus de score
 #' }
-#' @family var QR_matrix manipulation
-#' @rdname QR_var_manipulation
 #' @keywords internal
 #' @name fr-remove_indicators
 NULL
@@ -526,7 +514,7 @@ NULL
 
 #' Editing the indicators list
 #'
-#' Functions to remove indicators (\code{remove_indicators}) or retrain some indicators only (\code{retain_indicators})
+#' Functions to remove indicators (\code{remove_indicators()}) or retrain some indicators only (\code{retain_indicators()})
 #' from \code{QR_matrix} or \code{mQR_matrix} objects. The series names (column "series") cannot be removed.
 #'
 #' @param x a \code{QR_matrix} or \code{mQR_matrix} object.
@@ -608,8 +596,8 @@ retain_indicators.mQR_matrix <- function(x, ...){
 #'
 #' @param ... objets \code{QR_matrix} à combiner.
 #' @param check_formula booléen indiquant s'il faut vérifier la cohérence dans les formules de calcul du score.
-#' Par défaut \code{check_formula = TRUE} : la fonction renvoie une erreur si des scores sont calculés avec des formules différentes.
-#' Si \code{check_formula = FALSE} alors il n'y a pas de vérification et le paramètre \code{score_formula} de l'objet
+#' Par défaut, \code{check_formula = TRUE} : la fonction renvoie une erreur si des scores sont calculés avec des formules différentes.
+#' Si \code{check_formula = FALSE}, alors il n'y a pas de vérification et le paramètre \code{score_formula} de l'objet
 #' en sortie est \code{NULL}.
 #' @examples \dontrun{
 #' QR <- extract_QR()
@@ -618,7 +606,6 @@ retain_indicators.mQR_matrix <- function(x, ...){
 #' rbind(QR1, QR2) # Une erreur est renvoyée
 #' rbind(QR1, QR2, check_formula = FALSE)
 #' }
-#' @family QR_matrix functions
 #' @keywords internal
 #' @name fr-rbind.QR_matrix
 NULL
@@ -683,8 +670,7 @@ rbind.QR_matrix <- function(..., check_formula = TRUE){
 
 #' Ajout d'un indicateur dans les objets QR_matrix
 #'
-#' Permet d'ajouter un indicateur dans les objets \code{QR_matrix}. Le nom des séries
-#' (colonne "series") ne peut être enlevé.
+#' Permet d'ajouter un indicateur dans les objets \code{QR_matrix}.
 #'
 #' @param x objet de type \code{QR_matrix} ou \code{mQR_matrix}.
 #' @param indicator un \code{vector} ou un \code{data.frame} (voir détails).
@@ -703,7 +689,6 @@ rbind.QR_matrix <- function(..., check_formula = TRUE){
 #'  * dans le cas d'un \code{data.frame}, il devra contenir une colonne "series" avec les noms des séries
 #'  correspondantes.
 #'
-#' @family var QR_matrix manipulation
 #' @keywords internal
 #' @name fr-add_indicator
 NULL
@@ -719,9 +704,9 @@ NULL
 #' @param variable_name a string containing the name of the variables to add.
 #' @param ... other parameters of the function \code{\link[base]{merge}}.
 #'
-#' @details The function \code{add_indicator()} adds a chosen indicator in the values matrix of a quality report.
+#' @details The function \code{add_indicator()} adds the chosen indicator to the values matrix of a quality report.
 #' Therefore, because said indicator isn't added in the modalities matrix, it cannot be used to calculate a score (except for weighting).
-#' Before using the added variable for score calculation, the function \code{\link{recode_indicator_num}} will have to be adapted.
+#' Before using the added variable for score calculation, it will have to be coded with the function \code{\link{recode_indicator_num}}.
 #'
 #' The new indicator can be a \code{vector} or a \code{data.frame}. In both cases, its format must allow for pairing:
 #'  * a \code{vector}'s elements must be named and these names must match those of the quality report (variable "series");
@@ -785,17 +770,14 @@ add_indicator.mQR_matrix <- function(x, indicator, variable_name, ...){
 
 #' Ré-encodage en modalités des variables
 #'
-#' Permet d'encoder des variables présentes dans la matrice des valeurs en modalités
-#' ajoutables à la matrice des modalités.
+#' Permet d'encoder des variables présentes dans la matrice des valeurs en modalités ajoutables à la matrice des modalités.
 #'
 #' @param x objet de type \code{QR_matrix} ou \code{mQR_matrix}.
-#' @param variable_name vecteur de chaînes de caractères contenant les noms des
-#'  variables à recoder.
-#' @param breaks voir fonction \code{\link[base]{cut}}.
-#' @param labels voir fonction \code{\link[base]{cut}}.
+#' @param variable_name vecteur de chaînes de caractères contenant les noms des variables à recoder.
+#' @param breaks voir l'argument éponyme de la fonction \code{\link[base]{cut}}.
+#' @param labels voir l'argument éponyme de la fonction \code{\link[base]{cut}}.
 #' @param ... autres paramètres de la fonction \code{\link[base]{cut}}.
 #'
-#' @family var QR_matrix manipulation
 #' @keywords internal
 #' @name fr-recode_indicator_num
 NULL
@@ -810,7 +792,7 @@ NULL
 #' @param variable_name a vector of strings containing the names of the variables to convert.
 #' @param breaks see function \code{\link[base]{cut}}.
 #' @param labels see function \code{\link[base]{cut}}.
-#' @param ... other parameters of the function \code{\link[base]{cut}}.
+#' @param ... other parameters of the \code{\link[base]{cut}} function.
 #'
 #' @family var QR_matrix manipulation
 #' @seealso [Traduction française][fr-recode_indicator_num()]

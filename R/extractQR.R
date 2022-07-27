@@ -26,7 +26,6 @@
 #'
 #' @encoding UTF-8
 #' @return Un objet de type \code{\link{QR_matrix}}.
-#' @family QR_matrix functions
 #' @examples \dontrun{
 #' QR <- extract_QR()
 #' print(QR)
@@ -73,12 +72,17 @@ NULL
 #' QR[["modalities"]]
 #' }
 #' @importFrom stats sd
-#' @importFrom utils read.csv
+#' @importFrom utils read.csv choose.files
 #' @seealso [Traduction française][fr-extract_QR()]
 #' @export
 extract_QR <- function(matrix_output_file, sep = ";", dec = ","){
     if(missing(matrix_output_file) || is.null(matrix_output_file)){
-        stop("The first argument must be a csv file containing the diagnostics matrix")
+        if(Sys.info()[['sysname']] == "Windows"){
+            matrix_output_file <- choose.files(caption = "Please select the file containing the parameters matrix",
+                                               filters = c("Fichier CSV","*.csv"))
+        }else{
+            matrix_output_file <- file.choose()
+        }
     }
     if(length(matrix_output_file) == 0)
         stop("The chosen csv file is empty")
@@ -94,8 +98,8 @@ extract_QR <- function(matrix_output_file, sep = ";", dec = ","){
                                              "skewness","kurtosis"),
                                            colnames(demetra_m))))
     if(length(missing_variables)!=0){
-        stop(paste0("The following variables are missing from the diagnostics matrix:\n"
-                    ,c("qs.test.on.sa", "f.test.on.sa..seasonal.dummies.",
+        stop(paste0("The following variables are missing from the diagnostics matrix:\n",
+                    c("qs.test.on.sa", "f.test.on.sa..seasonal.dummies.",
                        "qs.test.on.i","f.test.on.i..seasonal.dummies.",
                        "f.test.on.sa..td.", "f.test.on.i..td.","independence","normality",
                        "skewness","kurtosis")[missing_variables],
@@ -113,12 +117,12 @@ extract_QR <- function(matrix_output_file, sep = ";", dec = ","){
                        extractNormalityTests(demetra_m))
     demetra_m$pct_outliers_value <- demetra_m[,match("number.of.outliers",colnames(demetra_m))+1] * 100
     demetra_m$pct_outliers_modality <- demetra_m$number.of.outliers
-    demetra_m$m7_modality <- cut(demetra_m$m7+0, #+0 to impose the variable type to be numeric in case of an NA
+    demetra_m$m7_modality <- cut(demetra_m$m7+0, #+0 to force the variable type to be numeric in case of an NA
                                  breaks = c(0, 1, 2, Inf),
                                  labels = c("Good", "Bad", "Severe"), right = FALSE)
 
-    colnames(demetra_m)[match(c("qs.test.on.sa", "f.test.on.sa..seasonal.dummies."
-                                ,"qs.test.on.i","f.test.on.i..seasonal.dummies.",
+    colnames(demetra_m)[match(c("qs.test.on.sa", "f.test.on.sa..seasonal.dummies.",
+                                "qs.test.on.i","f.test.on.i..seasonal.dummies.",
                                 "f.test.on.sa..td.", "f.test.on.i..td.","independence","normality"),
                               colnames(demetra_m))+1] <- paste0(c("qs.test.on.sa", "f.test.on.sa..seasonal.dummies.",
                                                                   "qs.test.on.i","f.test.on.i..seasonal.dummies.",
@@ -144,8 +148,8 @@ extract_QR <- function(matrix_output_file, sep = ";", dec = ","){
         missing_variables <- unique(c(modalities_variables[!modalities_variables %in% colnames(demetra_m)],
                                       values_variables[!values_variables %in% colnames(demetra_m)]))
         missing_variables <- paste(missing_variables,collapse = "\n")
-        stop(paste0("The following variables are missing from the diagnostics matrix:\n"
-                    ,missing_variables,"\nPlease re-compute the export."))
+        stop(paste0("The following variables are missing from the diagnostics matrix:\n",
+                    missing_variables,"\nPlease re-compute the export."))
     }
 
     names_QR_variables <- c("series","qs_residual_sa_on_sa","f_residual_sa_on_sa",

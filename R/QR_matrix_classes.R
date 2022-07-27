@@ -1,10 +1,10 @@
 #' Objets bilan qualité
 #'
-#' \code{QR_matrix} permet de créer un objet de type \code{QR_matrix} contenant un bilan qualité.
+#' \code{QR_matrix()} permet de créer un objet de type \code{QR_matrix} contenant un bilan qualité.
 #'
-#' \code{mQR_matrix} permet de créer un objet de type \code{mQR_matrix} qui est une liste de bilans qualité (donc d'objets \code{QR_matrix}).
+#' \code{mQR_matrix()} permet de créer un objet de type \code{mQR_matrix} qui est une liste de bilans qualité (donc d'objets \code{QR_matrix}).
 #'
-#' \code{is.QR_matrix} et \code{is.mQR_matrix} permettent de tester si un objet est un bilan qualité ou une liste de bilans qualité.
+#' \code{is.QR_matrix()} et \code{is.mQR_matrix()} permettent de tester si un objet est un bilan qualité ou une liste de bilans qualité.
 #'
 #'
 #' @param modalities un \code{data.frame} contenant les modalités (Good, Bad, etc.)
@@ -23,7 +23,6 @@
 #' * le paramètre \code{score_formula} contient la formule utilisée pour calculer le score (une fois le calcul réalisé).
 #'
 #' @encoding UTF-8
-#' @rdname QR_matrix
 #' @keywords internal
 #' @name fr-QR_matrix
 NULL
@@ -32,11 +31,11 @@ NULL
 
 #' Quality report objects
 #'
-#' \code{QR_matrix} creates a \code{QR_matrix} object containing a quality report.
+#' \code{QR_matrix()} creates a \code{QR_matrix} object containing a quality report.
 #'
-#' \code{mQR_matrix} creates a \code{mQR_matrix} object containing a list of quality reports (ie. a list of \code{QR_matrix} objects).
+#' \code{mQR_matrix()} creates a \code{mQR_matrix} object containing a list of quality reports (ie. a list of \code{QR_matrix} objects).
 #'
-#' \code{is.QR_matrix} and \code{is.mQR_matrix} are functions to test whether an object is a quality report or a list of quality reports.
+#' \code{is.QR_matrix()} and \code{is.mQR_matrix()} are functions to test whether an object is a quality report or a list of quality reports.
 #'
 #'
 #' @param modalities a \code{data.frame} containing the output variables' modalities (Good, Bad, etc.)
@@ -53,7 +52,6 @@ NULL
 #'
 #' @encoding UTF-8
 #' @name QR_matrix
-#' @rdname QR_matrix
 #' @seealso [Traduction française][fr-QR_matrix()]
 #' @export
 QR_matrix <- function(modalities = NULL, values = NULL, score_formula = NULL){
@@ -108,7 +106,6 @@ is.mQR_matrix <- function(x){
 #' @param score_statistics booléen pour imprimer ou non des statistiques sur les scores de la \code{mQR_matrix} (le cas échéant).
 #' @param ... autres arguments non utilisés.
 #' @encoding UTF-8
-#' @rdname print.QR_matrix
 #' @keywords internal
 #' @name fr-print.QR_matrix
 NULL
@@ -126,7 +123,6 @@ NULL
 #' @param ... other unused arguments.
 #' @encoding UTF-8
 #' @name print.QR_matrix
-#' @rdname print.QR_matrix
 #' @seealso [Traduction française][fr-print.QR_matrix()]
 #' @export
 print.QR_matrix <- function(x, print_variables = TRUE, print_score_formula = TRUE, ...){
