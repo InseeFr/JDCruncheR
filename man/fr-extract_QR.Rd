@@ -5,8 +5,7 @@
 \alias{fr-extract_QR}
 \title{Extraction d'un bilan qualité}
 \arguments{
-\item{matrix_output_file}{fichier CSV contenant la matrice des diagnostics. S'il n'est pas spécifié, une fenêtre s'ouvre
-pour sélectionner le fichier.}
+\item{matrix_output_file}{fichier CSV contenant la matrice des diagnostics.}
 
 \item{sep}{séparateur de caractères utilisé dans le fichier csv (par défaut \code{sep = ";"})}
 
@@ -49,20 +48,4 @@ QR$modalities
 QR[["modalities"]]
 }
 }
-\seealso{
-Other QR_matrix functions: 
-\code{\link{export_xlsx.QR_matrix}()},
-\code{\link{export_xlsx.mQR_matrix}()},
-\code{\link{extract_QR}()},
-\code{\link{extract_score}()},
-\code{\link{fr-compute_score}},
-\code{\link{fr-export_xlsx.QR_matrix}},
-\code{\link{fr-export_xlsx.mQR_matrix}},
-\code{\link{fr-extract_score}},
-\code{\link{fr-rbind.QR_matrix}},
-\code{\link{fr-sort.QR_matrix}},
-\code{\link{fr-weighted_score}},
-\code{\link{rbind.QR_matrix}()}
-}
-\concept{QR_matrix functions}
 \keyword{internal}

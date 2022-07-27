@@ -5,7 +5,7 @@
 \alias{fr-cruncher_and_param}
 \title{Lanceur rapide de cruncher}
 \arguments{
-\item{workspace}{chemin vers le workspace. Par défaut, une fenêtre s'ouvre pour sélectionner le workspace.}
+\item{workspace}{chemin vers le workspace.}
 
 \item{cruncher_bin_directory}{répertoire contenant contenant le dossier "bin" du cruncher.}
 
@@ -29,15 +29,4 @@ L'adresse du workspace.
 \description{
 Fonction qui permet de lancer le cruncher sur un workspace tout en créant le fichier des paramètres.
 }
-\seealso{
-Other Cruncher functions: 
-\code{\link{create_param_file}()},
-\code{\link{cruncher_and_param}()},
-\code{\link{cruncher}()},
-\code{\link{fr-create_param_file}},
-\code{\link{fr-cruncher}},
-\code{\link{fr-update_workspace}},
-\code{\link{update_workspace}()}
-}
-\concept{Cruncher functions}
 \keyword{internal}

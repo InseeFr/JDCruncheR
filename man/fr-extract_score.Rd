@@ -27,20 +27,4 @@ extract_score(QR) # NULL
 extract_score(mQR) # liste dont le premier élément est NULL
 }
 }
-\seealso{
-Other QR_matrix functions: 
-\code{\link{export_xlsx.QR_matrix}()},
-\code{\link{export_xlsx.mQR_matrix}()},
-\code{\link{extract_QR}()},
-\code{\link{extract_score}()},
-\code{\link{fr-compute_score}},
-\code{\link{fr-export_xlsx.QR_matrix}},
-\code{\link{fr-export_xlsx.mQR_matrix}},
-\code{\link{fr-extract_QR}},
-\code{\link{fr-rbind.QR_matrix}},
-\code{\link{fr-sort.QR_matrix}},
-\code{\link{fr-weighted_score}},
-\code{\link{rbind.QR_matrix}()}
-}
-\concept{QR_matrix functions}
 \keyword{internal}

@@ -16,20 +16,9 @@ Par défaut, un fichier .params est recherché au même niveau que le workspace.
 \item{log_file}{nom du fichier qui contiendra la log du cruncher. Par défaut, la log n'est pas exportée.}
 }
 \value{
-L'adresse du workspace.
+l'adresse du workspace
 }
 \description{
 Fonction qui permet de lancer le cruncher sur un workspace à partir d'un fichier de paramètres.
 }
-\seealso{
-Other Cruncher functions: 
-\code{\link{create_param_file}()},
-\code{\link{cruncher_and_param}()},
-\code{\link{cruncher}()},
-\code{\link{fr-create_param_file}},
-\code{\link{fr-cruncher_and_param}},
-\code{\link{fr-update_workspace}},
-\code{\link{update_workspace}()}
-}
-\concept{Cruncher functions}
 \keyword{internal}

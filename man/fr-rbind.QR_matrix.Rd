@@ -7,8 +7,8 @@
 \item{...}{objets \code{QR_matrix} à combiner.}
 
 \item{check_formula}{booléen indiquant s'il faut vérifier la cohérence dans les formules de calcul du score.
-Par défaut \code{check_formula = TRUE} : la fonction renvoie une erreur si des scores sont calculés avec des formules différentes.
-Si \code{check_formula = FALSE} alors il n'y a pas de vérification et le paramètre \code{score_formula} de l'objet
+Par défaut, \code{check_formula = TRUE} : la fonction renvoie une erreur si des scores sont calculés avec des formules différentes.
+Si \code{check_formula = FALSE}, alors il n'y a pas de vérification et le paramètre \code{score_formula} de l'objet
 en sortie est \code{NULL}.}
 }
 \description{
@@ -24,20 +24,4 @@ rbind(QR1, QR2) # Une erreur est renvoyée
 rbind(QR1, QR2, check_formula = FALSE)
 }
 }
-\seealso{
-Other QR_matrix functions: 
-\code{\link{export_xlsx.QR_matrix}()},
-\code{\link{export_xlsx.mQR_matrix}()},
-\code{\link{extract_QR}()},
-\code{\link{extract_score}()},
-\code{\link{fr-compute_score}},
-\code{\link{fr-export_xlsx.QR_matrix}},
-\code{\link{fr-export_xlsx.mQR_matrix}},
-\code{\link{fr-extract_QR}},
-\code{\link{fr-extract_score}},
-\code{\link{fr-sort.QR_matrix}},
-\code{\link{fr-weighted_score}},
-\code{\link{rbind.QR_matrix}()}
-}
-\concept{QR_matrix functions}
 \keyword{internal}

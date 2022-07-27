@@ -13,8 +13,7 @@
 \item{...}{autres paramètres de la fonction \code{\link[base]{merge}}.}
 }
 \description{
-Permet d'ajouter un indicateur dans les objets \code{QR_matrix}. Le nom des séries
-(colonne "series") ne peut être enlevé.
+Permet d'ajouter un indicateur dans les objets \code{QR_matrix}.
 }
 \details{
 La fonction \code{add_indicator()} permet d'ajouter un indicateur dans la matrice des valeurs du bilan qualité.
@@ -31,12 +30,4 @@ bilan qualité (variable "series") ;
 correspondantes.
 }
 }
-\seealso{
-Other var QR_matrix manipulation: 
-\code{\link{add_indicator}()},
-\code{\link{fr-recode_indicator_num}},
-\code{\link{fr-remove_indicators}},
-\code{\link{recode_indicator_num}()}
-}
-\concept{var QR_matrix manipulation}
 \keyword{internal}

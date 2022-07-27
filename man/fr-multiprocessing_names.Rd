@@ -5,13 +5,12 @@
 \alias{fr-multiprocessing_names}
 \title{Noms multiprocessings JDemetra+/XML}
 \arguments{
-\item{workspace}{chemin vers le workspace. Par défaut, une fenêtre s'ouvre pour sélectionner le workspace.}
+\item{workspace}{chemin vers le workspace.}
 }
 \value{
-Un \code{data.frame} contenant le nom des multiprocessings sous JDemetra+ (colonne \code{name}) et
-le nom des fichiers XML associés (colonne \code{file})
+Un \code{data.frame} contenant le nom des multiprocessings (colonne \code{name}) et celui des fichiers XML associés (colonne \code{file}).
 }
 \description{
-Fonction qui permet d'extraire le nom des multiprocessings sous JDemetra+ et les noms des fichiers XML associés.
+Fonction qui permet d'extraire le nom des multiprocessings visibles sous JDemetra+ ainsi que celui des fichiers XML associés.
 }
 \keyword{internal}

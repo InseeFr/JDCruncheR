@@ -6,25 +6,15 @@
 \arguments{
 \item{x}{objet de type \code{QR_matrix} ou \code{mQR_matrix}.}
 
-\item{variable_name}{vecteur de chaînes de caractères contenant les noms des
-variables à recoder.}
+\item{variable_name}{vecteur de chaînes de caractères contenant les noms des variables à recoder.}
 
-\item{breaks}{voir fonction \code{\link[base]{cut}}.}
+\item{breaks}{voir l'argument éponyme de la fonction \code{\link[base]{cut}}.}
 
-\item{labels}{voir fonction \code{\link[base]{cut}}.}
+\item{labels}{voir l'argument éponyme de la fonction \code{\link[base]{cut}}.}
 
 \item{...}{autres paramètres de la fonction \code{\link[base]{cut}}.}
 }
 \description{
-Permet d'encoder des variables présentes dans la matrice des valeurs en modalités
-ajoutables à la matrice des modalités.
+Permet d'encoder des variables présentes dans la matrice des valeurs en modalités ajoutables à la matrice des modalités.
 }
-\seealso{
-Other var QR_matrix manipulation: 
-\code{\link{add_indicator}()},
-\code{\link{fr-add_indicator}},
-\code{\link{fr-remove_indicators}},
-\code{\link{recode_indicator_num}()}
-}
-\concept{var QR_matrix manipulation}
 \keyword{internal}

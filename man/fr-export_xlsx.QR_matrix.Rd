@@ -29,20 +29,4 @@ Si le paramètre est spécifié, les éventuelles feuilles contenant ces noms so
 \description{
 Permet d'exporter un bilan qualité dans un fichier Excel.
 }
-\seealso{
-Other QR_matrix functions: 
-\code{\link{export_xlsx.QR_matrix}()},
-\code{\link{export_xlsx.mQR_matrix}()},
-\code{\link{extract_QR}()},
-\code{\link{extract_score}()},
-\code{\link{fr-compute_score}},
-\code{\link{fr-export_xlsx.mQR_matrix}},
-\code{\link{fr-extract_QR}},
-\code{\link{fr-extract_score}},
-\code{\link{fr-rbind.QR_matrix}},
-\code{\link{fr-sort.QR_matrix}},
-\code{\link{fr-weighted_score}},
-\code{\link{rbind.QR_matrix}()}
-}
-\concept{QR_matrix functions}
 \keyword{internal}
