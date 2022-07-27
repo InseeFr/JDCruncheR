@@ -1,39 +1,54 @@
+% Latest JDCruncher news
+
+# JDCruncher 0.2.4
+
+ * The functions' help pages as well as the package vignettes are now available both in French and English.
+ * The function choose.file, not compatible with all OS, has been replaced by an error message.  
+
+---
+
 # JDCruncher 0.2.3
 
- * la fonction `weighted_score()` crée maintenant une nouvelle variable `score_pond` plutôt que de remplacer l'ancienne. La fonction `extract_score()` permet d'extraire les deux scores.
- * changement des paramètres d'export par défaut du cruncher et des indicateurs utilisés pour le calcul du score dans la fonction `compute_score()`.
- * ajout d'un paramètre `conditional_indicator` à la fonction `compute_score()` permettant de réduire à 1 le poids de certains indicateurs en fonction des valeurs d'autres variables.
+ * the function `weighted_score()` now creates a new `score_pond` variable, rather than replacing it. The function `extract_score()` extracts both weighted and unweighted scores.
+ * change in the cruncher's default export parameters and in the indicators used by the function `compute_score()` to calculate the score.
+ * addition of a `conditional_indicator` parameter to the function `compute_score()` to reduce down to 1 the weight of some indicators, depending on other variables' value.
+
+---
 
 # JDCruncher 0.2.2
 
-## Nouvelles fonctions
+## New functions
 
- * la fonction `score()` devient maintenant la fonction `extract_score()` et contient un nouveau paramètre pour contrôler le format en sortie. La fonction `score()` sera enlevée dans la prochaine version du package.
- * ajout de la fonction `add_indicator()` pour ajouter des variables dans la matrice des valeurs du bilan qualité.
- * ajout de la fonction `recode_indicator_num()` pour recoder les modalités d'une variable dans le bilan qualité.
+ * the function `score()` is replaced by the function `extract_score()` and has a new parameter to choose the output format. The function `score()` will be removed in the next version of the package.
+ * addition of the function `add_indicator()` to add variables in the quality report's matrix of values.
+ * addition of the function `recode_indicator_num()` to recode variable modalities in the quality report.
 
-## Modification des fonctions déjà existantes
+## Modification of pre-existing functions
 
- * désormais, on ne peut plus retirer la colonne contenant le nom des séries avec `remove_indicators()` ou `retain_indicators()`
- * correction de bugs dans les fonctions `print.QR_matrix()` et `print.QR_matrix()`.
- * modification de la fonction `compute_score()` : désormais, le paramètre score_formula n'existe plus et est remplacé par score_pond. Le score n'est plus calculé à partir d'une formule mais à partir d'un vecteur dont les noms correspondent aux variables à pondérer. Ajout également d'un paramètre n_contrib_score pour extraire les variables qui contribuent au score et du paramètre na.rm pour prendre en compte les valeurs manquantes dans le calcul du score.
- * correction d'un bug dans la fonction `extract_QR()` : la stat q-m2 était égale à la stat Q.
+ * the column containing the series names can no longer be removed when using the functions `remove_indicators()` ou `retain_indicators()`
+ * bugs fixed in the functions `print.QR_matrix()` and `print.QR_matrix()`.
+ * modification of `compute_score()`: the parameter score_formula is removed and replaced by score_pond. The score is calculated using the vector of variables to weight instead of a formula. The function now also carries two additional arguments: n_contrib_score to extract the variables that contribute the most to the score, and na.rm to take into account the missing values when calculating the score.
+ * bug fixed in  `extract_QR()`: the Q-m2 stat was equal to the Q stat.
+
+---
 
 # JDCruncher 0.2.1
 
-Correction d'un bug sur les fonctions `retain_indicators()` et `remove_indicator()`.
+Bug fixed in the functions `retain_indicators()` and `remove_indicator()`.
 
+---
 
 # JDCruncher 0.2.0
 
-## Nouvelles fonctions
+## New functions
 
- * `update_workspace()` qui permet de mettre à jour un workspace sans exporter de résultat.
- * ajout de fonctions pour extraire un bilan qualité de la matrice des diagnostics de JDemetra+. Ajout de fonctions de manipulation et d'export de ces objets.
+ * `update_workspace()` to update a workspace without exporting the results.
+ * additionnal functions to extract a quality report from the JDemetra+ diagnostics matrix, as well as to use and export said quality reports.
 
-## Modification des fonctions déjà existantes
+##  Modification of pre-existing functions
 
- * ajout d'un paramètre `log_file` aux fonctions `cruncher()` et `cruncher_and_param()` pour exporter si besoin la log du cruncher.
+ * addition of the parameter `log_file` to the functions `cruncher()` and `cruncher_and_param()` to export the cruncher log if required.
 
-## Autres modifications
- * mise à jour des options `default_matrix_item` et `default_tsmatrix_series` avec les paramètres de la version 2.2.0 de JDemetra+.
+## Other modifications
+
+ * update of the options `default_matrix_item` and `default_tsmatrix_series`, in accordance with the parameters of version 2.2.0 of JDemetra+.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/QR_functions.R
 \name{extract_score}
 \alias{extract_score}
-\title{Extraction du score}
+\title{Score extraction}
 \usage{
 extract_score(
   x,
@@ -11,37 +11,28 @@ extract_score(
 )
 }
 \arguments{
-\item{x}{objet de type \code{QR_matrix} ou \code{mQR_matrix}.}
+\item{x}{a \code{QR_matrix} or \code{mQR_matrix}.}
 
-\item{format_output}{chaîne de caractères indiquant le format de l'objet en sortie :
-soit un \code{data.frame} soit un \code{vector}.}
+\item{format_output}{string of characters indicating the output format: either a \code{data.frame} or a \code{vector}.}
 
-\item{weighted_score}{booléen indiquant s'il faut extraire le score pondéré (s'il existe) ou le score non pondéré.
-Par défaut, c'est le score non pondéré qui est extrait.}
+\item{weighted_score}{logical indicating whether to extract the weighted score (if previously calculated) or the unweighted one.
+By default, the unweighted score is extracted.}
 }
 \description{
-Permet d'extraire le score des objets \code{QR_matrix} ou \code{mQR_matrix}.
+To extract score variables from \code{QR_matrix} or \code{mQR_matrix} objects.
 }
 \details{
-Pour les objets \code{QR_matrix}, le score renvoyé est soit l'objet \code{NULL} si aucun score n'a été calculé, soit un vecteur.
-Pour les objets \code{mQR_matrix}, c'est une liste de scores (\code{NULL} ou un vecteur).
+For \code{QR_matrix} objects, the output is a vector or the object \code{NULL} if no score was previously calculated.
+For \code{mQR_matrix} objects, it is a list of scores (\code{NULL} elements or vectors).
 }
 \examples{
 \dontrun{
 QR <- extract_QR()
 mQR <- mQR_matrix(QR, compute_score(QR))
-extract_score(QR) # NULL
-extract_score(mQR) # liste dont le premier Ã©lÃ©ment est NULL
+extract_score(QR)  # NULL
+extract_score(mQR) # List whose first element is NULL
 }
 }
 \seealso{
-Other QR_matrix functions: 
-\code{\link{compute_score}()},
-\code{\link{export_xlsx.QR_matrix}()},
-\code{\link{export_xlsx.mQR_matrix}()},
-\code{\link{extract_QR}()},
-\code{\link{rbind.QR_matrix}()},
-\code{\link{sort}()},
-\code{\link{weighted_score}()}
+\link[=fr-extract_score]{Traduction française}
 }
-\concept{QR_matrix functions}

@@ -4,7 +4,7 @@
 \name{compute_score}
 \alias{compute_score}
 \alias{compute_score.QR_matrix}
-\title{Calcul d'un score global}
+\title{Score calculation}
 \usage{
 \method{compute_score}{QR_matrix}(
   x,
@@ -21,80 +21,65 @@
 )
 }
 \arguments{
-\item{x}{objet de type \code{QR_matrix} ou \code{mQR_matrix}.}
+\item{x}{a \code{QR_matrix} or \code{mQR_matrix} object.}
 
-\item{score_pond}{formule utilisée pour calculer le score global.}
+\item{score_pond}{the formula used to calculate the series score.}
 
-\item{modalities}{modalités triées par ordre d'importance dans le calcul du score (voir détails).}
+\item{modalities}{modalities ordered by importance in the score calculation (cf. details).}
 
-\item{normalize_score_value}{chiffre indiquant la valeur de référence pour la normalisation des pondérations utilisées lors du
-calcul du score. Si le paramètre n'est pas renseigné, les poids ne seront pas normalisés.}
+\item{normalize_score_value}{integer indicating the reference value for weights normalisation. If missing, weights will not be normalised.}
 
-\item{na.rm}{booléen indiquant si les valeurs manquantes doivent être enlevées pour le calcul du score.}
+\item{na.rm}{logical indicating whether missing values must be ignored when calculating the score.}
 
-\item{n_contrib_score}{entier indiquant le nombre de variables à créer dans la matrice des valeurs du
-bilan qualité contenant les \code{n_contrib_score} plus grandes contributrices au score (voir détails).
-S'il n'est pas spécifié, aucune variable n'est créée.}
+\item{n_contrib_score}{integer indicating the number of variables to create in the quality report's values matrix
+to store the \code{n_contrib_score} greatest contributions to the score (cf. details).
+If not specified, no variable is created.}
 
-\item{conditional_indicator}{une \code{list} contenant des listes ayant 3 éléments : "indicator", "conditions" et
-"condition_modalities". Permet de réduire à 1 le poids de certains indicateurs en fonction des valeurs
-d'autres variables (voir détails).}
+\item{conditional_indicator}{a \code{list} containing 3-elements sub-lists: "indicator", "conditions" and
+"condition_modalities". To reduce down to 1 the weight of chosen indicators depending on other variables' values (cf. details).}
 
-\item{...}{autres paramètres non utilisés.}
+\item{...}{other unused parameters.}
 }
 \value{
-Un objet de type \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}.
+a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} object.
 }
 \description{
-Permet de calculer un score global à partir d'un bilan qualité
+To calculate a score for each series from a quality report
 }
 \details{
-La fonction \code{compute_score} permet de calculer un score à partir des modalités
-d'un bilan qualité. Pour cela, chaque modalité est associée à un poids défini par le paramètre
-\code{modalities}. Ainsi, le paramètre par défaut étant \code{c("Good", "Uncertain", "Bad","Severe")},
-la valeur \code{"Good"} sera associée à la note 0, la valeur \code{"Uncertain"} sera associée
-à la note 1, la valeur \code{"Bad"} sera associée à la note 2 et la valeur \code{"Bad"} sera associée à la note 3.
+The function \code{compute_score} calculates a score from the modalities of a quality report: to each modality corresponds
+a weight that depends on the parameter \code{modalities}. The default parameter is \code{c("Good", "Uncertain", "Bad","Severe")},
+and the associated weights are respectively 0, 1, 2 and 3.
 
-Le calcul du score se fait grâce au paramètre \code{score_pond}, qui est un vecteur numérique
-nommé contenant des poids et dont les noms correspondent aux variables de la matrice des modalités
-à utiliser dans le score. Ainsi, avec le paramètre \code{score_pond =
-c(qs_residual_sa_on_sa = 10, f_residual_td_on_sa = 5)} le score sera calculé à partir des deux
-variables qs_residual_sa_on_sa et f_residual_td_on_sa. Les notes associées aux modalités de
-la variable qs_residual_sa_on_sa seront multipliées par 10 et celles associées à la variable
-f_residual_td_on_sa seront multipliées par 5.
-Dans le calcul du score, certaines variables#' peuvent être manquantes: pour ne pas prendre en compte
-ces valeurs dans le calcul, il suffit d'utiliser le paramètre \code{na.rm = TRUE}.
+The score calculation is based on the \code{score_pond} parameter, which is a named integer vector containing the weights
+to apply to the (modalities matrix) variables. For example, with \code{score_pond = c(qs_residual_sa_on_sa = 10, f_residual_td_on_sa = 5)},
+the score will be based on the variables qs_residual_sa_on_sa and f_residual_td_on_sa.
+The qs_residual_sa_on_sa grades will be multiplied by 10 and the f_residual_td_on_sa grades, by 5.
+To ignore the missing values when calculating a score, use the parameter \code{na.rm = TRUE}.
 
-Le paramètre \code{normalize_score_value} permet de normaliser les scores. Par exemple,
-si l'on souhaite avoir des notes entre 0 et 20, il suffit d'utiliser le paramètre
-\code{normalize_score_value = 20}.
+The parameter \code{normalize_score_value} can be used to normalise the scores. For example, to have all scores between 0 and 20,
+specify \code{normalize_score_value = 20}.
 
-Le paramètre \code{n_contrib_score} permet d'ajouter de nouvelles variables à la matrice des valeurs
-du bilan qualité dont les valeurs correspondent aux noms des variables qui contribuent le plus au score
-de la série. \code{n_contrib_score} est un entier égal au nombre de variables contributrices
-que l'on souhaite exporter. Par exemple, pour \code{n_contrib_score = 3}, trois colonnes seront créées
-et elles contiendront les trois plus grandes contributrices au score. Les noms des nouvelles variables
-sont \emph{i}_highest_score, \emph{i} correspondant au rang en terme de contribution au score (1_highest_score
-contiendra les noms des plus grandes contributrices, 2_highest_score
-des deuxièmes plus grandes contributrices, etc).
-Seules les variables qui ont une contribution non nulle au score sont
-prises en compte. Ainsi, si une série a un score nul, toutes les colonnes \emph{i}_highest_score
-associées à cette série seront vides. Et si une série a un score positif uniquement du fait
-de la variable "m7", alors la valeur correspondante à la variable 1_highest_score sera égale à
-"m7" et celle des autres variables \emph{i}_highest_score seront vides.
+When using parameter \code{n_contrib_score}, \code{n_contrib_score} new variables are added to the quality report's values matrix.
+These new variables store the names of the variables that contribute the most to the series score.
+For example, \code{n_contrib_score = 3} will add to the values matrix the three variables that contribute the most to the score.
+The new variables' names are \emph{i}_highest_score, with \emph{i} being the rank in terms of contribution to the score (1_highest_score
+contains the name of the greatest contributor, 2_highest_score the second greatest, etc).
+Only the variables that have a non-zero contribution to the score are taken into account: if a series score is 0,
+all \emph{i}_highest_score variables will be empty. And if a series score is positive only because of the m7 statistic,
+1_highest_score will have a value of "m7" for this series and the other \emph{i}_highest_score will be empty.
 
-Certains indicateurs peuvent n'avoir de sens que sous certaines conditions. Par exemple, le test
-d'homoscédasticité n'est valide que si les résidus sont indépendants et les tests de normalité, que
-si les résidus sont indépendants et homoscédastiques. Le paramètre \code{conditional_indicator}
-permet de prendre cela en compte en réduisant, sous certaines conditions, à 1 le poids de certains variables.
-C'est une \code{list} contenant des listes ayant 3 éléments :
+Some indicators are only relevant under certain conditions. For example, the homoscedasticity test is only valid when the residuals are independant, and the normality tests,
+only when the residuals are both independant and homoscedastic. In these cases, the parameter \code{conditional_indicator} can be of use
+since it reduces the weight of some variables down to 1 when some conditions are met.
+\code{conditional_indicator} is a \code{list} of 3-elements sub-lists:
 \itemize{
-\item "indicator" : nom de la variable pour laquelle on veut ajouter des conditions
-\item "conditions" : nom des variables que l'on utilise pour conditionner
-\item "conditions_modalities" : modalités qui doivent être vérifiées pour modifier le poids
-Ainsi, avec le paramètre \code{conditional_indicator = list(list(indicator = "residuals_skewness", conditions = c("residuals_independency", "residuals_homoskedasticity"), conditions_modalities = c("Bad","Severe")))},
-on réduit à 1 le poids de la variable "residuals_skewness" lorsque les modalités du test d'indépendance
-("residuals_independency") ou du test d'homoscédasticité ("residuals_homoskedasticity") valent "Bad" ou "Severe".
+\item "indicator": the variable whose weight will be conditionally changed
+\item "conditions": the variables used to define the conditions
+\item "conditions_modalities": modalities that must be verified to induce the weight change
+For example, \code{conditional_indicator = list(list(indicator = "residuals_skewness", conditions = c("residuals_independency", "residuals_homoskedasticity"), conditions_modalities = c("Bad","Severe")))},
+reduces down to 1 the weight of the variable "residuals_skewness" when the modalities of the independancy test ("residuals_independency")
+or the homoscedasticity test ("residuals_homoskedasticity") are "Bad" or "Severe".
 }
 }
 \examples{
@@ -106,13 +91,5 @@ QR$modalities$score
 }
 }
 \seealso{
-Other QR_matrix functions: 
-\code{\link{export_xlsx.QR_matrix}()},
-\code{\link{export_xlsx.mQR_matrix}()},
-\code{\link{extract_QR}()},
-\code{\link{extract_score}()},
-\code{\link{rbind.QR_matrix}()},
-\code{\link{sort}()},
-\code{\link{weighted_score}()}
+\link[=fr-compute_score]{Traduction française}
 }
-\concept{QR_matrix functions}

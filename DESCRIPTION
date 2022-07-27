@@ -1,7 +1,7 @@
 Package: JDCruncheR
-Title: Interface entre le cruncher JDemetra+ et R, et création de bilans qualité
-Version: 0.2.3
-Date: 05/02/2019
+Title: Interface between the JDemetra+ cruncher and R, and quality report generator
+Version: 0.2.4
+Date: 27/07/2022
 Authors@R: 
     c(person(given = "Alain",
              family = "Quartier-la-Tente",
@@ -11,8 +11,8 @@ Authors@R:
              role = "cph",
              email = c("anna.smyk@insee.fr","alice.tchang@insee.fr"),
              comment = "https://www.insee.fr/"))
-Description: Permet de lancer rapidement le cruncher de JDemetra+ depuis R et de construire d'autres outils 
-    liés à la désaisonnalisation. La dernière version du cruncher peut être téléchargée sous https://github.com/jdemetra/jwsacruncher/releases.
+Description: This package enables the user to launch the JDemetra+ cruncher from R and to build complementary tools for seasonal adjustment 
+    (generating quality reports and calculating series scores). The latest cruncher version can be downloaded here: https://github.com/jdemetra/jwsacruncher/releases.
 URL: https://github.com/InseeFr/JDCruncheR
 BugReports: https://github.com/InseeFr/JDCruncheR/issues
 Imports:
@@ -22,9 +22,9 @@ Suggests:
     knitr,
     kableExtra,
     rmarkdown
-License: EUPL
+License: file LICENSE
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.0
 Roxygen: list(markdown = TRUE)

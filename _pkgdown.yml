@@ -14,36 +14,41 @@ navbar:
       icon: fa-home fa-lg
       href: index.html
     reference:
-      text: Fonctions du package
+      text: Package functions
       href: reference/index.html
     articles:
       text: Vignette
-      href: articles/Lancement_cruncher.html
+      menu:
+      - text: Using the cruncher with JDCruncheR
+        href: articles/Using_the_cruncher_with_JDCruncheR.html
+      - text: Utiliser le cruncher avec JDCruncheR
+        href: articles/Lancement_cruncher.html
     news:
       text: News
       href: news/index.html
     jdemetra:
       text: JDemetra+
       menu:
-      - text: Télécharger JDemetra+
+      - text: To download JDemetra+
         href: https://github.com/jdemetra/jdemetra-app/releases
-      - text: Télécharger le cruncher de JDemetra+
+      - text: To download the JDemetra+ cruncher
         href: https://github.com/jdemetra/jwsacruncher/releases
-      - text: Configuration avec une version portable de Java
-        href: https://github.com/InseeFr/JDCruncheR/wiki/Installation-et-configuration-de-JDemetra--et-du-cruncher
+      - text: Set up with a portable version of Java
+        href: https://github.com/InseeFr/JDCruncheR/wiki/Installation-and-set-up-of-JDemetra-and-the-cruncher
     github:
       icon: fa-github fa-lg
       href: https://github.com/nbbrd/rjdemetra
 
 reference:
-- title: Bilan qualité
-  desc: Fonctions pour créer, manipuler et exporter le bilan qualité
+- title: Quality report
+  desc: Functions to generate, edit and export a quality report
   contents:
   - '`extract_QR`'
   - '`compute_score`'
   - '`weighted_score`'
   - '`export_xlsx.mQR_matrix`'
   - '`export_xlsx.QR_matrix`'
+  - '`export_xlsx`'
   - '`extract_score`'
   - '`QR_matrix`'
   - '`QR_var_manipulation`'
@@ -54,7 +59,7 @@ reference:
   - '`compute_score`'
   - '`print.QR_matrix`'
 - title: Cruncher
-  desc: Fonctions pour utiliser le cruncher
+  desc: Functions to use the cruncher
   contents:
   - '`cruncher`'
   - '`cruncher_and_param`'

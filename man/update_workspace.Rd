@@ -3,7 +3,7 @@
 \encoding{UTF-8}
 \name{update_workspace}
 \alias{update_workspace}
-\title{Mise à jour d'un workspace}
+\title{Workspace update}
 \usage{
 update_workspace(
   workspace = NULL,
@@ -12,24 +12,38 @@ update_workspace(
 )
 }
 \arguments{
-\item{workspace}{chemin vers le workspace. Par défaut, une fenêtre s'ouvre pour sélectionner le workspace.}
+\item{workspace}{path to the workspace.}
 
-\item{policy}{méthode de rafraîchissement utilisée. Par défaut, \code{policy = "parameters"} (paramètres re-estimés).
-Les autres méthodes possibles sont :
-\code{"outliers"} (les outliers sont identifiés et les paramètres ré-estimés) ;
-\code{"lastoutliers"} (les outliers sont ré-identifiés sur la dernière année et les paramètres ré-estimés) ;
-\code{"stochastic"} (le modèle arima et les outliers sont identifiés et les paramètres ré-estimés) ;
-\code{"complete"} (le modèle est complétement ré-estimé).}
+\item{policy}{refresh policy. By default, \code{policy = "parameters"}.
+The other methods available are:
 
-\item{cruncher_bin_directory}{répertoire contenant contenant le dossier "bin" du cruncher.}
+\code{"current"} or \code{"n"} (fixed model + all new data are classified as additive outliers)
+
+\code{"fixed"} or \code{"f"} (fixed model: the model is unchanged)
+
+\code{"fixedparameters"} or \code{"fp"} (re-estimation of the regression coefficients)
+
+\code{"parameters"} or \code{"p"} (above + re-estimation of the arima coefficients)
+
+\code{"lastoutliers"} or \code{"l"} (above + re-identification of the outliers over the last year)
+
+\code{"outliers"} or \code{"o"} (above + re-identification of the outliers over the whole series span)
+
+\code{"stochastic"} or \code{"s"} (above + re-estimation of the arima model (orders))
+
+\code{"complete"} or \code{"c"} (the model is completely re-estimated).}
+
+\item{cruncher_bin_directory}{path to the cuncher "bin" folder.}
 }
 \value{
-L'adresse du workspace.
+The workspace address.
 }
 \description{
-Fonction qui permet de mettre à jour un workspace sans exporter les résultats
+Function to update a workspace without exporting the results
 }
 \seealso{
+\link[=fr-update_workspace]{Traduction française}
+
 Other Cruncher functions: 
 \code{\link{create_param_file}()},
 \code{\link{cruncher_and_param}()},

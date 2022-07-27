@@ -3,7 +3,7 @@
 \encoding{UTF-8}
 \name{cruncher_and_param}
 \alias{cruncher_and_param}
-\title{Lanceur rapide de cruncher}
+\title{Combined cruncher launcher}
 \usage{
 cruncher_and_param(
   workspace = NULL,
@@ -16,31 +16,31 @@ cruncher_and_param(
 )
 }
 \arguments{
-\item{workspace}{chemin vers le workspace. Par défaut, une fenêtre s'ouvre pour sélectionner le workspace.}
+\item{workspace}{path to the workspace.}
 
-\item{cruncher_bin_directory}{répertoire contenant contenant le dossier "bin" du cruncher.}
+\item{cruncher_bin_directory}{path to the cruncher "bin" folder.}
 
-\item{rename_multi_documents}{booléen indiquant s'il faut renommer les dossiers contenant les sorties en fonction
-des noms des multi-documents du workspace. Par défaut \code{rename_multi_documents = TRUE}.
-Si \code{rename_multi_documents = FALSE}, alors ce sont les noms des fichiers XML des multi_documents qui sont utilisés.}
+\item{rename_multi_documents}{boolean indicating whether to rename the output folders to the crunched multiprocessings' names. By default, \code{rename_multi_documents = TRUE}.
+If \code{rename_multi_documents = FALSE}, the multiprocessings' xml files' names are used.}
 
-\item{output}{dossier contenant les résultats du cruncher. Par défaut, (\code{output = NULL}) et un dossier "Output" est créé à l'adresse du workspace.}
+\item{output}{folder containing the cruncher results. By default, (\code{output = NULL}) and an "Output" folder is created within the workspace folder.}
 
-\item{delete_existing_file}{utile uniquement si \code{rename_multi_documents = TRUE}, booléen indiquant s'il faut supprimer
-les dossiers existants lors du renommage des dossiers. Par défaut, (\code{delete_existing_file = NULL}) et une boîte de dialogue s'ouvre
-demandant l'action à réaliser.}
+\item{delete_existing_file}{boolean indicating whether to delete pre-existing files when renaming the folders. Only used when \code{rename_multi_documents = TRUE}.
+By default, (\code{delete_existing_file = NULL}) and a dialogue box opens, asking whether to delete the files.}
 
-\item{log_file}{nom du fichier qui contiendra la log du cruncher. Par défaut, la log n'est pas exportée.}
+\item{log_file}{log file name. By default, no log file is generated.}
 
-\item{...}{autres paramètres de la fonction \link{create_param_file}.}
+\item{...}{other parameters of the function \link{create_param_file}.}
 }
 \value{
-L'adresse du workspace.
+The workspace path.
 }
 \description{
-Fonction qui permet de lancer le cruncher sur un workspace tout en créant le fichier des paramètres.
+Function to simultaneously crunch a workspace and create its .params file
 }
 \seealso{
+\link[=fr-cruncher_and_param]{Traduction française}
+
 Other Cruncher functions: 
 \code{\link{create_param_file}()},
 \code{\link{cruncher}()},
