@@ -18,7 +18,7 @@ et values."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">JDCruncheR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.4</span>
       </span>
     </div>
 
@@ -32,9 +32,19 @@ et values."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/
 <li>
   <a href="../reference/index.html">Package functions</a>
 </li>
-<li>
-  <a href="../articles/Using_the_cruncher_with_JDCruncheR.html">Vignette</a>
-</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Vignette
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu"><li>
+      <a href="../articles/Using_the_cruncher_with_JDCruncheR.html">Using the cruncher with JDCruncheR</a>
+    </li>
+    <li>
+      <a href="../articles/Lancement_cruncher.html">Utiliser le cruncher avec JDCruncheR</a>
+    </li>
+  </ul></li>
 <li>
   <a href="../news/index.html">News</a>
 </li>
@@ -88,27 +98,11 @@ et <code>values</code>.</p>
 
 <dt>check_formula</dt>
 <dd><p>booléen indiquant s'il faut vérifier la cohérence dans les formules de calcul du score.
-Par défaut <code>check_formula = TRUE</code> : la fonction renvoie une erreur si des scores sont calculés avec des formules différentes.
-Si <code>check_formula = FALSE</code> alors il n'y a pas de vérification et le paramètre <code>score_formula</code> de l'objet
+Par défaut, <code>check_formula = TRUE</code> : la fonction renvoie une erreur si des scores sont calculés avec des formules différentes.
+Si <code>check_formula = FALSE</code>, alors il n'y a pas de vérification et le paramètre <code>score_formula</code> de l'objet
 en sortie est <code>NULL</code>.</p></dd>
 
 </dl></div>
-    <div id="see-also">
-    <h2>See also</h2>
-    <div class="dont-index"><p>Other QR_matrix functions: 
-<code><a href="export_xlsx.QR_matrix.html">export_xlsx.QR_matrix</a>()</code>,
-<code><a href="export_xlsx.mQR_matrix.html">export_xlsx.mQR_matrix</a>()</code>,
-<code><a href="extract_QR.html">extract_QR</a>()</code>,
-<code><a href="extract_score.html">extract_score</a>()</code>,
-<code><a href="compute_score.html">fr-compute_score</a></code>,
-<code><a href="fr-export_xlsx.QR_matrix.html">fr-export_xlsx.QR_matrix</a></code>,
-<code><a href="fr-export_xlsx.mQR_matrix.html">fr-export_xlsx.mQR_matrix</a></code>,
-<code><a href="fr-extract_QR.html">fr-extract_QR</a></code>,
-<code><a href="fr-extract_score.html">fr-extract_score</a></code>,
-<code><a href="sort.html">fr-sort.QR_matrix</a></code>,
-<code><a href="weighted_score.html">fr-weighted_score</a></code>,
-<code><a href="rbind.QR_matrix.html">rbind.QR_matrix</a>()</code></p></div>
-    </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>

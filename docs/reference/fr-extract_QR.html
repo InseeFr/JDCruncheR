@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">JDCruncheR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.4</span>
       </span>
     </div>
 
@@ -31,9 +31,19 @@
 <li>
   <a href="../reference/index.html">Package functions</a>
 </li>
-<li>
-  <a href="../articles/Using_the_cruncher_with_JDCruncheR.html">Vignette</a>
-</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Vignette
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu"><li>
+      <a href="../articles/Using_the_cruncher_with_JDCruncheR.html">Using the cruncher with JDCruncheR</a>
+    </li>
+    <li>
+      <a href="../articles/Lancement_cruncher.html">Utiliser le cruncher avec JDCruncheR</a>
+    </li>
+  </ul></li>
 <li>
   <a href="../news/index.html">News</a>
 </li>
@@ -81,8 +91,7 @@
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>matrix_output_file</dt>
-<dd><p>fichier CSV contenant la matrice des diagnostics. S'il n'est pas spécifié, une fenêtre s'ouvre
-pour sélectionner le fichier.</p></dd>
+<dd><p>fichier CSV contenant la matrice des diagnostics.</p></dd>
 
 
 <dt>sep</dt>
@@ -116,22 +125,6 @@ de modalité (fréquence de la série et modèle ARIMA).</p></li>
 <li><p>le paramètre <code>score_formula</code> est initié à <code>NULL</code> : il contiendra la formule utilisée pour
 calculer le score (si le calcul est fait).</p></li>
 </ul></div>
-    <div id="see-also">
-    <h2>See also</h2>
-    <div class="dont-index"><p>Other QR_matrix functions: 
-<code><a href="export_xlsx.QR_matrix.html">export_xlsx.QR_matrix</a>()</code>,
-<code><a href="export_xlsx.mQR_matrix.html">export_xlsx.mQR_matrix</a>()</code>,
-<code><a href="extract_QR.html">extract_QR</a>()</code>,
-<code><a href="extract_score.html">extract_score</a>()</code>,
-<code><a href="compute_score.html">fr-compute_score</a></code>,
-<code><a href="fr-export_xlsx.QR_matrix.html">fr-export_xlsx.QR_matrix</a></code>,
-<code><a href="fr-export_xlsx.mQR_matrix.html">fr-export_xlsx.mQR_matrix</a></code>,
-<code><a href="fr-extract_score.html">fr-extract_score</a></code>,
-<code><a href="fr-rbind.QR_matrix.html">fr-rbind.QR_matrix</a></code>,
-<code><a href="sort.html">fr-sort.QR_matrix</a></code>,
-<code><a href="weighted_score.html">fr-weighted_score</a></code>,
-<code><a href="rbind.QR_matrix.html">rbind.QR_matrix</a>()</code></p></div>
-    </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
