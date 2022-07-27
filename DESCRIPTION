@@ -1,7 +1,7 @@
 Package: JDCruncheR
 Title: Interface between the JDemetra+ cruncher and R, and quality report generator
-Version: 0.2.3
-Date: 05/02/2019
+Version: 0.2.4
+Date: 27/07/2022
 Authors@R: 
     c(person(given = "Alain",
              family = "Quartier-la-Tente",

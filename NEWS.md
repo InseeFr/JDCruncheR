@@ -1,13 +1,19 @@
+% Latest JDCruncher news
+
 # JDCruncher 0.2.4
 
-* The functions'help pages as well as the package vignettes are now available both in French and English.  
-* The function choose.file, not compatible with all OS, has been replaced by an error message.  
+ * The functions' help pages as well as the package vignettes are now available both in French and English.
+ * The function choose.file, not compatible with all OS, has been replaced by an error message.  
+
+---
 
 # JDCruncher 0.2.3
 
  * the function `weighted_score()` now creates a new `score_pond` variable, rather than replacing it. The function `extract_score()` extracts both weighted and unweighted scores.
  * change in the cruncher's default export parameters and in the indicators used by the function `compute_score()` to calculate the score.
  * addition of a `conditional_indicator` parameter to the function `compute_score()` to reduce down to 1 the weight of some indicators, depending on other variables' value.
+
+---
 
 # JDCruncher 0.2.2
 
@@ -24,10 +30,13 @@
  * modification of `compute_score()`: the parameter score_formula is removed and replaced by score_pond. The score is calculated using the vector of variables to weight instead of a formula. The function now also carries two additional arguments: n_contrib_score to extract the variables that contribute the most to the score, and na.rm to take into account the missing values when calculating the score.
  * bug fixed in  `extract_QR()`: the Q-m2 stat was equal to the Q stat.
 
+---
+
 # JDCruncher 0.2.1
 
 Bug fixed in the functions `retain_indicators()` and `remove_indicator()`.
 
+---
 
 # JDCruncher 0.2.0
 
