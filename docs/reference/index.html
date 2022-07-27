@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">JDCruncheR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.4</span>
       </span>
     </div>
 
@@ -31,9 +31,19 @@
 <li>
   <a href="../reference/index.html">Package functions</a>
 </li>
-<li>
-  <a href="../articles/Using_the_cruncher_with_JDCruncheR.html">Vignette</a>
-</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Vignette
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu"><li>
+      <a href="../articles/Using_the_cruncher_with_JDCruncheR.html">Using the cruncher with JDCruncheR</a>
+    </li>
+    <li>
+      <a href="../articles/Lancement_cruncher.html">Utiliser le cruncher avec JDCruncheR</a>
+    </li>
+  </ul></li>
 <li>
   <a href="../news/index.html">News</a>
 </li>
@@ -78,15 +88,15 @@
       </tr></tbody><tbody><tr><td>
           <p><code><a href="extract_QR.html">extract_QR()</a></code> </p>
         </td>
-        <td><p>#' Extraction of a quality report</p></td>
+        <td><p>Extraction of a quality report</p></td>
       </tr><tr><td>
           <p><code><a href="compute_score.html">compute_score(<i>&lt;QR_matrix&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Calcul d'un score global</p></td>
+        <td><p>Score calculation</p></td>
       </tr><tr><td>
           <p><code><a href="weighted_score.html">weighted_score()</a></code> </p>
         </td>
-        <td><p>Calcul d'un score pondéré pour chaque observation</p></td>
+        <td><p>Weighted score calculation</p></td>
       </tr><tr><td>
           <p><code><a href="export_xlsx.mQR_matrix.html">export_xlsx(<i>&lt;mQR_matrix&gt;</i>)</a></code> </p>
         </td>
@@ -96,17 +106,21 @@
         </td>
         <td><p>Exporting QR_matrix objects in an Excel file</p></td>
       </tr><tr><td>
+          <p><code><a href="export_xlsx.html">export_xlsx()</a></code> </p>
+        </td>
+        <td><p>The function to call in practice</p></td>
+      </tr><tr><td>
           <p><code><a href="extract_score.html">extract_score()</a></code> </p>
         </td>
         <td><p>Score extraction</p></td>
       </tr><tr><td>
           <p><code><a href="QR_matrix.html">QR_matrix()</a></code> <code><a href="QR_matrix.html">mQR_matrix()</a></code> <code><a href="QR_matrix.html">is.QR_matrix()</a></code> <code><a href="QR_matrix.html">is.mQR_matrix()</a></code> </p>
         </td>
-        <td><p>Objets bilan qualité</p></td>
+        <td><p>Quality report objects</p></td>
       </tr><tr><td>
           <p><code><a href="QR_var_manipulation.html">remove_indicators()</a></code> <code><a href="QR_var_manipulation.html">retain_indicators()</a></code> </p>
         </td>
-        <td><p>Manipulation de la liste des indicateurs</p></td>
+        <td><p>Editing the indicators list</p></td>
       </tr><tr><td>
           <p><code><a href="rbind.QR_matrix.html">rbind(<i>&lt;QR_matrix&gt;</i>)</a></code> </p>
         </td>
@@ -122,14 +136,14 @@
       </tr><tr><td>
           <p><code><a href="sort.html">sort(<i>&lt;QR_matrix&gt;</i>)</a></code> <code><a href="sort.html">sort(<i>&lt;mQR_matrix&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Tri des objets QR_matrix et mQR_matrix</p></td>
+        <td><p>QR_matrix and mQR_matrix sorting</p></td>
       </tr><tr><td>
           <p><code><a href="print.QR_matrix.html">print(<i>&lt;QR_matrix&gt;</i>)</a></code> <code><a href="print.QR_matrix.html">print(<i>&lt;mQR_matrix&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Affichage des objets QR_matrix et mQR_matrix</p></td>
+        <td><p>Printing QR_matrix and mQR_matrix objects</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
           <h2 id="cruncher">Cruncher <a href="#cruncher" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p><p>Function to use the cruncher</p>
+          <p class="section-desc"></p><p>Functions to use the cruncher</p>
         </th>
       </tr></tbody><tbody><tr><td>
           <p><code><a href="cruncher.html">cruncher()</a></code> </p>

@@ -8,13 +8,13 @@
 multiprocessing_names(workspace)
 }
 \arguments{
-\item{workspace}{path to the workspace. When missing, a window to select the workspace opens.}
+\item{workspace}{path to the workspace.}
 }
 \value{
-a \code{data.frame} with the multiprocessing name as seen in the JDemetra+ interface (column \code{name}) and the corresponding xml files' title (column \code{file}).
+a \code{data.frame} with the multiprocessing names as seen in the JDemetra+ interface (column \code{name}) and the corresponding xml files names (column \code{file}).
 }
 \description{
-Function to extract multiprocessings names as seen in the JDemetra+ interface as well as from their xml files'.
+Function to extract multiprocessings names as seen in the JDemetra+ interface as well as their xml files' names.
 }
 \seealso{
 \link[=fr-multiprocessing_names]{Traduction française}

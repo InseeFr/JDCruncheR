@@ -17,7 +17,7 @@ cruncher(
 
 \item{cruncher_bin_directory}{path to the "bin" folder of the cruncher. To see the default value, compile \code{getOption("cruncher_bin_directory")}.}
 
-\item{param_file_path}{path to the settings file. By default, a ".params" file is searched for in the same folder the workspace is stored in.}
+\item{param_file_path}{path to the settings file. By default, a .params file is searched for in the same folder the workspace is stored in.}
 
 \item{log_file}{name of the log file. By default, no log file is exported.}
 }
@@ -33,10 +33,6 @@ Function to launch the cruncher on a workspace from a settings file.
 Other Cruncher functions: 
 \code{\link{create_param_file}()},
 \code{\link{cruncher_and_param}()},
-\code{\link{fr-create_param_file}},
-\code{\link{fr-cruncher_and_param}},
-\code{\link{fr-cruncher}},
-\code{\link{fr-update_workspace}},
 \code{\link{update_workspace}()}
 }
 \concept{Cruncher functions}

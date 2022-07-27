@@ -21,7 +21,7 @@
 \item{layout_file}{export parameter. By default, (\code{layout_file = "ByComponent"}) and an Excel file is exported for each part of the
 quality report matrix (modalities and values matrices). To group both modalities and values reports/sheets into a single Excel file, use the option \code{layout_file = "ByQRMatrix"}.}
 
-\item{file_extension}{possible values are (\code{".xls"} and \code{".xlsx"}).}
+\item{file_extension}{possible values are \code{".xls"} and \code{".xlsx"}.}
 
 \item{layout}{elements of the report to export: see \code{\link{export_xlsx.QR_matrix}} .}
 
@@ -35,16 +35,10 @@ To export several quality reports in Excel files
 
 Other QR_matrix functions: 
 \code{\link{export_xlsx.QR_matrix}()},
+\code{\link{export_xlsx}()},
 \code{\link{extract_QR}()},
-\code{\link{extract_score}()},
-\code{\link{fr-compute_score}},
-\code{\link{fr-export_xlsx.QR_matrix}},
-\code{\link{fr-export_xlsx.mQR_matrix}},
-\code{\link{fr-extract_QR}},
-\code{\link{fr-extract_score}},
-\code{\link{fr-rbind.QR_matrix}},
-\code{\link{fr-sort.QR_matrix}},
-\code{\link{fr-weighted_score}},
-\code{\link{rbind.QR_matrix}()}
+\code{\link{rbind.QR_matrix}()},
+\code{\link{sort}()},
+\code{\link{weighted_score}()}
 }
 \concept{QR_matrix functions}

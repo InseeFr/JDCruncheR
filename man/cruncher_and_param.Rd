@@ -16,7 +16,7 @@ cruncher_and_param(
 )
 }
 \arguments{
-\item{workspace}{path to the workspace. If not specified, a window opens so the user can select a workspace.}
+\item{workspace}{path to the workspace.}
 
 \item{cruncher_bin_directory}{path to the cruncher "bin" folder.}
 
@@ -44,10 +44,6 @@ Function to simultaneously crunch a workspace and create its .params file
 Other Cruncher functions: 
 \code{\link{create_param_file}()},
 \code{\link{cruncher}()},
-\code{\link{fr-create_param_file}},
-\code{\link{fr-cruncher_and_param}},
-\code{\link{fr-cruncher}},
-\code{\link{fr-update_workspace}},
 \code{\link{update_workspace}()}
 }
 \concept{Cruncher functions}

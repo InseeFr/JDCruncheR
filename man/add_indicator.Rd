@@ -19,9 +19,9 @@ add_indicator(x, indicator, variable_name, ...)
 Function to add indicators in \code{QR_matrix} objects.
 }
 \details{
-The function \code{add_indicator()} adds a chosen indicator in the values matrix of a quality report.
+The function \code{add_indicator()} adds the chosen indicator to the values matrix of a quality report.
 Therefore, because said indicator isn't added in the modalities matrix, it cannot be used to calculate a score (except for weighting).
-Before using the added variable for score calculation, the function \code{\link{recode_indicator_num}} will have to be adapted.
+Before using the added variable for score calculation, it will have to be coded with the function \code{\link{recode_indicator_num}}.
 
 The new indicator can be a \code{vector} or a \code{data.frame}. In both cases, its format must allow for pairing:
 \itemize{
@@ -33,9 +33,7 @@ The new indicator can be a \code{vector} or a \code{data.frame}. In both cases, 
 \link[=fr-add_indicator]{Traduction française}
 
 Other var QR_matrix manipulation: 
-\code{\link{fr-add_indicator}},
-\code{\link{fr-recode_indicator_num}},
-\code{\link{fr-remove_indicators}},
+\code{\link{QR_var_manipulation}},
 \code{\link{recode_indicator_num}()}
 }
 \concept{var QR_matrix manipulation}

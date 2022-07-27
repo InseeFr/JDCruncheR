@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">JDCruncheR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.4</span>
       </span>
     </div>
 
@@ -31,9 +31,19 @@
 <li>
   <a href="../reference/index.html">Package functions</a>
 </li>
-<li>
-  <a href="../articles/Using_the_cruncher_with_JDCruncheR.html">Vignette</a>
-</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Vignette
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu"><li>
+      <a href="../articles/Using_the_cruncher_with_JDCruncheR.html">Using the cruncher with JDCruncheR</a>
+    </li>
+    <li>
+      <a href="../articles/Lancement_cruncher.html">Utiliser le cruncher avec JDCruncheR</a>
+    </li>
+  </ul></li>
 <li>
   <a href="../news/index.html">News</a>
 </li>
@@ -101,9 +111,9 @@
 </dl></div>
     <div id="details">
     <h2>Details</h2>
-    <p>The function <code>add_indicator()</code> adds a chosen indicator in the values matrix of a quality report.
+    <p>The function <code>add_indicator()</code> adds the chosen indicator to the values matrix of a quality report.
 Therefore, because said indicator isn't added in the modalities matrix, it cannot be used to calculate a score (except for weighting).
-Before using the added variable for score calculation, the function <code><a href="recode_indicator_num.html">recode_indicator_num</a></code> will have to be adapted.</p>
+Before using the added variable for score calculation, it will have to be coded with the function <code><a href="recode_indicator_num.html">recode_indicator_num</a></code>.</p>
 <p>The new indicator can be a <code>vector</code> or a <code>data.frame</code>. In both cases, its format must allow for pairing:</p><ul><li><p>a <code>vector</code>'s elements must be named and these names must match those of the quality report (variable "series");</p></li>
 <li><p>a <code>data.frame</code> must contain a "series" column that matches with the quality report's series.</p></li>
 </ul></div>
@@ -111,9 +121,7 @@ Before using the added variable for score calculation, the function <code><a hre
     <h2>See also</h2>
     <div class="dont-index"><p><a href="fr-add_indicator.html">Traduction française</a></p>
 <p>Other var QR_matrix manipulation: 
-<code><a href="fr-add_indicator.html">fr-add_indicator</a></code>,
-<code><a href="fr-recode_indicator_num.html">fr-recode_indicator_num</a></code>,
-<code><a href="QR_var_manipulation.html">fr-remove_indicators</a></code>,
+<code><a href="QR_var_manipulation.html">QR_var_manipulation</a></code>,
 <code><a href="recode_indicator_num.html">recode_indicator_num</a>()</code></p></div>
     </div>
 

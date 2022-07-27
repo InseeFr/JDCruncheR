@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">JDCruncheR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.4</span>
       </span>
     </div>
 
@@ -31,9 +31,19 @@
 <li>
   <a href="../reference/index.html">Package functions</a>
 </li>
-<li>
-  <a href="../articles/Using_the_cruncher_with_JDCruncheR.html">Vignette</a>
-</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Vignette
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu"><li>
+      <a href="../articles/Using_the_cruncher_with_JDCruncheR.html">Using the cruncher with JDCruncheR</a>
+    </li>
+    <li>
+      <a href="../articles/Lancement_cruncher.html">Utiliser le cruncher avec JDCruncheR</a>
+    </li>
+  </ul></li>
 <li>
   <a href="../news/index.html">News</a>
 </li>
@@ -79,7 +89,7 @@
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for mQR_matrix</span>
-<span class="fu">export_xlsx</span><span class="op">(</span>
+<span class="fu"><a href="export_xlsx.html">export_xlsx</a></span><span class="op">(</span>
   <span class="va">x</span>,
   export_dir <span class="op">=</span> <span class="st">"./"</span>,
   layout_file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ByComponent"</span>, <span class="st">"ByQRMatrix"</span><span class="op">)</span>,
@@ -105,7 +115,7 @@ quality report matrix (modalities and values matrices). To group both modalities
 
 
 <dt>file_extension</dt>
-<dd><p>possible values are (<code>".xls"</code> and <code>".xlsx"</code>).</p></dd>
+<dd><p>possible values are <code>".xls"</code> and <code>".xlsx"</code>.</p></dd>
 
 
 <dt>layout</dt>
@@ -121,17 +131,11 @@ quality report matrix (modalities and values matrices). To group both modalities
     <div class="dont-index"><p><a href="fr-export_xlsx.mQR_matrix.html">Traduction française</a></p>
 <p>Other QR_matrix functions: 
 <code><a href="export_xlsx.QR_matrix.html">export_xlsx.QR_matrix</a>()</code>,
+<code><a href="export_xlsx.html">export_xlsx</a>()</code>,
 <code><a href="extract_QR.html">extract_QR</a>()</code>,
-<code><a href="extract_score.html">extract_score</a>()</code>,
-<code><a href="compute_score.html">fr-compute_score</a></code>,
-<code><a href="fr-export_xlsx.QR_matrix.html">fr-export_xlsx.QR_matrix</a></code>,
-<code><a href="fr-export_xlsx.mQR_matrix.html">fr-export_xlsx.mQR_matrix</a></code>,
-<code><a href="fr-extract_QR.html">fr-extract_QR</a></code>,
-<code><a href="fr-extract_score.html">fr-extract_score</a></code>,
-<code><a href="fr-rbind.QR_matrix.html">fr-rbind.QR_matrix</a></code>,
-<code><a href="sort.html">fr-sort.QR_matrix</a></code>,
-<code><a href="weighted_score.html">fr-weighted_score</a></code>,
-<code><a href="rbind.QR_matrix.html">rbind.QR_matrix</a>()</code></p></div>
+<code><a href="rbind.QR_matrix.html">rbind.QR_matrix</a>()</code>,
+<code><a href="sort.html">sort</a>()</code>,
+<code><a href="weighted_score.html">weighted_score</a>()</code></p></div>
     </div>
 
   </div>

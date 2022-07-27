@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">JDCruncheR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.4</span>
       </span>
     </div>
 
@@ -31,9 +31,19 @@
 <li>
   <a href="../reference/index.html">Package functions</a>
 </li>
-<li>
-  <a href="../articles/Using_the_cruncher_with_JDCruncheR.html">Vignette</a>
-</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Vignette
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu"><li>
+      <a href="../articles/Using_the_cruncher_with_JDCruncheR.html">Using the cruncher with JDCruncheR</a>
+    </li>
+    <li>
+      <a href="../articles/Lancement_cruncher.html">Utiliser le cruncher avec JDCruncheR</a>
+    </li>
+  </ul></li>
 <li>
   <a href="../news/index.html">News</a>
 </li>
@@ -88,20 +98,20 @@
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>workspace</dt>
-<dd><p>path to the workspace. By default, a window opens to select the workspace.</p></dd>
+<dd><p>path to the workspace.</p></dd>
 
 
 <dt>policy</dt>
 <dd><p>refresh policy. By default, <code>policy = "parameters"</code>.
-The other methods available are:
-<code>"current"</code> or <code>"n"</code> (fixed model + all new data are classified as dditive outliers)
-<code>"fixed"</code> or <code>"f"</code> (fixed model: the model is unchanged)
-<code>"fixedparameters"</code> or <code>"fp"</code> (re-estimation of the regression coefficients)
-<code>"parameters"</code> or <code>"p"</code> (above + re-estimation of the arima coefficients)
-<code>"lastoutliers"</code> or <code>"l"</code> (above + re-identification of the outliers over the last year) ;
-<code>"outliers"</code> or <code>"o"</code> (above + re-identification of the outliers over the whole series span) ;
-<code>"stochastic"</code> or <code>"s"</code> (above + re-estimation of the arima model (orders)) ;
-<code>"complete"</code> or <code>"c"</code> (the model is completely re-estimated).</p></dd>
+The other methods available are:</p>
+<p><code>"current"</code> or <code>"n"</code> (fixed model + all new data are classified as additive outliers)</p>
+<p><code>"fixed"</code> or <code>"f"</code> (fixed model: the model is unchanged)</p>
+<p><code>"fixedparameters"</code> or <code>"fp"</code> (re-estimation of the regression coefficients)</p>
+<p><code>"parameters"</code> or <code>"p"</code> (above + re-estimation of the arima coefficients)</p>
+<p><code>"lastoutliers"</code> or <code>"l"</code> (above + re-identification of the outliers over the last year)</p>
+<p><code>"outliers"</code> or <code>"o"</code> (above + re-identification of the outliers over the whole series span)</p>
+<p><code>"stochastic"</code> or <code>"s"</code> (above + re-estimation of the arima model (orders))</p>
+<p><code>"complete"</code> or <code>"c"</code> (the model is completely re-estimated).</p></dd>
 
 
 <dt>cruncher_bin_directory</dt>
@@ -120,11 +130,7 @@ The other methods available are:
 <p>Other Cruncher functions: 
 <code><a href="create_param_file.html">create_param_file</a>()</code>,
 <code><a href="cruncher_and_param.html">cruncher_and_param</a>()</code>,
-<code><a href="cruncher.html">cruncher</a>()</code>,
-<code><a href="fr-create_param_file.html">fr-create_param_file</a></code>,
-<code><a href="fr-cruncher_and_param.html">fr-cruncher_and_param</a></code>,
-<code><a href="fr-cruncher.html">fr-cruncher</a></code>,
-<code><a href="fr-update_workspace.html">fr-update_workspace</a></code></p></div>
+<code><a href="cruncher.html">cruncher</a>()</code></p></div>
     </div>
 
   </div>

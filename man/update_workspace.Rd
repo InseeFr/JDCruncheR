@@ -12,17 +12,25 @@ update_workspace(
 )
 }
 \arguments{
-\item{workspace}{path to the workspace. By default, a window opens to select the workspace.}
+\item{workspace}{path to the workspace.}
 
 \item{policy}{refresh policy. By default, \code{policy = "parameters"}.
 The other methods available are:
-\code{"current"} or \code{"n"} (fixed model + all new data are classified as dditive outliers)
+
+\code{"current"} or \code{"n"} (fixed model + all new data are classified as additive outliers)
+
 \code{"fixed"} or \code{"f"} (fixed model: the model is unchanged)
+
 \code{"fixedparameters"} or \code{"fp"} (re-estimation of the regression coefficients)
+
 \code{"parameters"} or \code{"p"} (above + re-estimation of the arima coefficients)
-\code{"lastoutliers"} or \code{"l"} (above + re-identification of the outliers over the last year) ;
-\code{"outliers"} or \code{"o"} (above + re-identification of the outliers over the whole series span) ;
-\code{"stochastic"} or \code{"s"} (above + re-estimation of the arima model (orders)) ;
+
+\code{"lastoutliers"} or \code{"l"} (above + re-identification of the outliers over the last year)
+
+\code{"outliers"} or \code{"o"} (above + re-identification of the outliers over the whole series span)
+
+\code{"stochastic"} or \code{"s"} (above + re-estimation of the arima model (orders))
+
 \code{"complete"} or \code{"c"} (the model is completely re-estimated).}
 
 \item{cruncher_bin_directory}{path to the cuncher "bin" folder.}
@@ -39,10 +47,6 @@ Function to update a workspace without exporting the results
 Other Cruncher functions: 
 \code{\link{create_param_file}()},
 \code{\link{cruncher_and_param}()},
-\code{\link{cruncher}()},
-\code{\link{fr-create_param_file}},
-\code{\link{fr-cruncher_and_param}},
-\code{\link{fr-cruncher}},
-\code{\link{fr-update_workspace}}
+\code{\link{cruncher}()}
 }
 \concept{Cruncher functions}

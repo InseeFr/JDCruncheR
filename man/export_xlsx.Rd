@@ -14,3 +14,13 @@ export_xlsx(x, ...)
 \description{
 The function to call in practice
 }
+\seealso{
+Other QR_matrix functions: 
+\code{\link{export_xlsx.QR_matrix}()},
+\code{\link{export_xlsx.mQR_matrix}()},
+\code{\link{extract_QR}()},
+\code{\link{rbind.QR_matrix}()},
+\code{\link{sort}()},
+\code{\link{weighted_score}()}
+}
+\concept{QR_matrix functions}
