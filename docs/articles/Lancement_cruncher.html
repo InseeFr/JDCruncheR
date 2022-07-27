@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">JDCruncheR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.4</span>
       </span>
     </div>
 
@@ -48,8 +48,20 @@
 <li>
   <a href="../reference/index.html">Package functions</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Vignette
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
 <li>
-  <a href="../articles/Using_the_cruncher_with_JDCruncheR.html">Vignette</a>
+      <a href="../articles/Using_the_cruncher_with_JDCruncheR.html">Using the cruncher with JDCruncheR</a>
+    </li>
+    <li>
+      <a href="../articles/Lancement_cruncher.html">Utiliser le cruncher avec JDCruncheR</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -95,7 +107,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Le lancement du cruncher avec JDCruncheR</h1>
             
-            <h4 data-toc-skip class="date">2022-07-18</h4>
+            <h4 data-toc-skip class="date">2022-07-27</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/InseeFr/JDCruncheR/blob/HEAD/vignettes/Lancement_cruncher.Rmd" class="external-link"><code>vignettes/Lancement_cruncher.Rmd</code></a></small>
       <div class="hidden name"><code>Lancement_cruncher.Rmd</code></div>
@@ -104,38 +116,39 @@
 
     
     
-<p>La version actuelle du package JDCruncheR (0.2.3) permet de faire deux choses :</p>
+<p>La version actuelle du package JDCruncheR (0.2.4) permet de faire deux choses :</p>
 <ul>
 <li>lancer facilement le cruncher de JDemetra+ (<a href="https://github.com/jdemetra/jwsacruncher/releases" class="external-link">JWSACruncher</a>) pour mettre à jour un workspace et en exporter les résultats.<br>
 </li>
 <li>calculer un <em>bilan qualité</em> qui permet de synthétiser l’ensemble des diagnostics liés aux séries désaisonnalisées, afin de repérer rapidement les séries les plus problématiques sur lesquelles il faut concentrer son analyse. Ce bilan est surtout utile dans le cas de la désaisonnalisation d’un grand nombre de séries puisqu’il est dans ce cas impossible de regarder l’ensemble des diagnostics pour chaque série dans un temps raisonnable.</li>
 </ul>
 <div class="section level2">
-<h2 id="lancement-du-cruncher">Lancement du cruncher<a class="anchor" aria-label="anchor" href="#lancement-du-cruncher"></a>
+<h2 id="à-propos-du-cruncher">À propos du cruncher<a class="anchor" aria-label="anchor" href="#%C3%A0-propos-du-cruncher"></a>
 </h2>
 <p>Pour éviter que le présent package (JDCruncheR) ne soit trop volumineux, il ne contient pas le cruncher de JDemetra+. Ce dernier peut être téléchargé à l’adresse suivante: <a href="https://github.com/jdemetra/jdemetra-app/releases" class="external-link uri">https://github.com/jdemetra/jdemetra-app/releases</a>. Pour plus d’informations sur l’installation du cruncher et sa configuration avec une version portable de Java, voir le wiki de JDCruncheR : <a href="https://github.com/InseeFr/JDCruncheR/wiki/Installation-et-configuration-de-JDemetra--et-du-cruncher" class="external-link uri">https://github.com/InseeFr/JDCruncheR/wiki/Installation-et-configuration-de-JDemetra--et-du-cruncher</a>.</p>
 <p>Pour lancer le cruncher de JDemetra+, il faut trois éléments :</p>
 <ul>
-<li>un fichier contenant les paramètres sur la méthode de rafraîchissement à utiliser pour mettre le workspace à jour ;<br>
+<li>un fichier contenant les paramètres sur la méthode de rafraîchissement à utiliser pour mettre le workspace à jour ;<br>
 </li>
-<li>un workspace valide de JDemetra+ ;<br>
+<li>un workspace valide de JDemetra+ ;<br>
 </li>
 <li>le chemin d’accès au cruncher.</li>
 </ul>
 <p>Dans le package JDCruncheR, il existe trois fonctions associées au lancement du cruncher :</p>
 <ul>
 <li>
-<code><a href="../reference/create_param_file.html">create_param_file()</a></code> qui permet de créer le fichier de paramètres ;<br>
+<code><a href="../reference/create_param_file.html">create_param_file()</a></code> qui permet de créer le fichier de paramètres ;<br>
 </li>
 <li>
-<code><a href="../reference/cruncher.html">cruncher()</a></code> qui permet de lancer le cruncher sur un workspace à partir d’un fichier de paramètres ;<br>
+<code><a href="../reference/cruncher.html">cruncher()</a></code> qui permet de lancer le cruncher sur un workspace à partir d’un fichier de paramètres ;<br>
 </li>
 <li>
 <code><a href="../reference/cruncher_and_param.html">cruncher_and_param()</a></code> qui permet de lancer le cruncher tout en créant le fichier de paramètres et de personnaliser certaines sorties du cruncher.</li>
 </ul>
-<div class="section level3">
-<h3 id="création-du-fichier-de-paramètres-avec-create_param_file">Création du fichier de paramètres avec <code>create_param_file()</code><a class="anchor" aria-label="anchor" href="#cr%C3%A9ation-du-fichier-de-param%C3%A8tres-avec-create_param_file"></a>
-</h3>
+</div>
+<div class="section level2">
+<h2 id="création-du-fichier-de-paramètres-avec-create_param_file">Création du fichier de paramètres avec <code>create_param_file()</code><a class="anchor" aria-label="anchor" href="#cr%C3%A9ation-du-fichier-de-param%C3%A8tres-avec-create_param_file"></a>
+</h2>
 <p>Les paramètres de la fonction <code><a href="../reference/create_param_file.html">create_param_file()</a></code> sont les mêmes que ceux décrits dans le wiki du cruncher de JDemetra+ (<a href="https://github.com/jdemetra/jwsacruncher/wiki" class="external-link uri">https://github.com/jdemetra/jwsacruncher/wiki</a>). Les trois paramètres les plus importants de <code><a href="../reference/create_param_file.html">create_param_file()</a></code> sont :</p>
 <ol style="list-style-type: decimal">
 <li>
@@ -277,9 +290,9 @@ Ré-identification de tout le modèle regARIMA.
                                   <span class="st">"likelihood.bic"</span>, <span class="st">"likelihood.bicc"</span><span class="op">)</span>,
                   tsmatrix_series <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sa"</span>, <span class="st">"sa_f"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="lancement-du-cruncher-1">Lancement du cruncher<a class="anchor" aria-label="anchor" href="#lancement-du-cruncher-1"></a>
-</h3>
+<div class="section level2">
+<h2 id="lancement-du-cruncher">Lancement du cruncher<a class="anchor" aria-label="anchor" href="#lancement-du-cruncher"></a>
+</h2>
 <p>Pour lancer le cruncher avec <code><a href="../reference/cruncher.html">cruncher()</a></code> ou <code><a href="../reference/cruncher_and_param.html">cruncher_and_param()</a></code>, il faut spécifier le chemin d’accès au dossier contenant le cruncher (paramètre <code>cruncher_bin_directory</code>) ainsi que celui du workspace à traiter (paramètre <code>workspace</code>).</p>
 <p>Par défaut, le chemin d’accès au dossier du cruncher est celui contenu dans le paramètre <code>cruncher_bin_directory</code> : il suffit donc de modifier une seule fois cette option afin qu’elle s’applique à toutes les exécutions du cruncher. Le chemin à indiquer est celui du dossier contenant le fichier <em>jwsacruncher.bat</em>, situé dans le dossier “Bin” du dossier d’installation du cruncher. Ainsi, s’il a été installé sous <code>D:\jdemetra-cli-2.2.3</code>, le fichier <em>jwsacruncher.bat</em> sera présent sous <code>D:\jdemetra-cli-2.2.3\bin</code>. Il faut donc modifier l’option <code>cruncher_bin_directory</code> de la façon suivante :</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -314,7 +327,6 @@ Ré-identification de tout le modèle regARIMA.
 
 <span class="co"># Pour voir les autres paramètres de la fonction :</span>
 <span class="op">?</span><span class="va">cruncher_and_param</span></code></pre></div>
-</div>
 </div>
   </div>
 
