@@ -29,16 +29,11 @@ NULL
 #' @family Cruncher functions
 #' @seealso [Traduction française][fr-cruncher()]
 #' @export
-cruncher <- function(workspace,
+cruncher <- function(workspace=workspace,
                      cruncher_bin_directory = getOption("cruncher_bin_directory"),
                      param_file_path, log_file){
     if(missing(workspace) || is.null(workspace)){
-        if(Sys.info()[['sysname']] == "Windows"){
-            workspace <- utils::choose.files(caption = "Please select a workspace",
-                                             filters = c("Fichier XML","*.xml"))
-        }else{
-            workspace <- base::file.choose()
-        }
+        stop("Please call the cruncher() on a valid workspace")
     }
 
     if(length(workspace) == 0)
@@ -61,10 +56,12 @@ cruncher <- function(workspace,
     }
     workspace <- paste0(workspace,".xml")
 
-    if(!all(file.exists(paste0(cruncher_bin_directory,"/jwsacruncher"),
-                        workspace,
-                        param_file_path)))
-        stop("There is an error in the path to the .params file, the cruncher bin folder or the workspace.")
+    if(!file.exists(paste0(cruncher_bin_directory,"/jwsacruncher")))
+        stop("There is an error in the path to the cruncher bin folder")
+    if(!file.exists(workspace))
+        stop("There is an error in the path to the workspace")
+    if(!file.exists(param_file_path))
+        stop("There is an error in the path to the .params file")
 
     wd <- getwd()
     setwd(cruncher_bin_directory)
@@ -128,7 +125,7 @@ NULL
 #' @family Cruncher functions
 #' @seealso [Traduction française][fr-cruncher_and_param()]
 #' @export
-cruncher_and_param <- function(workspace = NULL,
+cruncher_and_param <- function(workspace = workspace,
                                cruncher_bin_directory = getOption("cruncher_bin_directory"),
                                rename_multi_documents = TRUE,
                                output = NULL,
@@ -206,12 +203,7 @@ NULL
 #' @export
 multiprocessing_names <- function(workspace){
     if(missing(workspace) || is.null(workspace)){
-        if(Sys.info()[['sysname']] == "Windows"){
-            workspace <- utils::choose.files(caption = "Please select a workspace",
-                                             filters = c("Fichier XML","*.xml"))
-        }else{
-            workspace <- base::file.choose()
-        }
+        stop("Please call multiprocessing_names() on a valid workspace")
     }
 
     if(length(workspace) == 0)
@@ -294,7 +286,7 @@ NULL
 #' @family Cruncher functions
 #' @seealso [Traduction française][fr-update_workspace()]
 #' @export
-update_workspace <- function(workspace = NULL,
+update_workspace <- function(workspace = workspace,
                              policy = "parameters",
                              cruncher_bin_directory = getOption("cruncher_bin_directory")){
 

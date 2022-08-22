@@ -6,7 +6,7 @@
 \title{The Cruncher launcher}
 \usage{
 cruncher(
-  workspace,
+  workspace = workspace,
   cruncher_bin_directory = getOption("cruncher_bin_directory"),
   param_file_path,
   log_file

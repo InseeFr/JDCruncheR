@@ -6,7 +6,7 @@
 \title{Workspace update}
 \usage{
 update_workspace(
-  workspace = NULL,
+  workspace = workspace,
   policy = "parameters",
   cruncher_bin_directory = getOption("cruncher_bin_directory")
 )
