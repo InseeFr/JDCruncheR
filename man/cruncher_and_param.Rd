@@ -6,7 +6,7 @@
 \title{Combined cruncher launcher}
 \usage{
 cruncher_and_param(
-  workspace = NULL,
+  workspace = workspace,
   cruncher_bin_directory = getOption("cruncher_bin_directory"),
   rename_multi_documents = TRUE,
   output = NULL,

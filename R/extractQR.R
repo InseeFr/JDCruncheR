@@ -72,17 +72,12 @@ NULL
 #' QR[["modalities"]]
 #' }
 #' @importFrom stats sd
-#' @importFrom utils read.csv choose.files
+#' @importFrom utils read.csv
 #' @seealso [Traduction française][fr-extract_QR()]
 #' @export
 extract_QR <- function(matrix_output_file, sep = ";", dec = ","){
     if(missing(matrix_output_file) || is.null(matrix_output_file)){
-        if(Sys.info()[['sysname']] == "Windows"){
-            matrix_output_file <- choose.files(caption = "Please select the file containing the parameters matrix",
-                                               filters = c("Fichier CSV","*.csv"))
-        }else{
-            matrix_output_file <- file.choose()
-        }
+        stop("Please call extract_QR() on a csv file containing at least one cruncher output matrix (demetra_m.csv for example)")
     }
     if(length(matrix_output_file) == 0)
         stop("The chosen csv file is empty")
