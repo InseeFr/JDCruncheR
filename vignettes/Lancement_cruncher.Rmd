@@ -25,7 +25,7 @@ La version actuelle du package JDCruncheR (`r utils::packageVersion("JDCruncheR"
 
 # À propos du cruncher
 
-Pour éviter que le présent package (JDCruncheR) ne soit trop volumineux, il ne contient pas le cruncher de JDemetra+. Ce dernier peut être téléchargé à l'adresse suivante: <https://github.com/jdemetra/jdemetra-app/releases>. Pour plus d'informations sur l'installation du cruncher et sa configuration avec une version portable de Java, voir le wiki de JDCruncheR : <https://github.com/InseeFr/JDCruncheR/wiki/Installation-et-configuration-de-JDemetra--et-du-cruncher>.
+Pour éviter que le présent package (JDCruncheR) ne soit trop volumineux, il ne contient pas le cruncher de JDemetra+. Ce dernier peut être téléchargé à l'adresse suivante: <https://github.com/jdemetra/jdemetra-app/releases>. Pour plus d'informations sur l'installation du cruncher et sa configuration avec une version portable de Java, voir le wiki de JDCruncheR : <https://github.com/InseeFr/JDCruncheR/wiki/Installation-&-configuration>.
 
 Pour lancer le cruncher de JDemetra+, il faut trois éléments :
 
