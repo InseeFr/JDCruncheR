@@ -1,8 +1,8 @@
 ## ----setup, include=FALSE-----------------------------------------------------
 knitr::opts_chunk$set(echo = TRUE, size = "small")
-library(JDCruncheR)
-library(kableExtra)
-library(knitr)
+library("JDCruncheR")
+library("kableExtra")
+library("knitr")
 
 ## ----echo=FALSE---------------------------------------------------------------
 refresh_policy <- structure(list(`Option sous JDemetra+` = c("Fixed model", 
@@ -41,7 +41,7 @@ if (opts_knit$get("rmarkdown.pandoc.to") == "latex"){
 
 
 ## ---- eval = FALSE------------------------------------------------------------
-#  library(JDCruncheR)
+#  library("JDCruncheR")
 #   # Pour afficher les paramètres par défaut :
 #  getOption("default_matrix_item")
 #  # Pour modifier les paramètres par défaut pour n'exporter par exemple
