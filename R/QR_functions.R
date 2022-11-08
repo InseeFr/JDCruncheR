@@ -229,7 +229,7 @@ compute_score.QR_matrix <- function(x,
 
         contrib <- t(sapply(1:nrow(QR_modalities),function(i){
             ligne_i <- QR_modalities[i,]
-            res <- colnames(QR_modalities)[order(ligne_i,
+            res <- colnames(QR_modalities)[order(t(ligne_i),
                                                  decreasing = TRUE,
                                                  na.last = TRUE)]
             ligne_i <- ligne_i[,res]
