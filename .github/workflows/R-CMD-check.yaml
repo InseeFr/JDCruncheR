@@ -52,8 +52,8 @@ jobs:
       - name: Install dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          packages: any::sessioninfo, knitr, kableExtra, rmarkdown
-          extra-packages: any::rcmdcheck
+          packages: any::sessioninfo
+          extra-packages: any::rcmdcheck, knitr, kableExtra, rmarkdown
 
       - uses: r-lib/actions/setup-tinytex@v2
 
