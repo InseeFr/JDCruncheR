@@ -52,7 +52,7 @@ jobs:
       - name: Install dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          packages: any::sessioninfo
+          packages: any::sessioninfo, knitr, kableExtra, rmarkdown
           extra-packages: any::rcmdcheck
 
       - uses: r-lib/actions/setup-tinytex@v2
