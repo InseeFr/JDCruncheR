@@ -9,7 +9,7 @@ Authors@R:
              email = "alain.quartier-la-tente@insee.fr"),
       person(given = "Institut national de la statistique et des études économiques",
              role = "cph",
-             email = c("anna.smyk@insee.fr","alice.tchang@insee.fr"),
+             email = c("anna.smyk@insee.fr","tanguy.barthelemy@insee.fr"),
              comment = "https://www.insee.fr/"))
 Description: This package enables the user to launch the JDemetra+ cruncher from R and to build complementary tools for seasonal adjustment 
     (generating quality reports and calculating series scores). The latest cruncher version can be downloaded here: https://github.com/jdemetra/jwsacruncher/releases.
@@ -26,5 +26,5 @@ License: file LICENSE
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.1
 Roxygen: list(markdown = TRUE)

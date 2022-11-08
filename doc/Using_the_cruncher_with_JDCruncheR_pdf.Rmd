@@ -28,9 +28,9 @@ vignette: >
 knitr::opts_chunk$set(
   echo = TRUE, size = "small"
 )
-library(JDCruncheR)
-library(kableExtra)
-library(knitr)
+library("JDCruncheR")
+library("kableExtra")
+library("knitr")
 ```
 
 
@@ -41,7 +41,7 @@ With the current version of the JDCruncheR package (`r utils::packageVersion("JD
 
 # About the cruncher
 
-To prevent the package from being too voluminous, it does not contain the JDemetra+ cruncher. Said cruncher can be downloaded here: <https://github.com/jdemetra/jdemetra-app/releases>. For more information on the cruncher installation and its set up with a portable version of Java, please refer to the JDCruncheR wiki: <https://github.com/InseeFr/JDCruncheR/wiki/Installation-and-set-up-of-JDemetra-and-the-cruncher>.
+To prevent the package from being too voluminous, it does not contain the JDemetra+ cruncher. Said cruncher can be downloaded here: <https://github.com/jdemetra/jdemetra-app/releases>. For more information on the cruncher installation and its set up with a portable version of Java, please refer to the JDCruncheR wiki: <https://github.com/InseeFr/JDCruncheR/wiki/Installation-&-configuration>.
 
 The JDemetra+ cruncher requires three elements to function:
 
@@ -121,7 +121,7 @@ Option in JDemetra+ & Cruncher option & Description\\
 
 2. `matrix_item`, a list containing the names of the parameters to export. By default, such names are those contained in the `default_matrix_item` option. Thus, the user can either modify the `default_matrix_item` option or the `matrix_item` option:
 ```{r, eval = FALSE}
-library(JDCruncheR)
+library("JDCruncheR")
 # To see the default parameters:
 getOption("default_matrix_item")
 # To customise the parameter selection (here, only the information criteria are exported):

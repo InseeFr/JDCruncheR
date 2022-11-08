@@ -28,9 +28,9 @@ vignette: >
 knitr::opts_chunk$set(
   echo = TRUE, size = "small"
 )
-library(JDCruncheR)
-library(kableExtra)
-library(knitr)
+library("JDCruncheR")
+library("kableExtra")
+library("knitr")
 ```
 
 
@@ -121,7 +121,7 @@ Option in JDemetra+ & Cruncher option & Description\\
 
 2. `matrix_item`, a list containing the names of the parameters to export. By default, such names are those contained in the `default_matrix_item` option. Thus, the user can either modify the `default_matrix_item` option or the `matrix_item` option:
 ```{r, eval = FALSE}
-library(JDCruncheR)
+library("JDCruncheR")
 # To see the default parameters:
 getOption("default_matrix_item")
 # To customise the parameter selection (here, only the information criteria are exported):

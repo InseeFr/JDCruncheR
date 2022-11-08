@@ -2,9 +2,9 @@
 knitr::opts_chunk$set(
   echo = TRUE, size = "small"
 )
-library(JDCruncheR)
-library(kableExtra)
-library(knitr)
+library("JDCruncheR")
+library("kableExtra")
+library("knitr")
 
 ## ----echo=FALSE, eval=FALSE---------------------------------------------------
 #  refresh_policy <- structure(list(`Option in JDemetra+` = c("Current adjustment (AO approach)",
@@ -40,7 +40,7 @@ library(knitr)
 #  
 
 ## ---- eval = FALSE------------------------------------------------------------
-#  library(JDCruncheR)
+#  library("JDCruncheR")
 #  # To see the default parameters:
 #  getOption("default_matrix_item")
 #  # To customise the parameter selection (here, only the information criteria are exported):
