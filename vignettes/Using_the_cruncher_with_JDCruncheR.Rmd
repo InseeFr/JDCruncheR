@@ -13,9 +13,9 @@ vignette: >
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, size = "small")
-library(JDCruncheR)
-library(kableExtra)
-library(knitr)
+library("JDCruncheR")
+library("kableExtra")
+library("knitr")
 ```
 
 With the current version of the JDCruncheR package (`r utils::packageVersion("JDCruncheR")`), you can:
@@ -88,7 +88,7 @@ if (opts_knit$get("rmarkdown.pandoc.to") == "latex"){
 
 2. `matrix_item` is a list containing the names of the parameters to export. By default, such names are those contained in the `default_matrix_item` option. Thus, the user can either modify the `default_matrix_item` option or the `matrix_item` option:
 ```{r, eval = FALSE}
-library(JDCruncheR)
+library("JDCruncheR")
  # To see the default parameters:
 getOption("default_matrix_item")
 # To customise the parameter selection (here, only the information criteria are exported):
