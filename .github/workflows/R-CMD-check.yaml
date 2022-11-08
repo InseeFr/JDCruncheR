@@ -50,7 +50,7 @@ jobs:
           packages: any::sessioninfo
           # packages: XML, XLConnect, knitr, kableExtra, rmarkdown
           extra-packages: any::rcmdcheck
-          needs: check
+          # needs: check
 
       - uses: r-lib/actions/setup-tinytex@v2
 
