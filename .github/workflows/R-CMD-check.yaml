@@ -41,7 +41,7 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          packages: XML
+          packages: XML XLConnect
           extra-packages: rcmdcheck
 
       - uses: r-lib/actions/setup-tinytex@v2
