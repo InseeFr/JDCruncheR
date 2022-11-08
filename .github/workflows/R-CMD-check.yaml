@@ -43,7 +43,6 @@ jobs:
       - name: Install dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          needs: Imports, Suggests
           # packages: XML, XLConnect, knitr, kableExtra, rmarkdown
           extra-packages: rcmdcheck
 
