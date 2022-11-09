@@ -21,9 +21,9 @@ jobs:
         # r: ['devel', 'release', 'oldrel-1', '4.2.1', '4.1.1', '4.1.3', '3.6.1']
         os: [ubuntu-latest, windows-latest]
         r: ['release', 'oldrel-1', '4.2.2', '4.2.1']
-        include:
-          - http-user-agent: 'release'
-            r: 'devel'
+        # include:
+        #   - http-user-agent: 'release'
+        #     r: 'devel'
         # config:
           # - {os: macOS-latest,   r: 'release'}
           # - {os: windows-latest, r: 'release'}
