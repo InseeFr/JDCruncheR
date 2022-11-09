@@ -17,13 +17,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # os: [ubuntu-latest, windows-latest, macOS-latest]
-        # r: ['devel', 'release', 'oldrel-1', '4.2.1', '4.1.1', '4.1.3', '3.6.1']
-        os: [ubuntu-latest, windows-latest]
-        r: ['release', 'oldrel-1', '4.2.2', '4.2.1']
-        # include:
-        #   - http-user-agent: 'release'
-        #     r: 'devel'
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+        r: ['devel', 'release', 'oldrel-1', '4.2.1', '4.1.1', '4.1.3', '3.6.1']
+        include:
+          - http-user-agent: 'release'
+            r: 'devel'
         # config:
           # - {os: macOS-latest,   r: 'release'}
           # - {os: windows-latest, r: 'release'}
@@ -52,7 +50,7 @@ jobs:
           use-public-rspm: true
 
       - name: Install dependencies
-        uses: r-lib/actions/setup-r-dependencies@v2
+        uses: r-lib/actions/setup-r-dependencies@v1
         with:
           extra-packages: rcmdcheck
         
