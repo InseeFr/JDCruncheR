@@ -54,8 +54,7 @@ jobs:
       - name: Install dependencies
         uses: r-lib/actions/setup-r-dependencies@v1
         with:
-          packages: any::sessioninfo
-          extra-packages: any::rcmdcheck
+          extra-packages: rcmdcheck
         
 
       - uses: r-lib/actions/setup-tinytex@v2
