@@ -52,7 +52,11 @@ jobs:
           use-public-rspm: true
 
       - name: Install dependencies
-        uses: r-lib/actions/setup-r-dependencies@v2
+        uses: r-lib/actions/setup-r-dependencies@v1
+        with:
+          packages: any::sessioninfo
+          extra-packages: any::rcmdcheck
+        
 
       - uses: r-lib/actions/setup-tinytex@v2
 
