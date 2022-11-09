@@ -19,6 +19,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
         r: ['devel', 'release', 'oldrel-1', '4.2.1', '4.1.1', '4.1.3', '3.6.1']
+        java: [8, 13, 17]
         include:
           - http-user-agent: 'release'
             r: 'devel'
@@ -49,6 +50,9 @@ jobs:
           http-user-agent: ${{ matrix.http-user-agent }}
           use-public-rspm: true
 
+      - name: Install Java
+        uses: actions/setup-java@v1
+        
       - name: Install dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
