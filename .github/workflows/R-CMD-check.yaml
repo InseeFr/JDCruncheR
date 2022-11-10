@@ -51,7 +51,7 @@ jobs:
         with:
           java-version: ${{ matrix.java }}
           java-package: jdk
-          # distribution: zulu
+          distribution: 'zulu'
           architecture: x86
         # if: matrix.os != 'macos'
       
@@ -60,7 +60,7 @@ jobs:
         with:
           java-version: ${{ matrix.java }}
           java-package: jdk
-          # distribution: zulu
+          distribution: 'temurin'
           architecture: x64
         # if: matrix.os != 'macos'
       
