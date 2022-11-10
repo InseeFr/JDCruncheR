@@ -69,7 +69,7 @@ jobs:
       - name: Install dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::rcmdcheck, any::XML
+          extra-packages: any::rcmdcheck, XML
         
       - uses: r-lib/actions/setup-tinytex@v2
 
