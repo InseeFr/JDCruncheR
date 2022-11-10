@@ -21,7 +21,7 @@ jobs:
         # r: ['devel', 'release', 'oldrel-1', '4.2.1', '4.1.1', '4.1.3', '3.6.1']
         # java: [8, 11, 13, 17]        
         os: [ubuntu-latest, windows-latest, macOS-latest]
-        r: ['devel', 'release']
+        r: ['release']
         java: [8, 17]
         include:
           - http-user-agent: 'release'
