@@ -85,7 +85,7 @@ jobs:
       - uses: r-lib/actions/setup-tinytex@v2
 
       - name: Build site
-        run: install.packages("systemfonts") ; library(kableExtra)
+        run: install.packages("systemfonts") ; install.packages("kableExtra") ; library("kableExtra")
         shell: Rscript {0}
         
       - uses: r-lib/actions/check-r-package@v2
