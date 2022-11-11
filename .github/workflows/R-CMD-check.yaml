@@ -78,7 +78,7 @@ jobs:
         if: ${{ matrix.os == 'macOS-latest' }}
         with:
           packages: knitr, kableExtra, rmarkdown
-          extra-packages: any::rcmdcheck, XML, any::textshaping
+          extra-packages: any::rcmdcheck, XML, textshaping
         
       - uses: r-lib/actions/setup-tinytex@v2
 
