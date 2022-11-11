@@ -79,7 +79,7 @@ jobs:
         uses: r-lib/actions/setup-r-dependencies@v2
         if: ${{ matrix.os == 'macOS-latest' }}
         with:
-          packages: any::knitr, any::kableExtra, any::rmarkdown
+          packages: knitr, kableExtra, rmarkdown
           extra-packages: any::rcmdcheck, XML
         
       - uses: r-lib/actions/setup-tinytex@v2
