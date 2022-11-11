@@ -73,13 +73,13 @@ jobs:
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::rcmdcheck, XML
-          if: matrix.os != 'macos'
+          if: matrix.os != 'macOS-latest'
       
       - name: Install dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::rcmdcheck, XML, knitr, kableExtra, rmarkdown
-          if: matrix.os == 'macos'
+          if: matrix.os == 'macOS-latest'
         
       - uses: r-lib/actions/setup-tinytex@v2
 
