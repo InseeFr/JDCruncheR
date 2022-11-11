@@ -48,7 +48,6 @@ jobs:
         with:
           java-version: ${{ matrix.java }}
           java-package: jdk
-          # distribution: 'temurin'
           architecture: x64
         # if: matrix.os != 'macos'
         
@@ -57,7 +56,6 @@ jobs:
         with:
           java-version: ${{ matrix.java }}
           java-package: jdk
-          # distribution: 'temurin'
           architecture: x86
         # if: matrix.os != 'macos'
       
@@ -71,7 +69,14 @@ jobs:
       - name: Install dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
+          extra-packages: any::rcmdcheck, XML
+          if: matrix.os != 'macos'
+      
+      - name: Install dependencies
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
           extra-packages: any::rcmdcheck, XML, knitr, kableExtra, rmarkdown
+          if: matrix.os == 'macos'
         
       - uses: r-lib/actions/setup-tinytex@v2
 
