@@ -21,11 +21,11 @@ jobs:
         # r: ['devel', 'release', 'oldrel-1', '4.2.1', '4.1.1', '4.1.3', '3.6.1']
         # java: [ '8', '11', '13', '17' ]
         os: [ 'macOS-latest' ]
-        r: ['devel', '3.6.1']
+        r: ['3.6.1']
         java: [ '8' ]
-        include:
-          - http-user-agent: 'release'
-            r: 'devel'
+        # include:
+          # - http-user-agent: 'release'
+            # r: 'devel'
         # config:
           # - {os: macOS-latest,   r: 'release'}
           # - {os: windows-latest, r: 'release'}
@@ -84,4 +84,8 @@ jobs:
         
       - uses: r-lib/actions/setup-tinytex@v2
 
+      - name: Build site
+        run: library(kableExtra)
+        shell: Rscript {0}
+        
       - uses: r-lib/actions/check-r-package@v2
