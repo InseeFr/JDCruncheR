@@ -87,4 +87,8 @@ jobs:
         shell: Rscript {0}
         if: ${{ matrix.os == 'macOS-latest' && matrix.r == '3.6.1' }}
         
+      - name: Build site
+        run: install.packages("textshaping")
+        shell: Rscript {0}
+        
       - uses: r-lib/actions/check-r-package@v2
