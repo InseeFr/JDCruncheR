@@ -71,13 +71,13 @@ jobs:
 
       - name: Install dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
-        if: matrix.os != 'macOS-latest'
+        if: ${{ matrix.os != 'macOS-latest' }}
         with:
           extra-packages: any::rcmdcheck, XML
       
       - name: Install dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
-        if: matrix.os == 'macOS-latest'
+        if: ${{ matrix.os == 'macOS-latest' }}
         with:
           extra-packages: any::rcmdcheck, XML, knitr, kableExtra, rmarkdown
         
