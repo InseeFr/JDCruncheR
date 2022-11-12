@@ -19,10 +19,10 @@ jobs:
       matrix:
         os: [ 'ubuntu-latest', 'windows-latest', 'macOS-latest' ]
         # r: [ 'devel', 'release', 'oldrel-1', '4.2.1', '4.1.1', '4.1.3', '3.6.1' ]
-        r: [ 'devel', 'release', 'oldrel-1', '4.1.3', '3.6.1' ]
+        r: [ 'release' ]
         # java: [ '8', '11', '13', '16', '17' ]
-        java: [ '8', '11', '13', '17' ]
-        java_distribution: [ 'zulu', 'temurin', 'liberica', 'microsoft' ]
+        java: [ '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19' ]
+        java_distribution: [ 'zulu', 'temurin', 'liberica', 'microsoft', 'corretto' ]
         # include:
           # - http-user-agent: 'release'
             # r: 'devel'
