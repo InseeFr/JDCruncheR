@@ -81,7 +81,7 @@ jobs:
         if: ${{ matrix.os == 'macOS-latest' && matrix.r == 'devel' }}
         
       - name: Build site
-        run: install.packages(c('systemfonts', 'kableExtra')) ; library('kableExtra')
+        run: install.packages(c('systemfonts', 'kableExtra'))
         shell: Rscript {0}
         if: ${{ runner.os == 'macOS' && matrix.r == '3.6.1' }}
 
