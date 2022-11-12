@@ -23,9 +23,9 @@ jobs:
         os: [ 'macOS-latest' ]
         r: [ '3.6.1' ]
         java: [ '8' ]
-        include:
-          - http-user-agent: 'release'
-            r: 'devel'
+        # include:
+          # - http-user-agent: 'release'
+            # r: 'devel'
         # config:
           # - {os: macOS-latest,   r: 'release'}
           # - {os: windows-latest, r: 'release'}
@@ -81,7 +81,7 @@ jobs:
         if: ${{ matrix.os == 'macOS-latest' && matrix.r == 'devel' }}
         
       - name: Build site
-        run: install.packages('systemfonts') ; library('kableExtra')
+        run: install.packages(c('systemfonts', 'kableExtra')) ; library('kableExtra')
         shell: Rscript {0}
         if: ${{ runner.os == 'macOS' && matrix.r == '3.6.1' }}
 
