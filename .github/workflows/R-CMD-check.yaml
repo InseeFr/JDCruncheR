@@ -20,7 +20,8 @@ jobs:
         os: [ 'ubuntu-latest', 'windows-latest', 'macOS-latest' ]
         # r: [ 'devel', 'release', 'oldrel-1', '4.2.1', '4.1.1', '4.1.3', '3.6.1' ]
         r: [ 'release' ]
-        java: [ '8', '11', '13', '17' ]
+        java: [ '8', '11', '16', '17' ]
+        java_distribution: [ 'zulu', 'temurin' ]
         # include:
           # - http-user-agent: 'release'
             # r: 'devel'
@@ -49,7 +50,7 @@ jobs:
         with:
           java-version: ${{ matrix.java }}
           java-package: jdk
-          distribution: 'zulu'
+          distribution: ${{ matrix.java_distribution }}
           architecture: x64
         
       - name: Setup java (x86)
@@ -58,7 +59,7 @@ jobs:
         with:
           java-version: ${{ matrix.java }}
           java-package: jdk
-          distribution: 'zulu'
+          distribution: ${{ matrix.java_distribution }}
           architecture: x86
       
       - name: Set up R
