@@ -76,12 +76,12 @@ jobs:
         run: brew install harfbuzz fribidi
 
       - name: Build site
-        run: install.packages(c("textshaping"))
+        run: install.packages('textshaping')
         shell: Rscript {0}
         if: ${{ matrix.os == 'macOS-latest' && matrix.r == 'devel' }}
         
       - name: Build site
-        run: install.packages("systemfonts")
+        run: install.packages('systemfonts') ; library('kableExtra')
         shell: Rscript {0}
         if: ${{ runner.os == 'macOS' && matrix.r == '3.6.1' }}
 
