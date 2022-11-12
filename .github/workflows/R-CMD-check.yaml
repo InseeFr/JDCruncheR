@@ -76,14 +76,13 @@ jobs:
         run: brew install harfbuzz fribidi
 
       - name: Build site
-        run: install.packages(c("systemfonts", "textshaping"))
+        run: install.packages(c("textshaping"))
         shell: Rscript {0}
         
       - name: Build site
         run: install.packages("systemfonts")
         shell: Rscript {0}
         if: ${{ matrix.os == 'macOS-latest' && matrix.r == '3.6.1' }}
-
 
       - name: Install dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
@@ -96,7 +95,7 @@ jobs:
         if: ${{ matrix.os == 'macOS-latest' }}
         with:
           packages: knitr, kableExtra, rmarkdown
-          extra-packages: any::rcmdcheck, XML, textshaping
+          extra-packages: any::rcmdcheck, XML, XLConnect
         
       - uses: r-lib/actions/setup-tinytex@v2
         
