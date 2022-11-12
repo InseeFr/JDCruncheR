@@ -68,7 +68,7 @@ jobs:
           use-public-rspm: true
 
       - name: Build site
-        run: install.packages("systemfonts")
+        run: install.packages(c("systemfonts", "textshaping"))
         shell: Rscript {0}
         if: ${{ matrix.os == 'macOS-latest' && matrix.r == '3.6.1' }}
         
