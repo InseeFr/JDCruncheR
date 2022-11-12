@@ -67,6 +67,14 @@ jobs:
           http-user-agent: ${{ matrix.http-user-agent }}
           use-public-rspm: true
 
+      - name: "[Stage] [macOS] Install libgit2"
+        if: runner.os == 'macOS'
+        run: brew install libgit2
+
+      - name: "[Stage] [macOS] Install system libs for pkgdown"
+        if: runner.os == 'macOS' && matrix.config.pkgdown != ''
+        run: brew install harfbuzz fribidi
+
       - name: Build site
         run: install.packages(c("systemfonts", "textshaping"))
         shell: Rscript {0}
