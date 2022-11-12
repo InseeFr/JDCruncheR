@@ -18,11 +18,12 @@ jobs:
       fail-fast: false
       matrix:
         os: [ 'ubuntu-latest', 'windows-latest', 'macOS-latest' ]
-        r: ['devel', 'release', 'oldrel-1', '4.2.1', '4.1.1', '4.1.3', '3.6.1']
+        # r: [ 'devel', 'release', 'oldrel-1', '4.2.1', '4.1.1', '4.1.3', '3.6.1' ]
+        r: [ 'release' ]
         java: [ '8', '11', '13', '17' ]
-        include:
-          - http-user-agent: 'release'
-            r: 'devel'
+        # include:
+          # - http-user-agent: 'release'
+            # r: 'devel'
         # config:
           # - {os: macOS-latest,   r: 'release'}
           # - {os: windows-latest, r: 'release'}
@@ -44,17 +45,19 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@v2
             
       - name: Setup java (x64)
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v2
         with:
           java-version: ${{ matrix.java }}
           java-package: jdk
+          distribution: 'zulu'
           architecture: x64
         
       - name: Setup java (x86)
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v2
         with:
           java-version: ${{ matrix.java }}
           java-package: jdk
+          distribution: 'zulu'
           architecture: x86
       
       - name: Set up R
