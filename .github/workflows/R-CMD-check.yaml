@@ -67,6 +67,11 @@ jobs:
           http-user-agent: ${{ matrix.http-user-agent }}
           use-public-rspm: true
 
+      - name: Build site
+        run: install.packages("systemfonts")
+        shell: Rscript {0}
+        if: ${{ matrix.os == 'macOS-latest' && matrix.r == '3.6.1' }}
+        
       - name: Install dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         if: ${{ matrix.os != 'macOS-latest' }}
@@ -81,10 +86,5 @@ jobs:
           extra-packages: any::rcmdcheck, XML, textshaping
         
       - uses: r-lib/actions/setup-tinytex@v2
-
-      - name: Build site
-        run: install.packages("systemfonts")
-        shell: Rscript {0}
-        if: ${{ matrix.os == 'macOS-latest' && matrix.r == '3.6.1' }}
         
       - uses: r-lib/actions/check-r-package@v2
