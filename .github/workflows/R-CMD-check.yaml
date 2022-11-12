@@ -17,15 +17,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # os: [ 'ubuntu-latest', 'windows-latest', 'macOS-latest' ]
-        # r: ['devel', 'release', 'oldrel-1', '4.2.1', '4.1.1', '4.1.3', '3.6.1']
-        # java: [ '8', '11', '13', '17' ]
-        os: [ 'macOS-latest' ]
-        r: [ 'devel' ]
-        java: [ '8' ]
-        # include:
-          # - http-user-agent: 'release'
-            # r: 'devel'
+        os: [ 'ubuntu-latest', 'windows-latest', 'macOS-latest' ]
+        r: ['devel', 'release', 'oldrel-1', '4.2.1', '4.1.1', '4.1.3', '3.6.1']
+        java: [ '8', '11', '13', '17' ]
+        # os: [ 'macOS-latest' ]
+        # r: [ 'devel' ]
+        # java: [ '8' ]
+        include:
+          - http-user-agent: 'release'
+            r: 'devel'
         # config:
           # - {os: macOS-latest,   r: 'release'}
           # - {os: windows-latest, r: 'release'}
@@ -78,21 +78,22 @@ jobs:
       - name: Build site
         run: install.packages(c("textshaping"))
         shell: Rscript {0}
+        if: ${{ matrix.os == 'macOS-latest' && matrix.r == 'devel' }}
         
       - name: Build site
         run: install.packages("systemfonts")
         shell: Rscript {0}
-        if: ${{ matrix.os == 'macOS-latest' && matrix.r == '3.6.1' }}
+        if: ${{ runner.os == 'macOS' && matrix.r == '3.6.1' }}
 
       - name: Install dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
-        if: ${{ matrix.os != 'macOS-latest' }}
+        if: ${{ runner.os != 'macOS' }}
         with:
           extra-packages: any::rcmdcheck, XML
       
       - name: Install dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
-        if: ${{ matrix.os == 'macOS-latest' }}
+        if: ${{ runner.os == 'macOS' }}
         with:
           packages: knitr, kableExtra, rmarkdown
           extra-packages: any::rcmdcheck, XML, XLConnect
