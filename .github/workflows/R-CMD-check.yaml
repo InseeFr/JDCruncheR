@@ -17,15 +17,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # os: [ 'ubuntu-latest', 'windows-latest', 'macOS-latest' ]
-        # r: ['devel', 'release', 'oldrel-1', '4.2.1', '4.1.1', '4.1.3', '3.6.1']
-        # java: [ '8', '11', '13', '17' ]
-        os: [ 'macOS-latest' ]
-        r: [ '3.6.1' ]
-        java: [ '8' ]
-        # include:
-          # - http-user-agent: 'release'
-            # r: 'devel'
+        os: [ 'ubuntu-latest', 'windows-latest', 'macOS-latest' ]
+        r: ['devel', 'release', 'oldrel-1', '4.2.1', '4.1.1', '4.1.3', '3.6.1']
+        java: [ '8', '11', '13', '17' ]
+        # os: [ 'macOS-latest' ]
+        # r: [ '3.6.1' ]
+        # java: [ '8' ]
+        include:
+          - http-user-agent: 'release'
+            r: 'devel'
         # config:
           # - {os: macOS-latest,   r: 'release'}
           # - {os: windows-latest, r: 'release'}
@@ -91,7 +91,7 @@ jobs:
       - name: Build site
         run: install.packages('textshaping')
         shell: Rscript {0}
-        if: ${{ matrix.os == 'macOS-latest' && matrix.r == 'devel' }}
+        if: ${{ runner.os == 'macOS' && matrix.r == 'devel' }}
         
       - name: Build site
         run: install.packages('systemfonts')
