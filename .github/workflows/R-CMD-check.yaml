@@ -49,7 +49,7 @@ jobs:
         with:
           java-version: ${{ matrix.java }}
           java-package: jdk
-          distribution: 'temurin'
+          distribution: 'zulu'
           architecture: x64
         
       - name: Setup java (x86)
@@ -58,7 +58,7 @@ jobs:
         with:
           java-version: ${{ matrix.java }}
           java-package: jdk
-          distribution: 'temurin'
+          distribution: 'zulu'
           architecture: x86
       
       - name: Set up R
