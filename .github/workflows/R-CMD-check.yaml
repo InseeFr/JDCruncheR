@@ -18,10 +18,10 @@ jobs:
       fail-fast: false
       matrix:
         os: [ 'ubuntu-latest', 'windows-latest', 'macOS-latest' ]
-        # r: [ 'devel', 'release', 'oldrel-1', '4.2.1', '4.1.1', '4.1.3', '3.6.1' ]
-        r: [ 'release' ]
+        r: [ 'devel', 'release', 'oldrel-1', '4.2.1', '4.1.1', '4.1.3', '3.6.1' ]
+        # r: [ 'release' ]
         java: [ '8', '11', '13', '16', '17' ]
-        java_distribution: [ 'zulu', 'temurin' ]
+        java_distribution: [ 'zulu', 'temurin', 'liberica', 'microsoft' ]
         # include:
           # - http-user-agent: 'release'
             # r: 'devel'
@@ -46,7 +46,7 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@v2
             
       - name: Setup java (x64)
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           java-version: ${{ matrix.java }}
           java-package: jdk
@@ -54,7 +54,7 @@ jobs:
           architecture: x64
         
       - name: Setup java (x86)
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         if: runner.os == 'windows'
         with:
           java-version: ${{ matrix.java }}
