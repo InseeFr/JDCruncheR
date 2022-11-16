@@ -40,7 +40,7 @@ NULL
 #' @family QR_matrix functions
 #' @seealso [Traduction française][fr-export_xlsx.QR_matrix()]
 #' @export
-export_xlsx.QR_matrix <- function(x, layout = c("all","modalities", "values", "combined"),
+export_xlsx.QR_matrix <- function(x, layout = c("all", "modalities", "values", "combined"),
                                   create = TRUE, clear_sheet = TRUE, auto_format = TRUE,
                                   file_name, sheet_names, ...) {
     layout <- match.arg(layout)
@@ -78,16 +78,16 @@ export_xlsx.QR_matrix <- function(x, layout = c("all","modalities", "values", "c
         XLConnect::writeWorksheet(wb, data = data, sheet = s, header = TRUE)
         if (auto_format) {
             XLConnect::setCellStyle(wb, sheet = s, row = 1:(nrow(data) + 1),
-                                    col = 1:ncol(data), cellstyle = cs)
+                                    col = seq_len(ncol(data)), cellstyle = cs)
             XLConnect::setCellStyle(wb,
                                     formula = paste0(s, "!", "$A$1:",
                                                      XLConnect::idx2cref(c(nrow(data) + 1, ncol(data)))),
                                     cellstyle = cs)
-            XLConnect::setColumnWidth(wb, sheet = s, column = 1:(ncol(data)),
+            XLConnect::setColumnWidth(wb, sheet = s, column = seq_len(ncol(data)),
                                       width = -1)
         }
     }
-    if(!missing(sheet_names) && length(sheet_names) == length(sheets)){
+    if (!missing(sheet_names) && length(sheet_names) == length(sheets)) {
         XLConnect::removeSheet(wb, sheet = sheet_names)
         XLConnect::renameSheet(wb, sheets, sheet_names)
     }
@@ -99,12 +99,12 @@ export_xlsx.QR_matrix <- function(x, layout = c("all","modalities", "values", "c
 #' @param ... other parameters of the function \code{\link{export_xlsx.QR_matrix}}.
 #' @family QR_matrix functions
 #' @export
-export_xlsx <- function(x, ...){
+export_xlsx <- function(x, ...) {
     UseMethod("export_xlsx", x)
 }
 #' @family QR_matrix functions
 #' @export
-export_xlsx.default <- function(x, ...){
+export_xlsx.default <- function(x, ...) {
     stop("A QR_matrix or mQR_matrix object is required!")
 }
 
@@ -144,11 +144,11 @@ NULL
 #' @seealso [Traduction française][fr-export_xlsx.mQR_matrix()]
 #' @export
 export_xlsx.mQR_matrix <- function(x, export_dir = "./",
-                                   layout_file = c("ByComponent","ByQRMatrix"),
-                                   file_extension = c(".xls",".xlsx"),
-                                   layout = c("all","modalities", "values", "combined"),
-                                   ...){
-    if(length(x) == 0)
+                                   layout_file = c("ByComponent", "ByQRMatrix"),
+                                   file_extension = c(".xls", ".xlsx"),
+                                   layout = c("all", "modalities", "values", "combined"),
+                                   ...) {
+    if (length(x) == 0)
         return(invisible(x))
     file_extension <- match.arg(file_extension)
     layout_file <- match.arg(layout_file)
@@ -156,42 +156,42 @@ export_xlsx.mQR_matrix <- function(x, export_dir = "./",
 
     QR_matrix_names <- names(x)
 
-    if(is.null(QR_matrix_names)){
-        QR_matrix_names <- paste0("QR_",1:length(x))
-    }else{
+    if (is.null(QR_matrix_names)) {
+        QR_matrix_names <- paste0("QR_", seq_along(x))
+    } else {
         QR_matrix_names[is.na(QR_matrix_names)] <- ""
-        if(!is.na(match("", QR_matrix_names)))
+        if (!is.na(match("", QR_matrix_names)))
             QR_matrix_names[match("", QR_matrix_names)] <- paste0("QR_",
                                                                   match("", QR_matrix_names))
     }
 
 
-    if(layout_file == "ByQRMatrix"){
+    if (layout_file == "ByQRMatrix") {
         # To export a quality report per file:
         files_name <- normalizePath(file.path(export_dir,
-                                             paste0(QR_matrix_names, file_extension)),
-            mustWork = FALSE)
-        for(i in 1:length(x)){
-            export_xlsx(x[[i]],layout = layout, file_name = files_name[i], ...)
+                                              paste0(QR_matrix_names, file_extension)),
+                                    mustWork = FALSE)
+        for (i in seq_along(x)) {
+            export_xlsx(x[[i]], layout = layout, file_name = files_name[i], ...)
         }
-    }else{
+    } else {
         # To export a file per element of the quality report
         files_name <- switch(layout,
                              all = c("modalities", "values"),
                              combined = "values",
                              layout)
         final_layout <- switch(layout,
-                         all = c("modalities", "values"),
-                         layout)
+                               all = c("modalities", "values"),
+                               layout)
 
-        files = normalizePath(
-            file.path(export_dir,paste0(files_name, file_extension)),
+        files <- normalizePath(
+            file.path(export_dir, paste0(files_name, file_extension)),
             mustWork = FALSE)
-        for(i in 1:length(x)){
+        for (i in seq_along(x)) {
             # Index on the QR_matrix
-            for(j in 1:length(final_layout)){
+            for (j in seq_along(final_layout)) {
                 # Index on the elements
-                export_xlsx(x[[i]],layout = final_layout[j], file_name = files[j],
+                export_xlsx(x[[i]], layout = final_layout[j], file_name = files[j],
                             sheet_names = QR_matrix_names[i],
                             ...)
             }
@@ -201,4 +201,3 @@ export_xlsx.mQR_matrix <- function(x, export_dir = "./",
 
     return(invisible(x))
 }
-

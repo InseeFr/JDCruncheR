@@ -54,7 +54,7 @@ NULL
 #' @name QR_matrix
 #' @seealso [Traduction française][fr-QR_matrix()]
 #' @export
-QR_matrix <- function(modalities = NULL, values = NULL, score_formula = NULL){
+QR_matrix <- function(modalities = NULL, values = NULL, score_formula = NULL) {
     QR <- list(modalities = modalities, values = values,
                score_formula = score_formula)
     class(QR) <- c("QR_matrix")
@@ -62,35 +62,35 @@ QR_matrix <- function(modalities = NULL, values = NULL, score_formula = NULL){
 }
 #' @export
 #' @rdname QR_matrix
-mQR_matrix <- function(x = list(), ...){
+mQR_matrix <- function(x = list(), ...) {
     UseMethod("mQR_matrix", x)
 }
 #' @rdname QR_matrix
 #' @export
-is.QR_matrix <- function(x){
+is.QR_matrix <- function(x) {
     inherits(x, "QR_matrix")
 }
 #' @export
-mQR_matrix.QR_matrix <- function(x = QR_matrix(), ...){
+mQR_matrix.QR_matrix <- function(x = QR_matrix(), ...) {
     mQR <- c(list(x), list(...))
     class(mQR) <- "mQR_matrix"
     return(mQR)
 }
 #' @export
-mQR_matrix.default <- function(x = list(), ...){
+mQR_matrix.default <- function(x = list(), ...) {
     mQR <- c(x, list(...))
     class(mQR) <- "mQR_matrix"
     return(mQR)
 }
 #' @export
-mQR_matrix.mQR_matrix <- function(x = mQR_matrix.default(), ...){
+mQR_matrix.mQR_matrix <- function(x = mQR_matrix.default(), ...) {
     mQR <- c(x, ...)
     class(mQR) <- "mQR_matrix"
     return(mQR)
 }
 #' @rdname QR_matrix
 #' @export
-is.mQR_matrix <- function(x){
+is.mQR_matrix <- function(x) {
     inherits(x, "mQR_matrix")
 }
 
@@ -125,13 +125,13 @@ NULL
 #' @name print.QR_matrix
 #' @seealso [Traduction française][fr-print.QR_matrix()]
 #' @export
-print.QR_matrix <- function(x, print_variables = TRUE, print_score_formula = TRUE, ...){
+print.QR_matrix <- function(x, print_variables = TRUE, print_score_formula = TRUE, ...) {
     nb_var <- nrow(x$modalities)
     nb_var_modalities <- ncol(x$modalities)
     nb_var_values <- ncol(x$values)
 
-    if(is.null(nb_var) | is.null(nb_var_modalities) | is.null(nb_var_values) ||
-       nb_var * nb_var_modalities * nb_var_values == 0){
+    if (is.null(nb_var) || is.null(nb_var_modalities) || is.null(nb_var_values) ||
+        nb_var * nb_var_modalities * nb_var_values == 0) {
         cat("The quality report matrix is empty")
         return(invisible(x))
     }
@@ -146,7 +146,7 @@ print.QR_matrix <- function(x, print_variables = TRUE, print_score_formula = TRU
                          " and %d indicators in the values matrix"),
                 nb_var_values))
     cat("\n")
-    if(print_variables){
+    if (print_variables) {
         cat("\n")
         names_var_modalities <- colnames(x$modalities)
         names_var_values <- colnames(x$values)
@@ -159,14 +159,14 @@ print.QR_matrix <- function(x, print_variables = TRUE, print_score_formula = TRU
                     names_var_modalities)
         )
         cat("\n")
-        if(all(names_var_values_sup=="")){
+        if (all(names_var_values_sup == "")) {
             cat("There's no additionnal variable in the values matrix")
-        }else{
+        } else {
             cat(sprintf("The variables exclusively found in the values matrix are:\n%s",
                         names_var_values_sup))
         }
         cat("\n")
-        if(length(names_var_values_sup) >1){
+        if (length(names_var_values_sup) > 1) {
 
 
             cat(sprintf(ngettext(length(names_var_values_sup),
@@ -181,15 +181,15 @@ print.QR_matrix <- function(x, print_variables = TRUE, print_score_formula = TRU
 
 
     score_value <- extract_score(x, format_output = "vector")
-    if(is.null(score_value)){
+    if (is.null(score_value)) {
         cat("No score was calculated")
-    }else{
+    } else {
         cat(sprintf("The smallest score is %1g and the greatest is %2g\n",
-                    min(score_value, na.rm = TRUE),max(score_value, na.rm = TRUE)))
+                    min(score_value, na.rm = TRUE), max(score_value, na.rm = TRUE)))
         cat(sprintf("The average score is %1g and its standard deviation is %2g",
-                    mean(score_value, na.rm = TRUE),sd(score_value, na.rm = TRUE)))
+                    mean(score_value, na.rm = TRUE), sd(score_value, na.rm = TRUE)))
     }
-    if(print_score_formula && !is.null(x$score_formula)){
+    if (print_score_formula && !is.null(x$score_formula)) {
         cat("\n\n")
         cat(sprintf("The following formula was used to calculate the score:\n%s",
                     as.character(x$score_formula)))
@@ -199,8 +199,8 @@ print.QR_matrix <- function(x, print_variables = TRUE, print_score_formula = TRU
 
 #' @rdname print.QR_matrix
 #' @export
-print.mQR_matrix <- function(x, score_statistics = TRUE, ...){
-    if(length(x) == 0){
+print.mQR_matrix <- function(x, score_statistics = TRUE, ...) {
+    if (length(x) == 0) {
         cat("List without a quality report")
         return(invisible(x))
     }
@@ -210,17 +210,17 @@ print.mQR_matrix <- function(x, score_statistics = TRUE, ...){
     cat("\n")
     bq_names <- names(x)
     bq_names[is.na(bq_names)] <- ""
-    if(is.null(bq_names) || all(is.na(bq_names))){
+    if (is.null(bq_names) || all(is.na(bq_names))) {
         cat("No quality report is named")
-    }else{
+    } else {
         bq_names_na <- sum(is.na(bq_names))
         bq_valid_names <- bq_names[!is.na(bq_names)]
         cat(sprintf(ngettext(length(bq_valid_names),
                              "%d quality report is named: %s",
                              "%d quality reports are named: %s"),
-                    length(bq_valid_names),paste(bq_valid_names, collapse ="  ")))
+                    length(bq_valid_names), paste(bq_valid_names, collapse = "  ")))
 
-        if(length(bq_names_na) > 1){
+        if (length(bq_names_na) > 1) {
             cat("\n")
             cat(sprintf(ngettext(bq_names_na,
                                  "%d quality report isn't named",
@@ -228,36 +228,36 @@ print.mQR_matrix <- function(x, score_statistics = TRUE, ...){
                         bq_names_na))
         }
     }
-    if(score_statistics){
+    if (score_statistics) {
         cat("\n")
         score_values <- extract_score(x, format_output = "vector")
-        all_score <- do.call(c,score_values)
-        if(is.null(all_score)){
+        all_score <- do.call(c, score_values)
+        if (is.null(all_score)) {
             cat("No quality report has a calculated score")
-        }else{
+        } else {
             cat(sprintf("The average score over all quality reports is %g\n",
-                        mean(all_score, na.rm=TRUE)))
+                        mean(all_score, na.rm = TRUE)))
             cat(sprintf("The smallest score is %1g and the greatest is %2g\n",
-                        min(all_score, na.rm = TRUE),max(all_score, na.rm = TRUE)))
+                        min(all_score, na.rm = TRUE), max(all_score, na.rm = TRUE)))
 
-            for(i in 1 : length(score_values)){
+            for (i in seq_along(score_values)) {
                 cat("\n\n")
                 score_value <- score_values[[i]]
 
                 bq_name <- bq_names[i]
-                if(is.null(bq_name) || is.na(bq_name)){
+                if (is.null(bq_name) || is.na(bq_name)) {
                     bq_name <- ""
-                }else{
-                    bq_name <- paste0(" (",bq_name,")")
+                } else {
+                    bq_name <- paste0(" (", bq_name, ")")
                 }
 
-                if(is.null(score_value)){
-                    cat(sprintf("There is no calculated score for the quality report n.%d%s",i,bq_name))
-                }else{
-                    cat(sprintf("The quality report n.%d%s has an average score of %g\n",i,bq_name,
-                                mean(score_value, na.rm=TRUE)))
+                if (is.null(score_value)) {
+                    cat(sprintf("There is no calculated score for the quality report n.%d%s", i, bq_name))
+                } else {
+                    cat(sprintf("The quality report n.%d%s has an average score of %g\n", i, bq_name,
+                                mean(score_value, na.rm = TRUE)))
                     cat(sprintf("The smallest score is %1g and the greatest is %2g\n",
-                                min(score_value, na.rm = TRUE),max(score_value, na.rm = TRUE)))
+                                min(score_value, na.rm = TRUE), max(score_value, na.rm = TRUE)))
                 }
             }
         }

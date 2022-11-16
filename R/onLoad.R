@@ -1,5 +1,5 @@
-.onLoad<-function(libname, pkgname){
-    if(is.null(getOption("default_matrix_item")))
+.onLoad <- function(libname, pkgname) {
+    if (is.null(getOption("default_matrix_item")))
         options(default_matrix_item = c("period", "span.start", "span.end", "span.n", "span.missing",
                                         "espan.start", "espan.end", "espan.n", "log", "adjust", "regression.lp",
                                         "regression.ntd", "regression.nmh", "regression.td-derived",
@@ -75,9 +75,9 @@
                                         "diagnostics.residual trading days tests.f-test on i (td):2",
                                         "diagnostics.quality"
         ))
-    if(is.null(getOption("default_tsmatrix_series")))
-        options(default_tsmatrix_series = c("y", "t","sa","s","i","ycal"))
-    if(is.null(getOption("cruncher_bin_directory")))
+    if (is.null(getOption("default_tsmatrix_series")))
+        options(default_tsmatrix_series = c("y", "t", "sa", "s", "i", "ycal"))
+    if (is.null(getOption("cruncher_bin_directory")))
         options(cruncher_bin_directory = "Y:/Logiciels/jwsacruncher-2.2.3/jdemetra-cli-2.2.3/bin")
 
 }
