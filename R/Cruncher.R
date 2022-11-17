@@ -32,9 +32,8 @@ NULL
 cruncher <- function(workspace = workspace,
                      cruncher_bin_directory = getOption("cruncher_bin_directory"),
                      param_file_path, log_file) {
-    if (missing(workspace) || is.null(workspace)) {
+    if (missing(workspace) || is.null(workspace))
         stop("Please call the cruncher() on a valid workspace")
-    }
 
     if (length(workspace) == 0)
         stop("The first argument must be a non-null workspace path")
