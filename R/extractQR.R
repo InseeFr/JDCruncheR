@@ -4,7 +4,7 @@
 #'
 #' @param matrix_output_file fichier CSV contenant la matrice des diagnostics.
 #' @param sep séparateur de caractères utilisé dans le fichier csv (par défaut \code{sep = ";"})
-#' @param dec séparateur décimal utilisé dans le fichier csv (par défaut \code{dec = ", "})
+#' @param dec séparateur décimal utilisé dans le fichier csv (par défaut \code{dec = ","})
 #'
 #' @details La fonction permet d'extraire un bilan qualité à partir d'un fichier csv contenant l'ensemble des
 #' diagnostics (généralement fichier \emph{demetra_m.csv}).
@@ -75,7 +75,7 @@ NULL
 #' @importFrom utils read.csv
 #' @seealso [Traduction française][fr-extract_QR()]
 #' @export
-extract_QR <- function(matrix_output_file, sep = ";", dec = ", ") {
+extract_QR <- function(matrix_output_file, sep = ";", dec = ",") {
     if (missing(matrix_output_file) || is.null(matrix_output_file)) {
         stop("Please call extract_QR() on a csv file containing at least one cruncher output matrix (demetra_m.csv for example)")
     }
