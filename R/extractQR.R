@@ -46,7 +46,7 @@ NULL
 #'
 #' @param matrix_output_file the csv file containing the diagnostics matrix.
 #' @param sep the separator used in the csv file (by default, \code{sep = ";"})
-#' @param dec the decimal separator used in the csv file (by default, \code{dec = ", "})
+#' @param dec the decimal separator used in the csv file (by default, \code{dec = ","})
 #'
 #' @details This function generates a quality report from a csv file containing diagnostics (usually from the file \emph{demetra_m.csv}).
 #'
@@ -202,7 +202,7 @@ extractNormalityTests <- function(demetra_m) {
     if (length(tests_possibles) != 3)
         stop("At least one test is missing, among: skewness, kurtosis, lb2")
 
-    if (length(grep("^X\\.(\\d) {1,}$",
+    if (length(grep("^X\\.(\\d){1,}$",
                     colnames(demetra_m)[rep(tests_possibles, each = 2) + rep(1:2, 3)])) != 6)
         stop("Re-compute the cruncher export with the options: residuals.skewness:3, residuals.kurtosis:3 and residuals.lb2:3")
 
