@@ -12,7 +12,7 @@ extract_QR(matrix_output_file, sep = ";", dec = ",")
 
 \item{sep}{the separator used in the csv file (by default, \code{sep = ";"})}
 
-\item{dec}{the decimal separator used in the csv file (by default, \code{dec = ", "})}
+\item{dec}{the decimal separator used in the csv file (by default, \code{dec = ","})}
 }
 \value{
 a \code{\link{QR_matrix}} object.
