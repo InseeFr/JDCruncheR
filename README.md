@@ -24,6 +24,8 @@ remotes::install_github("InseeFr/JDCruncheR", build_vignettes = TRUE)
 
 - depuis le dossier compressé **.zip** ou **.tar.gz**, qui peuvent être trouvés ici : https://github.com/InseeFr/JDCruncheR/releases. Pour plus d'informations sur l'installation et la configuration du package `JDCruncheR`, vous pouvez visiter la page [wiki](https://github.com/jdemetra/jwsacruncher/wiki)
 
+Pour une description plus complète des packages R pour JDemetra+ voir le document de travail Insee [Les packages R pour JDemetra+ : une aide à la désaisonnalisation](https://www.insee.fr/fr/statistiques/5019786)
+
 ## English 🇬🇧
 
 ### Overview
@@ -55,3 +57,5 @@ remotes::install_github("InseeFr/JDCruncheR", build_vignettes = TRUE)
     <https://github.com/InseeFr/JDCruncheR/releases>. For more info on
 the package installation and the cruncher configuration, please
 refer to the [wiki](https://github.com/InseeFr/JDCruncheR/wiki).
+
+For a more comprehensive description of the R packages for JDemetra+ check the Insee working paper [R Tools for JDemetra+: Seasonal adjustment made easier](https://www.insee.fr/en/statistiques/5019812)
