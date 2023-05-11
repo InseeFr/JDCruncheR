@@ -7,7 +7,7 @@ The primary objective of the JDCruncheR package is to provide a quick
 and easy access to the JDemetra+ cruncher (JWSACruncher) from R. The
 cruncher is a tool to update a JDemetra+ workspace, without having to
 open the software itself. The latest version can be downloaded here:
-<https://github.com/jdemetra/jwsacruncher/releases>. Fore more
+<https://github.com/jdemetra/jwsacruncher/releases>. For more
 information, please refer to the wiki page:
 <https://github.com/jdemetra/jwsacruncher/wiki>.
 
