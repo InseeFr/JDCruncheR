@@ -799,7 +799,7 @@ NULL
 #' @export
 recode_indicator_num <- function(x,
                                  variable_name,
-                                 breaks = c(0, 0.01, 0.05, 0.1, 1),
+                                 breaks = c(0, .01, .05, .1, 1),
                                  labels =  c("Good", "Uncertain", "Bad", "Severe"),
                                  ...) {
     UseMethod("recode_indicator_num", x)
@@ -811,7 +811,7 @@ recode_indicator_num.default <- function(x, variable_name, breaks, labels, ...) 
 #' @export
 recode_indicator_num.QR_matrix <- function(x,
                                            variable_name,
-                                           breaks = c(0, 0.01, 0.05, 0.1, 1),
+                                           breaks = c(0, .01, .05, .1, 1),
                                            labels =  c("Good", "Uncertain", "Bad", "Severe"),
                                            ...) {
     modalities <- x$modalities
@@ -833,7 +833,7 @@ recode_indicator_num.QR_matrix <- function(x,
 #' @export
 recode_indicator_num.mQR_matrix <- function(x,
                                             variable_name,
-                                            breaks = c(0, 0.01, 0.05, 0.1, 1),
+                                            breaks = c(0, .01, .05, .1, 1),
                                             labels =  c("Good", "Uncertain", "Bad", "Severe"),
                                             ...) {
     return(mQR_matrix(lapply(x,

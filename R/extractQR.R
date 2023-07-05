@@ -202,7 +202,7 @@ extractNormalityTests <- function(demetra_m) {
     if (length(tests_possibles) != 3)
         stop("At least one test is missing, among: skewness, kurtosis, lb2")
 
-    if (length(grep("^X\\.(\\d){1,}$",
+    if (length(grep("^X\\.(\\d) {1,}$",
                     colnames(demetra_m)[rep(tests_possibles, each = 2) + rep(1:2, 3)])) != 6)
         stop("Re-compute the cruncher export with the options: residuals.skewness:3, residuals.kurtosis:3 and residuals.lb2:3")
 
@@ -210,15 +210,15 @@ extractNormalityTests <- function(demetra_m) {
                             kurtosis_pvalue = demetra_m[, tests_possibles[2] + 2],
                             homoskedasticity_pvalue = demetra_m[, tests_possibles[3] + 2])
     normality$skewness_modality <- cut(normality$skewness_pvalue,
-                                       breaks = c(0, 0.01, 0.1, 1),
+                                       breaks = c(0, .01, .1, 1),
                                        labels = c("Bad", "Uncertain", "Good"),
                                        right = FALSE)
     normality$kurtosis_modality <- cut(normality$kurtosis_pvalue,
-                                       breaks = c(0, 0.01, 0.1, 1),
+                                       breaks = c(0, .01, .1, 1),
                                        labels = c("Bad", "Uncertain", "Good"),
                                        right = FALSE)
     normality$homoskedasticity_modality <- cut(normality$homoskedasticity_pvalue,
-                                               breaks = c(0, 0.01, 0.1, 1),
+                                               breaks = c(0, .01, .1, 1),
                                                labels = c("Bad", "Uncertain", "Good"),
                                                right = FALSE)
     return(normality)

@@ -22,7 +22,7 @@ refresh_policy <- structure(list(`Option sous JDemetra+` = c("Fixed model",
 "Ré-identification de tout le modèle regARIMA.")), .Names = c("Option sous JDemetra+", 
 "Option du cruncher", "Signification"), class = "data.frame", row.names = c(NA, 
 -7L))
-if (opts_knit$get("rmarkdown.pandoc.to") == "latex"){
+if (opts_knit$get("rmarkdown.pandoc.to") == "latex") {
     kable(refresh_policy, caption = "Les différentes politiques de rafraîchissement",
           booktabs = TRUE, format = "latex") %>% 
         kable_styling(full_width = T,
