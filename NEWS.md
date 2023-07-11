@@ -1,13 +1,13 @@
-% Latest JDCruncher news
+% Latest JDCruncheR news
 
-# JDCruncher 0.2.4
+# JDCruncheR 0.2.4
 
  * The functions' help pages as well as the package vignettes are now available both in French and English.
  * The function choose.file, not compatible with all OS, has been replaced by an error message.  
 
 ---
 
-# JDCruncher 0.2.3
+# JDCruncheR 0.2.3
 
  * the function `weighted_score()` now creates a new `score_pond` variable, rather than replacing it. The function `extract_score()` extracts both weighted and unweighted scores.
  * change in the cruncher's default export parameters and in the indicators used by the function `compute_score()` to calculate the score.
@@ -15,7 +15,7 @@
 
 ---
 
-# JDCruncher 0.2.2
+# JDCruncheR 0.2.2
 
 ## New functions
 
@@ -32,13 +32,13 @@
 
 ---
 
-# JDCruncher 0.2.1
+# JDCruncheR 0.2.1
 
 Bug fixed in the functions `retain_indicators()` and `remove_indicator()`.
 
 ---
 
-# JDCruncher 0.2.0
+# JDCruncheR 0.2.0
 
 ## New functions
 
