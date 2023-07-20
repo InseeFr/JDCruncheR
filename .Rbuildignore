@@ -8,3 +8,8 @@
 ^pkgdown$
 ^doc$
 ^Meta$
+^NEWS.html$
+^TO_DO$
+^LICENCE$
+^LICENSE$
+^.github$
