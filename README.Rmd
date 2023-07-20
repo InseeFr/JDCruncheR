@@ -22,10 +22,10 @@ With JDCruncheR, you can also generate a *quality report* based on the cruncher 
 
 There are two ways to install the JDCruncheR package: 
 
-- using the devtools package: 
+- using the remotes package: 
 ```{r gh-installation, eval = FALSE}
-# install.packages("devtools")
-devtools::install_github("InseeFr/JDCruncheR", build_vignettes = TRUE)
+# install.packages("remotes")
+remotes::install_github("InseeFr/JDCruncheR", build_vignettes = TRUE)
 ```
 - from the **.zip** or **.tar.gz** file, that can both be found here: <https://github.com/InseeFr/JDCruncheR/releases>. For more info on the package installation and the cruncher configuration, please refer to the [wiki](https://github.com/InseeFr/JDCruncheR/wiki).
 
