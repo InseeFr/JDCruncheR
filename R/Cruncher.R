@@ -218,7 +218,9 @@ multiprocessing_names <- function(workspace) {
         stop("The workspace doesn't exist")
 
     xml_workspace <- suppressWarnings(XML::xmlParse(workspace, error = function(...) {}))
-    noms_objets <- XML::xmlToDataFrame(nodes = XML::getNodeSet(doc = xml_workspace, path = "//ns2:demetraGenericWorkspace/ns2:items/ns2:item"))
+    noms_objets <- XML::xmlToDataFrame(nodes = XML::getNodeSet(
+        doc = xml_workspace,
+        path = "//ns2:demetraGenericWorkspace/ns2:items/ns2:item"))
     noms_multi_documents <- noms_objets[grep("multi-documents", noms_objets$family), ]
     noms_multi_documents <- noms_multi_documents[, c("name", "file")]
 
