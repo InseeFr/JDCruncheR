@@ -44,17 +44,9 @@ Pour une description plus complète des packages R pour JDemetra+ voir le docume
 
 ### Overview
 
-The primary objective of the `JDCruncheR` package is to provide a quick
-and easy access to the JDemetra+ cruncher (`JWSACruncher`) from R. The
-cruncher is a tool for updating JDemetra+ workspaces, without having to
-open the graphical user interface. The latest version can be downloaded here:
-    <https://github.com/jdemetra/jwsacruncher/releases>. For more
-information, please refer to the [wiki page](https://github.com/jdemetra/jwsacruncher/wiki).
+The primary objective of the `JDCruncheR` package is to provide a quick and easy access to the JDemetra+ cruncher (`JWSACruncher`) from R. The cruncher is a tool for updating JDemetra+ workspaces, without having to open the graphical user interface. The latest version can be downloaded here: <https://github.com/jdemetra/jwsacruncher/releases>. For more information, please refer to the [wiki page](https://github.com/jdemetra/jwsacruncher/wiki).
 
-With `JDCruncheR`, you can also generate a *quality report* based on the
-cruncher's output. This report is a formatted summary of the seasonal adjustment process
-main diagnostics and parameters. It can be used to spot the most problematic series which
-will require a finer analysis. This is most useful when dealing with a large number of series.
+With `JDCruncheR`, you can also generate a *quality report* based on the cruncher's output. This report is a formatted summary of the seasonal adjustment process main diagnostics and parameters. It can be used to spot the most problematic series which will require a finer analysis. This is most useful when dealing with a large number of series.
 
 ### Installation
 
@@ -67,9 +59,6 @@ There are two ways to install the `JDCruncheR` package:
 remotes::install_github("InseeFr/JDCruncheR", build_vignettes = TRUE)
 ```
 
-- from the **.zip** or **.tar.gz** file, that can both be found here:
-    <https://github.com/InseeFr/JDCruncheR/releases>. For more info on
-the package installation and the cruncher configuration, please
-refer to the [wiki](https://github.com/InseeFr/JDCruncheR/wiki).
+- from the **.zip** or **.tar.gz** file, that can both be found here:     <https://github.com/InseeFr/JDCruncheR/releases>.
 
 For a more comprehensive description of the R packages for JDemetra+ check the Insee working paper [R Tools for JDemetra+: Seasonal adjustment made easier](https://www.insee.fr/en/statistiques/5019812)

@@ -74,9 +74,7 @@ remotes::install_github("InseeFr/JDCruncheR", build_vignettes = TRUE)
 ```
 
 - from the **.zip** or **.tar.gz** file, that can both be found here:
-  <https://github.com/InseeFr/JDCruncheR/releases>. For more info on the
-  package installation and the cruncher configuration, please refer to
-  the [wiki](https://github.com/InseeFr/JDCruncheR/wiki).
+  <https://github.com/InseeFr/JDCruncheR/releases>.
 
 For a more comprehensive description of the R packages for JDemetra+
 check the Insee working paper [R Tools for JDemetra+: Seasonal
