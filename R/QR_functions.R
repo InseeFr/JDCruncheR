@@ -136,25 +136,26 @@ NULL
 #' @name compute_score
 #' @seealso [Traduction française][fr-compute_score()]
 #' @export
-compute_score.QR_matrix <- function(x,
-                                    score_pond = c(qs_residual_sa_on_sa = 30,
-                                                   f_residual_sa_on_sa = 30,
-                                                   qs_residual_sa_on_i = 20,
-                                                   f_residual_sa_on_i = 20,
-                                                   f_residual_td_on_sa = 30,
-                                                   f_residual_td_on_i = 20,
-                                                   oos_mean = 15,
-                                                   oos_mse = 10,
-                                                   residuals_independency = 15,
-                                                   residuals_homoskedasticity = 5,
-                                                   residuals_skewness = 5,
-                                                   m7 = 5,  q_m2 = 5),
-                                    modalities = c("Good", "Uncertain", "", "Bad", "Severe"),
-                                    normalize_score_value,
-                                    na.rm = FALSE,
-                                    n_contrib_score,
-                                    conditional_indicator,
-                                    ...) {
+compute_score.QR_matrix <- function(
+        x,
+        score_pond = c(qs_residual_sa_on_sa = 30,
+                       f_residual_sa_on_sa = 30,
+                       qs_residual_sa_on_i = 20,
+                       f_residual_sa_on_i = 20,
+                       f_residual_td_on_sa = 30,
+                       f_residual_td_on_i = 20,
+                       oos_mean = 15,
+                       oos_mse = 10,
+                       residuals_independency = 15,
+                       residuals_homoskedasticity = 5,
+                       residuals_skewness = 5,
+                       m7 = 5,  q_m2 = 5),
+        modalities = c("Good", "Uncertain", "", "Bad", "Severe"),
+        normalize_score_value,
+        na.rm = FALSE,
+        n_contrib_score,
+        conditional_indicator,
+        ...) {
     # score_formula_exp <- as.expression(substitute(score_formula))
 
     QR_modalities <- x$modalities
@@ -484,8 +485,14 @@ extract_score.QR_matrix <- function(x, format_output = c("data.frame", "vector")
     return(res)
 }
 #' @export
-extract_score.mQR_matrix <- function(x, format_output = c("data.frame", "vector"), weighted_score = FALSE) {
-    return(lapply(x, extract_score, format_output = format_output, weighted_score = weighted_score))
+extract_score.mQR_matrix <- function(
+        x,
+        format_output = c("data.frame", "vector"),
+        weighted_score = FALSE) {
+    return(lapply(X = x,
+                  FUN = extract_score,
+                  format_output = format_output,
+                  weighted_score = weighted_score))
 }
 
 
@@ -797,11 +804,12 @@ NULL
 #' @family var QR_matrix manipulation
 #' @seealso [Traduction française][fr-recode_indicator_num()]
 #' @export
-recode_indicator_num <- function(x,
-                                 variable_name,
-                                 breaks = c(0, .01, .05, .1, 1),
-                                 labels =  c("Good", "Uncertain", "Bad", "Severe"),
-                                 ...) {
+recode_indicator_num <- function(
+        x,
+        variable_name,
+        breaks = c(0, .01, .05, .1, 1),
+        labels =  c("Good", "Uncertain", "Bad", "Severe"),
+        ...) {
     UseMethod("recode_indicator_num", x)
 }
 #' @export
@@ -809,11 +817,12 @@ recode_indicator_num.default <- function(x, variable_name, breaks, labels, ...) 
     stop("This function requires a QR_matrix or mQR_matrix object")
 }
 #' @export
-recode_indicator_num.QR_matrix <- function(x,
-                                           variable_name,
-                                           breaks = c(0, .01, .05, .1, 1),
-                                           labels =  c("Good", "Uncertain", "Bad", "Severe"),
-                                           ...) {
+recode_indicator_num.QR_matrix <- function(
+        x,
+        variable_name,
+        breaks = c(0, .01, .05, .1, 1),
+        labels =  c("Good", "Uncertain", "Bad", "Severe"),
+        ...) {
     modalities <- x$modalities
     values <- x$values
     for (var in variable_name) {
@@ -831,15 +840,13 @@ recode_indicator_num.QR_matrix <- function(x,
     return(x)
 }
 #' @export
-recode_indicator_num.mQR_matrix <- function(x,
-                                            variable_name,
-                                            breaks = c(0, .01, .05, .1, 1),
-                                            labels =  c("Good", "Uncertain", "Bad", "Severe"),
-                                            ...) {
-    return(mQR_matrix(lapply(x,
-                             recode_indicator_num,
-                             variable_name = variable_name,
-                             breaks = breaks,
-                             labels = labels,
-                             ...)))
+recode_indicator_num.mQR_matrix <- function(
+        x,
+        variable_name,
+        breaks = c(0, .01, .05, .1, 1),
+        labels =  c("Good", "Uncertain", "Bad", "Severe"),
+        ...) {
+    return(mQR_matrix(lapply(
+        X = x, FUN = recode_indicator_num,
+        variable_name = variable_name, breaks = breaks, labels = labels, ...)))
 }

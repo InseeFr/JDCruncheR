@@ -61,8 +61,7 @@ export_xlsx.QR_matrix <- function(x, layout = c("all", "modalities", "values", "
         XLConnect::clearSheet(wb, sheets)
     }
 
-    XLConnect::setStyleAction(wb,
-                              XLConnect::XLC$STYLE_ACTION.DATA_FORMAT_ONLY)
+    XLConnect::setStyleAction(wb, XLConnect::XLC$STYLE_ACTION.DATA_FORMAT_ONLY)
     if (auto_format) {
         XLConnect::setDataFormatForType(wb,
                                         type = XLConnect::XLC$DATA_TYPE.NUMERIC,
