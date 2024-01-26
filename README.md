@@ -4,6 +4,8 @@
 # `JDCruncheR`
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/JDCruncheR)](https://cran.r-project.org/package=JDCruncheR)
+[![Linting
+code](https://github.com/InseeFr/JDCruncheR/actions/workflows/lint.yaml/badge.svg)](https://github.com/InseeFr/JDCruncheR/actions/workflows/lint.yaml)
 
 ## Français 🇫🇷
 
@@ -25,13 +27,30 @@ très utile lorsqu’on a beaucoup de séries à désaisonnaliser.
 
 ### Installation
 
-Il y a 2 méthodes d’installation du package `JDCruncheR` :
-
-- utiliser le package `remotes` :
+Pour obtenir la version en cours de développement depuis GitHub :
 
 ``` r
+# Si le package remotes n'est pas installé
 # install.packages("remotes")
-remotes::install_github("InseeFr/JDCruncheR", build_vignettes = TRUE)
+
+# Installer la version en cours de développement depuis GitHub
+remotes::install_github("InseeFr/JDCruncheR")
+```
+
+Pour obtenir la dernière release stable du package, il y a 2 méthodes
+d’installation du package `JDCruncheR` :
+
+- directement depuis GitHub :
+
+``` r
+# Si le package remotes n'est pas installé
+# install.packages("remotes")
+
+# Installer la dernière version stable disponible sur GitHub
+remotes::install_github("InseeFr/JDCruncheR@*release")
+
+# Sur les ordinateurs Insee
+install.packages("JDCruncheR", repos = "https://nexus.insee.fr/repository/r-public/")
 ```
 
 - depuis le dossier compressé **.zip** ou **.tar.gz**, qui peuvent être
@@ -64,17 +83,37 @@ This is most useful when dealing with a large number of series.
 
 ### Installation
 
-There are two ways to install the `JDCruncheR` package:
-
-- using the `remotes` package:
+To get the current development version from GitHub:
 
 ``` r
+# If remotes packages is not installed
 # install.packages("remotes")
-remotes::install_github("InseeFr/JDCruncheR", build_vignettes = TRUE)
+
+# Install development version from GitHub
+remotes::install_github("InseeFr/JDCruncheR")
 ```
 
-- from the **.zip** or **.tar.gz** file, that can both be found here:
-  <https://github.com/InseeFr/JDCruncheR/releases>.
+To get the current stable version (from the latest release), there are
+two ways to install the `JDCruncheR` package:
+
+- directly from GitHub :
+
+``` r
+# If remotes packages is not installed
+# install.packages("remotes")
+
+# Install the last stable release from GitHub
+remotes::install_github("InseeFr/JDCruncheR@*release")
+
+# on Insee computer
+install.packages("JDCruncheR", repos = "https://nexus.insee.fr/repository/r-public/")
+```
+
+- from the **.zip** or **.tar.gz** compressed folder, that can both be
+  found here: : <https://github.com/InseeFr/JDCruncheR/releases>. For
+  more informations on installing and configuring the `JDCruncheR`
+  package, you can visit the
+  [wiki](https://github.com/jdemetra/jwsacruncher/wiki) page.
 
 For a more comprehensive description of the R packages for JDemetra+
 check the Insee working paper [R Tools for JDemetra+: Seasonal
