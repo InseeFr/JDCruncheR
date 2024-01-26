@@ -76,7 +76,9 @@ create_param_file <- function(dir_file_param = getwd(), bundle = 10000, csv_layo
                               paths_path = NULL) {
     first_line <- "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>"
     param_line <- paste("<wsaConfig bundle=", bundle, " csvlayout=", csv_layout, " csvseparator=",
-                        csv_separator, " ndecs=", ndecs, ">", sep = "\"")
+        csv_separator, " ndecs=", ndecs, ">",
+        sep = "\""
+    )
     policy_line <- paste0("    <policy>", policy, "</policy>")
 
     output_line <- matrix_lines <- tsmatrix_lines <- path_lines <- NULL
@@ -87,26 +89,33 @@ create_param_file <- function(dir_file_param = getwd(), bundle = 10000, csv_layo
     }
 
     if (!is.null(matrix_item)) {
-        matrix_lines <- c("    <matrix>",
-                          paste0("        <item>", matrix_item, "</item>"),
-                          "    </matrix>")
+        matrix_lines <- c(
+            "    <matrix>",
+            paste0("        <item>", matrix_item, "</item>"),
+            "    </matrix>"
+        )
     }
 
     if (!is.null(tsmatrix_series)) {
-        tsmatrix_lines <- c("    <tsmatrix>",
-                            paste0("        <series>", tsmatrix_series, "</series>"),
-                            "    </tsmatrix>")
+        tsmatrix_lines <- c(
+            "    <tsmatrix>",
+            paste0("        <series>", tsmatrix_series, "</series>"),
+            "    </tsmatrix>"
+        )
     }
 
     if (!is.null(paths_path)) {
-        path_lines <- c("    <paths>",
-                        paste0("        <path>", gsub("/", "\\", paths_path, fixed = TRUE), "</path>"),
-                        "    </paths>")
+        path_lines <- c(
+            "    <paths>",
+            paste0("        <path>", gsub("/", "\\", paths_path, fixed = TRUE), "</path>"),
+            "    </paths>"
+        )
     }
 
-    file_param <- c(first_line, param_line, policy_line, output_line,
-                    matrix_lines, tsmatrix_lines, path_lines,
-                    "</wsaConfig>"
+    file_param <- c(
+        first_line, param_line, policy_line, output_line,
+        matrix_lines, tsmatrix_lines, path_lines,
+        "</wsaConfig>"
     )
     writeLines(file_param, con = paste0(dir_file_param, "/parametres.param"))
     return(invisible(paste0(dir_file_param, "/parametres.param")))

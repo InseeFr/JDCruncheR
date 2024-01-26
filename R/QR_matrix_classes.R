@@ -55,8 +55,10 @@ NULL
 #' @seealso [Traduction française][fr-QR_matrix()]
 #' @export
 QR_matrix <- function(modalities = NULL, values = NULL, score_formula = NULL) {
-    QR <- list(modalities = modalities, values = values,
-               score_formula = score_formula)
+    QR <- list(
+        modalities = modalities, values = values,
+        score_formula = score_formula
+    )
     class(QR) <- c("QR_matrix")
     QR
 }
@@ -130,21 +132,35 @@ print.QR_matrix <- function(x, print_variables = TRUE, print_score_formula = TRU
     nb_var_modalities <- ncol(x$modalities)
     nb_var_values <- ncol(x$values)
 
-    if (is.null(nb_var) || is.null(nb_var_modalities) || is.null(nb_var_values) ||
-        nb_var * nb_var_modalities * nb_var_values == 0) {
+    if (is.null(nb_var)
+        || is.null(nb_var_modalities)
+        || is.null(nb_var_values)
+        || nb_var * nb_var_modalities * nb_var_values == 0) {
         cat("The quality report matrix is empty")
         return(invisible(x))
     }
-    cat(sprintf(ngettext(nb_var, "The quality report matrix has %d observations",
-                         "The quality report matrix has %d observations"),
-                nb_var))
+    cat(sprintf(
+        ngettext(
+            nb_var, "The quality report matrix has %d observations",
+            "The quality report matrix has %d observations"
+        ),
+        nb_var
+    ))
     cat("\n")
-    cat(sprintf(ngettext(nb_var_modalities, "There are %d indicators in the modalities matrix",
-                         "There are %d indicators in the modalities matrix"),
-                nb_var_modalities))
-    cat(sprintf(ngettext(nb_var_values, " and %d indicators in the values matrix",
-                         " and %d indicators in the values matrix"),
-                nb_var_values))
+    cat(sprintf(
+        ngettext(
+            nb_var_modalities, "There are %d indicators in the modalities matrix",
+            "There are %d indicators in the modalities matrix"
+        ),
+        nb_var_modalities
+    ))
+    cat(sprintf(
+        ngettext(
+            nb_var_values, " and %d indicators in the values matrix",
+            " and %d indicators in the values matrix"
+        ),
+        nb_var_values
+    ))
     cat("\n")
     if (print_variables) {
         cat("\n")
@@ -155,25 +171,29 @@ print.QR_matrix <- function(x, print_variables = TRUE, print_score_formula = TRU
         names_var_values_sup <- paste(names_var_values_sup, collapse = "  ")
 
 
-        cat(sprintf("The quality report matrix contains the following variables:\n%s\n",
-                    names_var_modalities)
-        )
+        cat(sprintf(
+            "The quality report matrix contains the following variables:\n%s\n",
+            names_var_modalities
+        ))
         cat("\n")
         if (all(names_var_values_sup == "")) {
             cat("There's no additionnal variable in the values matrix")
         } else {
-            cat(sprintf("The variables exclusively found in the values matrix are:\n%s",
-                        names_var_values_sup))
+            cat(sprintf(
+                "The variables exclusively found in the values matrix are:\n%s",
+                names_var_values_sup
+            ))
         }
         cat("\n")
         if (length(names_var_values_sup) > 1) {
-
-
-            cat(sprintf(ngettext(length(names_var_values_sup),
-                                 "There's no additionnal variable in the values matrix",
-                                 "The variables exclusively found in the values matrix are:\n%s"),
-                        names_var_values_sup))
-
+            cat(sprintf(
+                ngettext(
+                    length(names_var_values_sup),
+                    "There's no additionnal variable in the values matrix",
+                    "The variables exclusively found in the values matrix are:\n%s"
+                ),
+                names_var_values_sup
+            ))
         }
 
         cat("\n")
@@ -184,15 +204,21 @@ print.QR_matrix <- function(x, print_variables = TRUE, print_score_formula = TRU
     if (is.null(score_value)) {
         cat("No score was calculated")
     } else {
-        cat(sprintf("The smallest score is %1g and the greatest is %2g\n",
-                    min(score_value, na.rm = TRUE), max(score_value, na.rm = TRUE)))
-        cat(sprintf("The average score is %1g and its standard deviation is %2g",
-                    mean(score_value, na.rm = TRUE), sd(score_value, na.rm = TRUE)))
+        cat(sprintf(
+            "The smallest score is %1g and the greatest is %2g\n",
+            min(score_value, na.rm = TRUE), max(score_value, na.rm = TRUE)
+        ))
+        cat(sprintf(
+            "The average score is %1g and its standard deviation is %2g",
+            mean(score_value, na.rm = TRUE), sd(score_value, na.rm = TRUE)
+        ))
     }
     if (print_score_formula && !is.null(x$score_formula)) {
         cat("\n\n")
-        cat(sprintf("The following formula was used to calculate the score:\n%s",
-                    as.character(x$score_formula)))
+        cat(sprintf(
+            "The following formula was used to calculate the score:\n%s",
+            as.character(x$score_formula)
+        ))
     }
     return(invisible(x))
 }
@@ -204,9 +230,13 @@ print.mQR_matrix <- function(x, score_statistics = TRUE, ...) {
         cat("List without a quality report")
         return(invisible(x))
     }
-    cat(sprintf(ngettext(length(x), "The object contains %d quality report(s)",
-                         "The object contains %d quality report(s)"),
-                length(x)))
+    cat(sprintf(
+        ngettext(
+            length(x), "The object contains %d quality report(s)",
+            "The object contains %d quality report(s)"
+        ),
+        length(x)
+    ))
     cat("\n")
     bq_names <- names(x)
     bq_names[is.na(bq_names)] <- ""
@@ -215,17 +245,25 @@ print.mQR_matrix <- function(x, score_statistics = TRUE, ...) {
     } else {
         bq_names_na <- sum(is.na(bq_names))
         bq_valid_names <- bq_names[!is.na(bq_names)]
-        cat(sprintf(ngettext(length(bq_valid_names),
-                             "%d quality report is named: %s",
-                             "%d quality reports are named: %s"),
-                    length(bq_valid_names), paste(bq_valid_names, collapse = "  ")))
+        cat(sprintf(
+            ngettext(
+                length(bq_valid_names),
+                "%d quality report is named: %s",
+                "%d quality reports are named: %s"
+            ),
+            length(bq_valid_names), paste(bq_valid_names, collapse = "  ")
+        ))
 
         if (length(bq_names_na) > 1) {
             cat("\n")
-            cat(sprintf(ngettext(bq_names_na,
-                                 "%d quality report isn't named",
-                                 "%d quality reports aren't named"),
-                        bq_names_na))
+            cat(sprintf(
+                ngettext(
+                    bq_names_na,
+                    "%d quality report isn't named",
+                    "%d quality reports aren't named"
+                ),
+                bq_names_na
+            ))
         }
     }
     if (score_statistics) {
@@ -235,10 +273,14 @@ print.mQR_matrix <- function(x, score_statistics = TRUE, ...) {
         if (is.null(all_score)) {
             cat("No quality report has a calculated score")
         } else {
-            cat(sprintf("The average score over all quality reports is %g\n",
-                        mean(all_score, na.rm = TRUE)))
-            cat(sprintf("The smallest score is %1g and the greatest is %2g\n",
-                        min(all_score, na.rm = TRUE), max(all_score, na.rm = TRUE)))
+            cat(sprintf(
+                "The average score over all quality reports is %g\n",
+                mean(all_score, na.rm = TRUE)
+            ))
+            cat(sprintf(
+                "The smallest score is %1g and the greatest is %2g\n",
+                min(all_score, na.rm = TRUE), max(all_score, na.rm = TRUE)
+            ))
 
             for (i in seq_along(score_values)) {
                 cat("\n\n")
@@ -254,10 +296,14 @@ print.mQR_matrix <- function(x, score_statistics = TRUE, ...) {
                 if (is.null(score_value)) {
                     cat(sprintf("There is no calculated score for the quality report n.%d%s", i, bq_name))
                 } else {
-                    cat(sprintf("The quality report n.%d%s has an average score of %g\n", i, bq_name,
-                                mean(score_value, na.rm = TRUE)))
-                    cat(sprintf("The smallest score is %1g and the greatest is %2g\n",
-                                min(score_value, na.rm = TRUE), max(score_value, na.rm = TRUE)))
+                    cat(sprintf(
+                        "The quality report n.%d%s has an average score of %g\n", i, bq_name,
+                        mean(score_value, na.rm = TRUE)
+                    ))
+                    cat(sprintf(
+                        "The smallest score is %1g and the greatest is %2g\n",
+                        min(score_value, na.rm = TRUE), max(score_value, na.rm = TRUE)
+                    ))
                 }
             }
         }
