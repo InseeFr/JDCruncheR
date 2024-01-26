@@ -1,5 +1,12 @@
 % Latest JDCruncheR news
 
+# JDCruncheR development
+
+ * Update readme
+ * resolve a bug
+
+---
+
 # JDCruncheR 0.2.4
 
  * The functions' help pages as well as the package vignettes are now available both in French and English.
