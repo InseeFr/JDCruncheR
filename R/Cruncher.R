@@ -32,50 +32,60 @@ NULL
 cruncher <- function(workspace = workspace,
                      cruncher_bin_directory = getOption("cruncher_bin_directory"),
                      param_file_path, log_file) {
-    if (missing(workspace) || is.null(workspace))
+    if (missing(workspace) || is.null(workspace)) {
         stop("Please call the cruncher() on a valid workspace")
+    }
 
-    if (length(workspace) == 0)
+    if (length(workspace) == 0) {
         stop("The first argument must be a non-null workspace path")
+    }
 
-    if (length(workspace) > 1)
+    if (length(workspace) > 1) {
         stop("Please specify only one workspace path")
+    }
 
     # The path to the workspace must be "whole", not relative/from the setwd.
     workspace <- normalizePath(workspace, mustWork = FALSE)
     workspace <- sub("\\.xml$", "", workspace) # To remove the .xml from the workspace name, if needed
 
     if (missing(param_file_path) || is.null(param_file_path)) {
-        param_file_path <- list.files(path = workspace,
-                                      recursive = TRUE,
-                                      pattern = "\\.params$",
-                                      full.names = TRUE)
-        if (length(param_file_path) != 0)
+        param_file_path <- list.files(
+            path = workspace,
+            recursive = TRUE,
+            pattern = "\\.params$",
+            full.names = TRUE
+        )
+        if (length(param_file_path) != 0) {
             stop("No or more than one .param file was found")
+        }
     }
     workspace <- paste0(workspace, ".xml")
 
-    if (!file.exists(paste0(cruncher_bin_directory, "/jwsacruncher")))
+    if (!file.exists(paste0(cruncher_bin_directory, "/jwsacruncher"))) {
         stop("There is an error in the path to the cruncher bin folder")
-    if (!file.exists(workspace))
+    }
+    if (!file.exists(workspace)) {
         stop("There is an error in the path to the workspace")
-    if (!file.exists(param_file_path))
+    }
+    if (!file.exists(param_file_path)) {
         stop("There is an error in the path to the .params file")
+    }
 
     wd <- getwd()
     setwd(cruncher_bin_directory)
 
     log <- shell(paste0(
-        "jwsacruncher \""
-        , workspace
-        , "\" -x \""
-        , param_file_path, "\""
+        "jwsacruncher \"",
+        workspace,
+        "\" -x \"",
+        param_file_path, "\""
     ), intern = TRUE)
 
     setwd(wd)
 
-    if (!missing(log_file) && !is.null(log_file))
+    if (!missing(log_file) && !is.null(log_file)) {
         writeLines(text = log, con = log_file)
+    }
 
     return(invisible(workspace))
 }
@@ -131,45 +141,47 @@ cruncher_and_param <- function(workspace = workspace,
                                delete_existing_file = NULL,
                                log_file = NULL,
                                ...) {
-
     dossier_temp <- tempdir()
     fichier_param <- create_param_file(dossier_temp, output = output, ...)
-    workspace <- cruncher(workspace = workspace, cruncher_bin_directory = cruncher_bin_directory,
-                          param_file_path = fichier_param, log_file = log_file)
+    workspace <- cruncher(
+        workspace = workspace, cruncher_bin_directory = cruncher_bin_directory,
+        param_file_path = fichier_param, log_file = log_file
+    )
 
     if (rename_multi_documents) {
-        if (is.null(output))
+        if (is.null(output)) {
             output <- paste0(sub("\\.xml", "", workspace), "\\Output")
+        }
 
         noms_multi_documents <- multiprocessing_names(workspace)
-        if (nrow(noms_multi_documents) == 0)
+        if (nrow(noms_multi_documents) == 0) {
             stop("There is no multiprocessing in the workspace!")
+        }
         noms_multi_documents$name <- paste0(output, "\\", noms_multi_documents$name)
         noms_multi_documents$file <- paste0(output, "\\", noms_multi_documents$file)
         noms_multi_documents <- noms_multi_documents[noms_multi_documents$name != noms_multi_documents$file, ]
 
         if (any(file.exists(noms_multi_documents$name))) {
-
             if (is.null(delete_existing_file)) {
                 message <- paste("There is already at least one file in ", output, ".\nDo you want to clear the output folder?")
-                delete_existing_file <- utils::winDialog(type = c("yesnocancel"),
-                                                         message)
+                delete_existing_file <- utils::winDialog(
+                    type = c("yesnocancel"),
+                    message
+                )
 
                 delete_existing_file <- isTRUE(delete_existing_file == "YES")
-
             }
             if (delete_existing_file) {
                 unlink(noms_multi_documents$name[file.exists(noms_multi_documents$name)],
-                       recursive = TRUE)
+                    recursive = TRUE
+                )
                 file.rename(from = noms_multi_documents$file, to = noms_multi_documents$name)
             } else {
                 warning("There were pre-existing files in the output folder: none were removed or renamed.")
             }
-
         } else {
             file.rename(from = noms_multi_documents$file, to = noms_multi_documents$name)
         }
-
     }
 
     return(invisible(workspace))
@@ -205,22 +217,26 @@ multiprocessing_names <- function(workspace) {
         stop("Please call multiprocessing_names() on a valid workspace")
     }
 
-    if (length(workspace) == 0)
+    if (length(workspace) == 0) {
         stop("The first argument must be a non-null workspace path")
+    }
 
-    if (length(workspace) > 1)
+    if (length(workspace) > 1) {
         stop("Please specify only one workspace path")
+    }
 
     workspace <- normalizePath(workspace, mustWork = FALSE)
     workspace <- paste0(sub("\\.xml$", "", workspace), ".xml")
 
-    if (!file.exists(workspace))
+    if (!file.exists(workspace)) {
         stop("The workspace doesn't exist")
+    }
 
     xml_workspace <- suppressWarnings(XML::xmlParse(workspace, error = function(...) {}))
     noms_objets <- XML::xmlToDataFrame(nodes = XML::getNodeSet(
         doc = xml_workspace,
-        path = "//ns2:demetraGenericWorkspace/ns2:items/ns2:item"))
+        path = "//ns2:demetraGenericWorkspace/ns2:items/ns2:item"
+    ))
     noms_multi_documents <- noms_objets[grep("multi-documents", noms_objets$family), ]
     noms_multi_documents <- noms_multi_documents[, c("name", "file")]
 
@@ -288,12 +304,15 @@ NULL
 update_workspace <- function(workspace = workspace,
                              policy = "parameters",
                              cruncher_bin_directory = getOption("cruncher_bin_directory")) {
-
     dossier_temp <- tempdir()
-    fichier_param <- create_param_file(dossier_temp, output = dossier_temp, policy = policy,
-                                       matrix_item = NULL, tsmatrix_series = NULL)
-    workspace <- cruncher(workspace = workspace, cruncher_bin_directory = cruncher_bin_directory,
-                          param_file_path = fichier_param)
+    fichier_param <- create_param_file(dossier_temp,
+        output = dossier_temp, policy = policy,
+        matrix_item = NULL, tsmatrix_series = NULL
+    )
+    workspace <- cruncher(
+        workspace = workspace, cruncher_bin_directory = cruncher_bin_directory,
+        param_file_path = fichier_param
+    )
 
     return(invisible(workspace))
 }
