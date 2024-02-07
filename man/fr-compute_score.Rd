@@ -84,7 +84,7 @@ on réduit à 1 le poids de la variable "residuals_skewness" lorsque les modalit
 \examples{
 \dontrun{
 QR <- extract_QR()
-QR <- compute_score(QR,n_contrib_score = 2)
+QR <- compute_score(QR, n_contrib_score = 2)
 QR
 QR$modalities$score
 }

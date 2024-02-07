@@ -29,7 +29,7 @@ For \code{mQR_matrix} objects, it is a list of scores (\code{NULL} elements or v
 \dontrun{
 QR <- extract_QR()
 mQR <- mQR_matrix(QR, compute_score(QR))
-extract_score(QR)  # NULL
+extract_score(QR) # NULL
 extract_score(mQR) # List whose first element is NULL
 }
 }

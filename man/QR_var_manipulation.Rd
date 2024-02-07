@@ -22,9 +22,9 @@ from \code{QR_matrix} or \code{mQR_matrix} objects. The series names (column "se
 \examples{
 \dontrun{
 QR <- compute_score(extract_QR())
-retain_indicators(QR,"score","m7")    # Only the score and the m7 variables are kept
-retain_indicators(QR,c("score","m7")) # equivalent syntax
-score(remove_indicator(QR,"score"))   # The score is removed
+retain_indicators(QR, "score", "m7") # Only the score and the m7 variables are kept
+retain_indicators(QR, c("score", "m7")) # equivalent syntax
+score(remove_indicator(QR, "score")) # The score is removed
 }
 }
 \seealso{
