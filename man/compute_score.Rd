@@ -85,7 +85,7 @@ or the homoscedasticity test ("residuals_homoskedasticity") are "Bad" or "Severe
 \examples{
 \dontrun{
 QR <- extract_QR()
-QR <- compute_score(QR,n_contrib_score = 2)
+QR <- compute_score(QR, n_contrib_score = 2)
 QR
 QR$modalities$score
 }
