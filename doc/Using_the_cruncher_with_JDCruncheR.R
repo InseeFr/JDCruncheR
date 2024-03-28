@@ -30,26 +30,35 @@ refresh_policy <- structure(
             "All outliers are re-identified. All coefficients of the RegARIMA model, regression variables and ARIMA parameters, are re-estimated. The transformation type remains unchanged.",
             "Re-identification of the ARIMA model, outliers and regression variables, except the calendar variables. The transformation type remains unchanged.",
             "Complete re-identification of the whole RegARIMA model, all regression variables and ARIMA model orders."
-        )),
+        )
+    ),
     .Names = c("Option in JDemetra+", "Cruncher options", "Description"),
     class = "data.frame",
     row.names = c(NA, -8L)
 )
 
 if (opts_knit$get("rmarkdown.pandoc.to") == "latex") {
-    kable(refresh_policy, caption = "The refresh/revision policies",
-          booktabs = TRUE, format = "latex") %>%
-        kable_styling(full_width = TRUE,
-                      latex_options = "hold_position") %>%
+    kable(
+        refresh_policy,
+        caption = "The refresh/revision policies",
+        booktabs = TRUE, format = "latex"
+    ) %>%
+        kable_styling(
+            full_width = TRUE,
+            latex_options = "hold_position"
+        ) %>%
         group_rows("Current adjustment (AO approach)", 1, 1) %>%
         group_rows("Partial concurrent adjustment", 2, 7) %>%
         group_rows("Concurrent", 8, 8) %>%
         column_spec(1, width = "4cm") %>%
         column_spec(2, width = "2.5cm")
 } else {
-    refresh_policy[2:7, 1] <-  paste("Partial concurrent adjustment ->", refresh_policy[2:7, 1])
-    kable(refresh_policy, caption = "The refresh/revision policies",
-             booktabs = TRUE)
+    refresh_policy[2:7, 1] <- paste("Partial concurrent adjustment ->", refresh_policy[2:7, 1])
+    kable(
+        refresh_policy,
+        caption = "The refresh/revision policies",
+        booktabs = TRUE
+    )
 }
 
 

@@ -96,7 +96,7 @@ if (opts_knit$get("rmarkdown.pandoc.to") == "latex") {
 2. `matrix_item` qui est une chaîne de caractères contenant les noms des paramètres à exporter. Par défaut, ce sont ceux de l'option `default_matrix_item`. On peut donc au choix modifier l'option `default_matrix_item` ou le paramètre `matrix_item` :
 ```{r, eval = FALSE}
 library("JDCruncheR")
- # Pour afficher les paramètres par défaut :
+# Pour afficher les paramètres par défaut :
 getOption("default_matrix_item")
 # Pour modifier les paramètres par défaut pour n'exporter par exemple
 # que les critères d'information :
@@ -108,7 +108,7 @@ options(default_matrix_item = c("likelihood.aic",
 
 3. `tsmatrix_series` qui est une chaîne de caractères contenant les noms des paramètres à exporter. Par défaut, ce sont ceux de l'option `default_tsmatrix_series`. On peut donc au choix modifier l'option `default_tsmatrix_series` ou le paramètre `tsmatrix_series` :
 ```{r, eval = FALSE}
- # Pour afficher les paramètres par défaut :
+# Pour afficher les paramètres par défaut :
 getOption("default_tsmatrix_series")
 # Pour modifier les paramètres par défaut pour n'exporter par exemple que
 # la série désaisonnalisée et ses prévisions :

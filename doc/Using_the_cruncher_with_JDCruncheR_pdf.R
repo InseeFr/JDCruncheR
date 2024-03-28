@@ -1,6 +1,6 @@
 ## ----setup, include = FALSE---------------------------------------------------
 knitr::opts_chunk$set(
-  echo = TRUE, size = "small"
+    echo = TRUE, size = "small"
 )
 library("JDCruncheR")
 library("kableExtra")
