@@ -24,7 +24,7 @@ library("knitr")
 #  "Ré-identification de tout le modèle regARIMA.")), .Names = c("Option sous JDemetra+",
 #  "Option du cruncher", "Signification"), class = "data.frame", row.names = c(NA,
 #  -7L))
-#  
+#
 #  kable(refresh_policy, caption = "Les différentes politiques de rafraîchissement",
 #        booktabs = TRUE, format = "latex") %>%
 #      kable_styling(full_width = T,
@@ -33,8 +33,8 @@ library("knitr")
 #      group_rows("Concurrent", 7, 7) %>%
 #      column_spec(1, width = "4cm") %>%
 #      column_spec(2, width = "2.5cm")
-#  
-#  
+#
+#
 
 ## ---- eval = FALSE------------------------------------------------------------
 #  library("JDCruncheR")
@@ -59,7 +59,7 @@ library("knitr")
 #  # "lastoutliers" et les autres paramètres par défaut
 #  create_param_file(dir_file_param = "D:/",
 #                    policy = "lastoutliers")
-#  
+#
 #  # Si l'on a modifié les options "default_matrix_item" et "default_tsmatrix_series" pour
 #  # n'exporter que les critères d'information, la série désaisonnalisée et ses
 #  # prévisions, la commande précédente est équivalent à :
@@ -81,13 +81,13 @@ library("knitr")
 #  cruncher_and_param(workspace = "D:/Campagne_CVS/ipi.xml",
 #                     rename_multi_documents = FALSE,
 #                     policy = "lastoutliers")
-#  
+#
 #  # Utilisation du paramètre "output" pour changer le dossier contenant les résultats :
 #  cruncher_and_param(workspace = "D:/Campagne_CVS/ipi.xml",
 #                     output = "D:/Resultats campagne/",
 #                     rename_multi_documents = FALSE,
 #                     policy = "lastoutliers")
-#  
+#
 #  # Pour modifier les noms des dossiers contenant les sorties afin qu'ils soient égaux
 #  # aux noms des multi-documents affichés dans l'application JDemetra+ il suffit
 #  # d'utiliser le paramètre "rename_multi_documents = TRUE" (valeur par défaut).
@@ -97,7 +97,6 @@ library("knitr")
 #                     rename_multi_documents = TRUE,
 #                     delete_existing_file = TRUE,
 #                     policy = "lastoutliers")
-#  
+#
 #  # Pour voir les autres paramètres de la fonction :
 #  ?cruncher_and_param
-

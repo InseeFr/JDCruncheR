@@ -26,7 +26,7 @@ library("knitr")
 #  "Re-identification of the ARIMA model, outliers and regression variables, except the calendar variables. The transformation type remains unchanged.",
 #  "Complete re-identification of the whole RegARIMA model, all regression variables and ARIMA model orders.")),
 #  .Names = c("Option in JDemetra+", "Cruncher option", "Description"), class = "data.frame", row.names = c(NA, -7L))
-#  
+#
 #  kable(refresh_policy, caption = "The refresh/revision policies",
 #        booktabs = TRUE, format = "latex") %>%
 #      kable_styling(full_width = T,
@@ -36,8 +36,8 @@ library("knitr")
 #      group_rows("Concurrent", 8, 8) %>%
 #      column_spec(1, width = "4cm") %>%
 #      column_spec(2, width = "2.5cm")
-#  
-#  
+#
+#
 
 ## ---- eval = FALSE------------------------------------------------------------
 #  library("JDCruncheR")
@@ -60,7 +60,7 @@ library("knitr")
 #  # and default values for the other parameters
 #  create_param_file(dir_file_param = "D:/",
 #                    policy = "lastoutliers")
-#  
+#
 #  # To customise the "default_matrix_item" and "default_tsmatrix_series" options
 #  # to only export the information criteria, the adjusted series and its forecast:
 #  create_param_file(dir_file_param = "D:/",
@@ -79,13 +79,13 @@ library("knitr")
 #  cruncher_and_param(workspace = "D:/seasonal_adjustment/ipi.xml",
 #                     rename_multi_documents = FALSE,
 #                     policy = "lastoutliers")
-#  
+#
 #  # Example of customisation of the parameter "output":
 #  cruncher_and_param(workspace = "D:/seasonal_adjustment/ipi.xml",
 #                     output = "D:/cruncher_results/",
 #                     rename_multi_documents = FALSE,
 #                     policy = "lastoutliers")
-#  
+#
 #  # Here, we explicitely have "rename_multi_documents = TRUE" (which is also the default value) to rename the ouput folders
 #  # after the SAProcessings as displayed in the JDemetra+ interface.
 #  # With parameter "delete_existing_file = TRUE", all pre-existing versions of such folders are deleted before the export.
@@ -93,7 +93,6 @@ library("knitr")
 #                     rename_multi_documents = TRUE,
 #                     delete_existing_file = TRUE,
 #                     policy = "lastoutliers")
-#  
+#
 #  # To see all the function parameters:
 #  ?cruncher_and_param
-
