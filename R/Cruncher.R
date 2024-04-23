@@ -74,7 +74,7 @@ cruncher <- function(workspace = workspace,
     wd <- getwd()
     setwd(cruncher_bin_directory)
 
-    log <- base::shell(paste0(
+    log <- shell(paste0(
         "jwsacruncher \"",
         workspace,
         "\" -x \"",
