@@ -1,11 +1,16 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# `JDCruncheR`
+# `JDCruncheR` <a href="inseefr.github.io/JDCruncheR"><img src="man/figures/logo.png" align="right" height="138" /></a>
 
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/JDCruncheR)](https://cran.r-project.org/package=JDCruncheR)
+<!-- badges: start -->
+
+[![CRAN
+status](http://www.r-pkg.org/badges/version/JDCruncheR)](https://cran.r-project.org/package=JDCruncheR)
 [![Linting
 code](https://github.com/InseeFr/JDCruncheR/actions/workflows/lint.yaml/badge.svg)](https://github.com/InseeFr/JDCruncheR/actions/workflows/lint.yaml)
+[![R-CMD-check](https://github.com/InseeFr/JDCruncheR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/InseeFr/JDCruncheR/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
 
 ## Français 🇫🇷
 
@@ -77,7 +82,7 @@ page](https://github.com/jdemetra/jwsacruncher/wiki).
 
 With `JDCruncheR`, you can also generate a *quality report* based on the
 cruncher’s output. This report is a formatted summary of the seasonal
-adjustment process main diagnostics and parameters. It can be used to
+adjustment process master diagnostics and parameters. It can be used to
 spot the most problematic series which will require a finer analysis.
 This is most useful when dealing with a large number of series.
 

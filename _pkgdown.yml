@@ -37,7 +37,7 @@ navbar:
         href: https://github.com/InseeFr/JDCruncheR/wiki/Installation-and-set-up-of-JDemetra-and-the-cruncher
     github:
       icon: fa-github fa-lg
-      href: https://github.com/nbbrd/rjdemetra
+      href: https://github.com/rjdverse/rjdemetra
 
 reference:
 - title: Quality report
