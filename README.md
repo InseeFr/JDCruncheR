@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# `JDCruncheR` <a href="inseefr.github.io/JDCruncheR"><img src="man/figures/logo.png" align="right" height="138" /></a>
+# `JDCruncheR` <a href="https://inseefr.github.io/JDCruncheR/"><img src="man/figures/logo.png" align="right" height="138" /></a>
 
 <!-- badges: start -->
 

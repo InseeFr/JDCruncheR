@@ -1,6 +1,6 @@
 Package: JDCruncheR
 Type: Package
-Title: Interface Between the JDemetra+ Cruncher and R, and Quality Report Generator
+Title: Interface Between the 'JDemetra+' Cruncher and R, and Quality Report Generator
 Version: 0.2.4
 Authors@R: c(
     person(given = "Alain",
@@ -16,7 +16,7 @@ Authors@R: c(
     person(given = "Anna", 
            family = "Smyk", role = c("aut"),
            email ="anna.smyk@insee.fr"))
-Description: R tools to enables the user to launch the JDemetra+ cruncher from R and to build complementary tools for seasonal adjustment 
+Description: R tools to enables the user to launch the 'JDemetra+' cruncher from R and to build complementary tools for seasonal adjustment 
     (generating quality reports and calculating series scores). The latest cruncher version can be downloaded here: <https://github.com/jdemetra/jwsacruncher/releases>.
 URL: https://github.com/InseeFr/JDCruncheR
 BugReports: https://github.com/InseeFr/JDCruncheR/issues
