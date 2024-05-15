@@ -29,9 +29,9 @@ weighted_score(QR, 2) # All scores are multiplied by 2
 \link[=fr-weighted_score]{Traduction française}
 
 Other QR_matrix functions: 
+\code{\link{export_xlsx}()},
 \code{\link{export_xlsx.QR_matrix}()},
 \code{\link{export_xlsx.mQR_matrix}()},
-\code{\link{export_xlsx}()},
 \code{\link{extract_QR}()},
 \code{\link{rbind.QR_matrix}()},
 \code{\link{sort}()}

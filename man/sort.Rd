@@ -36,9 +36,9 @@ sort(QR, sort_variables = "score") # To sort by ascending values of the score
 \link[=fr-sort.QR_matrix]{Traduction française}
 
 Other QR_matrix functions: 
+\code{\link{export_xlsx}()},
 \code{\link{export_xlsx.QR_matrix}()},
 \code{\link{export_xlsx.mQR_matrix}()},
-\code{\link{export_xlsx}()},
 \code{\link{extract_QR}()},
 \code{\link{rbind.QR_matrix}()},
 \code{\link{weighted_score}()}

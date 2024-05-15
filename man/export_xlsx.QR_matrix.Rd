@@ -42,8 +42,8 @@ To export a quality report in an Excel file.
 \link[=fr-export_xlsx.QR_matrix]{Traduction française}
 
 Other QR_matrix functions: 
-\code{\link{export_xlsx.mQR_matrix}()},
 \code{\link{export_xlsx}()},
+\code{\link{export_xlsx.mQR_matrix}()},
 \code{\link{extract_QR}()},
 \code{\link{rbind.QR_matrix}()},
 \code{\link{sort}()},

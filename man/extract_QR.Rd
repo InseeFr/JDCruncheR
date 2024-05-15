@@ -49,9 +49,9 @@ QR[["modalities"]]
 \link[=fr-extract_QR]{Traduction française}
 
 Other QR_matrix functions: 
+\code{\link{export_xlsx}()},
 \code{\link{export_xlsx.QR_matrix}()},
 \code{\link{export_xlsx.mQR_matrix}()},
-\code{\link{export_xlsx}()},
 \code{\link{rbind.QR_matrix}()},
 \code{\link{sort}()},
 \code{\link{weighted_score}()}

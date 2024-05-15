@@ -1,8 +1,8 @@
-linters: linters_with_defaults( 
-        object_name_linter = NULL, 
-        cyclocomp_linter = NULL, 
+linters: linters_with_defaults(
+        indentation_linter(indent = 4L),
+        object_name_linter = NULL,
+        cyclocomp_linter = NULL,
         line_length_linter = NULL,
-        commented_code_linter = NULL, 
-        indentation_linter(indent = 4L)
+        commented_code_linter = NULL
     )
 encoding: "UTF-8"
