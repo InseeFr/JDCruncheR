@@ -11,7 +11,7 @@
 \method{sort}{mQR_matrix}(x, decreasing = FALSE, sort_variables = "score", ...)
 }
 \arguments{
-\item{x}{a \code{QR_matrix} or \code{mQR_matrix} object}
+\item{x}{a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} object}
 
 \item{decreasing}{logical indicating whether the quality reports must be sorted in ascending or decreasing order.
 By default, the sorting is done in ascending order.}
@@ -27,10 +27,24 @@ the input with sorted quality reports
 To sort the quality reports on one or several variables
 }
 \examples{
-\dontrun{
-QR <- compute_score(extract_QR())
-sort(QR, sort_variables = "score") # To sort by ascending values of the score
-}
+# Path of matrix demetra_m
+demetra_path <- file.path(
+    system.file("extdata", package = "JDCruncheR"),
+    "WS/ws_ipi/Output/SAProcessing-1",
+    "demetra_m.csv"
+)
+
+# Extract the quality report from the demetra_m file
+QR <- extract_QR(demetra_path)
+
+# Compute the score
+QR <- compute_score(QR, n_contrib_score = 2)
+print(QR$modalities$score)
+
+# Sort the scores
+QR <- sort(QR, sort_variables = "score") # Pour trier par ordre croissant sur le score
+print(QR$modalities$score)
+
 }
 \seealso{
 \link[=fr-sort.QR_matrix]{Traduction française}

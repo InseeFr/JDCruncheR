@@ -4,7 +4,7 @@
 \alias{fr-export_xlsx.mQR_matrix}
 \title{Export des objets mQR_matrix dans des fichiers Excel}
 \arguments{
-\item{x}{objet de type \code{mQR_matrix} à exporter.}
+\item{x}{objet de type \code{\link{mQR_matrix}} à exporter.}
 
 \item{export_dir}{dossier d'export des résultats.}
 
@@ -17,6 +17,9 @@ un fichier par bilan qualité dont chaque feuille correspond à la composante ex
 \item{layout}{composantes du bilan à exporter : voir \code{\link{export_xlsx.QR_matrix}} .}
 
 \item{...}{autres paramètres de la fonction \code{\link{export_xlsx.QR_matrix}}.}
+}
+\value{
+Renvoie de manière invisible (via \code{invisible(x)}) le même objet \code{\link{mQR_matrix}} que \code{x}.
 }
 \description{
 Permet d'exporter dans des fichiers Excel une liste de bilan qualité

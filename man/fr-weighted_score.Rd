@@ -4,10 +4,10 @@
 \alias{fr-weighted_score}
 \title{Calcul d'un score pondéré pour chaque observation}
 \arguments{
-\item{x}{objet de type \code{QR_matrix} ou \code{mQR_matrix}.}
+\item{x}{objet de type \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}.}
 
 \item{pond}{pondération à appliquer au score. Il peut s'agir d'un nombre, d'un vecteur de nombres, du nom
-d'une des variables du bilan qualité ou d'une liste de pondérations pour les objets \code{mQR_matrix}.}
+d'une des variables du bilan qualité ou d'une liste de pondérations pour les objets \code{\link{mQR_matrix}}.}
 }
 \value{
 L'objet en entrée avec le score recalculé
@@ -16,10 +16,25 @@ L'objet en entrée avec le score recalculé
 Permet de pondérer un score déjà calculé en fonction de variables.
 }
 \examples{
-\dontrun{
-QR <- extract_QR()
-QR <- compute_score(QR)
-weighted_score(QR, 2) # Tous les scores sont multipliés par 2
-}
+# Path of matrix demetra_m
+demetra_path <- file.path(
+    system.file("extdata", package = "JDCruncheR"),
+    "WS/ws_ipi/Output/SAProcessing-1",
+    "demetra_m.csv"
+)
+
+# Extract the quality report from the demetra_m file
+QR <- extract_QR(demetra_path)
+
+# Compute the score
+QR <- compute_score(QR, n_contrib_score = 2)
+
+# Weighted score
+QR <- weighted_score(QR, 2)
+print(QR)
+
+# Extract the weighted score
+QR$modalities$score_pond
+
 }
 \keyword{internal}

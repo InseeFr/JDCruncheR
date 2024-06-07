@@ -14,7 +14,7 @@
 )
 }
 \arguments{
-\item{x}{a\code{mQR_matrix} object to export.}
+\item{x}{a \code{\link{mQR_matrix}} object to export.}
 
 \item{export_dir}{export directory.}
 
@@ -26,6 +26,9 @@ quality report matrix (modalities and values matrices). To group both modalities
 \item{layout}{elements of the report to export: see \code{\link{export_xlsx.QR_matrix}} .}
 
 \item{...}{other parameters of the function \code{\link{export_xlsx.QR_matrix}}.}
+}
+\value{
+Returns invisibly (via \code{invisible(x)}) the same \code{\link{mQR_matrix}} object as \code{x}.
 }
 \description{
 To export several quality reports in Excel files

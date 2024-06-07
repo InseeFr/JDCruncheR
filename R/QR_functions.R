@@ -2,7 +2,7 @@
 #'
 #' Permet de calculer un score global à partir d'un bilan qualité
 #'
-#' @param x objet de type \code{QR_matrix} ou \code{mQR_matrix}.
+#' @param x objet de type \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}.
 #' @param score_pond formule utilisée pour calculer le score global.
 #' @param modalities modalités triées par ordre d'importance dans le calcul du score (voir détails).
 #' @param normalize_score_value chiffre indiquant la valeur de référence pour la normalisation des pondérations utilisées lors du
@@ -64,12 +64,24 @@
 #'
 #' @encoding UTF-8
 #' @return Un objet de type \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}.
-#' @examples \dontrun{
-#' QR <- extract_QR()
+#' @examples
+#' # Path of matrix demetra_m
+#' demetra_path <- file.path(
+#'     system.file("extdata", package = "JDCruncheR"),
+#'     "WS/ws_ipi/Output/SAProcessing-1",
+#'     "demetra_m.csv"
+#' )
+#'
+#' # Extract the quality report from the demetra_m file
+#' QR <- extract_QR(demetra_path)
+#'
+#' # Compute the score
 #' QR <- compute_score(QR, n_contrib_score = 2)
-#' QR
+#' print(QR)
+#'
+#' # Extract the modalities matrix:
 #' QR$modalities$score
-#' }
+#'
 #' @keywords internal
 #' @name fr-compute_score
 NULL
@@ -80,7 +92,7 @@ NULL
 #'
 #' To calculate a score for each series from a quality report
 #'
-#' @param x a \code{QR_matrix} or \code{mQR_matrix} object.
+#' @param x a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} object.
 #' @param score_pond the formula used to calculate the series score.
 #' @param modalities modalities ordered by importance in the score calculation (cf. details).
 #' @param normalize_score_value integer indicating the reference value for weights normalisation. If missing, weights will not be normalised.
@@ -127,12 +139,24 @@ NULL
 #'
 #' @encoding UTF-8
 #' @return a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} object.
-#' @examples \dontrun{
-#' QR <- extract_QR()
+#' @examples
+#' # Path of matrix demetra_m
+#' demetra_path <- file.path(
+#'     system.file("extdata", package = "JDCruncheR"),
+#'     "WS/ws_ipi/Output/SAProcessing-1",
+#'     "demetra_m.csv"
+#' )
+#'
+#' # Extract the quality report from the demetra_m file
+#' QR <- extract_QR(demetra_path)
+#'
+#' # Compute the score
 #' QR <- compute_score(QR, n_contrib_score = 2)
-#' QR
+#' print(QR)
+#'
+#' # Extract the modalities matrix:
 #' QR$modalities$score
-#' }
+#'
 #' @name compute_score
 #' @seealso [Traduction française][fr-compute_score()]
 #' @export
@@ -294,14 +318,30 @@ compute_score.default <- function(x, ...) {
 #'
 #' Permet de pondérer un score déjà calculé en fonction de variables.
 #'
-#' @param x objet de type \code{QR_matrix} ou \code{mQR_matrix}.
+#' @param x objet de type \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}.
 #' @param pond pondération à appliquer au score. Il peut s'agir d'un nombre, d'un vecteur de nombres, du nom
-#' d'une des variables du bilan qualité ou d'une liste de pondérations pour les objets \code{mQR_matrix}.
-#' @examples \dontrun{
-#' QR <- extract_QR()
-#' QR <- compute_score(QR)
-#' weighted_score(QR, 2) # Tous les scores sont multipliés par 2
-#' }
+#' d'une des variables du bilan qualité ou d'une liste de pondérations pour les objets \code{\link{mQR_matrix}}.
+#' @examples
+#' # Path of matrix demetra_m
+#' demetra_path <- file.path(
+#'     system.file("extdata", package = "JDCruncheR"),
+#'     "WS/ws_ipi/Output/SAProcessing-1",
+#'     "demetra_m.csv"
+#' )
+#'
+#' # Extract the quality report from the demetra_m file
+#' QR <- extract_QR(demetra_path)
+#'
+#' # Compute the score
+#' QR <- compute_score(QR, n_contrib_score = 2)
+#'
+#' # Weighted score
+#' QR <- weighted_score(QR, 2)
+#' print(QR)
+#'
+#' # Extract the weighted score
+#' QR$modalities$score_pond
+#'
 #' @return L'objet en entrée avec le score recalculé
 #' @keywords internal
 #' @name fr-weighted_score
@@ -313,14 +353,30 @@ NULL
 #'
 #' Function to weight a pre-calculated score
 #'
-#' @param x a \code{QR_matrix} or \code{mQR_matrix} object
+#' @param x a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} object
 #' @param pond the weights to use. Can be an integer, a vector of integers, the name of one of the quality report variables
-#' or a list of weights for the \code{mQR_matrix} objects.
-#' @examples \dontrun{
-#' QR <- extract_QR()
-#' QR <- compute_score(QR)
-#' weighted_score(QR, 2) # All scores are multiplied by 2
-#' }
+#' or a list of weights for the \code{\link{mQR_matrix}} objects.
+#' @examples
+#' # Path of matrix demetra_m
+#' demetra_path <- file.path(
+#'     system.file("extdata", package = "JDCruncheR"),
+#'     "WS/ws_ipi/Output/SAProcessing-1",
+#'     "demetra_m.csv"
+#' )
+#'
+#' # Extract the quality report from the demetra_m file
+#' QR <- extract_QR(demetra_path)
+#'
+#' # Compute the score
+#' QR <- compute_score(QR, n_contrib_score = 2)
+#'
+#' # Weighted score
+#' QR <- weighted_score(QR, 2)
+#' print(QR)
+#'
+#' # Extract the weighted score
+#' QR$modalities$score_pond
+#'
 #' @family QR_matrix functions
 #' @return the input with an additionnal weighted score
 #' @name weighted_score
@@ -371,20 +427,36 @@ weighted_score.mQR_matrix <- function(x, pond = 1) {
 
 
 
-#' Tri des objets QR_matrix et mQR_matrix
+#' @title Tri des objets QR_matrix et mQR_matrix
 #'
+#' @description
 #' Permet de trier les bilans qualité en fonction d'une ou plusieurs variables.
 #'
-#' @param x objet de type \code{QR_matrix} ou \code{mQR_matrix}.
+#' @param x objet de type \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}.
 #' @param decreasing booléen indiquant si les bilans qualité doivent être triés par ordre croissant ou décroissant.
 #' Par défaut, le tri est effectué par ordre croissant.
 #' @param sort_variables variables à utiliser pour le tri. Elles doivent être présentes dans les tables de modalités.
 #' @param ... autres paramètres de la fonction \code{\link[base]{order}} (non utilisés pour l'instant).
 #' @return L'objet en entrée avec les tables de bilan qualité triées.
-#' @examples \dontrun{
-#' QR <- compute_score(extract_QR())
-#' sort(QR, sort_variables = "score") # Pour trier par ordre croissant sur le score
-#' }
+#' @examples
+#' # Path of matrix demetra_m
+#' demetra_path <- file.path(
+#'     system.file("extdata", package = "JDCruncheR"),
+#'     "WS/ws_ipi/Output/SAProcessing-1",
+#'     "demetra_m.csv"
+#' )
+#'
+#' # Extract the quality report from the demetra_m file
+#' QR <- extract_QR(demetra_path)
+#'
+#' # Compute the score
+#' QR <- compute_score(QR, n_contrib_score = 2)
+#' print(QR$modalities$score)
+#'
+#' # Sort the scores
+#' QR <- sort(QR, sort_variables = "score") # Pour trier par ordre croissant sur le score
+#' print(QR$modalities$score)
+#'
 #' @keywords internal
 #' @name fr-sort.QR_matrix
 NULL
@@ -395,16 +467,31 @@ NULL
 #'
 #' To sort the quality reports on one or several variables
 #'
-#' @param x a \code{QR_matrix} or \code{mQR_matrix} object
+#' @param x a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} object
 #' @param decreasing logical indicating whether the quality reports must be sorted in ascending or decreasing order.
 #' By default, the sorting is done in ascending order.
 #' @param sort_variables They must be present in the modalities table.
 #' @param ... other parameters of the function \code{\link[base]{order}} (unused for now)
 #' @return the input with sorted quality reports
-#' @examples \dontrun{
-#' QR <- compute_score(extract_QR())
-#' sort(QR, sort_variables = "score") # To sort by ascending values of the score
-#' }
+#' @examples
+#' # Path of matrix demetra_m
+#' demetra_path <- file.path(
+#'     system.file("extdata", package = "JDCruncheR"),
+#'     "WS/ws_ipi/Output/SAProcessing-1",
+#'     "demetra_m.csv"
+#' )
+#'
+#' # Extract the quality report from the demetra_m file
+#' QR <- extract_QR(demetra_path)
+#'
+#' # Compute the score
+#' QR <- compute_score(QR, n_contrib_score = 2)
+#' print(QR$modalities$score)
+#'
+#' # Sort the scores
+#' QR <- sort(QR, sort_variables = "score") # Pour trier par ordre croissant sur le score
+#' print(QR$modalities$score)
+#'
 #' @family QR_matrix functions
 #' @name sort
 #' @rdname sort
@@ -436,23 +523,40 @@ sort.mQR_matrix <- function(x, decreasing = FALSE, sort_variables = "score", ...
 
 
 
-#' Extraction du score
+#' @title Extraction du score
 #'
-#' Permet d'extraire le score des objets \code{QR_matrix} ou \code{mQR_matrix}.
+#' @description
+#' Permet d'extraire le score des objets \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}.
 #'
-#' @param x objet de type \code{QR_matrix} ou \code{mQR_matrix}.
+#' @param x objet de type \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}.
 #' @param format_output chaîne de caractères indiquant le format de l'objet en sortie :
 #' soit un \code{data.frame} soit un \code{vector}.
 #' @param weighted_score booléen indiquant s'il faut extraire le score pondéré (s'il existe) ou le score non pondéré.
 #' Par défaut, c'est le score non pondéré qui est extrait.
-#' @details Pour les objets \code{QR_matrix}, le score renvoyé est soit l'objet \code{NULL} si aucun score n'a été calculé, soit un vecteur.
-#' Pour les objets \code{mQR_matrix}, c'est une liste de scores (\code{NULL} ou un vecteur).
-#' @examples \dontrun{
-#' QR <- extract_QR()
+#' @details Pour les objets \code{\link{QR_matrix}}, le score renvoyé est soit l'objet \code{NULL} si aucun score n'a été calculé, soit un vecteur.
+#' Pour les objets \code{\link{mQR_matrix}}, c'est une liste de scores (\code{NULL} ou un vecteur).
+#'
+#' @returns \code{extract_score()} renvoie un data.frame avec deux colonnes : le nom de la série et son score.
+#'
+#' @examples
+#' # Path of matrix demetra_m
+#' demetra_path <- file.path(
+#'     system.file("extdata", package = "JDCruncheR"),
+#'     "WS/ws_ipi/Output/SAProcessing-1",
+#'     "demetra_m.csv"
+#' )
+#'
+#' # Extract the quality report from the demetra_m file
+#' QR <- extract_QR(demetra_path)
+#'
+#' # Compute the score
+#' QR1 <- compute_score(QR, n_contrib_score = 2)
 #' mQR <- mQR_matrix(QR, compute_score(QR))
-#' extract_score(QR) # NULL
-#' extract_score(mQR) # liste dont le premier élément est NULL
-#' }
+#'
+#' # Extract score
+#' extract_score(QR1)
+#' extract_score(mQR)
+#'
 #' @keywords internal
 #' @name fr-extract_score
 NULL
@@ -461,20 +565,36 @@ NULL
 
 #' Score extraction
 #'
-#' To extract score variables from \code{QR_matrix} or \code{mQR_matrix} objects.
+#' To extract score variables from \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} objects.
 #'
-#' @param x a \code{QR_matrix} or \code{mQR_matrix}.
+#' @param x a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}}.
 #' @param format_output string of characters indicating the output format: either a \code{data.frame} or a \code{vector}.
 #' @param weighted_score logical indicating whether to extract the weighted score (if previously calculated) or the unweighted one.
 #' By default, the unweighted score is extracted.
-#' @details For \code{QR_matrix} objects, the output is a vector or the object \code{NULL} if no score was previously calculated.
-#' For \code{mQR_matrix} objects, it is a list of scores (\code{NULL} elements or vectors).
-#' @examples \dontrun{
-#' QR <- extract_QR()
+#' @details For \code{\link{QR_matrix}} objects, the output is a vector or the object \code{NULL} if no score was previously calculated.
+#' For \code{\link{mQR_matrix}} objects, it is a list of scores (\code{NULL} elements or vectors).
+#'
+#' @returns \code{extract_score()} returns a data.frame with two column: the series name and their score.
+#'
+#' @examples
+#' # Path of matrix demetra_m
+#' demetra_path <- file.path(
+#'     system.file("extdata", package = "JDCruncheR"),
+#'     "WS/ws_ipi/Output/SAProcessing-1",
+#'     "demetra_m.csv"
+#' )
+#'
+#' # Extract the quality report from the demetra_m file
+#' QR <- extract_QR(demetra_path)
+#'
+#' # Compute the score
+#' QR1 <- compute_score(QR, n_contrib_score = 2)
 #' mQR <- mQR_matrix(QR, compute_score(QR))
-#' extract_score(QR) # NULL
-#' extract_score(mQR) # List whose first element is NULL
-#' }
+#'
+#' # Extract score
+#' extract_score(QR1)
+#' extract_score(mQR)
+#'
 #' @seealso [Traduction française][fr-extract_score()]
 #' @export
 extract_score <- function(x, format_output = c("data.frame", "vector"), weighted_score = FALSE) {
@@ -533,17 +653,38 @@ extract_score.mQR_matrix <- function(x,
 #' Manipulation de la liste des indicateurs
 #'
 #' Permet de retirer des indicateurs (fonction \code{remove_indicators()}) ou de n'en retenir que certains
-#' (fonction \code{retain_indicators()}) d'objets \code{QR_matrix} ou \code{mQR_matrix}. Le nom des séries
+#' (fonction \code{retain_indicators()}) d'objets \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}. Le nom des séries
 #' (colonne "series") ne peut être enlevé.
 #'
-#' @param x objet de type \code{QR_matrix} ou \code{mQR_matrix}.
+#' @param x objet de type \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}.
 #' @param ... noms des variables à retirer (ou conserver).
-#' @examples \dontrun{
-#' QR <- compute_score(extract_QR())
-#' retain_indicators(QR, "score", "m7") # On ne retient que les variables score et m7
-#' retain_indicators(QR, c("score", "m7")) # équivalent
-#' score(remove_indicator(QR, "score")) # Il n'y a plus de score
-#' }
+#' @returns \code{remove_indicators()} renvoie le même objet \code{x} réduit par les drapeaux et les variables utilisés comme arguments \dots
+#' Donc si l'entrée \code{x} est une matrice QR_matrix, un objet de la classe QR_matrix est renvoyé.
+#' Si le code d'entrée \code{x} est une matrice mQR, un objet de la classe mQR_matrix est renvoyé.
+#'
+#' @examples
+#' # Path of matrix demetra_m
+#' demetra_path <- file.path(
+#'     system.file("extdata", package = "JDCruncheR"),
+#'     "WS/ws_ipi/Output/SAProcessing-1",
+#'     "demetra_m.csv"
+#' )
+#'
+#' # Extract the quality report from the demetra_m file
+#' QR <- extract_QR(demetra_path)
+#'
+#' # Compute the score
+#' QR <- compute_score(QR, n_contrib_score = 2)
+#'
+#' # Retain indicators
+#' retain_indicators(QR, "score", "m7") # retaining "score" and "m7"
+#' retain_indicators(QR, c("score", "m7")) # Same
+#'
+#' # Remove indicators
+#' QR <- retain_indicators(QR, "score") # removing "score"
+#'
+#' extract_score(QR) # is NULL because we removed the score indicator
+#'
 #' @keywords internal
 #' @name fr-remove_indicators
 NULL
@@ -553,16 +694,38 @@ NULL
 #' Editing the indicators list
 #'
 #' Functions to remove indicators (\code{remove_indicators()}) or retrain some indicators only (\code{retain_indicators()})
-#' from \code{QR_matrix} or \code{mQR_matrix} objects. The series names (column "series") cannot be removed.
+#' from \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} objects. The series names (column "series") cannot be removed.
 #'
-#' @param x a \code{QR_matrix} or \code{mQR_matrix} object.
+#' @param x a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} object.
 #' @param ... names of the variable to remove (or keep)
-#' @examples \dontrun{
-#' QR <- compute_score(extract_QR())
-#' retain_indicators(QR, "score", "m7") # Only the score and the m7 variables are kept
-#' retain_indicators(QR, c("score", "m7")) # equivalent syntax
-#' score(remove_indicator(QR, "score")) # The score is removed
-#' }
+#'
+#' @returns \code{remove_indicators()} returns the same object \code{x} reduced by the flags and variables used as arguments \dots
+#' So if the input \code{x} is a QR_matrix, an object of class QR_matrix is returned.
+#' If the input \code{x} is a mQR_matrix, an object of class mQR_matrix is returned.
+#'
+#' @examples
+#' # Path of matrix demetra_m
+#' demetra_path <- file.path(
+#'     system.file("extdata", package = "JDCruncheR"),
+#'     "WS/ws_ipi/Output/SAProcessing-1",
+#'     "demetra_m.csv"
+#' )
+#'
+#' # Extract the quality report from the demetra_m file
+#' QR <- extract_QR(demetra_path)
+#'
+#' # Compute the score
+#' QR <- compute_score(QR, n_contrib_score = 2)
+#'
+#' # Retain indicators
+#' retain_indicators(QR, "score", "m7") # retaining "score" and "m7"
+#' retain_indicators(QR, c("score", "m7")) # Same
+#'
+#' # Remove indicators
+#' QR <- retain_indicators(QR, "score") # removing "score"
+#'
+#' extract_score(QR) # is NULL because we removed the score indicator
+#'
 #' @family var QR_matrix manipulation
 #' @name QR_var_manipulation
 #' @rdname QR_var_manipulation
@@ -629,42 +792,73 @@ retain_indicators.mQR_matrix <- function(x, ...) {
 
 #' Combiner par ligne des objets QR_matrix
 #'
-#' Permet de combiner plusieurs objets \code{QR_matrix} en combinant par ligne les paramètres \code{modalities}
+#' Permet de combiner plusieurs objets \code{\link{QR_matrix}} en combinant par ligne les paramètres \code{modalities}
 #' et \code{values}.
 #'
-#' @param ... objets \code{QR_matrix} à combiner.
+#' @param ... objets \code{\link{QR_matrix}} à combiner.
 #' @param check_formula booléen indiquant s'il faut vérifier la cohérence dans les formules de calcul du score.
 #' Par défaut, \code{check_formula = TRUE} : la fonction renvoie une erreur si des scores sont calculés avec des formules différentes.
 #' Si \code{check_formula = FALSE}, alors il n'y a pas de vérification et le paramètre \code{score_formula} de l'objet
 #' en sortie est \code{NULL}.
-#' @examples \dontrun{
-#' QR <- extract_QR()
-#' QR1 <- compute_score(QR1, score_pond = c(m7 = 2, q = 3, qs_residual_sa_on_sa = 5))
-#' QR2 <- compute_score(QR1, score_pond = c(m7 = 2, qs_residual_sa_on_sa = 5))
-#' rbind(QR1, QR2) # Une erreur est renvoyée
+#'
+#' @returns \code{rbind.QR_matrix()} renvoie un objet \code{\link{QR_matrix}}.
+#'
+#' @examples
+#' # Path of matrix demetra_m
+#' demetra_path <- file.path(
+#'     system.file("extdata", package = "JDCruncheR"),
+#'     "WS/ws_ipi/Output/SAProcessing-1",
+#'     "demetra_m.csv"
+#' )
+#'
+#' # Extract the quality report from the demetra_m file
+#' QR <- extract_QR(demetra_path)
+#'
+#' # Compute differents scores
+#' QR1 <- compute_score(QR, score_pond = c(m7 = 2, q = 3, qs_residual_sa_on_sa = 5))
+#' QR2 <- compute_score(QR, score_pond = c(m7 = 2, qs_residual_sa_on_sa = 5))
+#'
+#' # Merge two quality report
+#' try(rbind(QR1, QR2)) # Une erreur est renvoyée
 #' rbind(QR1, QR2, check_formula = FALSE)
-#' }
+#'
 #' @keywords internal
 #' @name fr-rbind.QR_matrix
 NULL
 #> NULL
 
 
-#' Combining QR_matrix objects
+#' @title Combining QR_matrix objects
 #'
-#' Function to combine multiple \code{QR_matrix} objects: line by line, both for the \code{modalities} and the \code{values} table.
+#' @description
+#' Function to combine multiple \code{\link{QR_matrix}} objects: line by line, both for the \code{modalities} and the \code{values} table.
 #'
-#' @param ... \code{QR_matrix} objects to combine.
+#' @param ... \code{\link{QR_matrix}} objects to combine.
 #' @param check_formula logical indicating whether to check the score formulas' coherency.
 #' By default, \code{check_formula = TRUE}: an error is returned if the scores were calculated with different formulas.
 #' If \code{check_formula = FALSE}, no check is performed and the \code{score_formula} of the output is \code{NULL}.
-#' @examples \dontrun{
-#' QR <- extract_QR()
-#' QR1 <- compute_score(QR1, score_pond = c(m7 = 2, q = 3, qs_residual_sa_on_sa = 5))
-#' QR2 <- compute_score(QR1, score_pond = c(m7 = 2, qs_residual_sa_on_sa = 5))
-#' rbind(QR1, QR2) # Returns an error
+#'
+#' @returns \code{rbind.QR_matrix()} returns a \code{\link{QR_matrix}} object.
+#'
+#' @examples
+#' # Path of matrix demetra_m
+#' demetra_path <- file.path(
+#'     system.file("extdata", package = "JDCruncheR"),
+#'     "WS/ws_ipi/Output/SAProcessing-1",
+#'     "demetra_m.csv"
+#' )
+#'
+#' # Extract the quality report from the demetra_m file
+#' QR <- extract_QR(demetra_path)
+#'
+#' # Compute differents scores
+#' QR1 <- compute_score(QR, score_pond = c(m7 = 2, q = 3, qs_residual_sa_on_sa = 5))
+#' QR2 <- compute_score(QR, score_pond = c(m7 = 2, qs_residual_sa_on_sa = 5))
+#'
+#' # Merge two quality report
+#' try(rbind(QR1, QR2)) # Une erreur est renvoyée
 #' rbind(QR1, QR2, check_formula = FALSE)
-#' }
+#'
 #' @family QR_matrix functions
 #' @seealso [Traduction française][fr-rbind.QR_matrix()]
 #' @export
@@ -713,14 +907,11 @@ rbind.QR_matrix <- function(..., check_formula = TRUE) {
     return(QR)
 }
 
-
-
-
 #' Ajout d'un indicateur dans les objets QR_matrix
 #'
-#' Permet d'ajouter un indicateur dans les objets \code{QR_matrix}.
+#' Permet d'ajouter un indicateur dans les objets \code{\link{QR_matrix}}.
 #'
-#' @param x objet de type \code{QR_matrix} ou \code{mQR_matrix}.
+#' @param x objet de type \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}.
 #' @param indicator un \code{vector} ou un \code{data.frame} (voir détails).
 #' @param variable_name chaîne de caractères contenant les noms des nouvelles variables.
 #' @param ... autres paramètres de la fonction \code{\link[base]{merge}}.
@@ -736,7 +927,9 @@ rbind.QR_matrix <- function(..., check_formula = TRUE) {
 #'   bilan qualité (variable "series") ;
 #'  * dans le cas d'un \code{data.frame}, il devra contenir une colonne "series" avec les noms des séries
 #'  correspondantes.
-#'
+#' @returns Cette fonction renvoie le même objet, enrichi de l'indicateur choisi.
+#' Ainsi, si l'entrée \code{x} est une matrice QR, un objet de la classe QR_matrix est renvoyé.
+#' Si le code d'entrée \code{x} est une matrice mQR, un objet de la classe mQR_matrix est renvoyé.
 #' @keywords internal
 #' @name fr-add_indicator
 NULL
@@ -745,9 +938,9 @@ NULL
 
 #' Adding an indicator in QR_matrix objects
 #'
-#' Function to add indicators in \code{QR_matrix} objects.
+#' Function to add indicators in \code{\link{QR_matrix}} objects.
 #'
-#' @param x a \code{QR_matrix} or \code{mQR_matrix} object
+#' @param x a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} object
 #' @param indicator a \code{vector} or a \code{data.frame} (cf. details).
 #' @param variable_name a string containing the name of the variables to add.
 #' @param ... other parameters of the function \code{\link[base]{merge}}.
@@ -759,6 +952,10 @@ NULL
 #' The new indicator can be a \code{vector} or a \code{data.frame}. In both cases, its format must allow for pairing:
 #'  * a \code{vector}'s elements must be named and these names must match those of the quality report (variable "series");
 #'  * a \code{data.frame} must contain a "series" column that matches with the quality report's series.
+#'
+#' @returns This function returns the same object, enhanced with the chosen indicator.
+#' So if the input \code{x} is a QR_matrix, an object of class QR_matrix is returned.
+#' If the input \code{x} is a mQR_matrix, an object of class mQR_matrix is returned.
 #'
 #' @family var QR_matrix manipulation
 #' @seealso [Traduction française][fr-add_indicator()]
@@ -821,35 +1018,38 @@ add_indicator.mQR_matrix <- function(x, indicator, variable_name, ...) {
 }
 
 
-
-
-
-
 #' Ré-encodage en modalités des variables
 #'
 #' Permet d'encoder des variables présentes dans la matrice des valeurs en modalités ajoutables à la matrice des modalités.
 #'
-#' @param x objet de type \code{QR_matrix} ou \code{mQR_matrix}.
+#' @param x objet de type \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}.
 #' @param variable_name vecteur de chaînes de caractères contenant les noms des variables à recoder.
 #' @param breaks voir l'argument éponyme de la fonction \code{\link[base]{cut}}.
 #' @param labels voir l'argument éponyme de la fonction \code{\link[base]{cut}}.
 #' @param ... autres paramètres de la fonction \code{\link[base]{cut}}.
-#'
+#' @returns La fonction \code{recode_indicator_num()} renvoie le même objet, enrichi de l'indicateur choisi.
+#' Ainsi, si l'entrée \code{x} est une matrice QR_matrix, un objet de classe QR_matrix est renvoyé.
+#' Si le code d'entrée \code{x} est une matrice mQR, un objet de la classe mQR_matrix est renvoyé.
 #' @keywords internal
 #' @name fr-recode_indicator_num
 NULL
 #> NULL
 
 
-#' Converting "values variables" into "modalities variables"
+#' @title Converting "values variables" into "modalities variables"
 #'
+#' @description
 #' To transform variables from the values matrix into categorical variables that can be added into the modalities matrix.
 #'
-#' @param x a \code{QR_matrix} or \code{mQR_matrix} object.
+#' @param x a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} object.
 #' @param variable_name a vector of strings containing the names of the variables to convert.
 #' @param breaks see function \code{\link[base]{cut}}.
 #' @param labels see function \code{\link[base]{cut}}.
 #' @param ... other parameters of the \code{\link[base]{cut}} function.
+#'
+#' @returns The function \code{recode_indicator_num()} returns the same object, enhanced with the chosen indicator.
+#' So if the input \code{x} is a QR_matrix, an object of class QR_matrix  is returned.
+#' If the input \code{x} is a mQR_matrix, an object of class mQR_matrix is returned.
 #'
 #' @family var QR_matrix manipulation
 #' @seealso [Traduction française][fr-recode_indicator_num()]

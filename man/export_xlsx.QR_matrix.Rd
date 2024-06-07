@@ -16,7 +16,7 @@
 )
 }
 \arguments{
-\item{x}{a \code{QR_matrix} object.}
+\item{x}{a \code{\link{QR_matrix}} object.}
 
 \item{layout}{the components of the report to export. By default, \code{layout = "all"}: the matrices modalities
 (\code{"modalities"}) and values (\code{"values"}) are exported in separate files. To export them in a single file (in two sheets),
@@ -34,6 +34,9 @@ use \code{layout = "combined"}.}
 If specified, existing sheets with these names will be overwritten.}
 
 \item{...}{other unused parameters.}
+}
+\value{
+Returns invisibly (via \code{invisible(x)}) a workbook object created by \code{XLConnect::loadWorkbook()} for further manipulation.
 }
 \description{
 To export a quality report in an Excel file.

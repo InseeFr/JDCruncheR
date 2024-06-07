@@ -21,9 +21,9 @@ Permet d'extraire un bilan qualité à partir du fichier CSV contenant la matric
 La fonction permet d'extraire un bilan qualité à partir d'un fichier csv contenant l'ensemble des
 diagnostics (généralement fichier \emph{demetra_m.csv}).
 
-Ce fichier peut être obtenu en lançant le cruncher (\code{\link{cruncher}} ou \code{\link{cruncher_and_param}}) avec
+Ce fichier peut être obtenu en lançant le cruncher (\code{\link[rjwsacruncher]{cruncher}} ou \code{\link[rjwsacruncher]{cruncher_and_param}}) avec
 l'ensemble des paramètres de base pour les paramètres à exporter et l'option \code{csv_layout = "vtable"} (par défaut)
-pour le format de sortie des fichiers csv (option de \code{\link{cruncher_and_param}} ou de \code{\link{create_param_file}}
+pour le format de sortie des fichiers csv (option de \code{\link[rjwsacruncher]{cruncher_and_param}} ou de \code{\link[rjwsacruncher]{create_param_file}}
 lors de la création du
 fichier de paramètres).
 
@@ -39,13 +39,22 @@ calculer le score (si le calcul est fait).
 }
 }
 \examples{
-\dontrun{
-QR <- extract_QR()
+# Path of matrix demetra_m
+demetra_path <- file.path(
+    system.file("extdata", package = "JDCruncheR"),
+    "WS/ws_ipi/Output/SAProcessing-1",
+    "demetra_m.csv"
+)
+
+# Extract the quality report from the demetra_m file
+QR <- extract_QR(demetra_path)
+
 print(QR)
-# Pour extraire la matrice des modalités :
+
+# Extract the modalities matrix:
 QR$modalities
-# Ou :
+# Or:
 QR[["modalities"]]
-}
+
 }
 \keyword{internal}

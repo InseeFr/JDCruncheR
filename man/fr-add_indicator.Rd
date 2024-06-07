@@ -4,7 +4,7 @@
 \alias{fr-add_indicator}
 \title{Ajout d'un indicateur dans les objets QR_matrix}
 \arguments{
-\item{x}{objet de type \code{QR_matrix} ou \code{mQR_matrix}.}
+\item{x}{objet de type \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}.}
 
 \item{indicator}{un \code{vector} ou un \code{data.frame} (voir détails).}
 
@@ -12,8 +12,13 @@
 
 \item{...}{autres paramètres de la fonction \code{\link[base]{merge}}.}
 }
+\value{
+Cette fonction renvoie le même objet, enrichi de l'indicateur choisi.
+Ainsi, si l'entrée \code{x} est une matrice QR, un objet de la classe QR_matrix est renvoyé.
+Si le code d'entrée \code{x} est une matrice mQR, un objet de la classe mQR_matrix est renvoyé.
+}
 \description{
-Permet d'ajouter un indicateur dans les objets \code{QR_matrix}.
+Permet d'ajouter un indicateur dans les objets \code{\link{QR_matrix}}.
 }
 \details{
 La fonction \code{add_indicator()} permet d'ajouter un indicateur dans la matrice des valeurs du bilan qualité.

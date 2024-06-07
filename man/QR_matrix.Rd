@@ -24,18 +24,20 @@ than the data frame \code{modalities}.}
 
 \item{score_formula}{the formula used to calculate the series score (if defined).}
 
-\item{x}{a \code{QR_matrix} object, a \code{mQR_matrix} object or a list of \code{QR_matrix} objects.}
+\item{x}{a \code{\link{QR_matrix}} object, a \code{\link{mQR_matrix}} object or a list of \code{\link{QR_matrix}} objects.}
 
 \item{...}{objects of the same type as \code{x}.}
 }
+\value{
+\code{QR_matrix()} creates and returns a \code{\link{QR_matrix}} object.
+\code{mQR_matrix()} creates and returns a \code{\link{mQR_matrix}} object (ie. a list of \code{\link{QR_matrix}} objects).
+\code{is.QR_matrix()} and \code{is.mQR_matrix()} return Boolean values (\code{TRUE} or \code{FALSE}).
+}
 \description{
-\code{QR_matrix()} creates a \code{QR_matrix} object containing a quality report.
+\code{mQR_matrix()} and \code{QR_matrix()} are creating one (or several) quality report. The function
+\code{is.QR_matrix()} and \code{is.mQR_matrix()} are functions to test whether an object is a quality report or a list of quality reports.
 }
 \details{
-\code{mQR_matrix()} creates a \code{mQR_matrix} object containing a list of quality reports (ie. a list of \code{QR_matrix} objects).
-
-\code{is.QR_matrix()} and \code{is.mQR_matrix()} are functions to test whether an object is a quality report or a list of quality reports.
-
 A\code{\link{QR_matrix}} object is a list of three items:
 \itemize{
 \item \code{modalities}, a \code{data.frame} containing a set of categorical variables (by default: Good, Uncertain, Bad, Severe).

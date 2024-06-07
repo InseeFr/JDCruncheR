@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:demetraGenericWorkspace xmlns="ec/tss.core" xmlns:ns2="ec/tss.demetra" name="ws_ipi">
+    <ns2:items>
+        <ns2:item readOnly="false">
+            <ns2:family>Seasonal adjustment@multi-documents</ns2:family>
+            <ns2:name>SAProcessing-1</ns2:name>
+            <ns2:file>SAProcessing-1</ns2:file>
+        </ns2:item>
+    </ns2:items>
+</ns2:demetraGenericWorkspace>

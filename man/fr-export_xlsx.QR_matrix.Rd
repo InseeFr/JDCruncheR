@@ -4,7 +4,7 @@
 \alias{fr-export_xlsx.QR_matrix}
 \title{Export des objets QR_matrix dans un fichier Excel}
 \arguments{
-\item{x}{objet de type \code{QR_matrix}.}
+\item{x}{objet de type \code{\link{QR_matrix}}.}
 
 \item{layout}{composantes du bilan à exporter. Par défaut, \code{layout = "all"} : la matrice des modalités
 (\code{"modalities"}) et celle des valeurs (\code{"values"}) sont exportées. Pour exporter la matrice
@@ -25,6 +25,9 @@ un fichier \emph{export.xls} sera créé dans le working directory.}
 Si le paramètre est spécifié, les éventuelles feuilles contenant ces noms sont supprimées.}
 
 \item{...}{autres paramètres non utilisés.}
+}
+\value{
+Renvoie de manière invisible (via \code{invisible(x)}) un objet de classeur créé par \code{XLConnect::loadWorkbook()} pour une manipulation ultérieure.
 }
 \description{
 Permet d'exporter un bilan qualité dans un fichier Excel.

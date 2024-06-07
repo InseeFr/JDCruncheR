@@ -7,7 +7,7 @@
 add_indicator(x, indicator, variable_name, ...)
 }
 \arguments{
-\item{x}{a \code{QR_matrix} or \code{mQR_matrix} object}
+\item{x}{a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} object}
 
 \item{indicator}{a \code{vector} or a \code{data.frame} (cf. details).}
 
@@ -15,8 +15,13 @@ add_indicator(x, indicator, variable_name, ...)
 
 \item{...}{other parameters of the function \code{\link[base]{merge}}.}
 }
+\value{
+This function returns the same object, enhanced with the chosen indicator.
+So if the input \code{x} is a QR_matrix, an object of class QR_matrix is returned.
+If the input \code{x} is a mQR_matrix, an object of class mQR_matrix is returned.
+}
 \description{
-Function to add indicators in \code{QR_matrix} objects.
+Function to add indicators in \code{\link{QR_matrix}} objects.
 }
 \details{
 The function \code{add_indicator()} adds the chosen indicator to the values matrix of a quality report.

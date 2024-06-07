@@ -11,7 +11,7 @@
 \method{print}{mQR_matrix}(x, score_statistics = TRUE, ...)
 }
 \arguments{
-\item{x}{a \code{mQR_matrix} or \code{mQR_matrix} object.}
+\item{x}{a \code{\link{mQR_matrix}} or \code{\link{mQR_matrix}} object.}
 
 \item{print_variables}{logical indicating whether to print the indicators' name (including additionnal variables).}
 
@@ -19,7 +19,10 @@
 
 \item{...}{other unused arguments.}
 
-\item{score_statistics}{logical indicating whether to print the statistics in the \code{mQR_matrix} scores (when calculated).}
+\item{score_statistics}{logical indicating whether to print the statistics in the \code{\link{mQR_matrix}} scores (when calculated).}
+}
+\value{
+the \code{print} method prints a \code{\link{mQR_matrix}} or \code{\link{mQR_matrix}} object and returns it invisibly (via \code{invisible(x)}).
 }
 \description{
 To print information on a QR_matrix or mQR_matrix object.

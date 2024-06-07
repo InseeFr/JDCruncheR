@@ -2,7 +2,7 @@ linters: linters_with_defaults(
         indentation_linter(indent = 4L),
         object_name_linter = NULL,
         cyclocomp_linter = NULL,
-        line_length_linter = NULL,
-        commented_code_linter = NULL
+        commented_code_linter = NULL,
+        line_length_linter = NULL
     )
 encoding: "UTF-8"

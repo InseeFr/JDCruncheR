@@ -21,7 +21,7 @@
 )
 }
 \arguments{
-\item{x}{a \code{QR_matrix} or \code{mQR_matrix} object.}
+\item{x}{a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} object.}
 
 \item{score_pond}{the formula used to calculate the series score.}
 
@@ -83,12 +83,23 @@ or the homoscedasticity test ("residuals_homoskedasticity") are "Bad" or "Severe
 }
 }
 \examples{
-\dontrun{
-QR <- extract_QR()
+# Path of matrix demetra_m
+demetra_path <- file.path(
+    system.file("extdata", package = "JDCruncheR"),
+    "WS/ws_ipi/Output/SAProcessing-1",
+    "demetra_m.csv"
+)
+
+# Extract the quality report from the demetra_m file
+QR <- extract_QR(demetra_path)
+
+# Compute the score
 QR <- compute_score(QR, n_contrib_score = 2)
-QR
+print(QR)
+
+# Extract the modalities matrix:
 QR$modalities$score
-}
+
 }
 \seealso{
 \link[=fr-compute_score]{Traduction française}

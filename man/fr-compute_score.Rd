@@ -5,7 +5,7 @@
 \alias{fr-compute_score}
 \title{Calcul d'un score global}
 \arguments{
-\item{x}{objet de type \code{QR_matrix} ou \code{mQR_matrix}.}
+\item{x}{objet de type \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}.}
 
 \item{score_pond}{formule utilisée pour calculer le score global.}
 
@@ -82,11 +82,22 @@ on réduit à 1 le poids de la variable "residuals_skewness" lorsque les modalit
 }
 }
 \examples{
-\dontrun{
-QR <- extract_QR()
+# Path of matrix demetra_m
+demetra_path <- file.path(
+    system.file("extdata", package = "JDCruncheR"),
+    "WS/ws_ipi/Output/SAProcessing-1",
+    "demetra_m.csv"
+)
+
+# Extract the quality report from the demetra_m file
+QR <- extract_QR(demetra_path)
+
+# Compute the score
 QR <- compute_score(QR, n_contrib_score = 2)
-QR
+print(QR)
+
+# Extract the modalities matrix:
 QR$modalities$score
-}
+
 }
 \keyword{internal}

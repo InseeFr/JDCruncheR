@@ -13,7 +13,7 @@ recode_indicator_num(
 )
 }
 \arguments{
-\item{x}{a \code{QR_matrix} or \code{mQR_matrix} object.}
+\item{x}{a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} object.}
 
 \item{variable_name}{a vector of strings containing the names of the variables to convert.}
 
@@ -22,6 +22,11 @@ recode_indicator_num(
 \item{labels}{see function \code{\link[base]{cut}}.}
 
 \item{...}{other parameters of the \code{\link[base]{cut}} function.}
+}
+\value{
+The function \code{recode_indicator_num()} returns the same object, enhanced with the chosen indicator.
+So if the input \code{x} is a QR_matrix, an object of class QR_matrix  is returned.
+If the input \code{x} is a mQR_matrix, an object of class mQR_matrix is returned.
 }
 \description{
 To transform variables from the values matrix into categorical variables that can be added into the modalities matrix.

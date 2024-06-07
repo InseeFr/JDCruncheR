@@ -1,8 +1,9 @@
-#' Export des objets QR_matrix dans un fichier Excel
+#' @title Export des objets QR_matrix dans un fichier Excel
 #'
+#' @description
 #' Permet d'exporter un bilan qualité dans un fichier Excel.
 #'
-#' @param x objet de type \code{QR_matrix}.
+#' @param x objet de type \code{\link{QR_matrix}}.
 #' @param layout composantes du bilan à exporter. Par défaut, \code{layout = "all"} : la matrice des modalités
 #' (\code{"modalities"}) et celle des valeurs (\code{"values"}) sont exportées. Pour exporter la matrice
 #' des modalités avec en plus les variables supplémentaires de la matrice des valeurs, utiliser
@@ -16,17 +17,21 @@
 #' @param sheet_names nom des feuilles Excel en sortie. S'il n'est pas spécifié, le nom sera celui de la composante exportée.
 #' Si le paramètre est spécifié, les éventuelles feuilles contenant ces noms sont supprimées.
 #' @param ... autres paramètres non utilisés.
+#'
+#' @returns Renvoie de manière invisible (via \code{invisible(x)}) un objet de classeur créé par \code{XLConnect::loadWorkbook()} pour une manipulation ultérieure.
+#'
 #' @keywords internal
 #' @name fr-export_xlsx.QR_matrix
 NULL
 #> NULL
 
 
-#' Exporting QR_matrix objects in an Excel file
+#' @title Exporting QR_matrix objects in an Excel file
 #'
+#' @description
 #' To export a quality report in an Excel file.
 #'
-#' @param x a \code{QR_matrix} object.
+#' @param x a \code{\link{QR_matrix}} object.
 #' @param layout the components of the report to export. By default, \code{layout = "all"}: the matrices modalities
 #' (\code{"modalities"}) and values (\code{"values"}) are exported in separate files. To export them in a single file (in two sheets),
 #' use \code{layout = "combined"}.
@@ -37,6 +42,9 @@ NULL
 #' @param sheet_names names of the exported Excel sheets. If not specified, the sheets will be named after the exported components.
 #' If specified, existing sheets with these names will be overwritten.
 #' @param ... other unused parameters.
+#'
+#' @returns Returns invisibly (via \code{invisible(x)}) a workbook object created by \code{XLConnect::loadWorkbook()} for further manipulation.
+#'
 #' @family QR_matrix functions
 #' @seealso [Traduction française][fr-export_xlsx.QR_matrix()]
 #' @export
@@ -108,14 +116,22 @@ export_xlsx.QR_matrix <- function(x, layout = c("all", "modalities", "values", "
     XLConnect::saveWorkbook(wb)
     return(invisible(wb))
 }
-#' The function to call in practice
-#' @param x a \code{QR_matrix} or \code{mQR_matrix} object.
+
+#' @title Exporting QR_matrix or mQR_matrix objects in an Excel file
+#'
+#' @param x a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} object.
 #' @param ... other parameters of the function \code{\link{export_xlsx.QR_matrix}}.
+#'
+#' @returns
+#' If \code{x} is a \code{\link{mQR_matrix}}, the function returns invisibly (via \code{invisible(x)}) the same \code{\link{mQR_matrix}} object as \code{x}.
+#' Else if \code{x} is a \code{\link{QR_matrix}}, the function returns invisibly (via \code{invisible(x)}) a workbook object created by \code{XLConnect::loadWorkbook()} for further manipulation.
+#'
 #' @family QR_matrix functions
 #' @export
 export_xlsx <- function(x, ...) {
     UseMethod("export_xlsx", x)
 }
+
 #' @family QR_matrix functions
 #' @export
 export_xlsx.default <- function(x, ...) {
@@ -129,7 +145,7 @@ export_xlsx.default <- function(x, ...) {
 #'
 #' Permet d'exporter dans des fichiers Excel une liste de bilan qualité
 #'
-#' @param x objet de type \code{mQR_matrix} à exporter.
+#' @param x objet de type \code{\link{mQR_matrix}} à exporter.
 #' @param export_dir dossier d'export des résultats.
 #' @param layout_file paramètre d'export. Par défaut, (\code{layout_file = "ByComponent"}) et un fichier Excel est exporté par composante
 #' de la matrice bilan qualité (matrice des modalités ou des valeurs), dont chaque feuille correspond à un bilan qualité. Pour avoir
@@ -137,6 +153,9 @@ export_xlsx.default <- function(x, ...) {
 #' @param file_extension extension des fichiers (\code{".xls"} ou \code{".xlsx"}).
 #' @param layout composantes du bilan à exporter : voir \code{\link{export_xlsx.QR_matrix}} .
 #' @param ... autres paramètres de la fonction \code{\link{export_xlsx.QR_matrix}}.
+#'
+#' @returns Renvoie de manière invisible (via \code{invisible(x)}) le même objet \code{\link{mQR_matrix}} que \code{x}.
+#'
 #' @keywords internal
 #' @name fr-export_xlsx.mQR_matrix
 NULL
@@ -147,13 +166,16 @@ NULL
 #'
 #' To export several quality reports in Excel files
 #'
-#' @param x a\code{mQR_matrix} object to export.
+#' @param x a \code{\link{mQR_matrix}} object to export.
 #' @param export_dir export directory.
 #' @param layout_file export parameter. By default, (\code{layout_file = "ByComponent"}) and an Excel file is exported for each part of the
 #' quality report matrix (modalities and values matrices). To group both modalities and values reports/sheets into a single Excel file, use the option \code{layout_file = "ByQRMatrix"}.
 #' @param file_extension possible values are \code{".xls"} and \code{".xlsx"}.
 #' @param layout elements of the report to export: see \code{\link{export_xlsx.QR_matrix}} .
 #' @param ... other parameters of the function \code{\link{export_xlsx.QR_matrix}}.
+#'
+#' @returns Returns invisibly (via \code{invisible(x)}) the same \code{\link{mQR_matrix}} object as \code{x}.
+#'
 #' @family QR_matrix functions
 #' @seealso [Traduction française][fr-export_xlsx.mQR_matrix()]
 #' @export

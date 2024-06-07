@@ -4,7 +4,7 @@
 \alias{fr-sort.QR_matrix}
 \title{Tri des objets QR_matrix et mQR_matrix}
 \arguments{
-\item{x}{objet de type \code{QR_matrix} ou \code{mQR_matrix}.}
+\item{x}{objet de type \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}.}
 
 \item{decreasing}{booléen indiquant si les bilans qualité doivent être triés par ordre croissant ou décroissant.
 Par défaut, le tri est effectué par ordre croissant.}
@@ -20,9 +20,23 @@ L'objet en entrée avec les tables de bilan qualité triées.
 Permet de trier les bilans qualité en fonction d'une ou plusieurs variables.
 }
 \examples{
-\dontrun{
-QR <- compute_score(extract_QR())
-sort(QR, sort_variables = "score") # Pour trier par ordre croissant sur le score
-}
+# Path of matrix demetra_m
+demetra_path <- file.path(
+    system.file("extdata", package = "JDCruncheR"),
+    "WS/ws_ipi/Output/SAProcessing-1",
+    "demetra_m.csv"
+)
+
+# Extract the quality report from the demetra_m file
+QR <- extract_QR(demetra_path)
+
+# Compute the score
+QR <- compute_score(QR, n_contrib_score = 2)
+print(QR$modalities$score)
+
+# Sort the scores
+QR <- sort(QR, sort_variables = "score") # Pour trier par ordre croissant sur le score
+print(QR$modalities$score)
+
 }
 \keyword{internal}
