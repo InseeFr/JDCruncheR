@@ -109,8 +109,12 @@ extract_QR <- function(matrix_output_file, sep = ";", dec = ",") {
 
     demetra_m <- read.csv(
         file = matrix_output_file,
-        sep = sep, dec = dec, stringsAsFactors = FALSE,
-        na.strings = c("NA", "?")
+        sep = sep,
+        dec = dec,
+        stringsAsFactors = FALSE,
+        na.strings = c("NA", "?"),
+        fileEncoding = "latin1",
+        quote = ""
     )
     missing_variables <- which(is.na(match(
         c(
