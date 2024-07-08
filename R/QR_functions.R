@@ -65,21 +65,21 @@
 #' @encoding UTF-8
 #' @return Un objet de type \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}.
 #' @examples
-#' # Path of matrix demetra_m
+#' # Chemin menant au fichier demetra_m.csv
 #' demetra_path <- file.path(
 #'     system.file("extdata", package = "JDCruncheR"),
 #'     "WS/ws_ipi/Output/SAProcessing-1",
 #'     "demetra_m.csv"
 #' )
 #'
-#' # Extract the quality report from the demetra_m file
+#' # Extraire le bilan qualité à partir du fichier demetra_m.csv
 #' QR <- extract_QR(demetra_path)
 #'
 #' # Compute the score
 #' QR <- compute_score(QR, n_contrib_score = 2)
 #' print(QR)
 #'
-#' # Extract the modalities matrix:
+#' # Extraire les modalités de la matrice
 #' QR$modalities$score
 #'
 #' @keywords internal
@@ -150,7 +150,7 @@ NULL
 #' # Extract the quality report from the demetra_m file
 #' QR <- extract_QR(demetra_path)
 #'
-#' # Compute the score
+#' # Calculer le score
 #' QR <- compute_score(QR, n_contrib_score = 2)
 #' print(QR)
 #'
@@ -322,24 +322,26 @@ compute_score.default <- function(x, ...) {
 #' @param pond pondération à appliquer au score. Il peut s'agir d'un nombre, d'un vecteur de nombres, du nom
 #' d'une des variables du bilan qualité ou d'une liste de pondérations pour les objets \code{\link{mQR_matrix}}.
 #' @examples
-#' # Path of matrix demetra_m
+#'
+#' # Chemin menant au fichier demetra_m.csv
 #' demetra_path <- file.path(
 #'     system.file("extdata", package = "JDCruncheR"),
 #'     "WS/ws_ipi/Output/SAProcessing-1",
 #'     "demetra_m.csv"
 #' )
 #'
-#' # Extract the quality report from the demetra_m file
+#' # Extraire le bilan qualité à partir du fichier demetra_m.csv
 #' QR <- extract_QR(demetra_path)
 #'
-#' # Compute the score
+#' # Calculer le score
 #' QR <- compute_score(QR, n_contrib_score = 2)
+#' print(QR)
 #'
-#' # Weighted score
+#' # Pondérer le score
 #' QR <- weighted_score(QR, 2)
 #' print(QR)
 #'
-#' # Extract the weighted score
+#' # Extraire le score pondéré
 #' QR$modalities$score_pond
 #'
 #' @return L'objet en entrée avec le score recalculé
@@ -439,21 +441,22 @@ weighted_score.mQR_matrix <- function(x, pond = 1) {
 #' @param ... autres paramètres de la fonction \code{\link[base]{order}} (non utilisés pour l'instant).
 #' @return L'objet en entrée avec les tables de bilan qualité triées.
 #' @examples
-#' # Path of matrix demetra_m
+#'
+#' # Chemin menant au fichier demetra_m.csv
 #' demetra_path <- file.path(
 #'     system.file("extdata", package = "JDCruncheR"),
 #'     "WS/ws_ipi/Output/SAProcessing-1",
 #'     "demetra_m.csv"
 #' )
 #'
-#' # Extract the quality report from the demetra_m file
+#' # Extraire le bilan qualité à partir du fichier demetra_m.csv
 #' QR <- extract_QR(demetra_path)
 #'
-#' # Compute the score
+#' # Calculer le score
 #' QR <- compute_score(QR, n_contrib_score = 2)
 #' print(QR$modalities$score)
 #'
-#' # Sort the scores
+#' # Trier les scores
 #' QR <- sort(QR, sort_variables = "score") # Pour trier par ordre croissant sur le score
 #' print(QR$modalities$score)
 #'
@@ -539,21 +542,28 @@ sort.mQR_matrix <- function(x, decreasing = FALSE, sort_variables = "score", ...
 #' @returns \code{extract_score()} renvoie un data.frame avec deux colonnes : le nom de la série et son score.
 #'
 #' @examples
-#' # Path of matrix demetra_m
+#'
+#' # Chemin menant au fichier demetra_m.csv
 #' demetra_path <- file.path(
 #'     system.file("extdata", package = "JDCruncheR"),
 #'     "WS/ws_ipi/Output/SAProcessing-1",
 #'     "demetra_m.csv"
 #' )
 #'
-#' # Extract the quality report from the demetra_m file
+#' # Extraire le bilan qualité à partir du fichier demetra_m.csv
 #' QR <- extract_QR(demetra_path)
 #'
-#' # Compute the score
-#' QR1 <- compute_score(QR, n_contrib_score = 2)
-#' mQR <- mQR_matrix(QR, compute_score(QR))
+#' # Calculer le score
+#' QR1 <- compute_score(x = QR, n_contrib_score = 5)
+#' QR2 <- compute_score(
+#'     x = QR,
+#'     score_pond = c(qs_residual_sa_on_sa = 5, qs_residual_sa_on_i = 30,
+#'                    f_residual_td_on_sa = 10, f_residual_td_on_i = 40,
+#'                    oos_mean = 30, residuals_skewness = 15, m7 = 25)
+#' )
+#' mQR <- mQR_matrix(list(a = QR1, b = QR2))
 #'
-#' # Extract score
+#' # Extraire les scores
 #' extract_score(QR1)
 #' extract_score(mQR)
 #'
@@ -588,8 +598,14 @@ NULL
 #' QR <- extract_QR(demetra_path)
 #'
 #' # Compute the score
-#' QR1 <- compute_score(QR, n_contrib_score = 2)
-#' mQR <- mQR_matrix(QR, compute_score(QR))
+#' QR1 <- compute_score(x = QR, n_contrib_score = 5)
+#' QR2 <- compute_score(
+#'     x = QR,
+#'     score_pond = c(qs_residual_sa_on_sa = 5, qs_residual_sa_on_i = 30,
+#'                    f_residual_td_on_sa = 10, f_residual_td_on_i = 40,
+#'                    oos_mean = 30, residuals_skewness = 15, m7 = 25)
+#' )
+#' mQR <- mQR_matrix(list(a = QR1, b = QR2))
 #'
 #' # Extract score
 #' extract_score(QR1)
@@ -663,27 +679,28 @@ extract_score.mQR_matrix <- function(x,
 #' Si le code d'entrée \code{x} est une matrice mQR, un objet de la classe mQR_matrix est renvoyé.
 #'
 #' @examples
-#' # Path of matrix demetra_m
+#'
+#' # Chemin menant au fichier demetra_m.csv
 #' demetra_path <- file.path(
 #'     system.file("extdata", package = "JDCruncheR"),
 #'     "WS/ws_ipi/Output/SAProcessing-1",
 #'     "demetra_m.csv"
 #' )
 #'
-#' # Extract the quality report from the demetra_m file
+#' # Extraire le bilan qualité à partir du fichier demetra_m.csv
 #' QR <- extract_QR(demetra_path)
 #'
-#' # Compute the score
-#' QR <- compute_score(QR, n_contrib_score = 2)
+#' # Calculer le score
+#' QR <- compute_score(x = QR, n_contrib_score = 5)
 #'
-#' # Retain indicators
-#' retain_indicators(QR, "score", "m7") # retaining "score" and "m7"
-#' retain_indicators(QR, c("score", "m7")) # Same
+#' # Retenir certains indicateurs
+#' retain_indicators(QR, "score", "m7") # Retiens les indicateurs "score" et "m7"
+#' retain_indicators(QR, c("score", "m7")) # Pareil
 #'
-#' # Remove indicators
-#' QR <- retain_indicators(QR, "score") # removing "score"
+#' # Retirer des indicateurs
+#' QR <- remove_indicators(QR, "score") # removing "score"
 #'
-#' extract_score(QR) # is NULL because we removed the score indicator
+#' extract_score(QR) # est NULL car l'indicateur "score a été retiré
 #'
 #' @keywords internal
 #' @name fr-remove_indicators
@@ -722,7 +739,7 @@ NULL
 #' retain_indicators(QR, c("score", "m7")) # Same
 #'
 #' # Remove indicators
-#' QR <- retain_indicators(QR, "score") # removing "score"
+#' QR <- remove_indicators(QR, "score") # removing "score"
 #'
 #' extract_score(QR) # is NULL because we removed the score indicator
 #'
@@ -787,9 +804,6 @@ retain_indicators.mQR_matrix <- function(x, ...) {
 }
 
 
-
-
-
 #' Combiner par ligne des objets QR_matrix
 #'
 #' Permet de combiner plusieurs objets \code{\link{QR_matrix}} en combinant par ligne les paramètres \code{modalities}
@@ -804,21 +818,21 @@ retain_indicators.mQR_matrix <- function(x, ...) {
 #' @returns \code{rbind.QR_matrix()} renvoie un objet \code{\link{QR_matrix}}.
 #'
 #' @examples
-#' # Path of matrix demetra_m
+#' # Chemin menant au fichier demetra_m.csv
 #' demetra_path <- file.path(
 #'     system.file("extdata", package = "JDCruncheR"),
 #'     "WS/ws_ipi/Output/SAProcessing-1",
 #'     "demetra_m.csv"
 #' )
 #'
-#' # Extract the quality report from the demetra_m file
-#' QR <- extract_QR(demetra_path)
+#' # Extraire le bilan qualité à partir du fichier demetra_m.csv
+#' QR <- extract_QR(demetra_path)=
 #'
-#' # Compute differents scores
+#' # Calculer differents scores
 #' QR1 <- compute_score(QR, score_pond = c(m7 = 2, q = 3, qs_residual_sa_on_sa = 5))
 #' QR2 <- compute_score(QR, score_pond = c(m7 = 2, qs_residual_sa_on_sa = 5))
 #'
-#' # Merge two quality report
+#' # Fusionner 2 bilans qualité
 #' try(rbind(QR1, QR2)) # Une erreur est renvoyée
 #' rbind(QR1, QR2, check_formula = FALSE)
 #'

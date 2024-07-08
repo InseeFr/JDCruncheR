@@ -206,6 +206,7 @@ export_xlsx.mQR_matrix <- function(x, export_dir = "./",
     }
 
 
+
     if (layout_file == "ByQRMatrix") {
         # To export a quality report per file:
         files_name <- normalizePath(

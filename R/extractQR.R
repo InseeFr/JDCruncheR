@@ -27,19 +27,19 @@
 #' @encoding UTF-8
 #' @return Un objet de type \code{\link{QR_matrix}}.
 #' @examples
-#' # Path of matrix demetra_m
+#' # Chemin menant au fichier demetra_m.csv
 #' demetra_path <- file.path(
 #'     system.file("extdata", package = "JDCruncheR"),
 #'     "WS/ws_ipi/Output/SAProcessing-1",
 #'     "demetra_m.csv"
 #' )
 #'
-#' # Extract the quality report from the demetra_m file
+#' # Extraire le bilan qualité à partir du fichier demetra_m.csv
 #' QR <- extract_QR(demetra_path)
 #'
 #' print(QR)
 #'
-#' # Extract the modalities matrix:
+#' # Extraire les modalités de la matrice
 #' QR$modalities
 #' # Or:
 #' QR[["modalities"]]
