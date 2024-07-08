@@ -16,24 +16,26 @@ L'objet en entrée avec le score recalculé
 Permet de pondérer un score déjà calculé en fonction de variables.
 }
 \examples{
-# Path of matrix demetra_m
+
+# Chemin menant au fichier demetra_m.csv
 demetra_path <- file.path(
     system.file("extdata", package = "JDCruncheR"),
     "WS/ws_ipi/Output/SAProcessing-1",
     "demetra_m.csv"
 )
 
-# Extract the quality report from the demetra_m file
+# Extraire le bilan qualité à partir du fichier demetra_m.csv
 QR <- extract_QR(demetra_path)
 
-# Compute the score
+# Calculer le score
 QR <- compute_score(QR, n_contrib_score = 2)
+print(QR)
 
-# Weighted score
+# Pondérer le score
 QR <- weighted_score(QR, 2)
 print(QR)
 
-# Extract the weighted score
+# Extraire le score pondéré
 QR$modalities$score_pond
 
 }

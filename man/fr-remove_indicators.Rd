@@ -19,27 +19,28 @@ Permet de retirer des indicateurs (fonction \code{remove_indicators()}) ou de n'
 (colonne "series") ne peut être enlevé.
 }
 \examples{
-# Path of matrix demetra_m
+
+# Chemin menant au fichier demetra_m.csv
 demetra_path <- file.path(
     system.file("extdata", package = "JDCruncheR"),
     "WS/ws_ipi/Output/SAProcessing-1",
     "demetra_m.csv"
 )
 
-# Extract the quality report from the demetra_m file
+# Extraire le bilan qualité à partir du fichier demetra_m.csv
 QR <- extract_QR(demetra_path)
 
-# Compute the score
-QR <- compute_score(QR, n_contrib_score = 2)
+# Calculer le score
+QR <- compute_score(x = QR, n_contrib_score = 5)
 
-# Retain indicators
-retain_indicators(QR, "score", "m7") # retaining "score" and "m7"
-retain_indicators(QR, c("score", "m7")) # Same
+# Retenir certains indicateurs
+retain_indicators(QR, "score", "m7") # Retiens les indicateurs "score" et "m7"
+retain_indicators(QR, c("score", "m7")) # Pareil
 
-# Remove indicators
-QR <- retain_indicators(QR, "score") # removing "score"
+# Retirer des indicateurs
+QR <- remove_indicators(QR, "score") # removing "score"
 
-extract_score(QR) # is NULL because we removed the score indicator
+extract_score(QR) # est NULL car l'indicateur "score a été retiré
 
 }
 \keyword{internal}

@@ -6,25 +6,16 @@
 \arguments{
 \item{x}{objet de type \code{\link{QR_matrix}}.}
 
-\item{layout}{composantes du bilan à exporter. Par défaut, \code{layout = "all"} : la matrice des modalités
-(\code{"modalities"}) et celle des valeurs (\code{"values"}) sont exportées. Pour exporter la matrice
-des modalités avec en plus les variables supplémentaires de la matrice des valeurs, utiliser
-\code{layout = "combined"}.}
+\item{file}{un objet de type \code{character} contenant le chemin menant au fichier
+que l'on veut créer}
 
-\item{create}{booléen indiquant s'il faut créer le fichier Excel ou non (\code{create = TRUE} par défaut)}
+\item{auto_format}{booléen indiquant s'il faut formatter la sortie
+(\code{auto_format = TRUE} par défaut).}
 
-\item{clear_sheet}{booléen indiquant s'il faut nettoyer les feuilles du fichier Excel avant l'export (
-\code{clear_sheet = TRUE} par défaut).}
+\item{overwrite}{booléen indiquant s'il faut ré-écrire créer le fichier Excel
+s'il existe déjà (\code{create = TRUE} par défaut)}
 
-\item{auto_format}{booléen indiquant s'il faut formatter la sortie (\code{auto_format = TRUE} par défaut).}
-
-\item{file_name}{argument optionnel permettant de choisir le chemin et le nom du fichier à exporter. S'il n'est pas spécifié,
-un fichier \emph{export.xls} sera créé dans le working directory.}
-
-\item{sheet_names}{nom des feuilles Excel en sortie. S'il n'est pas spécifié, le nom sera celui de la composante exportée.
-Si le paramètre est spécifié, les éventuelles feuilles contenant ces noms sont supprimées.}
-
-\item{...}{autres paramètres non utilisés.}
+\item{...}{autres argument non utilisés}
 }
 \value{
 Renvoie de manière invisible (via \code{invisible(x)}) un objet de classeur créé par \code{XLConnect::loadWorkbook()} pour une manipulation ultérieure.

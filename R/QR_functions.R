@@ -826,7 +826,7 @@ retain_indicators.mQR_matrix <- function(x, ...) {
 #' )
 #'
 #' # Extraire le bilan qualité à partir du fichier demetra_m.csv
-#' QR <- extract_QR(demetra_path)=
+#' QR <- extract_QR(demetra_path)
 #'
 #' # Calculer differents scores
 #' QR1 <- compute_score(QR, score_pond = c(m7 = 2, q = 3, qs_residual_sa_on_sa = 5))

@@ -8,15 +8,23 @@
 
 \item{export_dir}{dossier d'export des résultats.}
 
-\item{layout_file}{paramètre d'export. Par défaut, (\code{layout_file = "ByComponent"}) et un fichier Excel est exporté par composante
-de la matrice bilan qualité (matrice des modalités ou des valeurs), dont chaque feuille correspond à un bilan qualité. Pour avoir
-un fichier par bilan qualité dont chaque feuille correspond à la composante exportée, utiliser \code{layout_file = "ByQRMatrix"}.}
+\item{layout_file}{paramètre d'export. Par défaut,
+(\code{layout_file = "ByComponent"}) et un fichier Excel est exporté par
+composante de la matrice bilan qualité (matrice des modalités ou des
+valeurs), dont chaque feuille correspond à un bilan qualité. Pour avoir un
+fichier par bilan qualité dont chaque feuille correspond à la composante
+exportée, utiliser \code{layout_file = "ByQRMatrix"}.
+La modalité \code{layout_file = "AllTogether"} correspond à la création d'un
+fichier avec 2 feuilles par bilan qualité (\code{Values} et
+\code{Modalities}).}
 
-\item{file_extension}{extension des fichiers (\code{".xls"} ou \code{".xlsx"}).}
+\item{auto_format}{booléen indiquant s'il faut formatter la sortie
+(\code{auto_format = TRUE} par défaut).}
 
-\item{layout}{composantes du bilan à exporter : voir \code{\link{export_xlsx.QR_matrix}} .}
+\item{overwrite}{booléen indiquant s'il faut ré-écrire créer le fichier Excel
+s'il existe déjà (\code{create = TRUE} par défaut)}
 
-\item{...}{autres paramètres de la fonction \code{\link{export_xlsx.QR_matrix}}.}
+\item{...}{autres argument non utilisés}
 }
 \value{
 Renvoie de manière invisible (via \code{invisible(x)}) le même objet \code{\link{mQR_matrix}} que \code{x}.

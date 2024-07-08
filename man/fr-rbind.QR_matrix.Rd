@@ -19,21 +19,21 @@ Permet de combiner plusieurs objets \code{\link{QR_matrix}} en combinant par lig
 et \code{values}.
 }
 \examples{
-# Path of matrix demetra_m
+# Chemin menant au fichier demetra_m.csv
 demetra_path <- file.path(
     system.file("extdata", package = "JDCruncheR"),
     "WS/ws_ipi/Output/SAProcessing-1",
     "demetra_m.csv"
 )
 
-# Extract the quality report from the demetra_m file
+# Extraire le bilan qualité à partir du fichier demetra_m.csv
 QR <- extract_QR(demetra_path)
 
-# Compute differents scores
+# Calculer differents scores
 QR1 <- compute_score(QR, score_pond = c(m7 = 2, q = 3, qs_residual_sa_on_sa = 5))
 QR2 <- compute_score(QR, score_pond = c(m7 = 2, qs_residual_sa_on_sa = 5))
 
-# Merge two quality report
+# Fusionner 2 bilans qualité
 try(rbind(QR1, QR2)) # Une erreur est renvoyée
 rbind(QR1, QR2, check_formula = FALSE)
 

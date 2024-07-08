@@ -40,8 +40,14 @@ demetra_path <- file.path(
 QR <- extract_QR(demetra_path)
 
 # Compute the score
-QR1 <- compute_score(QR, n_contrib_score = 2)
-mQR <- mQR_matrix(QR, compute_score(QR))
+QR1 <- compute_score(x = QR, n_contrib_score = 5)
+QR2 <- compute_score(
+    x = QR,
+    score_pond = c(qs_residual_sa_on_sa = 5, qs_residual_sa_on_i = 30,
+                   f_residual_td_on_sa = 10, f_residual_td_on_i = 40,
+                   oos_mean = 30, residuals_skewness = 15, m7 = 25)
+)
+mQR <- mQR_matrix(list(a = QR1, b = QR2))
 
 # Extract score
 extract_score(QR1)

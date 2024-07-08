@@ -93,7 +93,7 @@ demetra_path <- file.path(
 # Extract the quality report from the demetra_m file
 QR <- extract_QR(demetra_path)
 
-# Compute the score
+# Calculer le score
 QR <- compute_score(QR, n_contrib_score = 2)
 print(QR)
 

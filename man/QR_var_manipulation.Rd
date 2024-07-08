@@ -43,7 +43,7 @@ retain_indicators(QR, "score", "m7") # retaining "score" and "m7"
 retain_indicators(QR, c("score", "m7")) # Same
 
 # Remove indicators
-QR <- retain_indicators(QR, "score") # removing "score"
+QR <- remove_indicators(QR, "score") # removing "score"
 
 extract_score(QR) # is NULL because we removed the score indicator
 

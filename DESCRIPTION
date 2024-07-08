@@ -22,14 +22,17 @@ Description: Tool for generating quality reports from cruncher outputs (and calc
 URL: https://github.com/InseeFr/JDCruncheR
 BugReports: https://github.com/InseeFr/JDCruncheR/issues
 Imports:
-    XLConnect (>= 1.0.0)
+    openxlsx,
+    stats, 
+    utils
 Suggests:
     knitr,
     kableExtra,
+    pkgdown, 
     rmarkdown
 License: EUPL
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Roxygen: list(markdown = TRUE)
