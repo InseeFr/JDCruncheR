@@ -1,3 +1,6 @@
+url: https://inseefr.github.io/JDCruncheR/
+template:
+  bootstrap: 5
 navbar:
   structure:
     left:

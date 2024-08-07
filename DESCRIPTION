@@ -19,7 +19,7 @@ Authors@R: c(
            family = "Smyk", role = c("aut"),
            email ="anna.smyk@insee.fr"))
 Description: Tool for generating quality reports from cruncher outputs (and calculating series scores). The latest version of the cruncher can be downloaded here: <https://github.com/jdemetra/jwsacruncher/releases>.
-URL: https://github.com/InseeFr/JDCruncheR
+URL: https://github.com/InseeFr/JDCruncheR, https://inseefr.github.io/JDCruncheR/
 BugReports: https://github.com/InseeFr/JDCruncheR/issues
 Imports:
     openxlsx,
