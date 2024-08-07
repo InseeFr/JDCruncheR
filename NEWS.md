@@ -11,10 +11,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 * Update readme
+* remove all functions related to cruncher
+
 
 ### Fixed
 
-* resolve a bug
+* resolve a bug linked to shell function
+* resolve a bug related to accent colnames
+* lintr is up-to-date
+
+
+### Added
+
+* Github Action to check the package
 
 
 ## [0.2.4] - 2022-07-27

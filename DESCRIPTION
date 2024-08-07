@@ -3,33 +3,36 @@ Type: Package
 Title: Interface Between the 'JDemetra+' Cruncher and R, and Quality Report Generator
 Version: 0.2.4
 Authors@R: c(
-    person(given = "Alain",
-             family = "Quartier-la-Tente",
-             role = c("aut"),
-             email = "alain.quartier-la-tente@insee.fr"),
-      person(given = "Institut national de la statistique et des études économiques",
-             role = "cph",
-             comment = "https://www.insee.fr/"),
     person(given = "Tanguy", 
-           family = "Barthelemy", role = c("aut", "cre"),
+           family = "Barthelemy", role = c("aut", "cre", "art"),
            email ="tanguy.barthelemy@insee.fr"),
+    person(given = "Alain",
+           family = "Quartier-la-Tente",
+           role = c("aut"),
+           email = "alain.quartier-la-tente@insee.fr",
+           comment = c(ORCID = "0000-0001-7890-3857")),
+    person(given = NULL, 
+           family = "Institut national de la statistique et des études économiques",
+           role = "cph",
+           comment = "https://www.insee.fr/"),
     person(given = "Anna", 
            family = "Smyk", role = c("aut"),
            email ="anna.smyk@insee.fr"))
-Description: R tools to enables the user to launch the 'JDemetra+' cruncher from R and to build complementary tools for seasonal adjustment 
-    (generating quality reports and calculating series scores). The latest cruncher version can be downloaded here: <https://github.com/jdemetra/jwsacruncher/releases>.
-URL: https://github.com/InseeFr/JDCruncheR
+Description: Tool for generating quality reports from cruncher outputs (and calculating series scores). The latest version of the cruncher can be downloaded here: <https://github.com/jdemetra/jwsacruncher/releases>.
+URL: https://github.com/InseeFr/JDCruncheR, https://inseefr.github.io/JDCruncheR/
 BugReports: https://github.com/InseeFr/JDCruncheR/issues
 Imports:
-    XML,
-    XLConnect (>= 1.0.0)
+    openxlsx,
+    stats, 
+    utils
 Suggests:
     knitr,
     kableExtra,
+    pkgdown, 
     rmarkdown
 License: EUPL
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Roxygen: list(markdown = TRUE)

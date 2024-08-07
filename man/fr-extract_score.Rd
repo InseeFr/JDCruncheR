@@ -4,7 +4,7 @@
 \alias{fr-extract_score}
 \title{Extraction du score}
 \arguments{
-\item{x}{objet de type \code{QR_matrix} ou \code{mQR_matrix}.}
+\item{x}{objet de type \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}.}
 
 \item{format_output}{chaîne de caractères indiquant le format de l'objet en sortie :
 soit un \code{data.frame} soit un \code{vector}.}
@@ -12,19 +12,41 @@ soit un \code{data.frame} soit un \code{vector}.}
 \item{weighted_score}{booléen indiquant s'il faut extraire le score pondéré (s'il existe) ou le score non pondéré.
 Par défaut, c'est le score non pondéré qui est extrait.}
 }
+\value{
+\code{extract_score()} renvoie un data.frame avec deux colonnes : le nom de la série et son score.
+}
 \description{
-Permet d'extraire le score des objets \code{QR_matrix} ou \code{mQR_matrix}.
+Permet d'extraire le score des objets \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}.
 }
 \details{
-Pour les objets \code{QR_matrix}, le score renvoyé est soit l'objet \code{NULL} si aucun score n'a été calculé, soit un vecteur.
-Pour les objets \code{mQR_matrix}, c'est une liste de scores (\code{NULL} ou un vecteur).
+Pour les objets \code{\link{QR_matrix}}, le score renvoyé est soit l'objet \code{NULL} si aucun score n'a été calculé, soit un vecteur.
+Pour les objets \code{\link{mQR_matrix}}, c'est une liste de scores (\code{NULL} ou un vecteur).
 }
 \examples{
-\dontrun{
-QR <- extract_QR()
-mQR <- mQR_matrix(QR, compute_score(QR))
-extract_score(QR) # NULL
-extract_score(mQR) # liste dont le premier élément est NULL
-}
+
+# Chemin menant au fichier demetra_m.csv
+demetra_path <- file.path(
+    system.file("extdata", package = "JDCruncheR"),
+    "WS/ws_ipi/Output/SAProcessing-1",
+    "demetra_m.csv"
+)
+
+# Extraire le bilan qualité à partir du fichier demetra_m.csv
+QR <- extract_QR(demetra_path)
+
+# Calculer le score
+QR1 <- compute_score(x = QR, n_contrib_score = 5)
+QR2 <- compute_score(
+    x = QR,
+    score_pond = c(qs_residual_sa_on_sa = 5, qs_residual_sa_on_i = 30,
+                   f_residual_td_on_sa = 10, f_residual_td_on_i = 40,
+                   oos_mean = 30, residuals_skewness = 15, m7 = 25)
+)
+mQR <- mQR_matrix(list(a = QR1, b = QR2))
+
+# Extraire les scores
+extract_score(QR1)
+extract_score(mQR)
+
 }
 \keyword{internal}

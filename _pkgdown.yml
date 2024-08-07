@@ -1,3 +1,6 @@
+url: https://inseefr.github.io/JDCruncheR/
+template:
+  bootstrap: 5
 navbar:
   structure:
     left:
@@ -13,6 +16,7 @@ navbar:
     home:
       icon: fa-home fa-lg
       href: index.html
+      aria-label: Home
     reference:
       text: Package functions
       href: reference/index.html
@@ -38,6 +42,7 @@ navbar:
     github:
       icon: fa-github fa-lg
       href: https://github.com/rjdverse/rjdemetra
+      aria-label: GitHub
 
 reference:
 - title: Quality report
@@ -58,11 +63,3 @@ reference:
   - '`sort`'
   - '`compute_score`'
   - '`print.QR_matrix`'
-- title: Cruncher
-  desc: Functions to use the cruncher
-  contents:
-  - '`cruncher`'
-  - '`cruncher_and_param`'
-  - '`create_param_file`'
-  - '`multiprocessing_names`'
-  - '`update_workspace`'

@@ -1,121 +1,256 @@
-#' Export des objets QR_matrix dans un fichier Excel
+
+header_style <- openxlsx::createStyle(
+    fontColour = "#ffffff",
+    fgFill = "#4F80BD",
+    textDecoration = "Bold",
+    borderColour = "grey30"
+)
+severe_style <- openxlsx::createStyle(
+    fontColour = "#ffffff",
+    fgFill = "black", bgFill = "black",
+    borderColour = "grey30",
+    border = "TopBottomLeftRight"
+)
+bad_style <- openxlsx::createStyle(
+    fontColour = "#9C0006",
+    fgFill = "#FFC7CE", bgFill = "#FFC7CE",
+    borderColour = "grey30",
+    border = "TopBottomLeftRight"
+)
+good_style <- openxlsx::createStyle(
+    fontColour = "#006100",
+    fgFill = "#C6EFCE", bgFill = "#C6EFCE",
+    borderColour = "grey30",
+    border = "TopBottomLeftRight"
+)
+uncertain_style <- openxlsx::createStyle(
+    fontColour = "#9c6a00",
+    fgFill = "#ffeec7", bgFill = "#ffeec7",
+    borderColour = "grey30",
+    border = "TopBottomLeftRight"
+)
+border_style <- openxlsx::createStyle(
+    border = "TopBottomLeftRight",
+    borderColour = "grey30"
+)
+rowname_style <- openxlsx::createStyle(
+    fontColour = "black",
+    fgFill = "orange",
+    textDecoration = "bold"
+)
+
+
+apply_BQ_style <- function(wb, x, values_sheet = NULL, modalities_sheet = NULL) {
+
+    if (!is.null(modalities_sheet)) {
+
+        # Apply BQ style cell Modalities
+        openxlsx::conditionalFormatting(
+            wb = wb,
+            sheet = modalities_sheet,
+            rule = '=="Bad"',
+            style = bad_style,
+            cols = seq_len(ncol(x$modalities)),
+            rows = 1 + seq_len(nrow(x$modalities))
+        )
+        openxlsx::conditionalFormatting(
+            wb = wb,
+            sheet = modalities_sheet,
+            rule = '=="Good"',
+            style = good_style,
+            cols = seq_len(ncol(x$modalities)),
+            rows = 1 + seq_len(nrow(x$modalities))
+        )
+        openxlsx::conditionalFormatting(
+            wb = wb,
+            sheet = modalities_sheet,
+            rule = '=="Uncertain"',
+            style = uncertain_style,
+            cols = seq_len(ncol(x$modalities)),
+            rows = 1 + seq_len(nrow(x$modalities))
+        )
+        openxlsx::conditionalFormatting(
+            wb = wb,
+            sheet = modalities_sheet,
+            rule = '=="Severe"',
+            style = severe_style,
+            cols = seq_len(ncol(x$modalities)),
+            rows = 1 + seq_len(nrow(x$modalities))
+        )
+
+        # Appliquer les styles aux bordures
+        openxlsx::addStyle(
+            wb = wb,
+            sheet = modalities_sheet,
+            style = border_style,
+            cols = seq_len(ncol(x$modalities)),
+            rows = 1 + seq_len(nrow(x$modalities)),
+            gridExpand = TRUE
+        )
+
+        # Appliquer les styles aux noms de ligne (1ère colonne)
+        openxlsx::addStyle(
+            wb = wb,
+            sheet = modalities_sheet,
+            style = rowname_style,
+            cols = 1,
+            rows = 1 + seq_len(nrow(x$modalities)),
+            gridExpand = TRUE
+        )
+    }
+
+    if (!is.null(values_sheet)) {
+
+        # Appliquer les styles aux bordures
+        openxlsx::addStyle(
+            wb = wb,
+            sheet = values_sheet,
+            style = border_style,
+            cols = seq_len(ncol(x$values)),
+            rows = 1 + seq_len(nrow(x$values)),
+            gridExpand = TRUE
+        )
+
+        # Apply BQ style cell Modalities
+        for (id_col in seq_len(ncol(x$values))) {
+            name_col <- colnames(x$values)[id_col]
+            if (name_col %in% colnames(x$modalities)) {
+                for (id_row in seq_len(ncol(x$values))) {
+                    cell_value <- as.character(x$modalities[id_row, name_col])
+                    cell_style <- switch(
+                        cell_value,
+                        "Bad" = bad_style,
+                        "Good" = good_style,
+                        "Uncertain" = uncertain_style,
+                        "Severe" = severe_style,
+                        NULL
+                    )
+                    if (!is.null(cell_style)) {
+                        openxlsx::addStyle(
+                            wb = wb,
+                            sheet = values_sheet,
+                            style = cell_style,
+                            rows = id_row + 1,
+                            cols = id_col,
+                            gridExpand = FALSE
+                        )
+                    }
+                }
+            }
+        }
+
+        # Appliquer les styles aux noms de ligne (1ère colonne)
+        openxlsx::addStyle(
+            wb = wb,
+            sheet = values_sheet,
+            style = rowname_style,
+            cols = 1,
+            rows = 1 + seq_len(nrow(x$values)),
+            gridExpand = TRUE
+        )
+    }
+
+    return(wb)
+}
+
+#' @title Export des objets QR_matrix dans un fichier Excel
 #'
+#' @description
 #' Permet d'exporter un bilan qualité dans un fichier Excel.
 #'
-#' @param x objet de type \code{QR_matrix}.
-#' @param layout composantes du bilan à exporter. Par défaut, \code{layout = "all"} : la matrice des modalités
-#' (\code{"modalities"}) et celle des valeurs (\code{"values"}) sont exportées. Pour exporter la matrice
-#' des modalités avec en plus les variables supplémentaires de la matrice des valeurs, utiliser
-#' \code{layout = "combined"}.
-#' @param create booléen indiquant s'il faut créer le fichier Excel ou non (\code{create = TRUE} par défaut)
-#' @param clear_sheet booléen indiquant s'il faut nettoyer les feuilles du fichier Excel avant l'export (
-#' \code{clear_sheet = TRUE} par défaut).
-#' @param auto_format booléen indiquant s'il faut formatter la sortie (\code{auto_format = TRUE} par défaut).
-#' @param file_name argument optionnel permettant de choisir le chemin et le nom du fichier à exporter. S'il n'est pas spécifié,
-#' un fichier *export.xls* sera créé dans le working directory.
-#' @param sheet_names nom des feuilles Excel en sortie. S'il n'est pas spécifié, le nom sera celui de la composante exportée.
-#' Si le paramètre est spécifié, les éventuelles feuilles contenant ces noms sont supprimées.
-#' @param ... autres paramètres non utilisés.
+#' @param x objet de type \code{\link{QR_matrix}}.
+#' @param file un objet de type \code{character} contenant le chemin menant au fichier
+#' que l'on veut créer
+#' @param auto_format booléen indiquant s'il faut formatter la sortie
+#' (\code{auto_format = TRUE} par défaut).
+#' @param overwrite booléen indiquant s'il faut ré-écrire créer le fichier Excel
+#' s'il existe déjà (\code{create = TRUE} par défaut)
+#' @param ... autres argument non utilisés
+#'
+#' @returns Renvoie de manière invisible (via \code{invisible(x)}) un objet de classeur créé par \code{XLConnect::loadWorkbook()} pour une manipulation ultérieure.
+#'
 #' @keywords internal
 #' @name fr-export_xlsx.QR_matrix
 NULL
 #> NULL
 
 
-#' Exporting QR_matrix objects in an Excel file
+#' @title Exporting QR_matrix objects in an Excel file
 #'
+#' @description
 #' To export a quality report in an Excel file.
 #'
-#' @param x a \code{QR_matrix} object.
-#' @param layout the components of the report to export. By default, \code{layout = "all"}: the matrices modalities
-#' (\code{"modalities"}) and values (\code{"values"}) are exported in separate files. To export them in a single file (in two sheets),
-#' use \code{layout = "combined"}.
-#' @param create logical indicating whether to create an Excel file if it doesn't exist yet (\code{create = TRUE} by default)
-#' @param clear_sheet logical indicating whether to clear the Excel sheets before the export (\code{clear_sheet = TRUE} by default).
-#' @param auto_format logical indicating whether to format the output (\code{auto_format = TRUE} by default).
-#' @param file_name optional argument to choose the path and name of the file to export. If not specified, an *export.xls* will be created in the working directory.
-#' @param sheet_names names of the exported Excel sheets. If not specified, the sheets will be named after the exported components.
-#' If specified, existing sheets with these names will be overwritten.
-#' @param ... other unused parameters.
+#' @param x a \code{\link{QR_matrix}} object.
+#' @param file a \code{character} object with the path to the file to export
+#' que l'on veut créer
+#' @param auto_format logical indicating whether to format the output
+#' (\code{auto_format = TRUE} by default).
+#' @param overwrite logical indicating whether to create an Excel file if it
+#' doesn't exist yet (\code{create = TRUE} by default)
+#' @param ... other unused arguments
+#'
+#' @returns Returns invisibly (via \code{invisible(x)}) a workbook object created by \code{XLConnect::loadWorkbook()} for further manipulation.
+#'
 #' @family QR_matrix functions
 #' @seealso [Traduction française][fr-export_xlsx.QR_matrix()]
 #' @export
-export_xlsx.QR_matrix <- function(x, layout = c("all", "modalities", "values", "combined"),
-                                  create = TRUE, clear_sheet = TRUE, auto_format = TRUE,
-                                  file_name, sheet_names, ...) {
-    layout <- match.arg(layout)
-    file_name <- ifelse(missing(file_name), "export.xls", file_name)
-    wb <- XLConnect::loadWorkbook(filename = file_name, create = create)
-    sheets <- switch(layout,
-        all = c("modalities", "values"),
-        combined = "values",
-        layout
-    )
-    exp_data <- switch(layout,
-        combined = {
-            data_v <- x[["values"]]
-            data_m <- x[["modalities"]]
-            joint_names <- colnames(data_m)[colnames(data_m) %in% colnames(data_v)]
-            data_v[, joint_names] <- data_m[, joint_names]
-            list(values = data_v)
-        },
-        x
-    )
-    XLConnect::createSheet(wb, sheets)
-    if (clear_sheet) {
-        XLConnect::clearSheet(wb, sheets)
+export_xlsx.QR_matrix <- function(x,
+                                  file,
+                                  auto_format = TRUE,
+                                  overwrite = TRUE,
+                                  ...) {
+
+    ext <- tools::file_ext(file)
+    if (nchar(ext) == 0) {
+        file <- paste0(file, ".xslx")
+    } else if (ext != "xlsx") {
+        stop("The format of the file must be .xlsx .")
     }
 
-    XLConnect::setStyleAction(wb, XLConnect::XLC$STYLE_ACTION.DATA_FORMAT_ONLY)
+    wb_qr <- openxlsx::createWorkbook(title = "QR for WS", subject = "Seasonal Adjustment")
+
+    openxlsx::addWorksheet(wb = wb_qr, sheetName = "Modalities")
+    openxlsx::addWorksheet(wb = wb_qr, sheetName = "Values")
+
+    openxlsx::writeData(
+        wb = wb_qr,
+        sheet = "Modalities",
+        x = x$modalities,
+        headerStyle = ifelse(test = auto_format, yes = header_style, no = NULL)
+    )
+    openxlsx::writeData(
+        wb = wb_qr,
+        sheet = "Values",
+        x = x$values,
+        headerStyle = ifelse(test = auto_format, yes = header_style, no = NULL)
+    )
+
     if (auto_format) {
-        XLConnect::setDataFormatForType(wb,
-            type = XLConnect::XLC$DATA_TYPE.NUMERIC,
-            format = "0.000"
-        )
+        wb_qr <- apply_BQ_style(wb = wb_qr, x = x,
+                                values_sheet = "Values",
+                                modalities_sheet = "Modalities")
+    }
 
-        cs <- XLConnect::createCellStyle(wb)
-        XLConnect::setBorder(cs,
-            side = "all",
-            type = XLConnect::XLC$BORDER.THIN,
-            color = XLConnect::XLC$COLOR.BLACK
-        )
-    }
-    for (s in sheets) {
-        data <- exp_data[[s]]
-        XLConnect::writeWorksheet(wb, data = data, sheet = s, header = TRUE)
-        if (auto_format) {
-            XLConnect::setCellStyle(wb,
-                sheet = s, row = 1:(nrow(data) + 1),
-                col = seq_len(ncol(data)), cellstyle = cs
-            )
-            XLConnect::setCellStyle(wb,
-                formula = paste0(
-                    s, "!", "$A$1:",
-                    XLConnect::idx2cref(c(nrow(data) + 1, ncol(data)))
-                ),
-                cellstyle = cs
-            )
-            XLConnect::setColumnWidth(wb,
-                sheet = s, column = seq_len(ncol(data)),
-                width = -1
-            )
-        }
-    }
-    if (!missing(sheet_names) && length(sheet_names) == length(sheets)) {
-        XLConnect::removeSheet(wb, sheet = sheet_names)
-        XLConnect::renameSheet(wb, sheets, sheet_names)
-    }
-    XLConnect::saveWorkbook(wb)
-    return(invisible(wb))
+    openxlsx::saveWorkbook(wb = wb_qr, file = file, overwrite = overwrite)
+
+    return(invisible(wb_qr))
 }
-#' The function to call in practice
-#' @param x a \code{QR_matrix} or \code{mQR_matrix} object.
+
+#' @title Exporting QR_matrix or mQR_matrix objects in an Excel file
+#'
+#' @param x a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} object.
 #' @param ... other parameters of the function \code{\link{export_xlsx.QR_matrix}}.
+#'
+#' @returns
+#' If \code{x} is a \code{\link{mQR_matrix}}, the function returns invisibly (via \code{invisible(x)}) the same \code{\link{mQR_matrix}} object as \code{x}.
+#' Else if \code{x} is a \code{\link{QR_matrix}}, the function returns invisibly (via \code{invisible(x)}) a workbook object created by \code{XLConnect::loadWorkbook()} for further manipulation.
+#'
 #' @family QR_matrix functions
 #' @export
 export_xlsx <- function(x, ...) {
     UseMethod("export_xlsx", x)
 }
+
 #' @family QR_matrix functions
 #' @export
 export_xlsx.default <- function(x, ...) {
@@ -129,14 +264,25 @@ export_xlsx.default <- function(x, ...) {
 #'
 #' Permet d'exporter dans des fichiers Excel une liste de bilan qualité
 #'
-#' @param x objet de type \code{mQR_matrix} à exporter.
+#' @param x objet de type \code{\link{mQR_matrix}} à exporter.
 #' @param export_dir dossier d'export des résultats.
-#' @param layout_file paramètre d'export. Par défaut, (\code{layout_file = "ByComponent"}) et un fichier Excel est exporté par composante
-#' de la matrice bilan qualité (matrice des modalités ou des valeurs), dont chaque feuille correspond à un bilan qualité. Pour avoir
-#' un fichier par bilan qualité dont chaque feuille correspond à la composante exportée, utiliser \code{layout_file = "ByQRMatrix"}.
-#' @param file_extension extension des fichiers (\code{".xls"} ou \code{".xlsx"}).
-#' @param layout composantes du bilan à exporter : voir \code{\link{export_xlsx.QR_matrix}} .
-#' @param ... autres paramètres de la fonction \code{\link{export_xlsx.QR_matrix}}.
+#' @param layout_file paramètre d'export. Par défaut,
+#' (\code{layout_file = "ByComponent"}) et un fichier Excel est exporté par
+#' composante de la matrice bilan qualité (matrice des modalités ou des
+#' valeurs), dont chaque feuille correspond à un bilan qualité. Pour avoir un
+#' fichier par bilan qualité dont chaque feuille correspond à la composante
+#' exportée, utiliser \code{layout_file = "ByQRMatrix"}.
+#' La modalité \code{layout_file = "AllTogether"} correspond à la création d'un
+#' fichier avec 2 feuilles par bilan qualité (\code{Values} et
+#' \code{Modalities}).
+#' @param auto_format booléen indiquant s'il faut formatter la sortie
+#' (\code{auto_format = TRUE} par défaut).
+#' @param overwrite booléen indiquant s'il faut ré-écrire créer le fichier Excel
+#' s'il existe déjà (\code{create = TRUE} par défaut)
+#' @param ... autres argument non utilisés
+#'
+#' @returns Renvoie de manière invisible (via \code{invisible(x)}) le même objet \code{\link{mQR_matrix}} que \code{x}.
+#'
 #' @keywords internal
 #' @name fr-export_xlsx.mQR_matrix
 NULL
@@ -147,82 +293,127 @@ NULL
 #'
 #' To export several quality reports in Excel files
 #'
-#' @param x a\code{mQR_matrix} object to export.
+#' @param x a \code{\link{mQR_matrix}} object to export.
 #' @param export_dir export directory.
-#' @param layout_file export parameter. By default, (\code{layout_file = "ByComponent"}) and an Excel file is exported for each part of the
-#' quality report matrix (modalities and values matrices). To group both modalities and values reports/sheets into a single Excel file, use the option \code{layout_file = "ByQRMatrix"}.
-#' @param file_extension possible values are \code{".xls"} and \code{".xlsx"}.
-#' @param layout elements of the report to export: see \code{\link{export_xlsx.QR_matrix}} .
-#' @param ... other parameters of the function \code{\link{export_xlsx.QR_matrix}}.
+#' @param layout_file export parameter. By default,
+#' (\code{layout_file = "ByComponent"}) and an Excel file is exported for each
+#' part of the quality report matrix (modalities and values matrices). To group
+#' both modalities and values reports/sheets into a single Excel file, use the
+#' option \code{layout_file = "ByQRMatrix"}.
+#' @param auto_format logical indicating whether to format the output
+#' (\code{auto_format = TRUE} by default).
+#' @param overwrite logical indicating whether to create an Excel file if it
+#' doesn't exist yet (\code{create = TRUE} by default)
+#' @param ... other unused arguments
+#'
+#' @returns Returns invisibly (via \code{invisible(x)}) the same \code{\link{mQR_matrix}} object as \code{x}.
+#'
 #' @family QR_matrix functions
 #' @seealso [Traduction française][fr-export_xlsx.mQR_matrix()]
 #' @export
-export_xlsx.mQR_matrix <- function(x, export_dir = "./",
-                                   layout_file = c("ByComponent", "ByQRMatrix"),
-                                   file_extension = c(".xls", ".xlsx"),
-                                   layout = c("all", "modalities", "values", "combined"),
+export_xlsx.mQR_matrix <- function(x,
+                                   export_dir,
+                                   layout_file = c("ByComponent", "ByQRMatrix", "AllTogether"),
+                                   auto_format = TRUE,
+                                   overwrite = TRUE,
                                    ...) {
-    if (length(x) == 0) {
-        return(invisible(x))
-    }
-    file_extension <- match.arg(file_extension)
+
+    #by component = 1file / component (different QR in same file) = 2 files
+    #by QRMatrix = 1file / QR (different component in same file)
+    #All together = All Qr and components in same file
+
     layout_file <- match.arg(layout_file)
-    layout <- match.arg(layout)
-
-    QR_matrix_names <- names(x)
-
-    if (is.null(QR_matrix_names)) {
-        QR_matrix_names <- paste0("QR_", seq_along(x))
-    } else {
-        QR_matrix_names[is.na(QR_matrix_names)] <- ""
-        if (!is.na(match("", QR_matrix_names))) {
-            QR_matrix_names[match("", QR_matrix_names)] <- paste0(
-                "QR_",
-                match("", QR_matrix_names)
-            )
-        }
-    }
-
+    export_dir <- normalizePath(export_dir)
 
     if (layout_file == "ByQRMatrix") {
-        # To export a quality report per file:
-        files_name <- normalizePath(
-            file.path(
-                export_dir,
-                paste0(QR_matrix_names, file_extension)
-            ),
-            mustWork = FALSE
-        )
-        for (i in seq_along(x)) {
-            export_xlsx(x[[i]], layout = layout, file_name = files_name[i], ...)
+        for (id_qr in seq_along(x)) {
+            qr <- x[[id_qr]]
+            name <- ifelse(
+                test = is.null(names(x)) || nchar(names(x)[id_qr]) == 0,
+                yes = paste0("QR_", id_qr),
+                no = names(x)[id_qr]
+            )
+            file <- file.path(export_dir, paste0(name, ".xlsx"))
+            export_xlsx(x = qr, file = file, auto_format = auto_format, overwrite = overwrite)
         }
-    } else {
-        # To export a file per element of the quality report
-        files_name <- switch(layout,
-            all = c("modalities", "values"),
-            combined = "values",
-            layout
-        )
-        final_layout <- switch(layout,
-            all = c("modalities", "values"),
-            layout
-        )
+    } else if (layout_file == "ByComponent") {
 
-        files <- normalizePath(
-            path = file.path(export_dir, paste0(files_name, file_extension)),
-            mustWork = FALSE
-        )
-        for (i in seq_along(x)) {
-            # Index on the QR_matrix
-            for (j in seq_along(final_layout)) {
-                # Index on the elements
-                export_xlsx(x[[i]],
-                    layout = final_layout[j], file_name = files[j],
-                    sheet_names = QR_matrix_names[i],
-                    ...
-                )
+        wb_modalities <- openxlsx::createWorkbook(title = "Modalities of the QR", subject = "Seasonal Adjustment")
+        wb_values <- openxlsx::createWorkbook(title = "Values of the QR", subject = "Seasonal Adjustment")
+
+        for (id_qr in seq_along(x)) {
+            qr <- x[[id_qr]]
+            name <- ifelse(
+                test = is.null(names(x)) || nchar(names(x)[id_qr]) == 0,
+                yes = paste0("QR_", id_qr),
+                no = names(x)[id_qr]
+            )
+
+            openxlsx::addWorksheet(wb = wb_modalities, sheetName = name)
+            openxlsx::addWorksheet(wb = wb_values, sheetName = name)
+
+            openxlsx::writeData(
+                wb = wb_modalities,
+                sheet = name,
+                x = qr$modalities,
+                headerStyle = ifelse(test = auto_format, yes = header_style, no = NULL)
+            )
+            openxlsx::writeData(
+                wb = wb_values,
+                sheet = name,
+                x = qr$values,
+                headerStyle = ifelse(test = auto_format, yes = header_style, no = NULL)
+            )
+            if (auto_format) {
+                wb_modalities <- apply_BQ_style(wb = wb_modalities, x = qr,
+                                                modalities_sheet = name)
+                wb_values <- apply_BQ_style(wb = wb_values, x = qr,
+                                            values_sheet = name)
             }
         }
+
+        file_modalities <- file.path(export_dir, "modalities.xlsx")
+        file_values <- file.path(export_dir, "values.xlsx")
+
+        openxlsx::saveWorkbook(wb = wb_modalities, file = file_modalities, overwrite = overwrite)
+        openxlsx::saveWorkbook(wb = wb_values, file = file_values, overwrite = overwrite)
+
+    } else if (layout_file == "AllTogether") {
+
+        wb_mqr <- openxlsx::createWorkbook(title = "Multiple QR", subject = "Seasonal Adjustment")
+
+        for (id_qr in seq_along(x)) {
+            qr <- x[[id_qr]]
+            name <- ifelse(
+                test = is.null(names(x)) || nchar(names(x)[id_qr]) == 0 || sum(names(x) == names(x)[id_qr]) > 1,
+                yes = paste0("QR_", id_qr),
+                no = names(x)[id_qr]
+            )
+
+            openxlsx::addWorksheet(wb = wb_mqr, sheetName = paste0(name, "_modalities"))
+            openxlsx::addWorksheet(wb = wb_mqr, sheetName = paste0(name, "_values"))
+
+            openxlsx::writeData(
+                wb = wb_mqr,
+                sheet = paste0(name, "_modalities"),
+                x = qr$modalities,
+                headerStyle = ifelse(test = auto_format, yes = header_style, no = NULL)
+            )
+            openxlsx::writeData(
+                wb = wb_mqr,
+                sheet = paste0(name, "_values"),
+                x = qr$values,
+                headerStyle = ifelse(test = auto_format, yes = header_style, no = NULL)
+            )
+            if (auto_format) {
+                wb_mqr <- apply_BQ_style(wb = wb_mqr, x = qr,
+                                         modalities_sheet = paste0(name, "_modalities"),
+                                         values_sheet = paste0(name, "_values"))
+            }
+        }
+
+        file <- file.path(export_dir, "mQR.xlsx")
+        openxlsx::saveWorkbook(wb = wb_mqr, file = file, overwrite = overwrite)
     }
 
     return(invisible(x))

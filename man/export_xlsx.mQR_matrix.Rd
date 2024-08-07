@@ -6,26 +6,34 @@
 \usage{
 \method{export_xlsx}{mQR_matrix}(
   x,
-  export_dir = "./",
-  layout_file = c("ByComponent", "ByQRMatrix"),
-  file_extension = c(".xls", ".xlsx"),
-  layout = c("all", "modalities", "values", "combined"),
+  export_dir,
+  layout_file = c("ByComponent", "ByQRMatrix", "AllTogether"),
+  auto_format = TRUE,
+  overwrite = TRUE,
   ...
 )
 }
 \arguments{
-\item{x}{a\code{mQR_matrix} object to export.}
+\item{x}{a \code{\link{mQR_matrix}} object to export.}
 
 \item{export_dir}{export directory.}
 
-\item{layout_file}{export parameter. By default, (\code{layout_file = "ByComponent"}) and an Excel file is exported for each part of the
-quality report matrix (modalities and values matrices). To group both modalities and values reports/sheets into a single Excel file, use the option \code{layout_file = "ByQRMatrix"}.}
+\item{layout_file}{export parameter. By default,
+(\code{layout_file = "ByComponent"}) and an Excel file is exported for each
+part of the quality report matrix (modalities and values matrices). To group
+both modalities and values reports/sheets into a single Excel file, use the
+option \code{layout_file = "ByQRMatrix"}.}
 
-\item{file_extension}{possible values are \code{".xls"} and \code{".xlsx"}.}
+\item{auto_format}{logical indicating whether to format the output
+(\code{auto_format = TRUE} by default).}
 
-\item{layout}{elements of the report to export: see \code{\link{export_xlsx.QR_matrix}} .}
+\item{overwrite}{logical indicating whether to create an Excel file if it
+doesn't exist yet (\code{create = TRUE} by default)}
 
-\item{...}{other parameters of the function \code{\link{export_xlsx.QR_matrix}}.}
+\item{...}{other unused arguments}
+}
+\value{
+Returns invisibly (via \code{invisible(x)}) the same \code{\link{mQR_matrix}} object as \code{x}.
 }
 \description{
 To export several quality reports in Excel files

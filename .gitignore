@@ -53,3 +53,7 @@ rsconnect/
 
 # Hidden file from mac-os
 .DS_Store
+
+# produced README.html
+README.html
+docs

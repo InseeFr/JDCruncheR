@@ -7,23 +7,37 @@
 \method{rbind}{QR_matrix}(..., check_formula = TRUE)
 }
 \arguments{
-\item{...}{\code{QR_matrix} objects to combine.}
+\item{...}{\code{\link{QR_matrix}} objects to combine.}
 
 \item{check_formula}{logical indicating whether to check the score formulas' coherency.
 By default, \code{check_formula = TRUE}: an error is returned if the scores were calculated with different formulas.
 If \code{check_formula = FALSE}, no check is performed and the \code{score_formula} of the output is \code{NULL}.}
 }
+\value{
+\code{rbind.QR_matrix()} returns a \code{\link{QR_matrix}} object.
+}
 \description{
-Function to combine multiple \code{QR_matrix} objects: line by line, both for the \code{modalities} and the \code{values} table.
+Function to combine multiple \code{\link{QR_matrix}} objects: line by line, both for the \code{modalities} and the \code{values} table.
 }
 \examples{
-\dontrun{
-QR <- extract_QR()
-QR1 <- compute_score(QR1, score_pond = c(m7 = 2, q = 3, qs_residual_sa_on_sa = 5))
-QR2 <- compute_score(QR1, score_pond = c(m7 = 2, qs_residual_sa_on_sa = 5))
-rbind(QR1, QR2) # Returns an error
+# Path of matrix demetra_m
+demetra_path <- file.path(
+    system.file("extdata", package = "JDCruncheR"),
+    "WS/ws_ipi/Output/SAProcessing-1",
+    "demetra_m.csv"
+)
+
+# Extract the quality report from the demetra_m file
+QR <- extract_QR(demetra_path)
+
+# Compute differents scores
+QR1 <- compute_score(QR, score_pond = c(m7 = 2, q = 3, qs_residual_sa_on_sa = 5))
+QR2 <- compute_score(QR, score_pond = c(m7 = 2, qs_residual_sa_on_sa = 5))
+
+# Merge two quality report
+try(rbind(QR1, QR2)) # Une erreur est renvoyée
 rbind(QR1, QR2, check_formula = FALSE)
-}
+
 }
 \seealso{
 \link[=fr-rbind.QR_matrix]{Traduction française}

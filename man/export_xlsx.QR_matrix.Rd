@@ -4,36 +4,24 @@
 \alias{export_xlsx.QR_matrix}
 \title{Exporting QR_matrix objects in an Excel file}
 \usage{
-\method{export_xlsx}{QR_matrix}(
-  x,
-  layout = c("all", "modalities", "values", "combined"),
-  create = TRUE,
-  clear_sheet = TRUE,
-  auto_format = TRUE,
-  file_name,
-  sheet_names,
-  ...
-)
+\method{export_xlsx}{QR_matrix}(x, file, auto_format = TRUE, overwrite = TRUE, ...)
 }
 \arguments{
-\item{x}{a \code{QR_matrix} object.}
+\item{x}{a \code{\link{QR_matrix}} object.}
 
-\item{layout}{the components of the report to export. By default, \code{layout = "all"}: the matrices modalities
-(\code{"modalities"}) and values (\code{"values"}) are exported in separate files. To export them in a single file (in two sheets),
-use \code{layout = "combined"}.}
+\item{file}{a \code{character} object with the path to the file to export
+que l'on veut créer}
 
-\item{create}{logical indicating whether to create an Excel file if it doesn't exist yet (\code{create = TRUE} by default)}
+\item{auto_format}{logical indicating whether to format the output
+(\code{auto_format = TRUE} by default).}
 
-\item{clear_sheet}{logical indicating whether to clear the Excel sheets before the export (\code{clear_sheet = TRUE} by default).}
+\item{overwrite}{logical indicating whether to create an Excel file if it
+doesn't exist yet (\code{create = TRUE} by default)}
 
-\item{auto_format}{logical indicating whether to format the output (\code{auto_format = TRUE} by default).}
-
-\item{file_name}{optional argument to choose the path and name of the file to export. If not specified, an \emph{export.xls} will be created in the working directory.}
-
-\item{sheet_names}{names of the exported Excel sheets. If not specified, the sheets will be named after the exported components.
-If specified, existing sheets with these names will be overwritten.}
-
-\item{...}{other unused parameters.}
+\item{...}{other unused arguments}
+}
+\value{
+Returns invisibly (via \code{invisible(x)}) a workbook object created by \code{XLConnect::loadWorkbook()} for further manipulation.
 }
 \description{
 To export a quality report in an Excel file.

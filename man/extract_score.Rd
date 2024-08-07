@@ -11,27 +11,48 @@ extract_score(
 )
 }
 \arguments{
-\item{x}{a \code{QR_matrix} or \code{mQR_matrix}.}
+\item{x}{a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}}.}
 
 \item{format_output}{string of characters indicating the output format: either a \code{data.frame} or a \code{vector}.}
 
 \item{weighted_score}{logical indicating whether to extract the weighted score (if previously calculated) or the unweighted one.
 By default, the unweighted score is extracted.}
 }
+\value{
+\code{extract_score()} returns a data.frame with two column: the series name and their score.
+}
 \description{
-To extract score variables from \code{QR_matrix} or \code{mQR_matrix} objects.
+To extract score variables from \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} objects.
 }
 \details{
-For \code{QR_matrix} objects, the output is a vector or the object \code{NULL} if no score was previously calculated.
-For \code{mQR_matrix} objects, it is a list of scores (\code{NULL} elements or vectors).
+For \code{\link{QR_matrix}} objects, the output is a vector or the object \code{NULL} if no score was previously calculated.
+For \code{\link{mQR_matrix}} objects, it is a list of scores (\code{NULL} elements or vectors).
 }
 \examples{
-\dontrun{
-QR <- extract_QR()
-mQR <- mQR_matrix(QR, compute_score(QR))
-extract_score(QR) # NULL
-extract_score(mQR) # List whose first element is NULL
-}
+# Path of matrix demetra_m
+demetra_path <- file.path(
+    system.file("extdata", package = "JDCruncheR"),
+    "WS/ws_ipi/Output/SAProcessing-1",
+    "demetra_m.csv"
+)
+
+# Extract the quality report from the demetra_m file
+QR <- extract_QR(demetra_path)
+
+# Compute the score
+QR1 <- compute_score(x = QR, n_contrib_score = 5)
+QR2 <- compute_score(
+    x = QR,
+    score_pond = c(qs_residual_sa_on_sa = 5, qs_residual_sa_on_i = 30,
+                   f_residual_td_on_sa = 10, f_residual_td_on_i = 40,
+                   oos_mean = 30, residuals_skewness = 15, m7 = 25)
+)
+mQR <- mQR_matrix(list(a = QR1, b = QR2))
+
+# Extract score
+extract_score(QR1)
+extract_score(mQR)
+
 }
 \seealso{
 \link[=fr-extract_score]{Traduction française}

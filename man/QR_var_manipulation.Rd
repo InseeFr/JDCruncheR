@@ -11,21 +11,42 @@ remove_indicators(x, ...)
 retain_indicators(x, ...)
 }
 \arguments{
-\item{x}{a \code{QR_matrix} or \code{mQR_matrix} object.}
+\item{x}{a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} object.}
 
 \item{...}{names of the variable to remove (or keep)}
 }
+\value{
+\code{remove_indicators()} returns the same object \code{x} reduced by the flags and variables used as arguments \dots
+So if the input \code{x} is a QR_matrix, an object of class QR_matrix is returned.
+If the input \code{x} is a mQR_matrix, an object of class mQR_matrix is returned.
+}
 \description{
 Functions to remove indicators (\code{remove_indicators()}) or retrain some indicators only (\code{retain_indicators()})
-from \code{QR_matrix} or \code{mQR_matrix} objects. The series names (column "series") cannot be removed.
+from \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} objects. The series names (column "series") cannot be removed.
 }
 \examples{
-\dontrun{
-QR <- compute_score(extract_QR())
-retain_indicators(QR, "score", "m7") # Only the score and the m7 variables are kept
-retain_indicators(QR, c("score", "m7")) # equivalent syntax
-score(remove_indicator(QR, "score")) # The score is removed
-}
+# Path of matrix demetra_m
+demetra_path <- file.path(
+    system.file("extdata", package = "JDCruncheR"),
+    "WS/ws_ipi/Output/SAProcessing-1",
+    "demetra_m.csv"
+)
+
+# Extract the quality report from the demetra_m file
+QR <- extract_QR(demetra_path)
+
+# Compute the score
+QR <- compute_score(QR, n_contrib_score = 2)
+
+# Retain indicators
+retain_indicators(QR, "score", "m7") # retaining "score" and "m7"
+retain_indicators(QR, c("score", "m7")) # Same
+
+# Remove indicators
+QR <- remove_indicators(QR, "score") # removing "score"
+
+extract_score(QR) # is NULL because we removed the score indicator
+
 }
 \seealso{
 \link[=fr-remove_indicators]{Traduction française}
