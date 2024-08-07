@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![CRAN
-status](http://www.r-pkg.org/badges/version/JDCruncheR)](https://cran.r-project.org/package=JDCruncheR)
+status](https://www.r-pkg.org/badges/version/JDCruncheR)](https://cran.r-project.org/package=JDCruncheR)
 [![Linting
 code](https://github.com/InseeFr/JDCruncheR/actions/workflows/lint.yaml/badge.svg)](https://github.com/InseeFr/JDCruncheR/actions/workflows/lint.yaml)
 [![R-CMD-check](https://github.com/InseeFr/JDCruncheR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/InseeFr/JDCruncheR/actions/workflows/R-CMD-check.yaml)
