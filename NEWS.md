@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * resolve a bug linked to shell function
 * resolve a bug related to accent colnames
 * lintr is up-to-date
+* `extract_QR` works with V3 workspaces
 
 
 ### Added

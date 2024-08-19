@@ -81,6 +81,33 @@
         options(default_tsmatrix_series = c("y", "t", "sa", "s", "i", "ycal"))
     }
     if (is.null(getOption("cruncher_bin_directory"))) {
-        options(cruncher_bin_directory = "Y:/Logiciels/jwsacruncher-2.2.3/jdemetra-cli-2.2.3/bin")
+        options(cruncher_bin_directory = "Y:/Logiciels/jwsacruncher-2.2.4/jdemetra-cli-2.2.4/bin")
+    }
+    if (is.null(getOption("jdc_thresholds"))) {
+        options(jdc_thresholds = list(
+            qs_residual_sa_on_sa = c(Severe = 0.001, Bad = 0.01, Uncertain = 0.05, Good = Inf),
+            qs_residual_sa_on_i = c(Severe = 0.001, Bad = 0.01, Uncertain = 0.05, Good = Inf),
+
+            f_residual_sa_on_sa = c(Severe = 0.001, Bad = 0.01, Uncertain = 0.05, Good = Inf),
+            f_residual_sa_on_i = c(Severe = 0.001, Bad = 0.01, Uncertain = 0.05, Good = Inf),
+
+            f_residual_td_on_sa = c(Severe = 0.001, Bad = 0.01, Uncertain = 0.05, Good = Inf),
+            f_residual_td_on_i = c(Severe = 0.001, Bad = 0.01, Uncertain = 0.05, Good = Inf),
+
+            residuals_independency = c(Bad = 0.01, Uncertain = 0.1, Good = Inf),
+            residuals_homoskedasticity = c(Bad = 0.01, Uncertain = 0.1, Good = Inf),
+
+            residuals_skewness = c(Bad = 0.01, Uncertain = 0.1, Good = Inf),
+            residuals_kurtosis = c(Bad = 0.01, Uncertain = 0.1, Good = Inf),
+            residuals_normality = c(Bad = 0.01, Uncertain = 0.1, Good = Inf),
+
+            oos_mean = c(Bad = 0.01, Uncertain = 0.1, Good = Inf),
+            oos_mse = c(Bad = 0.01, Uncertain = 0.1, Good = Inf),
+
+            m7 = c(Good = 1, Bad = 2, Severe = Inf),
+            q = c(Good = 1, Bad = Inf),
+            q_m2 = c(Good = 1, Bad = Inf),
+            pct_outliers = c(Good = 3, Uncertain = 5, Bad = Inf)
+        ))
     }
 }
