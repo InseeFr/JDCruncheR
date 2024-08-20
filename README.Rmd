@@ -50,6 +50,35 @@ Pour obtenir la version en cours de développement depuis GitHub :
 remotes::install_github("InseeFr/JDCruncheR")
 ```
 
+### Usage
+
+```{r fr-loading-JDCruncheR, eval = TRUE}
+library("JDCruncheR")
+```
+
+Les seuils des tests du bilan qualité sont personnalisables.
+Pour cela, il faut modifier l'option `"jdc_thresholds"`.
+
+Pour récupérer les valeurs des tests par défault, il faut appeler la fonction `get_thresholds()` :
+
+```{r fr-get-threshold, eval = TRUE}
+get_thresholds("m7")
+get_thresholds(default = TRUE)
+```
+
+Pour changer la valeur de l'option, on peut utiliser la fonction `set_thresholds()` :
+
+```{r fr-set-threshold, eval = TRUE}
+# Fixer les seuils à une certaine valeur
+set_thresholds(test_name = "m7", thresholds = c(Good = 0.8, Bad = 1.4, Severe = Inf))
+get_thresholds(test_name = "m7", default = FALSE)
+
+# Remettre tous les seuils à leur valeur par défaut
+set_thresholds()
+get_thresholds(test_name = "m7", default = FALSE)
+```
+
+
 ### Autres informations
 
 Pour plus d'informations sur l'installation et la configuration du package `{JDCruncheR}`, vous pouvez visiter la page [wiki](https://github.com/jdemetra/jwsacruncher/wiki)
@@ -82,6 +111,34 @@ To get the current development version from GitHub:
 
 # Install development version from GitHub
 remotes::install_github("InseeFr/JDCruncheR")
+```
+
+### Usage
+
+```{r en-loading-JDCruncheR, eval = TRUE}
+library("JDCruncheR")
+```
+
+The thresholds of the QR tests can be customised
+You have to modify the option `"jdc_thresholds"`.
+
+To get the (default or not) values of the thresholds of the tests, you can call the fonction `get_thresholds()` :
+
+```{r en-get-threshold, eval = TRUE}
+get_thresholds("m7")
+get_thresholds(default = TRUE)
+```
+
+To change the value of the option, you can use the fonction `set_thresholds()`:
+
+```{r en-set-threshold, eval = TRUE}
+# Set threshold to imposed value
+set_thresholds(test_name = "m7", thresholds = c(Good = 0.8, Bad = 1.4, Severe = Inf))
+get_thresholds(test_name = "m7", default = FALSE)
+
+# Reset all thresholds to default
+set_thresholds()
+get_thresholds(test_name = "m7", default = FALSE)
 ```
 
 ### Other informations

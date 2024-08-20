@@ -229,4 +229,3 @@ cruncher_and_param(
 # Pour voir les autres paramètres de la fonction :
 ?cruncher_and_param
 ```
-

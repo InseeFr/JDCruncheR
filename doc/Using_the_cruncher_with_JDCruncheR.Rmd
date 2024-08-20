@@ -184,5 +184,3 @@ cruncher_and_param(workspace = "D:/Campagne_CVS/ipi.xml",
 # To see all the function parameters:
 ?cruncher_and_param
 ```
-
-

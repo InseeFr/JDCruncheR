@@ -50,6 +50,109 @@ Pour obtenir la version en cours de développement depuis GitHub :
 remotes::install_github("InseeFr/JDCruncheR")
 ```
 
+### Usage
+
+``` r
+library("JDCruncheR")
+```
+
+Les seuils des tests du bilan qualité sont personnalisables. Pour cela,
+il faut modifier l’option `"jdc_thresholds"`.
+
+Pour récupérer les valeurs des tests par défault, il faut appeler la
+fonction `get_thresholds()` :
+
+``` r
+get_thresholds("m7")
+#>   Good    Bad Severe 
+#>      1      2    Inf
+get_thresholds(default = TRUE)
+#> $qs_residual_sa_on_sa
+#>    Severe       Bad Uncertain      Good 
+#>     0.001     0.010     0.050       Inf 
+#> 
+#> $qs_residual_sa_on_i
+#>    Severe       Bad Uncertain      Good 
+#>     0.001     0.010     0.050       Inf 
+#> 
+#> $f_residual_sa_on_sa
+#>    Severe       Bad Uncertain      Good 
+#>     0.001     0.010     0.050       Inf 
+#> 
+#> $f_residual_sa_on_i
+#>    Severe       Bad Uncertain      Good 
+#>     0.001     0.010     0.050       Inf 
+#> 
+#> $f_residual_td_on_sa
+#>    Severe       Bad Uncertain      Good 
+#>     0.001     0.010     0.050       Inf 
+#> 
+#> $f_residual_td_on_i
+#>    Severe       Bad Uncertain      Good 
+#>     0.001     0.010     0.050       Inf 
+#> 
+#> $residuals_independency
+#>       Bad Uncertain      Good 
+#>      0.01      0.10       Inf 
+#> 
+#> $residuals_homoskedasticity
+#>       Bad Uncertain      Good 
+#>      0.01      0.10       Inf 
+#> 
+#> $residuals_skewness
+#>       Bad Uncertain      Good 
+#>      0.01      0.10       Inf 
+#> 
+#> $residuals_kurtosis
+#>       Bad Uncertain      Good 
+#>      0.01      0.10       Inf 
+#> 
+#> $residuals_normality
+#>       Bad Uncertain      Good 
+#>      0.01      0.10       Inf 
+#> 
+#> $oos_mean
+#>       Bad Uncertain      Good 
+#>      0.01      0.10       Inf 
+#> 
+#> $oos_mse
+#>       Bad Uncertain      Good 
+#>      0.01      0.10       Inf 
+#> 
+#> $m7
+#>   Good    Bad Severe 
+#>      1      2    Inf 
+#> 
+#> $q
+#> Good  Bad 
+#>    1  Inf 
+#> 
+#> $q_m2
+#> Good  Bad 
+#>    1  Inf 
+#> 
+#> $pct_outliers
+#>      Good Uncertain       Bad 
+#>         3         5       Inf
+```
+
+Pour changer la valeur de l’option, on peut utiliser la fonction
+`set_thresholds()` :
+
+``` r
+# Fixer les seuils à une certaine valeur
+set_thresholds(test_name = "m7", thresholds = c(Good = 0.8, Bad = 1.4, Severe = Inf))
+get_thresholds(test_name = "m7", default = FALSE)
+#>   Good    Bad Severe 
+#>    0.8    1.4    Inf
+
+# Remettre tous les seuils à leur valeur par défaut
+set_thresholds()
+get_thresholds(test_name = "m7", default = FALSE)
+#>   Good    Bad Severe 
+#>      1      2    Inf
+```
+
 ### Autres informations
 
 Pour plus d’informations sur l’installation et la configuration du
@@ -97,6 +200,109 @@ To get the current development version from GitHub:
 
 # Install development version from GitHub
 remotes::install_github("InseeFr/JDCruncheR")
+```
+
+### Usage
+
+``` r
+library("JDCruncheR")
+```
+
+The thresholds of the QR tests can be customised You have to modify the
+option `"jdc_thresholds"`.
+
+To get the (default or not) values of the thresholds of the tests, you
+can call the fonction `get_thresholds()` :
+
+``` r
+get_thresholds("m7")
+#>   Good    Bad Severe 
+#>      1      2    Inf
+get_thresholds(default = TRUE)
+#> $qs_residual_sa_on_sa
+#>    Severe       Bad Uncertain      Good 
+#>     0.001     0.010     0.050       Inf 
+#> 
+#> $qs_residual_sa_on_i
+#>    Severe       Bad Uncertain      Good 
+#>     0.001     0.010     0.050       Inf 
+#> 
+#> $f_residual_sa_on_sa
+#>    Severe       Bad Uncertain      Good 
+#>     0.001     0.010     0.050       Inf 
+#> 
+#> $f_residual_sa_on_i
+#>    Severe       Bad Uncertain      Good 
+#>     0.001     0.010     0.050       Inf 
+#> 
+#> $f_residual_td_on_sa
+#>    Severe       Bad Uncertain      Good 
+#>     0.001     0.010     0.050       Inf 
+#> 
+#> $f_residual_td_on_i
+#>    Severe       Bad Uncertain      Good 
+#>     0.001     0.010     0.050       Inf 
+#> 
+#> $residuals_independency
+#>       Bad Uncertain      Good 
+#>      0.01      0.10       Inf 
+#> 
+#> $residuals_homoskedasticity
+#>       Bad Uncertain      Good 
+#>      0.01      0.10       Inf 
+#> 
+#> $residuals_skewness
+#>       Bad Uncertain      Good 
+#>      0.01      0.10       Inf 
+#> 
+#> $residuals_kurtosis
+#>       Bad Uncertain      Good 
+#>      0.01      0.10       Inf 
+#> 
+#> $residuals_normality
+#>       Bad Uncertain      Good 
+#>      0.01      0.10       Inf 
+#> 
+#> $oos_mean
+#>       Bad Uncertain      Good 
+#>      0.01      0.10       Inf 
+#> 
+#> $oos_mse
+#>       Bad Uncertain      Good 
+#>      0.01      0.10       Inf 
+#> 
+#> $m7
+#>   Good    Bad Severe 
+#>      1      2    Inf 
+#> 
+#> $q
+#> Good  Bad 
+#>    1  Inf 
+#> 
+#> $q_m2
+#> Good  Bad 
+#>    1  Inf 
+#> 
+#> $pct_outliers
+#>      Good Uncertain       Bad 
+#>         3         5       Inf
+```
+
+To change the value of the option, you can use the fonction
+`set_thresholds()`:
+
+``` r
+# Set threshold to imposed value
+set_thresholds(test_name = "m7", thresholds = c(Good = 0.8, Bad = 1.4, Severe = Inf))
+get_thresholds(test_name = "m7", default = FALSE)
+#>   Good    Bad Severe 
+#>    0.8    1.4    Inf
+
+# Reset all thresholds to default
+set_thresholds()
+get_thresholds(test_name = "m7", default = FALSE)
+#>   Good    Bad Severe 
+#>      1      2    Inf
 ```
 
 ### Other informations

@@ -226,4 +226,3 @@ cruncher_and_param(
 # To see all the function parameters:
 ?cruncher_and_param
 ```
-
