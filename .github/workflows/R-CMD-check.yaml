@@ -19,8 +19,7 @@ jobs:
       matrix:
         os: [ 'macOS-latest' ]
         #os: [ 'ubuntu-latest', 'windows-latest', 'macOS-latest' ]
-        r: [ 'release' ]
-        #r: [ 'devel', 'release', 'oldrel' ]
+        r: [ 'devel', 'release', 'oldrel' ]
         # r: [ 'devel', 'release', 'oldrel', 'oldrel-1', '4.2.3', '4.2.1', '4.1.1', '4.1.3', '4.0.5', '3.6.1' ]
         java: [ '11' ]
         # java: [ '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19' ]
