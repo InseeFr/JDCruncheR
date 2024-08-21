@@ -189,9 +189,9 @@ extract_QR <- function(matrix_output_file, sep = ";", dec = ",") {
         "series",
 
         c("qs_residual_sa_on_sa", "f_residual_sa_on_sa",
-        "qs_residual_sa_on_i", "f_residual_sa_on_i",
-        "f_residual_td_on_sa", "f_residual_td_on_i",
-        "residuals_independency", "residuals_normality")[index_present_variables],
+          "qs_residual_sa_on_i", "f_residual_sa_on_i",
+          "f_residual_td_on_sa", "f_residual_td_on_i",
+          "residuals_independency", "residuals_normality")[index_present_variables],
 
         "residuals_homoskedasticity", "residuals_skewness", "residuals_kurtosis",
         "oos_mean", "oos_mse", "m7", "q", "q_m2", "pct_outliers"
@@ -200,8 +200,11 @@ extract_QR <- function(matrix_output_file, sep = ";", dec = ",") {
     QR_values <- demetra_m[, values_variables]
     rownames(QR_modalities) <- rownames(QR_values) <- NULL
     colnames(QR_values)[seq_along(names_QR_variables)] <- colnames(QR_modalities) <- names_QR_variables
-    QR_modalities[, -1] <- lapply(QR_modalities[, -1], factor,
-        levels = c("Good", "Uncertain", "Bad", "Severe"), ordered = TRUE
+    QR_modalities[, -1] <- lapply(
+        X = QR_modalities[, -1],
+        FUN = factor,
+        levels = c("Good", "Uncertain", "Bad", "Severe"),
+        ordered = TRUE
     )
     QR <- QR_matrix(modalities = QR_modalities, values = QR_values)
     QR
@@ -252,7 +255,7 @@ extractARIMA <- function(demetra_m) {
         } else {
             val_bp <- val_bp[, integer_col[1]]
         }
-    } else if (length(bp_possibles) == 1){
+    } else if (length(bp_possibles) == 1) {
         val_bp <- demetra_m[, bp_possibles]
     } else  {
         stop("Error in the extraction of the arima order bp: multiple column.")
@@ -428,9 +431,9 @@ extractNormalityTests <- function(demetra_m, thresholds = getOption("jdc_thresho
         if (length(grep(pattern = "^X\\.(\\d){1,}$", x = colnames(demetra_m)[rep(tests_possibles, each = 2) + rep(1:2, 3)])) != 6) {
             stop("Re-compute the cruncher export with the options: residuals.skewness:3, residuals.kurtosis:3 and residuals.lb2:3")
         }
-        skewness_pvalue = demetra_m[, tests_possibles[1] + 2]
-        kurtosis_pvalue = demetra_m[, tests_possibles[2] + 2]
-        homoskedasticity_pvalue = demetra_m[, tests_possibles[3] + 2]
+        skewness_pvalue <- demetra_m[, tests_possibles[1] + 2]
+        kurtosis_pvalue <- demetra_m[, tests_possibles[2] + 2]
+        homoskedasticity_pvalue <- demetra_m[, tests_possibles[3] + 2]
 
     } else if (is.numeric(demetra_m$skewness)
                && is.numeric(demetra_m$kurtosis)
@@ -438,9 +441,9 @@ extractNormalityTests <- function(demetra_m, thresholds = getOption("jdc_thresho
         if (length(grep(pattern = "^X\\.(\\d){1,}$", x = colnames(demetra_m)[tests_possibles + 1])) != 3) {
             stop("Re-compute the cruncher export with the options: residuals.skewness:2, residuals.kurtosis:2 and residuals.lb2:2")
         }
-        skewness_pvalue = demetra_m[, tests_possibles[1] + 1]
-        kurtosis_pvalue = demetra_m[, tests_possibles[2] + 1]
-        homoskedasticity_pvalue = demetra_m[, tests_possibles[3] + 1]
+        skewness_pvalue <- demetra_m[, tests_possibles[1] + 1]
+        kurtosis_pvalue <- demetra_m[, tests_possibles[2] + 1]
+        homoskedasticity_pvalue <- demetra_m[, tests_possibles[3] + 1]
     } else {
         stop("the matrix has wrong format.")
     }

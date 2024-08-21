@@ -158,6 +158,7 @@ NULL
 #' QR$modalities$score
 #'
 #' @name compute_score
+#' @rdname compute_score
 #' @seealso [Traduction française][fr-compute_score()]
 #' @export
 compute_score.QR_matrix <- function(x,
@@ -297,6 +298,8 @@ compute_score.QR_matrix <- function(x,
 
     return(x)
 }
+
+#' @rdname compute_score
 #' @export
 compute_score.mQR_matrix <- function(x, ...) {
     result <- mQR_matrix(lapply(x, compute_score, ...))

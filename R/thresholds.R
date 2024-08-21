@@ -70,7 +70,7 @@ set_thresholds <- function(test_name,
 #' # Get all current thresholds
 #' get_thresholds(test_name = "oos_mean", default = FALSE)
 #'
-get_thresholds <- function(test_name, default = TRUE){
+get_thresholds <- function(test_name, default = TRUE) {
 
     default_thresholds <- list(
         qs_residual_sa_on_sa = c(Severe = 0.001, Bad = 0.01, Uncertain = 0.05, Good = Inf),

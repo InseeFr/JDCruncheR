@@ -46,20 +46,30 @@ navbar:
 
 reference:
 - title: Quality report
-  desc: Functions to generate, edit and export a quality report
+  desc: Functions to generate, edit and display a quality report
   contents:
   - '`extract_QR`'
+  - '`QR_matrix`'
+  - '`rbind.QR_matrix`'
+  - '`print.QR_matrix`'
+- title: Manage indicator
+  desc: Functions to add, remove and custom the variables and indicators available
+  contents:
   - '`compute_score`'
   - '`weighted_score`'
-  - '`export_xlsx.mQR_matrix`'
-  - '`export_xlsx.QR_matrix`'
-  - '`export_xlsx`'
   - '`extract_score`'
-  - '`QR_matrix`'
   - '`QR_var_manipulation`'
-  - '`rbind.QR_matrix`'
   - '`add_indicator`'
   - '`recode_indicator_num`'
   - '`sort`'
-  - '`compute_score`'
-  - '`print.QR_matrix`'
+- title: Export
+  desc: Functions to export a quality report
+  contents:
+  - '`export_xlsx.mQR_matrix`'
+  - '`export_xlsx.QR_matrix`'
+  - '`export_xlsx`'
+- title: Threshold
+  desc: Functions to manage, reset and custom thresholds
+  contents:
+  - '`get_thresholds`'
+  - '`set_thresholds`'

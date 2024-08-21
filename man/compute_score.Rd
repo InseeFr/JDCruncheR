@@ -4,6 +4,7 @@
 \name{compute_score}
 \alias{compute_score}
 \alias{compute_score.QR_matrix}
+\alias{compute_score.mQR_matrix}
 \title{Score calculation}
 \usage{
 \method{compute_score}{QR_matrix}(
@@ -19,6 +20,8 @@
   conditional_indicator,
   ...
 )
+
+\method{compute_score}{mQR_matrix}(x, ...)
 }
 \arguments{
 \item{x}{a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} object.}
