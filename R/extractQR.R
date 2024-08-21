@@ -152,7 +152,7 @@ extract_QR <- function(matrix_output_file, sep = ";", dec = ",") {
         extractOutliers(demetra_m)
     )
 
-    values_name <- present_variables |> sapply(paste0, "_pvalue") |> unlist()
+    values_name <- unlist(sapply(X = present_variables, FUN = paste0, "_pvalue"))
     colnames(demetra_m)[match(present_variables, colnames(demetra_m)) + 1] <- values_name
 
     modalities_variables <- c(
