@@ -89,7 +89,7 @@ jobs:
           use-public-rspm: true
 
       # Pour macos, qqs installation supplémentaires
-      - name: [Stage] [macOS] Install libgit2 and system libs for pkgdown
+      - name: "[Stage] [macOS] Install libgit2 and system libs for pkgdown"
         if: runner.os == 'macOS'
         run: |
             brew install libgit2
