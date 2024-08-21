@@ -95,7 +95,7 @@ jobs:
             brew install libgit2
             brew install harfbuzz fribidi
             R CMD javareconf
-            sudo apt-get install libjpeg-dev
+            brew install pkg-config cairo libpng jpeg giflib
 
       - name: Install dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
