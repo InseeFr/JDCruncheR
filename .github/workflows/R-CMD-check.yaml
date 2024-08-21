@@ -53,19 +53,20 @@ jobs:
           http-user-agent: ${{ matrix.http-user-agent }}
           use-public-rspm: true
 
-      # Pour macos, qqs installation supplémentaires
-      - name: "[Stage] [macOS] Install libgit2 and system libs for pkgdown"
-        if: runner.os == 'macOS'
-        run: |
-            brew install libgit2
-            brew install harfbuzz fribidi
-            R CMD javareconf
-            brew install pkg-config cairo libpng jpeg giflib
+      # # Pour macos, qqs installation supplémentaires
+      # - name: "[Stage] [macOS] Install libgit2 and system libs for pkgdown"
+      #   if: runner.os == 'macOS'
+      #   run: |
+      #       brew install libgit2
+      #       brew install harfbuzz fribidi
+      #       R CMD javareconf
+      #       brew install pkg-config cairo libpng jpeg giflib
 
       - name: Install dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
-        # with:
-        #   extra-packages: any::rcmdcheck, XML
+        with:
+          extra-packages: any::rcmdcheck
+          needs: check
 
       - uses: r-lib/actions/setup-tinytex@v2
 
