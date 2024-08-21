@@ -9,5 +9,6 @@
 #' @importFrom openxlsx createWorkbook
 #' @importFrom openxlsx saveWorkbook
 #' @importFrom openxlsx writeData
+#' @importFrom tools file_ext
 ## usethis namespace: end
 NULL

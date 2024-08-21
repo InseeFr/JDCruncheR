@@ -100,33 +100,8 @@ jobs:
 
       - name: Install dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: any::rcmdcheck, XML
-
-      # - name: Install dependencies
-      #   uses: r-lib/actions/setup-r-dependencies@v2
-      #   if: ${{ runner.os != 'macOS' }}
-      #   with:
-      #     extra-packages: any::rcmdcheck, XML
-
-      # # Pour macos, qqs installation supplémentaires
-      # - name: Install dependencies
-      #   uses: r-lib/actions/setup-r-dependencies@v2
-      #   if: ${{ runner.os == 'macOS' }}
-      #   with:
-      #     packages: knitr, kableExtra, rmarkdown
-      #     extra-packages: any::rcmdcheck, XML, XLConnect
-      #
-      # # Pour macos, qqs installation supplémentaires
-      # - name: Build site
-      #   run: install.packages('textshaping')
-      #   shell: Rscript {0}
-      #   if: ${{ runner.os == 'macOS' && matrix.r == 'devel' }}
-      #
-      # - name: Build site
-      #   run: install.packages('systemfonts')
-      #   shell: Rscript {0}
-      #   if: ${{ runner.os == 'macOS' && matrix.r == '3.6.1' }}
+        # with:
+        #   extra-packages: any::rcmdcheck, XML
 
       - uses: r-lib/actions/setup-tinytex@v2
 

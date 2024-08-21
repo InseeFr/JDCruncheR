@@ -23,7 +23,8 @@ URL: https://github.com/InseeFr/JDCruncheR, https://inseefr.github.io/JDCruncheR
 BugReports: https://github.com/InseeFr/JDCruncheR/issues
 Imports:
     openxlsx,
-    stats, 
+    stats,
+    tools,
     utils
 Suggests:
     knitr,
