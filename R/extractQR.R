@@ -284,56 +284,58 @@ extractARIMA <- function(demetra_m) {
 
 extractStatQ <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
 
-    q_possibles <- grep("(^q$)|(^q\\.\\d$)", colnames(demetra_m))
-    q_m2_possibles <- grep("(^q\\.m2$)|(^q\\.m2\\.\\d$)", colnames(demetra_m))
+    col_q <- q_possibles <- grep("(^q$)|(^q\\.\\d$)",
+                                 colnames(demetra_m))
+    col_q_m2 <- q_m2_possibles <- grep("(^q\\.m2$)|(^q\\.m2\\.\\d$)",
+                                       colnames(demetra_m))
 
     if (length(q_possibles) > 1) {
         col_q_possibles <- demetra_m[, q_possibles]
-        non_character_non_integer_cols <- which(
-            !sapply(col_q_possibles, is.integer)
-            & !sapply(col_q_possibles, is.character)
-        )
-        if (length(non_character_non_integer_cols) == 0) {
-            col_all_NA <- which(apply(is.na(col_q_possibles), 2, all))
-            if (length(col_all_NA) == 0) {
-                stop("Error in the extraction of the Q stats")
-            } else {
-                col_q <- q_possibles[col_all_NA[1]]
-            }
-        } else if (length(non_character_non_integer_cols) == 1) {
-            col_q <- q_possibles[non_character_non_integer_cols]
-        } else if (length(non_character_non_integer_cols) > 1) {
+        NA_cols <- which(unlist(lapply(
+            X = col_q_possibles,
+            FUN = \(x) all(is.na(x))
+        )))
+        non_character_non_integer_non_na_cols <- which(unlist(lapply(
+            X = col_q_possibles,
+            FUN = \(x) !all(is.integer(x) | is.character(x) | is.na(x))
+        )))
+
+        if (length(non_character_non_integer_non_na_cols) > 1) {
             stop("Error in the extraction of the Q stats: multiple colum found")
+        } else if (length(non_character_non_integer_non_na_cols) == 1) {
+            col_q <- q_possibles[non_character_non_integer_non_na_cols]
+        } else if (length(NA_cols) > 0) {
+            col_q <- q_possibles[NA_cols[1]]
+        } else {
+            stop("Error in the extraction of the Q stats")
         }
-    } else {
-        col_q <- q_possibles
     }
 
     if (length(q_m2_possibles) > 1) {
         col_q_m2_possibles <- demetra_m[, q_m2_possibles]
-        non_character_non_integer_cols <- which(
-            !sapply(col_q_m2_possibles, is.integer)
-            & !sapply(col_q_m2_possibles, is.character)
-        )
-        if (length(non_character_non_integer_cols) == 0) {
-            col_all_NA <- which(apply(is.na(col_q_m2_possibles), 2, all))
-            if (length(col_all_NA) == 0) {
-                stop("Error in the extraction of the Q-M2 stats")
-            } else {
-                col_q_m2 <- q_m2_possibles[col_all_NA[1]]
-            }
-        } else if (length(non_character_non_integer_cols) == 1) {
-            col_q_m2 <- q_m2_possibles[non_character_non_integer_cols]
-        } else if (length(non_character_non_integer_cols) > 1) {
+        NA_cols <- which(unlist(lapply(
+            X = col_q_m2_possibles,
+            FUN = \(x) all(is.na(x))
+        )))
+        non_character_non_integer_non_na_cols <- which(unlist(lapply(
+            X = col_q_m2_possibles,
+            FUN = \(x) !all(is.integer(x) | is.character(x) | is.na(x))
+        )))
+
+        if (length(non_character_non_integer_non_na_cols) > 1) {
             stop("Error in the extraction of the Q stats: multiple colum found")
+        } else if (length(non_character_non_integer_non_na_cols) == 1) {
+            col_q_m2 <- q_m2_possibles[non_character_non_integer_non_na_cols]
+        } else if (length(NA_cols) > 0) {
+            col_q_m2 <- q_m2_possibles[NA_cols[1]]
+        } else {
+            stop("Error in the extraction of the Q-M2 stats")
         }
-    } else {
-        col_q_m2 <- q_m2_possibles
     }
 
     stat_Q <- data.frame(
         q_modality = cut(
-            x = demetra_m[, col_q],
+            x = as.numeric(demetra_m[, col_q]),
             breaks = c(-Inf, thresholds[["q"]]),
             labels = names(thresholds[["q"]]),
             right = FALSE,
@@ -342,7 +344,7 @@ extractStatQ <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
         ),
         q_value = demetra_m[, col_q],
         q_m2_modality = cut(
-            x = demetra_m[, col_q_m2],
+            x = as.numeric(demetra_m[, col_q_m2]),
             breaks = c(-Inf, thresholds[["q_m2"]]),
             labels = names(thresholds[["q_m2"]]),
             right = FALSE,
@@ -497,7 +499,7 @@ extractOutliers <- function(demetra_m, thresholds = getOption("jdc_thresholds"))
         pct_outliers_modality = pct_outliers_modality,
         pct_outliers_value = pct_outliers_value,
         m7_modality = cut(
-            x = demetra_m$m7,
+            x = as.numeric(demetra_m$m7),
             breaks = c(-Inf, thresholds[["m7"]]),
             labels = names(thresholds[["m7"]]),
             right = FALSE,
