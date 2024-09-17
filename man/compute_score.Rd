@@ -28,18 +28,24 @@
 
 \item{score_pond}{the formula used to calculate the series score.}
 
-\item{modalities}{modalities ordered by importance in the score calculation (cf. details).}
+\item{modalities}{modalities ordered by importance in the score calculation
+(cf. details).}
 
-\item{normalize_score_value}{integer indicating the reference value for weights normalisation. If missing, weights will not be normalised.}
+\item{normalize_score_value}{integer indicating the reference value for
+weights normalisation. If missing, weights will not be normalised.}
 
-\item{na.rm}{logical indicating whether missing values must be ignored when calculating the score.}
+\item{na.rm}{logical indicating whether missing values must be ignored when
+calculating the score.}
 
-\item{n_contrib_score}{integer indicating the number of variables to create in the quality report's values matrix
-to store the \code{n_contrib_score} greatest contributions to the score (cf. details).
-If not specified, no variable is created.}
+\item{n_contrib_score}{integer indicating the number of variables to create
+in the quality report's values matrix to store the \code{n_contrib_score}
+greatest contributions to the score (cf. details). If not specified, no
+variable is created.}
 
-\item{conditional_indicator}{a \code{list} containing 3-elements sub-lists: "indicator", "conditions" and
-"condition_modalities". To reduce down to 1 the weight of chosen indicators depending on other variables' values (cf. details).}
+\item{conditional_indicator}{a \code{list} containing 3-elements sub-lists:
+"indicator", "conditions" and "condition_modalities". To reduce down to 1 the
+weight of chosen indicators depending on other variables' values (cf.
+details).}
 
 \item{...}{other unused parameters.}
 }
@@ -50,39 +56,58 @@ a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} object.
 To calculate a score for each series from a quality report
 }
 \details{
-The function \code{compute_score} calculates a score from the modalities of a quality report: to each modality corresponds
-a weight that depends on the parameter \code{modalities}. The default parameter is \code{c("Good", "Uncertain", "Bad","Severe")},
-and the associated weights are respectively 0, 1, 2 and 3.
+The function \code{compute_score} calculates a score from the
+modalities of a quality report: to each modality corresponds a weight that
+depends on the parameter \code{modalities}. The default parameter is
+\code{c("Good", "Uncertain", "Bad","Severe")}, and the associated weights are
+respectively 0, 1, 2 and 3.
 
-The score calculation is based on the \code{score_pond} parameter, which is a named integer vector containing the weights
-to apply to the (modalities matrix) variables. For example, with \code{score_pond = c(qs_residual_sa_on_sa = 10, f_residual_td_on_sa = 5)},
-the score will be based on the variables qs_residual_sa_on_sa and f_residual_td_on_sa.
-The qs_residual_sa_on_sa grades will be multiplied by 10 and the f_residual_td_on_sa grades, by 5.
-To ignore the missing values when calculating a score, use the parameter \code{na.rm = TRUE}.
+The score calculation is based on the \code{score_pond} parameter, which is a
+named integer vector containing the weights to apply to the (modalities
+matrix) variables. For example, with
+\code{score_pond = c(qs_residual_sa_on_sa = 10, f_residual_td_on_sa = 5)},
+the score will be based on the variables \code{qs_residual_sa_on_sa} and
+\code{f_residual_td_on_sa}. The \code{qs_residual_sa_on_sa} grades will be
+multiplied by 10 and the \code{f_residual_td_on_sa grades}, by 5. To ignore
+the missing values when calculating a score, use the parameter
+\code{na.rm = TRUE}.
 
-The parameter \code{normalize_score_value} can be used to normalise the scores. For example, to have all scores between 0 and 20,
-specify \code{normalize_score_value = 20}.
+The parameter \code{normalize_score_value} can be used to normalise the
+scores. For example, to have all scores between 0 and 20, specify
+\code{normalize_score_value = 20}.
 
-When using parameter \code{n_contrib_score}, \code{n_contrib_score} new variables are added to the quality report's values matrix.
-These new variables store the names of the variables that contribute the most to the series score.
-For example, \code{n_contrib_score = 3} will add to the values matrix the three variables that contribute the most to the score.
-The new variables' names are \emph{i}_highest_score, with \emph{i} being the rank in terms of contribution to the score (1_highest_score
-contains the name of the greatest contributor, 2_highest_score the second greatest, etc).
-Only the variables that have a non-zero contribution to the score are taken into account: if a series score is 0,
-all \emph{i}_highest_score variables will be empty. And if a series score is positive only because of the m7 statistic,
-1_highest_score will have a value of "m7" for this series and the other \emph{i}_highest_score will be empty.
+When using parameter \code{n_contrib_score}, \code{n_contrib_score} new
+variables are added to the quality report's values matrix. These new
+variables store the names of the variables that contribute the most to the
+series score. For example, \code{n_contrib_score = 3} will add to the values
+matrix the three variables that contribute the most to the score. The new
+variables' names are \emph{i}_highest_score, with \emph{i} being the rank in terms of
+contribution to the score (1_highest_score contains the name of the greatest
+contributor, 2_highest_score the second greatest, etc). Only the variables
+that have a non-zero contribution to the score are taken into account: if a
+series score is 0, all \emph{i}_highest_score variables will be empty. And if a
+series score is positive only because of the m7 statistic, 1_highest_score
+will have a value of "m7" for this series and the other \emph{i}_highest_score
+will be empty.
 
-Some indicators are only relevant under certain conditions. For example, the homoscedasticity test is only valid when the residuals are independant, and the normality tests,
-only when the residuals are both independant and homoscedastic. In these cases, the parameter \code{conditional_indicator} can be of use
-since it reduces the weight of some variables down to 1 when some conditions are met.
-\code{conditional_indicator} is a \code{list} of 3-elements sub-lists:
+Some indicators are only relevant under certain conditions. For example, the
+homoscedasticity test is only valid when the residuals are independant, and
+the normality tests, only when the residuals are both independant and
+homoscedastic. In these cases, the parameter \code{conditional_indicator} can
+be of use since it reduces the weight of some variables down to 1 when some
+conditions are met. \code{conditional_indicator} is a \code{list} of
+3-elements sub-lists:
 \itemize{
 \item "indicator": the variable whose weight will be conditionally changed
 \item "conditions": the variables used to define the conditions
-\item "conditions_modalities": modalities that must be verified to induce the weight change
-For example, \code{conditional_indicator = list(list(indicator = "residuals_skewness", conditions = c("residuals_independency", "residuals_homoskedasticity"), conditions_modalities = c("Bad","Severe")))},
-reduces down to 1 the weight of the variable "residuals_skewness" when the modalities of the independancy test ("residuals_independency")
-or the homoscedasticity test ("residuals_homoskedasticity") are "Bad" or "Severe".
+\item "conditions_modalities": modalities that must be verified to induce the
+weight change For example,
+\code{conditional_indicator = list(list(indicator = "residuals_skewness",
+  conditions = c("residuals_independency", "residuals_homoskedasticity"),
+  conditions_modalities = c("Bad","Severe")))}, reduces down to 1 the weight
+of the variable "residuals_skewness" when the modalities of the
+independancy test ("residuals_independency") or the homoscedasticity test
+("residuals_homoskedasticity") are "Bad" or "Severe".
 }
 }
 \examples{

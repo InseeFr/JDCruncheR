@@ -16,13 +16,16 @@ retain_indicators(x, ...)
 \item{...}{names of the variable to remove (or keep)}
 }
 \value{
-\code{remove_indicators()} returns the same object \code{x} reduced by the flags and variables used as arguments \dots
-So if the input \code{x} is a QR_matrix, an object of class QR_matrix is returned.
-If the input \code{x} is a mQR_matrix, an object of class mQR_matrix is returned.
+\code{remove_indicators()} returns the same object \code{x} reduced
+by the flags and variables used as arguments \dots So if the input \code{x}
+is a QR_matrix, an object of class QR_matrix is returned. If the input
+\code{x} is a mQR_matrix, an object of class mQR_matrix is returned.
 }
 \description{
-Functions to remove indicators (\code{remove_indicators()}) or retrain some indicators only (\code{retain_indicators()})
-from \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} objects. The series names (column "series") cannot be removed.
+Functions to remove indicators (\code{remove_indicators()}) or retrain some
+indicators only (\code{retain_indicators()}) from \code{\link{QR_matrix}} or
+\code{\link{mQR_matrix}} objects. The series names (column "series") cannot
+be removed.
 }
 \examples{
 # Path of matrix demetra_m

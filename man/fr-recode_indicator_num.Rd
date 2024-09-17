@@ -6,7 +6,8 @@
 \arguments{
 \item{x}{objet de type \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}.}
 
-\item{variable_name}{vecteur de chaînes de caractères contenant les noms des variables à recoder.}
+\item{variable_name}{vecteur de chaînes de caractères contenant les noms des
+variables à recoder.}
 
 \item{breaks}{voir l'argument éponyme de la fonction \code{\link[base]{cut}}.}
 
@@ -15,11 +16,14 @@
 \item{...}{autres paramètres de la fonction \code{\link[base]{cut}}.}
 }
 \value{
-La fonction \code{recode_indicator_num()} renvoie le même objet, enrichi de l'indicateur choisi.
-Ainsi, si l'entrée \code{x} est une matrice QR_matrix, un objet de classe QR_matrix est renvoyé.
-Si le code d'entrée \code{x} est une matrice mQR, un objet de la classe mQR_matrix est renvoyé.
+La fonction \code{recode_indicator_num()} renvoie le même objet,
+enrichi de l'indicateur choisi. Ainsi, si l'entrée \code{x} est une matrice
+QR_matrix, un objet de classe \code{QR_matrix} est renvoyé. Si le code
+d'entrée \code{x} est une matrice mQR, un objet de la classe
+\code{mQR_matrix} est renvoyé.
 }
 \description{
-Permet d'encoder des variables présentes dans la matrice des valeurs en modalités ajoutables à la matrice des modalités.
+Permet d'encoder des variables présentes dans la matrice des valeurs en
+modalités ajoutables à la matrice des modalités.
 }
 \keyword{internal}

@@ -9,15 +9,18 @@
 \arguments{
 \item{...}{\code{\link{QR_matrix}} objects to combine.}
 
-\item{check_formula}{logical indicating whether to check the score formulas' coherency.
-By default, \code{check_formula = TRUE}: an error is returned if the scores were calculated with different formulas.
-If \code{check_formula = FALSE}, no check is performed and the \code{score_formula} of the output is \code{NULL}.}
+\item{check_formula}{logical indicating whether to check the score formulas'
+coherency.
+By default, \code{check_formula = TRUE}: an error is returned if the scores
+were calculated with different formulas. If \code{check_formula = FALSE}, no
+check is performed and the \code{score_formula} of the output is \code{NULL}.}
 }
 \value{
 \code{rbind.QR_matrix()} returns a \code{\link{QR_matrix}} object.
 }
 \description{
-Function to combine multiple \code{\link{QR_matrix}} objects: line by line, both for the \code{modalities} and the \code{values} table.
+Function to combine multiple \code{\link{QR_matrix}} objects: line by line,
+both for the \code{modalities} and the \code{values} table.
 }
 \examples{
 # Path of matrix demetra_m

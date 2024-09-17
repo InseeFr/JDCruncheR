@@ -40,7 +40,10 @@ rowname_style <- openxlsx::createStyle(
 )
 
 
-apply_BQ_style <- function(wb, x, values_sheet = NULL, modalities_sheet = NULL) {
+apply_BQ_style <- function(wb,
+                           x,
+                           values_sheet = NULL,
+                           modalities_sheet = NULL) {
 
     if (!is.null(modalities_sheet)) {
 
@@ -159,15 +162,17 @@ apply_BQ_style <- function(wb, x, values_sheet = NULL, modalities_sheet = NULL) 
 #' Permet d'exporter un bilan qualité dans un fichier Excel.
 #'
 #' @param x objet de type \code{\link{QR_matrix}}.
-#' @param file un objet de type \code{character} contenant le chemin menant au fichier
-#' que l'on veut créer
+#' @param file un objet de type \code{character} contenant le chemin menant au
+#' fichier que l'on veut créer
 #' @param auto_format booléen indiquant s'il faut formatter la sortie
 #' (\code{auto_format = TRUE} par défaut).
 #' @param overwrite booléen indiquant s'il faut ré-écrire créer le fichier Excel
 #' s'il existe déjà (\code{create = TRUE} par défaut)
 #' @param ... autres argument non utilisés
 #'
-#' @returns Renvoie de manière invisible (via \code{invisible(x)}) un objet de classeur créé par \code{XLConnect::loadWorkbook()} pour une manipulation ultérieure.
+#' @returns Renvoie de manière invisible (via \code{invisible(x)}) un objet de
+#' classeur créé par \code{XLConnect::loadWorkbook()} pour une manipulation
+#' ultérieure.
 #'
 #' @keywords internal
 #' @name fr-export_xlsx.QR_matrix
@@ -189,7 +194,8 @@ NULL
 #' doesn't exist yet (\code{create = TRUE} by default)
 #' @param ... other unused arguments
 #'
-#' @returns Returns invisibly (via \code{invisible(x)}) a workbook object created by \code{XLConnect::loadWorkbook()} for further manipulation.
+#' @returns Returns invisibly (via \code{invisible(x)}) a workbook object
+#' created by \code{XLConnect::loadWorkbook()} for further manipulation.
 #'
 #' @family QR_matrix functions
 #' @seealso [Traduction française][fr-export_xlsx.QR_matrix()]
@@ -207,7 +213,10 @@ export_xlsx.QR_matrix <- function(x,
         stop("The format of the file must be .xlsx .")
     }
 
-    wb_qr <- openxlsx::createWorkbook(title = "QR for WS", subject = "Seasonal Adjustment")
+    wb_qr <- openxlsx::createWorkbook(
+        title = "QR for WS",
+        subject = "Seasonal Adjustment"
+    )
 
     openxlsx::addWorksheet(wb = wb_qr, sheetName = "Modalities")
     openxlsx::addWorksheet(wb = wb_qr, sheetName = "Values")
@@ -239,11 +248,16 @@ export_xlsx.QR_matrix <- function(x,
 #' @title Exporting QR_matrix or mQR_matrix objects in an Excel file
 #'
 #' @param x a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} object.
-#' @param ... other parameters of the function \code{\link{export_xlsx.QR_matrix}}.
+#' @param ... other parameters of the function
+#' \code{\link{export_xlsx.QR_matrix}}.
 #'
 #' @returns
-#' If \code{x} is a \code{\link{mQR_matrix}}, the function returns invisibly (via \code{invisible(x)}) the same \code{\link{mQR_matrix}} object as \code{x}.
-#' Else if \code{x} is a \code{\link{QR_matrix}}, the function returns invisibly (via \code{invisible(x)}) a workbook object created by \code{XLConnect::loadWorkbook()} for further manipulation.
+#' If \code{x} is a \code{\link{mQR_matrix}}, the function returns invisibly
+#' (via \code{invisible(x)}) the same \code{\link{mQR_matrix}} object as
+#' \code{x}.
+#' Else if \code{x} is a \code{\link{QR_matrix}}, the function returns
+#' invisibly (via \code{invisible(x)}) a workbook object created by
+#' \code{XLConnect::loadWorkbook()} for further manipulation.
 #'
 #' @family QR_matrix functions
 #' @export
@@ -281,7 +295,8 @@ export_xlsx.default <- function(x, ...) {
 #' s'il existe déjà (\code{create = TRUE} par défaut)
 #' @param ... autres argument non utilisés
 #'
-#' @returns Renvoie de manière invisible (via \code{invisible(x)}) le même objet \code{\link{mQR_matrix}} que \code{x}.
+#' @returns Renvoie de manière invisible (via \code{invisible(x)}) le même objet
+#' \code{\link{mQR_matrix}} que \code{x}.
 #'
 #' @keywords internal
 #' @name fr-export_xlsx.mQR_matrix
@@ -306,17 +321,19 @@ NULL
 #' doesn't exist yet (\code{create = TRUE} by default)
 #' @param ... other unused arguments
 #'
-#' @returns Returns invisibly (via \code{invisible(x)}) the same \code{\link{mQR_matrix}} object as \code{x}.
+#' @returns Returns invisibly (via \code{invisible(x)}) the same
+#' \code{\link{mQR_matrix}} object as \code{x}.
 #'
 #' @family QR_matrix functions
 #' @seealso [Traduction française][fr-export_xlsx.mQR_matrix()]
 #' @export
-export_xlsx.mQR_matrix <- function(x,
-                                   export_dir,
-                                   layout_file = c("ByComponent", "ByQRMatrix", "AllTogether"),
-                                   auto_format = TRUE,
-                                   overwrite = TRUE,
-                                   ...) {
+export_xlsx.mQR_matrix <- function(
+        x,
+        export_dir,
+        layout_file = c("ByComponent", "ByQRMatrix", "AllTogether"),
+        auto_format = TRUE,
+        overwrite = TRUE,
+        ...) {
 
     #by component = 1file / component (different QR in same file) = 2 files
     #by QRMatrix = 1file / QR (different component in same file)
@@ -334,12 +351,21 @@ export_xlsx.mQR_matrix <- function(x,
                 no = names(x)[id_qr]
             )
             file <- file.path(export_dir, paste0(name, ".xlsx"))
-            export_xlsx(x = qr, file = file, auto_format = auto_format, overwrite = overwrite)
+            export_xlsx(x = qr,
+                        file = file,
+                        auto_format = auto_format,
+                        overwrite = overwrite)
         }
     } else if (layout_file == "ByComponent") {
 
-        wb_modalities <- openxlsx::createWorkbook(title = "Modalities of the QR", subject = "Seasonal Adjustment")
-        wb_values <- openxlsx::createWorkbook(title = "Values of the QR", subject = "Seasonal Adjustment")
+        wb_modalities <- openxlsx::createWorkbook(
+            title = "Modalities of the QR",
+            subject = "Seasonal Adjustment"
+        )
+        wb_values <- openxlsx::createWorkbook(
+            title = "Values of the QR",
+            subject = "Seasonal Adjustment"
+        )
 
         for (id_qr in seq_along(x)) {
             qr <- x[[id_qr]]
@@ -356,13 +382,17 @@ export_xlsx.mQR_matrix <- function(x,
                 wb = wb_modalities,
                 sheet = name,
                 x = qr$modalities,
-                headerStyle = ifelse(test = auto_format, yes = header_style, no = NULL)
+                headerStyle = ifelse(test = auto_format,
+                                     yes = header_style,
+                                     no = NULL)
             )
             openxlsx::writeData(
                 wb = wb_values,
                 sheet = name,
                 x = qr$values,
-                headerStyle = ifelse(test = auto_format, yes = header_style, no = NULL)
+                headerStyle = ifelse(test = auto_format,
+                                     yes = header_style,
+                                     no = NULL)
             )
             if (auto_format) {
                 wb_modalities <- apply_BQ_style(wb = wb_modalities, x = qr,
@@ -375,35 +405,52 @@ export_xlsx.mQR_matrix <- function(x,
         file_modalities <- file.path(export_dir, "modalities.xlsx")
         file_values <- file.path(export_dir, "values.xlsx")
 
-        openxlsx::saveWorkbook(wb = wb_modalities, file = file_modalities, overwrite = overwrite)
-        openxlsx::saveWorkbook(wb = wb_values, file = file_values, overwrite = overwrite)
+        openxlsx::saveWorkbook(wb = wb_modalities,
+                               file = file_modalities,
+                               overwrite = overwrite)
+        openxlsx::saveWorkbook(wb = wb_values,
+                               file = file_values,
+                               overwrite = overwrite)
 
     } else if (layout_file == "AllTogether") {
 
-        wb_mqr <- openxlsx::createWorkbook(title = "Multiple QR", subject = "Seasonal Adjustment")
+        wb_mqr <- openxlsx::createWorkbook(title = "Multiple QR",
+                                           subject = "Seasonal Adjustment")
 
         for (id_qr in seq_along(x)) {
             qr <- x[[id_qr]]
             name <- ifelse(
-                test = is.null(names(x)) || nchar(names(x)[id_qr]) == 0 || sum(names(x) == names(x)[id_qr]) > 1,
+                test = is.null(names(x))
+                || nchar(names(x)[id_qr]) == 0
+                || sum(names(x) == names(x)[id_qr]) > 1,
                 yes = paste0("QR_", id_qr),
                 no = names(x)[id_qr]
             )
 
-            openxlsx::addWorksheet(wb = wb_mqr, sheetName = paste0(name, "_modalities"))
-            openxlsx::addWorksheet(wb = wb_mqr, sheetName = paste0(name, "_values"))
+            openxlsx::addWorksheet(
+                wb = wb_mqr,
+                sheetName = paste0(name, "_modalities")
+            )
+            openxlsx::addWorksheet(
+                wb = wb_mqr,
+                sheetName = paste0(name, "_values")
+            )
 
             openxlsx::writeData(
                 wb = wb_mqr,
                 sheet = paste0(name, "_modalities"),
                 x = qr$modalities,
-                headerStyle = ifelse(test = auto_format, yes = header_style, no = NULL)
+                headerStyle = ifelse(test = auto_format,
+                                     yes = header_style,
+                                     no = NULL)
             )
             openxlsx::writeData(
                 wb = wb_mqr,
                 sheet = paste0(name, "_values"),
                 x = qr$values,
-                headerStyle = ifelse(test = auto_format, yes = header_style, no = NULL)
+                headerStyle = ifelse(test = auto_format,
+                                     yes = header_style,
+                                     no = NULL)
             )
             if (auto_format) {
                 wb_mqr <- apply_BQ_style(wb = wb_mqr, x = qr,

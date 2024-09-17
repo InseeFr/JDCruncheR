@@ -6,17 +6,19 @@
 \arguments{
 \item{...}{objets \code{\link{QR_matrix}} à combiner.}
 
-\item{check_formula}{booléen indiquant s'il faut vérifier la cohérence dans les formules de calcul du score.
-Par défaut, \code{check_formula = TRUE} : la fonction renvoie une erreur si des scores sont calculés avec des formules différentes.
-Si \code{check_formula = FALSE}, alors il n'y a pas de vérification et le paramètre \code{score_formula} de l'objet
-en sortie est \code{NULL}.}
+\item{check_formula}{booléen indiquant s'il faut vérifier la cohérence dans
+les formules de calcul du score.
+Par défaut, \code{check_formula = TRUE} : la fonction renvoie une erreur si
+des scores sont calculés avec des formules différentes. Si
+\code{check_formula = FALSE}, alors il n'y a pas de vérification et le
+paramètre \code{score_formula} de l'objet en sortie est \code{NULL}.}
 }
 \value{
 \code{rbind.QR_matrix()} renvoie un objet \code{\link{QR_matrix}}.
 }
 \description{
-Permet de combiner plusieurs objets \code{\link{QR_matrix}} en combinant par ligne les paramètres \code{modalities}
-et \code{values}.
+Permet de combiner plusieurs objets \code{\link{QR_matrix}} en combinant par
+ligne les paramètres \code{modalities} et \code{values}.
 }
 \examples{
 # Chemin menant au fichier demetra_m.csv

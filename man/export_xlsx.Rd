@@ -9,11 +9,16 @@ export_xlsx(x, ...)
 \arguments{
 \item{x}{a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} object.}
 
-\item{...}{other parameters of the function \code{\link{export_xlsx.QR_matrix}}.}
+\item{...}{other parameters of the function
+\code{\link{export_xlsx.QR_matrix}}.}
 }
 \value{
-If \code{x} is a \code{\link{mQR_matrix}}, the function returns invisibly (via \code{invisible(x)}) the same \code{\link{mQR_matrix}} object as \code{x}.
-Else if \code{x} is a \code{\link{QR_matrix}}, the function returns invisibly (via \code{invisible(x)}) a workbook object created by \code{XLConnect::loadWorkbook()} for further manipulation.
+If \code{x} is a \code{\link{mQR_matrix}}, the function returns invisibly
+(via \code{invisible(x)}) the same \code{\link{mQR_matrix}} object as
+\code{x}.
+Else if \code{x} is a \code{\link{QR_matrix}}, the function returns
+invisibly (via \code{invisible(x)}) a workbook object created by
+\code{XLConnect::loadWorkbook()} for further manipulation.
 }
 \description{
 Exporting QR_matrix or mQR_matrix objects in an Excel file

@@ -6,21 +6,27 @@
 \arguments{
 \item{x}{objet de type \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}.}
 
-\item{format_output}{chaîne de caractères indiquant le format de l'objet en sortie :
+\item{format_output}{chaîne de caractères indiquant le format de l'objet en
+sortie :
 soit un \code{data.frame} soit un \code{vector}.}
 
-\item{weighted_score}{booléen indiquant s'il faut extraire le score pondéré (s'il existe) ou le score non pondéré.
+\item{weighted_score}{booléen indiquant s'il faut extraire le score pondéré
+(s'il existe) ou le score non pondéré.
 Par défaut, c'est le score non pondéré qui est extrait.}
 }
 \value{
-\code{extract_score()} renvoie un data.frame avec deux colonnes : le nom de la série et son score.
+\code{extract_score()} renvoie un data.frame avec deux colonnes : le
+nom de la série et son score.
 }
 \description{
-Permet d'extraire le score des objets \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}.
+Permet d'extraire le score des objets \code{\link{QR_matrix}} ou
+\code{\link{mQR_matrix}}.
 }
 \details{
-Pour les objets \code{\link{QR_matrix}}, le score renvoyé est soit l'objet \code{NULL} si aucun score n'a été calculé, soit un vecteur.
-Pour les objets \code{\link{mQR_matrix}}, c'est une liste de scores (\code{NULL} ou un vecteur).
+Pour les objets \code{\link{QR_matrix}}, le score renvoyé est soit
+l'objet \code{NULL} si aucun score n'a été calculé, soit un vecteur.
+Pour les objets \code{\link{mQR_matrix}}, c'est une liste de scores
+(\code{NULL} ou un vecteur).
 }
 \examples{
 

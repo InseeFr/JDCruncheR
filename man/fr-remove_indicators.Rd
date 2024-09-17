@@ -9,13 +9,16 @@
 \item{...}{noms des variables à retirer (ou conserver).}
 }
 \value{
-\code{remove_indicators()} renvoie le même objet \code{x} réduit par les drapeaux et les variables utilisés comme arguments \dots
-Donc si l'entrée \code{x} est une matrice QR_matrix, un objet de la classe QR_matrix est renvoyé.
-Si le code d'entrée \code{x} est une matrice mQR, un objet de la classe mQR_matrix est renvoyé.
+\code{remove_indicators()} renvoie le même objet \code{x} réduit par
+les drapeaux et les variables utilisés comme arguments \dots Donc si l'entrée
+\code{x} est une matrice QR_matrix, un objet de la classe QR_matrix est
+renvoyé. Si le code d'entrée \code{x} est une matrice mQR, un objet de la
+classe mQR_matrix est renvoyé.
 }
 \description{
-Permet de retirer des indicateurs (fonction \code{remove_indicators()}) ou de n'en retenir que certains
-(fonction \code{retain_indicators()}) d'objets \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}. Le nom des séries
+Permet de retirer des indicateurs (fonction \code{remove_indicators()}) ou de
+n'en retenir que certains (fonction \code{retain_indicators()}) d'objets
+\code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}. Le nom des séries
 (colonne "series") ne peut être enlevé.
 }
 \examples{
