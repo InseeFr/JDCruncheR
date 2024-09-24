@@ -316,11 +316,11 @@ extractStatQ <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
         col_q_possibles <- demetra_m[, q_possibles]
         NA_cols <- which(unlist(lapply(
             X = col_q_possibles,
-            FUN = \(x) all(is.na(x))
+            FUN = function(x) all(is.na(x))
         )))
         num_cols <- which(unlist(lapply(
             X = col_q_possibles,
-            FUN = \(x) !all(is.integer(x) | is.character(x) | is.na(x))
+            FUN = function(x) !all(is.integer(x) | is.character(x) | is.na(x))
         )))
 
         if (length(num_cols) > 1) {
@@ -338,11 +338,11 @@ extractStatQ <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
         col_q_m2_possibles <- demetra_m[, q_m2_possibles]
         NA_cols <- which(unlist(lapply(
             X = col_q_m2_possibles,
-            FUN = \(x) all(is.na(x))
+            FUN = function(x) all(is.na(x))
         )))
         num_cols <- which(unlist(lapply(
             X = col_q_m2_possibles,
-            FUN = \(x) !all(is.integer(x) | is.character(x) | is.na(x))
+            FUN = function(x) !all(is.integer(x) | is.character(x) | is.na(x))
         )))
 
         if (length(num_cols) > 1) {
