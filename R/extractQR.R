@@ -383,28 +383,29 @@ extractStatQ <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
 
 extractOOS_test <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
 
-    mean_possibles <- grep("(^mean$)|(^mean\\.\\d$)", colnames(demetra_m))
+    col_mean <- mean_possibles <- grep("(^mean$)|(^mean\\.\\d$)", colnames(demetra_m))
 
     if (length(mean_possibles) > 1) {
         col_mean_possibles <- demetra_m[, mean_possibles]
-        non_character_non_integer_cols <- which(
-            !sapply(col_mean_possibles, is.integer)
-            & !sapply(col_mean_possibles, is.character)
-        )
-        if (length(non_character_non_integer_cols) == 0) {
-            col_all_NA <- which(apply(is.na(col_mean_possibles), 2, all))
-            if (length(col_all_NA) == 0) {
-                stop("Error in the extraction of the mean in the out of sample diagnostics")
-            } else {
-                col_mean <- mean_possibles[col_all_NA[1]]
-            }
-        } else if (length(non_character_non_integer_cols) == 1) {
-            col_mean <- mean_possibles[non_character_non_integer_cols]
-        } else {
+        NA_cols <- which(unlist(lapply(
+            X = col_mean_possibles,
+            FUN = function(x) all(is.na(x))
+        )))
+        num_cols <- which(unlist(lapply(
+            X = col_mean_possibles,
+            FUN = function(x) !all(is.integer(x) | is.character(x) | is.na(x))
+        )))
+
+        if (length(num_cols) > 1) {
             stop("Error in the extraction of the mean in the out of sample diagnostics: multiple column")
+        } else if (length(num_cols) == 1) {
+            col_mean <- mean_possibles[num_cols]
+        } else if (length(NA_cols) > 0) {
+            col_mean <- mean_possibles[NA_cols[1]]
+        } else {
+            stop("Error in the extraction of the mean in the out of sample diagnostics")
         }
-    } else {
-        col_mean <- mean_possibles
+
     }
 
     col_mse <- match("mse", colnames(demetra_m))
@@ -422,23 +423,23 @@ extractOOS_test <- function(demetra_m, thresholds = getOption("jdc_thresholds"))
 
     stat_OOS <- data.frame(
         oos_mean_modality = cut(
-            x = demetra_m[, col_mean],
+            x = as.numeric(demetra_m[, col_mean]),
             breaks = c(-Inf, thresholds[["oos_mean"]]),
             labels = names(thresholds[["oos_mean"]]),
             right = FALSE,
             include.lowest = TRUE,
             ordered_result = TRUE
         ),
-        oos_mean_pvalue = demetra_m[, col_mean],
+        oos_mean_pvalue = as.numeric(demetra_m[, col_mean]),
         oos_mse_modality = cut(
-            x = val_mse,
+            x = as.numeric(val_mse),
             breaks = c(-Inf, thresholds[["oos_mse"]]),
             labels = names(thresholds[["oos_mse"]]),
             right = FALSE,
             include.lowest = TRUE,
             ordered_result = TRUE
         ),
-        oos_mse_pvalue = val_mse,
+        oos_mse_pvalue = as.numeric(val_mse),
         stringsAsFactors = FALSE
     )
     return(stat_OOS)
