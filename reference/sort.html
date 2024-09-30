@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">JDCruncheR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.4.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,7 +38,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>QR_matrix and mQR_matrix sorting</h1>
-      <small class="dont-index">Source: <a href="https://github.com/InseeFr/JDCruncheR/blob/master/R/QR_functions.R" class="external-link"><code>R/QR_functions.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/InseeFr/JDCruncheR/blob/main/R/QR_functions.R" class="external-link"><code>R/QR_functions.R</code></a></small>
       <div class="d-none name"><code>sort.Rd</code></div>
     </div>
 
@@ -64,7 +64,8 @@
 
 
 <dt id="arg-decreasing">decreasing<a class="anchor" aria-label="anchor" href="#arg-decreasing"></a></dt>
-<dd><p>logical indicating whether the quality reports must be sorted in ascending or decreasing order.
+<dd><p>logical indicating whether the quality reports must be
+sorted in ascending or decreasing order.
 By default, the sorting is done in ascending order.</p></dd>
 
 
@@ -73,7 +74,8 @@ By default, the sorting is done in ascending order.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>other parameters of the function <code><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></code> (unused for now)</p></dd>
+<dd><p>other parameters of the function <code><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></code> (unused
+for now)</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -107,12 +109,14 @@ By default, the sorting is done in ascending order.</p></dd>
 <span class="r-in"><span><span class="co"># Compute the score</span></span></span>
 <span class="r-in"><span><span class="va">QR</span> <span class="op">&lt;-</span> <span class="fu"><a href="compute_score.html">compute_score</a></span><span class="op">(</span><span class="va">QR</span>, n_contrib_score <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">QR</span><span class="op">$</span><span class="va">modalities</span><span class="op">$</span><span class="va">score</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 145  45 270 260  30 195 460 460 415 485 295 260 475</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 140 105 280 245  75 240 460 505 460 515 300 305 510</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Sort the scores</span></span></span>
-<span class="r-in"><span><span class="va">QR</span> <span class="op">&lt;-</span> <span class="fu">sort</span><span class="op">(</span><span class="va">QR</span>, sort_variables <span class="op">=</span> <span class="st">"score"</span><span class="op">)</span> <span class="co"># Pour trier par ordre croissant sur le score</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># To sort by ascending scores</span></span></span>
+<span class="r-in"><span><span class="va">QR</span> <span class="op">&lt;-</span> <span class="fu">sort</span><span class="op">(</span><span class="va">QR</span>, sort_variables <span class="op">=</span> <span class="st">"score"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">QR</span><span class="op">$</span><span class="va">modalities</span><span class="op">$</span><span class="va">score</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  30  45 145 195 260 260 270 295 415 460 460 475 485</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  75 105 140 240 245 280 300 305 460 460 505 510 515</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
@@ -125,7 +129,7 @@ By default, the sorting is done in ascending order.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer></div>

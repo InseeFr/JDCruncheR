@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">JDCruncheR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.4.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,7 +43,7 @@
     <div class="section level2">
       <h2 id="quality-report">Quality report<a class="anchor" aria-label="anchor" href="#quality-report"></a></h2>
 
-      <div class="section-desc"><p>Functions to generate, edit and export a quality report</p></div>
+      <div class="section-desc"><p>Functions to generate, edit and display a quality report</p></div>
 
 
     </div><div class="section level2">
@@ -59,7 +59,36 @@
         <dd>Extraction of a quality report</dd>
       </dl><dl><dt>
 
-          <code><a href="compute_score.html">compute_score(<i>&lt;QR_matrix&gt;</i>)</a></code>
+          <code><a href="QR_matrix.html">QR_matrix()</a></code> <code><a href="QR_matrix.html">mQR_matrix()</a></code> <code><a href="QR_matrix.html">is.QR_matrix()</a></code> <code><a href="QR_matrix.html">is.mQR_matrix()</a></code>
+
+        </dt>
+        <dd>Quality report objects</dd>
+      </dl><dl><dt>
+
+          <code><a href="rbind.QR_matrix.html">rbind(<i>&lt;QR_matrix&gt;</i>)</a></code>
+
+        </dt>
+        <dd>Combining QR_matrix objects</dd>
+      </dl><dl><dt>
+
+          <code><a href="print.QR_matrix.html">print(<i>&lt;QR_matrix&gt;</i>)</a></code> <code><a href="print.QR_matrix.html">print(<i>&lt;mQR_matrix&gt;</i>)</a></code>
+
+        </dt>
+        <dd>Printing QR_matrix and mQR_matrix objects</dd>
+      </dl></div><div class="section level2">
+      <h2 id="manage-indicator">Manage indicator<a class="anchor" aria-label="anchor" href="#manage-indicator"></a></h2>
+
+      <div class="section-desc"><p>Functions to add, remove and custom the variables and indicators available</p></div>
+
+
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="compute_score.html">compute_score(<i>&lt;QR_matrix&gt;</i>)</a></code> <code><a href="compute_score.html">compute_score(<i>&lt;mQR_matrix&gt;</i>)</a></code>
 
         </dt>
         <dd>Score calculation</dd>
@@ -71,46 +100,16 @@
         <dd>Weighted score calculation</dd>
       </dl><dl><dt>
 
-          <code><a href="export_xlsx.mQR_matrix.html">export_xlsx(<i>&lt;mQR_matrix&gt;</i>)</a></code>
-
-        </dt>
-        <dd>Exporting mQR_matrix objects in Excel files</dd>
-      </dl><dl><dt>
-
-          <code><a href="export_xlsx.QR_matrix.html">export_xlsx(<i>&lt;QR_matrix&gt;</i>)</a></code>
-
-        </dt>
-        <dd>Exporting QR_matrix objects in an Excel file</dd>
-      </dl><dl><dt>
-
-          <code><a href="export_xlsx.html">export_xlsx()</a></code>
-
-        </dt>
-        <dd>Exporting QR_matrix or mQR_matrix objects in an Excel file</dd>
-      </dl><dl><dt>
-
           <code><a href="extract_score.html">extract_score()</a></code>
 
         </dt>
         <dd>Score extraction</dd>
       </dl><dl><dt>
 
-          <code><a href="QR_matrix.html">QR_matrix()</a></code> <code><a href="QR_matrix.html">mQR_matrix()</a></code> <code><a href="QR_matrix.html">is.QR_matrix()</a></code> <code><a href="QR_matrix.html">is.mQR_matrix()</a></code>
-
-        </dt>
-        <dd>Quality report objects</dd>
-      </dl><dl><dt>
-
           <code><a href="QR_var_manipulation.html">remove_indicators()</a></code> <code><a href="QR_var_manipulation.html">retain_indicators()</a></code>
 
         </dt>
         <dd>Editing the indicators list</dd>
-      </dl><dl><dt>
-
-          <code><a href="rbind.QR_matrix.html">rbind(<i>&lt;QR_matrix&gt;</i>)</a></code>
-
-        </dt>
-        <dd>Combining QR_matrix objects</dd>
       </dl><dl><dt>
 
           <code><a href="add_indicator.html">add_indicator()</a></code>
@@ -129,14 +128,61 @@
 
         </dt>
         <dd>QR_matrix and mQR_matrix sorting</dd>
-      </dl><dl><dt>
+      </dl></div><div class="section level2">
+      <h2 id="export">Export<a class="anchor" aria-label="anchor" href="#export"></a></h2>
 
-          <code><a href="print.QR_matrix.html">print(<i>&lt;QR_matrix&gt;</i>)</a></code> <code><a href="print.QR_matrix.html">print(<i>&lt;mQR_matrix&gt;</i>)</a></code>
+      <div class="section-desc"><p>Functions to export a quality report</p></div>
+
+
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="export_xlsx.mQR_matrix.html">export_xlsx(<i>&lt;mQR_matrix&gt;</i>)</a></code>
 
         </dt>
-        <dd>Printing QR_matrix and mQR_matrix objects</dd>
+        <dd>Exporting mQR_matrix objects in Excel files</dd>
+      </dl><dl><dt>
+
+          <code><a href="export_xlsx.QR_matrix.html">export_xlsx(<i>&lt;QR_matrix&gt;</i>)</a></code>
+
+        </dt>
+        <dd>Exporting QR_matrix objects in an Excel file</dd>
+      </dl><dl><dt>
+
+          <code><a href="export_xlsx.html">export_xlsx()</a></code>
+
+        </dt>
+        <dd>Exporting QR_matrix or mQR_matrix objects in an Excel file</dd>
+      </dl></div><div class="section level2">
+      <h2 id="threshold">Threshold<a class="anchor" aria-label="anchor" href="#threshold"></a></h2>
+
+      <div class="section-desc"><p>Functions to manage, reset and custom thresholds</p></div>
+
+
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="get_thresholds.html">get_thresholds()</a></code>
+
+        </dt>
+        <dd>Get all (default) thresholds</dd>
+      </dl><dl><dt>
+
+          <code><a href="set_thresholds.html">set_thresholds()</a></code>
+
+        </dt>
+        <dd>Set values for thresholds</dd>
       </dl></div>
-  </main></div>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">
@@ -144,7 +190,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer></div>
