@@ -234,7 +234,7 @@ extract_QR <- function(matrix_output_file, sep = ";", dec = ",") {
 }
 
 extractFrequency <- function(demetra_m) {
-    if (any(is.na(match(c("start", "end", "n"), colnames(demetra_m))))) {
+    if (anyNA(match(c("start", "end", "n"), colnames(demetra_m)))) {
         stop("Error in the extraction of the series frequency (missing either the start date, the end date or the number of observations)")
     }
     start <- as.Date(demetra_m$start, format = "%Y-%m-%d")

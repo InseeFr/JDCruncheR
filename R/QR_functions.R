@@ -244,10 +244,10 @@ compute_score.QR_matrix <- function(
         for (i in seq_along(conditional_indicator)) {
             indicator_condition <- conditional_indicator[[i]]
 
-            if (any(is.na(match(
+            if (anyNA(match(
                 c("indicator", "conditions", "conditions_modalities"),
                 names(indicator_condition)
-            )))) {
+            ))) {
                 stop("There is an error in the specification of the indicator_condition variable")
             }
 
