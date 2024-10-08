@@ -559,7 +559,7 @@ NULL
 #' @export
 sort.QR_matrix <- function(x, decreasing = FALSE, sort_variables = "score", ...) {
     modalities <- x$modalities
-    if (!all(!is.na(match(sort_variables, colnames(modalities))))) {
+    if (any(is.na(match(sort_variables, colnames(modalities))))) {
         stop("There is an error in the variables' names")
     }
     modalities <- c(modalities[sort_variables], decreasing = decreasing)
