@@ -244,10 +244,10 @@ compute_score.QR_matrix <- function(
         for (i in seq_along(conditional_indicator)) {
             indicator_condition <- conditional_indicator[[i]]
 
-            if (any(is.na(match(
+            if (anyNA(match(
                 c("indicator", "conditions", "conditions_modalities"),
                 names(indicator_condition)
-            )))) {
+            ))) {
                 stop("There is an error in the specification of the indicator_condition variable")
             }
 
@@ -559,7 +559,7 @@ NULL
 #' @export
 sort.QR_matrix <- function(x, decreasing = FALSE, sort_variables = "score", ...) {
     modalities <- x$modalities
-    if (!all(!is.na(match(sort_variables, colnames(modalities))))) {
+    if (anyNA(match(sort_variables, colnames(modalities)))) {
         stop("There is an error in the variables' names")
     }
     modalities <- c(modalities[sort_variables], decreasing = decreasing)
