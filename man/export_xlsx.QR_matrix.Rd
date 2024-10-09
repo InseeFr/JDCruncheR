@@ -21,7 +21,8 @@ doesn't exist yet (\code{create = TRUE} by default)}
 \item{...}{other unused arguments}
 }
 \value{
-Returns invisibly (via \code{invisible(x)}) a workbook object created by \code{XLConnect::loadWorkbook()} for further manipulation.
+Returns invisibly (via \code{invisible(x)}) a workbook object
+created by \code{XLConnect::loadWorkbook()} for further manipulation.
 }
 \description{
 To export a quality report in an Excel file.

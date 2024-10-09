@@ -13,12 +13,14 @@
 \arguments{
 \item{x}{a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} object}
 
-\item{decreasing}{logical indicating whether the quality reports must be sorted in ascending or decreasing order.
+\item{decreasing}{logical indicating whether the quality reports must be
+sorted in ascending or decreasing order.
 By default, the sorting is done in ascending order.}
 
 \item{sort_variables}{They must be present in the modalities table.}
 
-\item{...}{other parameters of the function \code{\link[base]{order}} (unused for now)}
+\item{...}{other parameters of the function \code{\link[base]{order}} (unused
+for now)}
 }
 \value{
 the input with sorted quality reports
@@ -42,7 +44,9 @@ QR <- compute_score(QR, n_contrib_score = 2)
 print(QR$modalities$score)
 
 # Sort the scores
-QR <- sort(QR, sort_variables = "score") # Pour trier par ordre croissant sur le score
+
+# To sort by ascending scores
+QR <- sort(QR, sort_variables = "score")
 print(QR$modalities$score)
 
 }

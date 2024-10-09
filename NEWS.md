@@ -19,11 +19,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * resolve a bug linked to shell function
 * resolve a bug related to accent colnames
 * lintr is up-to-date
+* `extract_QR` works with V3 workspaces
+* Fixed bug with Tramo-Seats series --> Now, WS with Tramo-Seats series are accepted!
+* if column of demetra_m are not available, there will be NA instead
 
 
 ### Added
 
 * Github Action to check the package
+* New functions to manage the `jdc_thresholds` option
 
 
 ## [0.2.4] - 2022-07-27

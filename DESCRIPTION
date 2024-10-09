@@ -1,7 +1,7 @@
 Package: JDCruncheR
 Type: Package
 Title: Interface Between the 'JDemetra+' Cruncher and R, and Quality Report Generator
-Version: 0.2.4
+Version: 0.2.4.9000
 Authors@R: c(
     person(given = "Tanguy", 
            family = "Barthelemy", role = c("aut", "cre", "art"),
@@ -23,7 +23,8 @@ URL: https://github.com/InseeFr/JDCruncheR, https://inseefr.github.io/JDCruncheR
 BugReports: https://github.com/InseeFr/JDCruncheR/issues
 Imports:
     openxlsx,
-    stats, 
+    stats,
+    tools,
     utils
 Suggests:
     knitr,

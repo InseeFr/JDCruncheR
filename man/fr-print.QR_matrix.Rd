@@ -7,16 +7,21 @@
 \arguments{
 \item{x}{objet de type \code{\link{mQR_matrix}} ou \code{\link{mQR_matrix}}.}
 
-\item{print_variables}{booléen pour imprimer ou non les noms des indicateurs (supplémentaire inclus).}
+\item{print_variables}{booléen pour imprimer ou non les noms des indicateurs
+(supplémentaire inclus).}
 
-\item{print_score_formula}{booléen pour imprimer ou non la formule qui a servi à calculer le score (le cas échéant).}
+\item{print_score_formula}{booléen pour imprimer ou non la formule qui a
+servi à calculer le score (le cas échéant).}
 
-\item{score_statistics}{booléen pour imprimer ou non des statistiques sur les scores de la \code{\link{mQR_matrix}} (le cas échéant).}
+\item{score_statistics}{booléen pour imprimer ou non des statistiques sur les
+scores de la \code{\link{mQR_matrix}} (le cas échéant).}
 
 \item{...}{autres arguments non utilisés.}
 }
 \value{
-la méthode \code{print} imprime un objet \code{\link{mQR_matrix}} ou \code{\link{mQR_matrix}} et le renvoie de manière invisible (via \code{invisible(x)}).
+la méthode \code{print} imprime un objet \code{\link{mQR_matrix}} ou
+\code{\link{mQR_matrix}} et le renvoie de manière invisible (via
+\code{invisible(x)}).
 }
 \description{
 Pour afficher un objet QR_matrix ou mQR_matrix.

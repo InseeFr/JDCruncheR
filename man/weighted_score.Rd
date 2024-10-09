@@ -9,8 +9,9 @@ weighted_score(x, pond = 1)
 \arguments{
 \item{x}{a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} object}
 
-\item{pond}{the weights to use. Can be an integer, a vector of integers, the name of one of the quality report variables
-or a list of weights for the \code{\link{mQR_matrix}} objects.}
+\item{pond}{the weights to use. Can be an integer, a vector of integers, the
+name of one of the quality report variables or a list of weights for the
+\code{\link{mQR_matrix}} objects.}
 }
 \value{
 the input with an additionnal weighted score

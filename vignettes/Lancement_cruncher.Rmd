@@ -45,7 +45,8 @@ Les paramètres de la fonction `create_param_file()` sont les mêmes que ceux d�
 
 1. `policy` qui est la méthode de rafraîchissement utilisée (voir tableau ci-dessous).
 
-```{r,echo=FALSE}
+```{r, echo = FALSE}
+# nolint start line_length_linter
 refresh_policy <- structure(list(`Option sous JDemetra+` = c(
     "Fixed model",
     "Estimate regression coefficients",
@@ -87,12 +88,14 @@ if (opts_knit$get("rmarkdown.pandoc.to") == "latex") {
         column_spec(1, width = "4cm") %>%
         column_spec(2, width = "2.5cm")
 } else {
-    refresh_policy[1:6, 1] <- paste("Partial concurrent adjustment ->", refresh_policy[1:6, 1])
+    refresh_policy[1:6, 1] <- paste("Partial concurrent adjustment ->", 
+                                    refresh_policy[1:6, 1])
     kable(refresh_policy,
         caption = "Les différentes politiques de rafraîchissement",
         booktabs = TRUE
     )
 }
+# nolint end
 ```
 
 2. `matrix_item` qui est une chaîne de caractères contenant les noms des paramètres à exporter. Par défaut, ce sont ceux de l'option `default_matrix_item`. On peut donc au choix modifier l'option `default_matrix_item` ou le paramètre `matrix_item` :
@@ -197,5 +200,3 @@ cruncher_and_param(
 # Pour voir les autres paramètres de la fonction :
 ?cruncher_and_param
 ```
-
-

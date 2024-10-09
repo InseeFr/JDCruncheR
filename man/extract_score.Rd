@@ -13,20 +13,26 @@ extract_score(
 \arguments{
 \item{x}{a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}}.}
 
-\item{format_output}{string of characters indicating the output format: either a \code{data.frame} or a \code{vector}.}
+\item{format_output}{string of characters indicating the output format:
+either a \code{data.frame} or a \code{vector}.}
 
-\item{weighted_score}{logical indicating whether to extract the weighted score (if previously calculated) or the unweighted one.
+\item{weighted_score}{logical indicating whether to extract the weighted
+score (if previously calculated) or the unweighted one.
 By default, the unweighted score is extracted.}
 }
 \value{
-\code{extract_score()} returns a data.frame with two column: the series name and their score.
+\code{extract_score()} returns a data.frame with two column: the
+series name and their score.
 }
 \description{
-To extract score variables from \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} objects.
+To extract score variables from \code{\link{QR_matrix}} or
+\code{\link{mQR_matrix}} objects.
 }
 \details{
-For \code{\link{QR_matrix}} objects, the output is a vector or the object \code{NULL} if no score was previously calculated.
-For \code{\link{mQR_matrix}} objects, it is a list of scores (\code{NULL} elements or vectors).
+For \code{\link{QR_matrix}} objects, the output is a vector or the
+object \code{NULL} if no score was previously calculated.
+For \code{\link{mQR_matrix}} objects, it is a list of scores (\code{NULL}
+elements or vectors).
 }
 \examples{
 # Path of matrix demetra_m

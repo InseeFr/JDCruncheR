@@ -6,8 +6,8 @@
 \arguments{
 \item{x}{objet de type \code{\link{QR_matrix}}.}
 
-\item{file}{un objet de type \code{character} contenant le chemin menant au fichier
-que l'on veut créer}
+\item{file}{un objet de type \code{character} contenant le chemin menant au
+fichier que l'on veut créer}
 
 \item{auto_format}{booléen indiquant s'il faut formatter la sortie
 (\code{auto_format = TRUE} par défaut).}
@@ -18,7 +18,9 @@ s'il existe déjà (\code{create = TRUE} par défaut)}
 \item{...}{autres argument non utilisés}
 }
 \value{
-Renvoie de manière invisible (via \code{invisible(x)}) un objet de classeur créé par \code{XLConnect::loadWorkbook()} pour une manipulation ultérieure.
+Renvoie de manière invisible (via \code{invisible(x)}) un objet de
+classeur créé par \code{XLConnect::loadWorkbook()} pour une manipulation
+ultérieure.
 }
 \description{
 Permet d'exporter un bilan qualité dans un fichier Excel.

@@ -6,8 +6,9 @@
 \arguments{
 \item{x}{objet de type \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}.}
 
-\item{pond}{pondération à appliquer au score. Il peut s'agir d'un nombre, d'un vecteur de nombres, du nom
-d'une des variables du bilan qualité ou d'une liste de pondérations pour les objets \code{\link{mQR_matrix}}.}
+\item{pond}{pondération à appliquer au score. Il peut s'agir d'un nombre,
+d'un vecteur de nombres, du nom d'une des variables du bilan qualité ou d'une
+liste de pondérations pour les objets \code{\link{mQR_matrix}}.}
 }
 \value{
 L'objet en entrée avec le score recalculé

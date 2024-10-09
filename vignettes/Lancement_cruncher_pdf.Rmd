@@ -61,7 +61,8 @@ Les paramètres de la fonction `create_param_file()` sont les mêmes que ceux d�
 
 1. `policy` qui est la méthode de rafraîchissement utilisée (voir tableau ci-dessous).
 
-```{r,echo=FALSE, eval=FALSE}
+```{r, echo = FALSE, eval = FALSE}
+# nolint start line_length_linter
 refresh_policy <- structure(list(`Option sous JDemetra+` = c(
     "Fixed model",
     "Estimate regression coefficients",
@@ -102,6 +103,7 @@ kable(refresh_policy,
     group_rows("Concurrent", 7, 7) %>%
     column_spec(1, width = "4cm") %>%
     column_spec(2, width = "2.5cm")
+# nolint end
 ```
 
 \begin{table}[!h]
@@ -229,4 +231,3 @@ cruncher_and_param(
 # Pour voir les autres paramètres de la fonction :
 ?cruncher_and_param
 ```
-

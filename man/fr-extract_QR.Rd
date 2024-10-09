@@ -7,35 +7,45 @@
 \arguments{
 \item{matrix_output_file}{fichier CSV contenant la matrice des diagnostics.}
 
-\item{sep}{séparateur de caractères utilisé dans le fichier csv (par défaut \code{sep = ";"})}
+\item{sep}{séparateur de caractères utilisé dans le fichier csv (par défaut
+\code{sep = ";"})}
 
-\item{dec}{séparateur décimal utilisé dans le fichier csv (par défaut \code{dec = ","})}
+\item{dec}{séparateur décimal utilisé dans le fichier csv (par défaut
+\code{dec = ","})}
 }
 \value{
 Un objet de type \code{\link{QR_matrix}}.
 }
 \description{
-Permet d'extraire un bilan qualité à partir du fichier CSV contenant la matrice des diagnostics.
+Permet d'extraire un bilan qualité à partir du fichier CSV contenant la
+matrice des diagnostics.
 }
 \details{
-La fonction permet d'extraire un bilan qualité à partir d'un fichier csv contenant l'ensemble des
+La fonction permet d'extraire un bilan qualité à partir d'un
+fichier csv contenant l'ensemble des
 diagnostics (généralement fichier \emph{demetra_m.csv}).
 
-Ce fichier peut être obtenu en lançant le cruncher (\code{\link[rjwsacruncher]{cruncher}} ou \code{\link[rjwsacruncher]{cruncher_and_param}}) avec
-l'ensemble des paramètres de base pour les paramètres à exporter et l'option \code{csv_layout = "vtable"} (par défaut)
-pour le format de sortie des fichiers csv (option de \code{\link[rjwsacruncher]{cruncher_and_param}} ou de \code{\link[rjwsacruncher]{create_param_file}}
-lors de la création du
-fichier de paramètres).
+Ce fichier peut être obtenu en lançant le cruncher
+(\code{\link[rjwsacruncher]{cruncher}} ou
+\code{\link[rjwsacruncher]{cruncher_and_param}}) avec l'ensemble des
+paramètres de base pour les paramètres à exporter et l'option
+\code{csv_layout = "vtable"} (par défaut) pour le format de sortie des
+fichiers csv (option de \code{\link[rjwsacruncher]{cruncher_and_param}} ou de
+\code{\link[rjwsacruncher]{create_param_file}} lors de la création du fichier
+de paramètres).
 
-Le résultat de cette fonction est un objet \code{\link{QR_matrix}} qui est une liste de trois paramètres :
+Le résultat de cette fonction est un objet \code{\link{QR_matrix}} qui est
+une liste de trois paramètres :
 \itemize{
-\item le paramètre \code{modalities} est un \code{data.frame} contenant un ensemble de variables sous forme catégorielle
-(Good, Uncertain, Bad, Severe).
-\item le paramètre \code{values} est un \code{data.frame} contenant les valeurs associées aux indicateurs présents dans
-\code{modalities} (i.e. : p-valeurs, statistiques, etc.) ainsi que des variables qui n'ont pas
-de modalité (fréquence de la série et modèle ARIMA).
-\item le paramètre \code{score_formula} est initié à \code{NULL} : il contiendra la formule utilisée pour
-calculer le score (si le calcul est fait).
+\item le paramètre \code{modalities} est un \code{data.frame} contenant un
+ensemble de variables sous forme catégorielle (Good, Uncertain, Bad,
+Severe).
+\item le paramètre \code{values} est un \code{data.frame} contenant les valeurs
+associées aux indicateurs présents dans \code{modalities} (i.e. :
+p-valeurs, statistiques, etc.) ainsi que des variables qui n'ont pas de
+modalité (fréquence de la série et modèle ARIMA).
+\item le paramètre \code{score_formula} est initié à \code{NULL} : il contiendra
+la formule utilisée pour calculer le score (si le calcul est fait).
 }
 }
 \examples{

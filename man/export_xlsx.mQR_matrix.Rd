@@ -33,7 +33,8 @@ doesn't exist yet (\code{create = TRUE} by default)}
 \item{...}{other unused arguments}
 }
 \value{
-Returns invisibly (via \code{invisible(x)}) the same \code{\link{mQR_matrix}} object as \code{x}.
+Returns invisibly (via \code{invisible(x)}) the same
+\code{\link{mQR_matrix}} object as \code{x}.
 }
 \description{
 To export several quality reports in Excel files

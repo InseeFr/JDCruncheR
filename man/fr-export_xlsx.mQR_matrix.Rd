@@ -27,7 +27,8 @@ s'il existe déjà (\code{create = TRUE} par défaut)}
 \item{...}{autres argument non utilisés}
 }
 \value{
-Renvoie de manière invisible (via \code{invisible(x)}) le même objet \code{\link{mQR_matrix}} que \code{x}.
+Renvoie de manière invisible (via \code{invisible(x)}) le même objet
+\code{\link{mQR_matrix}} que \code{x}.
 }
 \description{
 Permet d'exporter dans des fichiers Excel une liste de bilan qualité

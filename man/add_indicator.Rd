@@ -16,22 +16,29 @@ add_indicator(x, indicator, variable_name, ...)
 \item{...}{other parameters of the function \code{\link[base]{merge}}.}
 }
 \value{
-This function returns the same object, enhanced with the chosen indicator.
-So if the input \code{x} is a QR_matrix, an object of class QR_matrix is returned.
-If the input \code{x} is a mQR_matrix, an object of class mQR_matrix is returned.
+This function returns the same object, enhanced with the chosen
+indicator. So if the input \code{x} is a QR_matrix, an object of class
+\code{QR_matrix} is returned. If the input \code{x} is a mQR_matrix, an
+object of class \code{mQR_matrix} is returned.
 }
 \description{
 Function to add indicators in \code{\link{QR_matrix}} objects.
 }
 \details{
-The function \code{add_indicator()} adds the chosen indicator to the values matrix of a quality report.
-Therefore, because said indicator isn't added in the modalities matrix, it cannot be used to calculate a score (except for weighting).
-Before using the added variable for score calculation, it will have to be coded with the function \code{\link{recode_indicator_num}}.
+The function \code{add_indicator()} adds the chosen indicator to the
+values matrix of a quality report. Therefore, because said indicator isn't
+added in the modalities matrix, it cannot be used to calculate a score
+(except for weighting). Before using the added variable for score
+calculation, it will have to be coded with the function
+\code{\link{recode_indicator_num}}.
 
-The new indicator can be a \code{vector} or a \code{data.frame}. In both cases, its format must allow for pairing:
+The new indicator can be a \code{vector} or a \code{data.frame}. In both
+cases, its format must allow for pairing:
 \itemize{
-\item a \code{vector}'s elements must be named and these names must match those of the quality report (variable "series");
-\item a \code{data.frame} must contain a "series" column that matches with the quality report's series.
+\item a \code{vector}'s elements must be named and these names must match those
+of the quality report (variable "series");
+\item a \code{data.frame} must contain a "series" column that matches with the
+quality report's series.
 }
 }
 \seealso{
