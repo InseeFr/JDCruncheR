@@ -225,13 +225,13 @@ export_xlsx.QR_matrix <- function(x,
         wb = wb_qr,
         sheet = "Modalities",
         x = x$modalities,
-        headerStyle = ifelse(test = auto_format, yes = header_style, no = NULL)
+        headerStyle = if (auto_format) header_style else NULL
     )
     openxlsx::writeData(
         wb = wb_qr,
         sheet = "Values",
         x = x$values,
-        headerStyle = ifelse(test = auto_format, yes = header_style, no = NULL)
+        headerStyle = if (auto_format) header_style else NULL
     )
 
     if (auto_format) {
@@ -382,17 +382,13 @@ export_xlsx.mQR_matrix <- function(
                 wb = wb_modalities,
                 sheet = name,
                 x = qr$modalities,
-                headerStyle = ifelse(test = auto_format,
-                                     yes = header_style,
-                                     no = NULL)
+                headerStyle = if (auto_format) header_style else NULL
             )
             openxlsx::writeData(
                 wb = wb_values,
                 sheet = name,
                 x = qr$values,
-                headerStyle = ifelse(test = auto_format,
-                                     yes = header_style,
-                                     no = NULL)
+                headerStyle = if (auto_format) header_style else NULL
             )
             if (auto_format) {
                 wb_modalities <- apply_BQ_style(wb = wb_modalities, x = qr,
@@ -440,17 +436,13 @@ export_xlsx.mQR_matrix <- function(
                 wb = wb_mqr,
                 sheet = paste0(name, "_modalities"),
                 x = qr$modalities,
-                headerStyle = ifelse(test = auto_format,
-                                     yes = header_style,
-                                     no = NULL)
+                headerStyle = if (auto_format) header_style else NULL
             )
             openxlsx::writeData(
                 wb = wb_mqr,
                 sheet = paste0(name, "_values"),
                 x = qr$values,
-                headerStyle = ifelse(test = auto_format,
-                                     yes = header_style,
-                                     no = NULL)
+                headerStyle = if (auto_format) header_style else NULL
             )
             if (auto_format) {
                 wb_mqr <- apply_BQ_style(wb = wb_mqr, x = qr,
