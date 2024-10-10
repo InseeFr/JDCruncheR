@@ -8,6 +8,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+## [0.3.1] - 2024-10-10
+
+### Fixed
+
+* bug in `export_xlsx()` with `ifelse()`
+
+
 ## [0.3.0] - 2024-10-09
 
 ### Changed
@@ -91,7 +99,8 @@ Bug fixed in the functions `retain_indicators()` and `remove_indicator()`.
  * addition of the parameter `log_file` to the functions `cruncher()` and `cruncher_and_param()` to export the cruncher log if required.
  * update of the options `default_matrix_item` and `default_tsmatrix_series`, in accordance with the parameters of version 2.2.0 of JDemetra+.
  
-[unreleased]: https://github.com/InseeFr/JDCruncheR/compare/v0.3.0...HEAD
+[unreleased]: https://github.com/InseeFr/JDCruncheR/compare/v0.3.1...HEAD
+[0.3.1]: https://github.com/InseeFr/JDCruncheR/compare/v0.3.0..v0.3.1
 [0.3.0]: https://github.com/InseeFr/JDCruncheR/compare/v0.2.4...v0.3.0
 [0.2.4]: https://github.com/InseeFr/JDCruncheR/compare/v0.2.3...v0.2.4
 [0.2.3]: https://github.com/InseeFr/JDCruncheR/compare/v0.2.2...v0.2.3
