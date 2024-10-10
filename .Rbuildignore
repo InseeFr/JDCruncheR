@@ -6,6 +6,7 @@
 ^\.github$
 
 ^README\.Rmd$
+^README\.html$
 ^README-.*\.png$
 
 ^Meta$
