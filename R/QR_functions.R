@@ -1,3 +1,16 @@
+recode_vec <- function(x, recode_variable) {
+    if (is.factor(x)) {
+        levels(x) <- recode_variable[levels(x)]
+    } else {
+        for (index in seq_along(recode_variable)) {
+            values_from <- names(recode_variable)[index]
+            values_to <- recode_variable[index]
+            x[x == values_from] <- values_to
+        }
+    }
+    return(x)
+}
+
 #' Calcul d'un score global
 #'
 #' Permet de calculer un score global à partir d'un bilan qualité
@@ -223,21 +236,20 @@ compute_score.QR_matrix <- function(
         na.rm = FALSE,
         n_contrib_score,
         conditional_indicator,
+        thresholds = getOption("jdc_thresholds"),
         ...) {
-    # score_formula_exp <- as.expression(substitute(score_formula))
 
-    QR_modalities <- x$modalities
-    QR_modalities[, ] <- lapply(QR_modalities, function(x) {
-        as.numeric(factor(x, levels = modalities, ordered = TRUE)) - 1
-    })
-    # Creation of an additionnal row to store the maximum score to normalise the score variable
-    QR_modalities <- rbind(
-        QR_modalities,
-        length(modalities) - 1
-    )
-    if (!all(names(score_pond) %in% colnames(QR_modalities))) {
+    if (!all(names(score_pond) %in% colnames(x$modalities))) {
         stop("Missing variables: please check the score_pond parameter")
     }
+
+    # Computing score from modalities
+    # Creation of an additionnal row to store the maximum score to normalise the score variable
+    QR_modalities <- x$modalities[names(score_pond)] |>
+        lapply(recode_vec, recode_variable = thresholds[["score"]]) |>
+        lapply(as.numeric) |>
+        as.data.frame() |>
+        rbind(max(thresholds[["score"]]))
 
     # Weight changes with the conditional_indicator parameter
     if (!missing(conditional_indicator) && length(conditional_indicator) > 0) {
@@ -274,8 +286,6 @@ compute_score.QR_matrix <- function(
         }
     }
 
-    QR_modalities <- QR_modalities[, names(score_pond)]
-
     for (nom_var in names(score_pond)) {
         QR_modalities[, nom_var] <- QR_modalities[, nom_var] * score_pond[nom_var]
     }
@@ -309,6 +319,7 @@ compute_score.QR_matrix <- function(
         names(score_pond),
         collapse = " + "
     )
+
     if (!missing(n_contrib_score)
         && is.numeric(n_contrib_score)
         && n_contrib_score >= 1) {
@@ -338,7 +349,6 @@ compute_score.QR_matrix <- function(
                 "_highest_contrib_score"
             )
     }
-
     return(x)
 }
 
