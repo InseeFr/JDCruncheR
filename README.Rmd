@@ -22,7 +22,11 @@ knitr::opts_chunk$set(
 <!-- badges: end -->
 
 
-## Français 🇫🇷
+<div align = center>
+  
+## [🇫🇷 README en français](#présentation) | [🇬🇧 README in english](#overview)
+
+<div align = left>
 
 ### Présentation
 
@@ -85,7 +89,6 @@ Pour plus d'informations sur l'installation et la configuration du package `{JDC
 
 Pour une description plus complète des packages R pour JDemetra+ voir le document de travail Insee [Les packages R pour JDemetra+ : une aide à la désaisonnalisation](https://www.insee.fr/fr/statistiques/5019786)
 
-## English 🇬🇧
 
 ### Overview
 

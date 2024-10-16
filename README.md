@@ -12,7 +12,11 @@ code](https://github.com/InseeFr/JDCruncheR/actions/workflows/lint.yaml/badge.sv
 [![R-CMD-check](https://github.com/InseeFr/JDCruncheR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/InseeFr/JDCruncheR/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-## Français 🇫🇷
+<div align="center">
+
+## [🇫🇷 README en français](#présentation) \| [🇬🇧 README in english](#overview)
+
+<div align="left">
 
 ### Présentation
 
@@ -163,8 +167,6 @@ Pour une description plus complète des packages R pour JDemetra+ voir le
 document de travail Insee [Les packages R pour JDemetra+ : une aide à la
 désaisonnalisation](https://www.insee.fr/fr/statistiques/5019786)
 
-## English 🇬🇧
-
 ### Overview
 
 The primary objective of the `{JDCruncheR}` package is to provide a
@@ -314,3 +316,7 @@ package, you can visit the
 For a more comprehensive description of the R packages for JDemetra+
 check the Insee working paper [R Tools for JDemetra+: Seasonal
 adjustment made easier](https://www.insee.fr/en/statistiques/5019812)
+
+</div>
+
+</div>
