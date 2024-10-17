@@ -131,13 +131,16 @@ NULL
 #' @importFrom utils read.csv
 #' @seealso [Traduction française][fr-extract_QR()]
 #' @export
-extract_QR <- function(matrix_output_file, sep = ";", dec = ",", thresholds = getOption("jdc_thresholds")) {
+extract_QR <- function(matrix_output_file,
+                       sep = ";",
+                       dec = ",",
+                       thresholds = getOption("jdc_thresholds")) {
     if (missing(matrix_output_file) || is.null(matrix_output_file)) {
         stop("Please call extract_QR() on a csv file containing at least one cruncher output matrix (demetra_m.csv for example)")
     }
-    if (length(matrix_output_file) == 0
+    if (length(matrix_output_file) == 0L
         || !file.exists(matrix_output_file)
-        || length(grep("\\.csv$", matrix_output_file)) == 0) {
+        || !endsWith(x = matrix_output_file, suffix = ".csv")) {
         stop("The chosen file desn't exist or isn't a csv file")
     }
 
@@ -151,7 +154,7 @@ extract_QR <- function(matrix_output_file, sep = ";", dec = ",", thresholds = ge
         quote = ""
     )
 
-    if (nrow(demetra_m) == 0 || ncol(demetra_m) == 0) {
+    if (nrow(demetra_m) == 0L || ncol(demetra_m) == 0L) {
         stop("The chosen csv file is empty")
     }
 
@@ -163,10 +166,10 @@ extract_QR <- function(matrix_output_file, sep = ";", dec = ",", thresholds = ge
     missing_variables <- setdiff(tests_variables, colnames(demetra_m))
     present_variables <- intersect(tests_variables, colnames(demetra_m))
     index_present_variables <- match(present_variables, tests_variables)
-    if (length(missing_variables) != 0) {
+    if (length(missing_variables) != 0L) {
         warning(
             "The following variables are missing from the diagnostics matrix:\n",
-            paste(missing_variables, collapse = ", "),
+            toString(missing_variables),
             "\n\nIf you are using a workspace with JDemetra+ in v2, please re-compute the export.",
             "\nIf you are using a workspace with JDemetra+ in v3, ignore this warning."
         )
@@ -174,7 +177,7 @@ extract_QR <- function(matrix_output_file, sep = ";", dec = ",", thresholds = ge
 
     demetra_m$series <- gsub(
         "(^ *)|(* $)", "",
-        gsub("(^.* \\* )|(\\[frozen\\])", "", demetra_m[, 1])
+        gsub("(^.* \\* )|(\\[frozen\\])", "", demetra_m[, 1L])
     )
     demetra_m$frequency <- extractFrequency(demetra_m)
 
@@ -188,7 +191,7 @@ extract_QR <- function(matrix_output_file, sep = ";", dec = ",", thresholds = ge
     )
 
     values_name <- unlist(sapply(X = present_variables, FUN = paste0, "_pvalue"))
-    colnames(demetra_m)[match(present_variables, colnames(demetra_m)) + 1] <- values_name
+    colnames(demetra_m)[match(present_variables, colnames(demetra_m)) + 1L] <- values_name
 
     modalities_variables <- c(
         "series",
@@ -214,10 +217,11 @@ extract_QR <- function(matrix_output_file, sep = ";", dec = ",", thresholds = ge
             values_variables[!values_variables %in% colnames(demetra_m)]
         ))
         missing_variables <- paste(missing_variables, collapse = "\n")
-        stop(paste0(
-            "The following variables are missing from the diagnostics matrix:\n",
-            missing_variables, "\nPlease re-compute the export."
-        ))
+        stop(
+            "The following variables are missing from the diagnostics matrix:",
+            "\n", missing_variables, "\n",
+            "\nPlease re-compute the export."
+        )
     }
 
     names_QR_variables <- c(
@@ -235,8 +239,8 @@ extract_QR <- function(matrix_output_file, sep = ";", dec = ",", thresholds = ge
     QR_values <- demetra_m[, values_variables]
     rownames(QR_modalities) <- rownames(QR_values) <- NULL
     colnames(QR_values)[seq_along(names_QR_variables)] <- colnames(QR_modalities) <- names_QR_variables
-    QR_modalities[, -1] <- lapply(
-        X = QR_modalities[, -1],
+    QR_modalities[, -1L] <- lapply(
+        X = QR_modalities[, -1L],
         FUN = factor,
         levels = c("Good", "Uncertain", "Bad", "Severe"),
         ordered = TRUE
@@ -247,20 +251,28 @@ extract_QR <- function(matrix_output_file, sep = ";", dec = ",", thresholds = ge
 
 extractFrequency <- function(demetra_m) {
     if (anyNA(match(c("start", "end", "n"), colnames(demetra_m)))) {
-        stop("Error in the extraction of the series frequency (missing either the start date, the end date or the number of observations)")
+        stop("Error in the extraction of the series frequency ",
+             "(missing either the start date, ",
+             "the end date or the number of observations)")
     }
     start <- as.Date(demetra_m$start, format = "%Y-%m-%d")
     end <- as.Date(demetra_m$end, format = "%Y-%m-%d")
     n <- demetra_m$n
 
-    start <- data.frame(y = as.numeric(format(start, "%Y")), m = as.numeric(format(start, "%m")))
-    end <- data.frame(y = as.numeric(format(end, "%Y")), m = as.numeric(format(end, "%m")))
-    freq <- c(12, 6, 4, 3, 2)
+    start <- data.frame(
+        y = as.numeric(format(start, "%Y")),
+        m = as.numeric(format(start, "%m"))
+    )
+    end <- data.frame(
+        y = as.numeric(format(end, "%Y")),
+        m = as.numeric(format(end, "%m"))
+    )
+    freq <- c(12L, 6L, 4L, 3L, 2L)
     nobs_compute <- matrix(sapply(freq, function(x) {
-        x * (end[, 1] - start[, 1]) + (end[, 2] - start[, 2]) / (12 / x)
+        x * (end[, 1L] - start[, 1L]) + (end[, 2L] - start[, 2L]) / (12. / x)
     }), nrow = nrow(demetra_m))
     return(sapply(seq_len(nrow(nobs_compute)), function(i) {
-        freq[which((nobs_compute[i, ] == n[i]) | (nobs_compute[i, ] + 1 == n[i]) | (nobs_compute[i, ] - 1 == n[i]))[1]]
+        freq[which((nobs_compute[i, ] == n[i]) | (nobs_compute[i, ] + 1L == n[i]) | (nobs_compute[i, ] - 1L == n[i]))[1L]]
     }))
 }
 
@@ -268,29 +280,29 @@ extractARIMA <- function(demetra_m) {
     q_possibles <- grep("(^q$)|(^q\\.\\d$)", colnames(demetra_m))
     bp_possibles <- grep("(^bp$)|(^bp\\.\\d$)", colnames(demetra_m))
 
-    if (length(q_possibles) > 1) {
+    if (length(q_possibles) > 1L) {
         val_q <- demetra_m[, q_possibles]
         integer_col <- which(sapply(val_q, is.integer))
-        if (length(integer_col) == 0) {
+        if (length(integer_col) == 0L) {
             val_q <- rep(NA_integer_, nrow(demetra_m))
-        } else if (length(integer_col) == 1) {
-            val_q <- val_q[, integer_col[1]]
+        } else if (length(integer_col) == 1L) {
+            val_q <- val_q[, integer_col[1L]]
         }
-    } else if (length(q_possibles) == 1) {
+    } else if (length(q_possibles) == 1L) {
         val_q <- demetra_m[, q_possibles]
     } else  {
         stop("Error in the extraction of the arima order q: multiple column.")
     }
 
-    if (length(bp_possibles) > 1) {
+    if (length(bp_possibles) > 1L) {
         val_bp <- demetra_m[, bp_possibles]
         integer_col <- which(sapply(val_bp, is.integer))
-        if (length(integer_col) == 0) {
+        if (length(integer_col) == 0L) {
             val_bp <- rep(NA_integer_, nrow(demetra_m))
         } else {
-            val_bp <- val_bp[, integer_col[1]]
+            val_bp <- val_bp[, integer_col[1L]]
         }
-    } else if (length(bp_possibles) == 1) {
+    } else if (length(bp_possibles) == 1L) {
         val_bp <- demetra_m[, bp_possibles]
     } else  {
         stop("Error in the extraction of the arima order bp: multiple column.")
@@ -324,7 +336,7 @@ extractStatQ <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
     col_q_m2 <- q_m2_possibles <- grep("(^q\\.m2$)|(^q\\.m2\\.\\d$)",
                                        colnames(demetra_m))
 
-    if (length(q_possibles) > 1) {
+    if (length(q_possibles) > 1L) {
         col_q_possibles <- demetra_m[, q_possibles]
         NA_cols <- which(unlist(lapply(
             X = col_q_possibles,
@@ -335,18 +347,18 @@ extractStatQ <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
             FUN = function(x) !all(is.integer(x) | is.character(x) | is.na(x))
         )))
 
-        if (length(num_cols) > 1) {
+        if (length(num_cols) > 1L) {
             stop("Error in the extraction of the Q stats: multiple colum found")
-        } else if (length(num_cols) == 1) {
+        } else if (length(num_cols) == 1L) {
             col_q <- q_possibles[num_cols]
-        } else if (length(NA_cols) > 0) {
-            col_q <- q_possibles[NA_cols[1]]
+        } else if (length(NA_cols) > 0L) {
+            col_q <- q_possibles[NA_cols[1L]]
         } else {
             stop("Error in the extraction of the Q stats")
         }
     }
 
-    if (length(q_m2_possibles) > 1) {
+    if (length(q_m2_possibles) > 1L) {
         col_q_m2_possibles <- demetra_m[, q_m2_possibles]
         NA_cols <- which(unlist(lapply(
             X = col_q_m2_possibles,
@@ -357,12 +369,12 @@ extractStatQ <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
             FUN = function(x) !all(is.integer(x) | is.character(x) | is.na(x))
         )))
 
-        if (length(num_cols) > 1) {
+        if (length(num_cols) > 1L) {
             stop("Error in the extraction of the Q stats: multiple colum found")
-        } else if (length(num_cols) == 1) {
+        } else if (length(num_cols) == 1L) {
             col_q_m2 <- q_m2_possibles[num_cols]
-        } else if (length(NA_cols) > 0) {
-            col_q_m2 <- q_m2_possibles[NA_cols[1]]
+        } else if (length(NA_cols) > 0L) {
+            col_q_m2 <- q_m2_possibles[NA_cols[1L]]
         } else {
             stop("Error in the extraction of the Q-M2 stats")
         }
@@ -397,7 +409,7 @@ extractOOS_test <- function(demetra_m, thresholds = getOption("jdc_thresholds"))
 
     col_mean <- mean_possibles <- grep("(^mean$)|(^mean\\.\\d$)", colnames(demetra_m))
 
-    if (length(mean_possibles) > 1) {
+    if (length(mean_possibles) > 1L) {
         col_mean_possibles <- demetra_m[, mean_possibles]
         NA_cols <- which(unlist(lapply(
             X = col_mean_possibles,
@@ -408,12 +420,12 @@ extractOOS_test <- function(demetra_m, thresholds = getOption("jdc_thresholds"))
             FUN = function(x) !all(is.integer(x) | is.character(x) | is.na(x))
         )))
 
-        if (length(num_cols) > 1) {
+        if (length(num_cols) > 1L) {
             stop("Error in the extraction of the mean in the out of sample diagnostics: multiple column")
-        } else if (length(num_cols) == 1) {
+        } else if (length(num_cols) == 1L) {
             col_mean <- mean_possibles[num_cols]
-        } else if (length(NA_cols) > 0) {
-            col_mean <- mean_possibles[NA_cols[1]]
+        } else if (length(NA_cols) > 0L) {
+            col_mean <- mean_possibles[NA_cols[1L]]
         } else {
             stop("Error in the extraction of the mean in the out of sample diagnostics")
         }
@@ -426,7 +438,7 @@ extractOOS_test <- function(demetra_m, thresholds = getOption("jdc_thresholds"))
     } else if (length(col_mse) == 1L) {
         val_mse <- demetra_m[, col_mse]
         if (is.character(val_mse)) {
-            col_mse <- col_mse + 1
+            col_mse <- col_mse + 1L
             val_mse <- demetra_m[, col_mse]
         }
     } else {
@@ -459,29 +471,29 @@ extractOOS_test <- function(demetra_m, thresholds = getOption("jdc_thresholds"))
 
 extractNormalityTests <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
     tests_possibles <- grep("(^skewness$)|(^kurtosis$)|(^lb2$)", colnames(demetra_m))
-    if (length(tests_possibles) != 3) {
+    if (length(tests_possibles) != 3L) {
         stop("At least one test is missing, among: skewness, kurtosis, lb2")
     }
 
     if (is.character(demetra_m$skewness)
         && is.character(demetra_m$kurtosis)
         && is.character(demetra_m$lb2)) {
-        if (length(grep(pattern = "^X\\.(\\d){1,}$", x = colnames(demetra_m)[rep(tests_possibles, each = 2) + rep(1:2, 3)])) != 6) {
+        if (length(grep(pattern = "^X\\.(\\d){1,}$", x = colnames(demetra_m)[rep(tests_possibles, each = 2L) + rep(seq_len(2L), 3L)])) != 6L) {
             stop("Re-compute the cruncher export with the options: residuals.skewness:3, residuals.kurtosis:3 and residuals.lb2:3")
         }
-        skewness_pvalue <- demetra_m[, tests_possibles[1] + 2]
-        kurtosis_pvalue <- demetra_m[, tests_possibles[2] + 2]
-        homoskedasticity_pvalue <- demetra_m[, tests_possibles[3] + 2]
+        skewness_pvalue <- demetra_m[, tests_possibles[1L] + 2L]
+        kurtosis_pvalue <- demetra_m[, tests_possibles[2L] + 2L]
+        homoskedasticity_pvalue <- demetra_m[, tests_possibles[3L] + 2L]
 
     } else if (is.numeric(demetra_m$skewness)
                && is.numeric(demetra_m$kurtosis)
                && is.numeric(demetra_m$lb2)) {
-        if (length(grep(pattern = "^X\\.(\\d){1,}$", x = colnames(demetra_m)[tests_possibles + 1])) != 3) {
+        if (length(grep(pattern = "^X\\.(\\d){1,}$", x = colnames(demetra_m)[tests_possibles + 1L])) != 3L) {
             stop("Re-compute the cruncher export with the options: residuals.skewness:2, residuals.kurtosis:2 and residuals.lb2:2")
         }
-        skewness_pvalue <- demetra_m[, tests_possibles[1] + 1]
-        kurtosis_pvalue <- demetra_m[, tests_possibles[2] + 1]
-        homoskedasticity_pvalue <- demetra_m[, tests_possibles[3] + 1]
+        skewness_pvalue <- demetra_m[, tests_possibles[1L] + 1L]
+        kurtosis_pvalue <- demetra_m[, tests_possibles[2L] + 1L]
+        homoskedasticity_pvalue <- demetra_m[, tests_possibles[3L] + 1L]
     } else {
         stop("the matrix has wrong format.")
     }
@@ -524,10 +536,10 @@ extractOutliers <- function(demetra_m, thresholds = getOption("jdc_thresholds"))
     if (all(is.na(col_nbr_outliers))) {
         pct_outliers_modality <- rep(NA_character_, nrow(demetra_m))
         pct_outliers_value <- rep(NA_real_, nrow(demetra_m))
-    } else if (length(col_nbr_outliers) == 1) {
+    } else if (length(col_nbr_outliers) == 1L) {
         pct_outliers_modality <- demetra_m[, col_nbr_outliers]
-        pct_outliers_value <- demetra_m[, col_nbr_outliers + 1] * 100
-    } else if (length(col_nbr_outliers) > 1) {
+        pct_outliers_value <- demetra_m[, col_nbr_outliers + 1L] * 100L
+    } else if (length(col_nbr_outliers) > 1L) {
         stop("Error in the extraction of the number of outliers: multiple column")
     }
 

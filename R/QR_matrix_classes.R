@@ -90,7 +90,7 @@ QR_matrix <- function(modalities = NULL, values = NULL, score_formula = NULL) {
         modalities = modalities, values = values,
         score_formula = score_formula
     )
-    class(QR) <- c("QR_matrix")
+    class(QR) <- "QR_matrix"
     QR
 }
 #' @export
@@ -184,7 +184,7 @@ print.QR_matrix <- function(x,
     if (is.null(nb_var)
         || is.null(nb_var_modalities)
         || is.null(nb_var_values)
-        || nb_var * nb_var_modalities * nb_var_values == 0) {
+        || nb_var * nb_var_modalities * nb_var_values == 0L) {
         cat("The quality report matrix is empty")
         return(invisible(x))
     }
@@ -235,7 +235,7 @@ print.QR_matrix <- function(x,
             ))
         }
         cat("\n")
-        if (length(names_var_values_sup) > 1) {
+        if (length(names_var_values_sup) > 1L) {
             cat(sprintf(
                 ngettext(
                     length(names_var_values_sup),
@@ -276,7 +276,7 @@ print.QR_matrix <- function(x,
 #' @rdname print.QR_matrix
 #' @export
 print.mQR_matrix <- function(x, score_statistics = TRUE, ...) {
-    if (length(x) == 0) {
+    if (length(x) == 0L) {
         cat("List without a quality report")
         return(invisible(x))
     }
@@ -304,7 +304,7 @@ print.mQR_matrix <- function(x, score_statistics = TRUE, ...) {
             length(bq_valid_names), paste(bq_valid_names, collapse = "  ")
         ))
 
-        if (length(bq_names_na) > 1) {
+        if (length(bq_names_na) > 1L) {
             cat("\n")
             cat(sprintf(
                 ngettext(

@@ -9,10 +9,10 @@
 \usage{
 \method{compute_score}{QR_matrix}(
   x,
-  score_pond = c(qs_residual_sa_on_sa = 30, f_residual_sa_on_sa = 30, qs_residual_sa_on_i
-    = 20, f_residual_sa_on_i = 20, f_residual_td_on_sa = 30, f_residual_td_on_i = 20,
-    oos_mean = 15, oos_mse = 10, residuals_independency = 15, residuals_homoskedasticity
-    = 5, residuals_skewness = 5, m7 = 5, q_m2 = 5),
+  score_pond = c(qs_residual_sa_on_sa = 30L, f_residual_sa_on_sa = 30L,
+    qs_residual_sa_on_i = 20L, f_residual_sa_on_i = 20L, f_residual_td_on_sa = 30L,
+    f_residual_td_on_i = 20L, oos_mean = 15L, oos_mse = 10L, residuals_independency =
+    15L, residuals_homoskedasticity = 5L, residuals_skewness = 5L, m7 = 5L, q_m2 = 5L),
   modalities = c("Good", "Uncertain", "", "Bad", "Severe"),
   normalize_score_value,
   na.rm = FALSE,

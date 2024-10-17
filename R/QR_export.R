@@ -54,7 +54,7 @@ apply_BQ_style <- function(wb,
             rule = '=="Bad"',
             style = bad_style,
             cols = seq_len(ncol(x$modalities)),
-            rows = 1 + seq_len(nrow(x$modalities))
+            rows = 1L + seq_len(nrow(x$modalities))
         )
         openxlsx::conditionalFormatting(
             wb = wb,
@@ -62,7 +62,7 @@ apply_BQ_style <- function(wb,
             rule = '=="Good"',
             style = good_style,
             cols = seq_len(ncol(x$modalities)),
-            rows = 1 + seq_len(nrow(x$modalities))
+            rows = 1L + seq_len(nrow(x$modalities))
         )
         openxlsx::conditionalFormatting(
             wb = wb,
@@ -70,7 +70,7 @@ apply_BQ_style <- function(wb,
             rule = '=="Uncertain"',
             style = uncertain_style,
             cols = seq_len(ncol(x$modalities)),
-            rows = 1 + seq_len(nrow(x$modalities))
+            rows = 1L + seq_len(nrow(x$modalities))
         )
         openxlsx::conditionalFormatting(
             wb = wb,
@@ -78,7 +78,7 @@ apply_BQ_style <- function(wb,
             rule = '=="Severe"',
             style = severe_style,
             cols = seq_len(ncol(x$modalities)),
-            rows = 1 + seq_len(nrow(x$modalities))
+            rows = 1L + seq_len(nrow(x$modalities))
         )
 
         # Appliquer les styles aux bordures
@@ -87,7 +87,7 @@ apply_BQ_style <- function(wb,
             sheet = modalities_sheet,
             style = border_style,
             cols = seq_len(ncol(x$modalities)),
-            rows = 1 + seq_len(nrow(x$modalities)),
+            rows = 1L + seq_len(nrow(x$modalities)),
             gridExpand = TRUE
         )
 
@@ -96,8 +96,8 @@ apply_BQ_style <- function(wb,
             wb = wb,
             sheet = modalities_sheet,
             style = rowname_style,
-            cols = 1,
-            rows = 1 + seq_len(nrow(x$modalities)),
+            cols = 1L,
+            rows = 1L + seq_len(nrow(x$modalities)),
             gridExpand = TRUE
         )
     }
@@ -110,7 +110,7 @@ apply_BQ_style <- function(wb,
             sheet = values_sheet,
             style = border_style,
             cols = seq_len(ncol(x$values)),
-            rows = 1 + seq_len(nrow(x$values)),
+            rows = 1L + seq_len(nrow(x$values)),
             gridExpand = TRUE
         )
 
@@ -122,10 +122,10 @@ apply_BQ_style <- function(wb,
                     cell_value <- as.character(x$modalities[id_row, name_col])
                     cell_style <- switch(
                         cell_value,
-                        "Bad" = bad_style,
-                        "Good" = good_style,
-                        "Uncertain" = uncertain_style,
-                        "Severe" = severe_style,
+                        Bad = bad_style,
+                        Good = good_style,
+                        Uncertain = uncertain_style,
+                        Severe = severe_style,
                         NULL
                     )
                     if (!is.null(cell_style)) {
@@ -133,7 +133,7 @@ apply_BQ_style <- function(wb,
                             wb = wb,
                             sheet = values_sheet,
                             style = cell_style,
-                            rows = id_row + 1,
+                            rows = id_row + 1L,
                             cols = id_col,
                             gridExpand = FALSE
                         )
@@ -147,8 +147,8 @@ apply_BQ_style <- function(wb,
             wb = wb,
             sheet = values_sheet,
             style = rowname_style,
-            cols = 1,
-            rows = 1 + seq_len(nrow(x$values)),
+            cols = 1L,
+            rows = 1L + seq_len(nrow(x$values)),
             gridExpand = TRUE
         )
     }
@@ -207,7 +207,7 @@ export_xlsx.QR_matrix <- function(x,
                                   ...) {
 
     ext <- tools::file_ext(file)
-    if (nchar(ext) == 0) {
+    if (nchar(ext) == 0L) {
         file <- paste0(file, ".xslx")
     } else if (ext != "xlsx") {
         stop("The format of the file must be .xlsx .")
@@ -346,7 +346,7 @@ export_xlsx.mQR_matrix <- function(
         for (id_qr in seq_along(x)) {
             qr <- x[[id_qr]]
             name <- ifelse(
-                test = is.null(names(x)) || nchar(names(x)[id_qr]) == 0,
+                test = is.null(names(x)) || nchar(names(x)[id_qr]) == 0L,
                 yes = paste0("QR_", id_qr),
                 no = names(x)[id_qr]
             )
@@ -370,7 +370,7 @@ export_xlsx.mQR_matrix <- function(
         for (id_qr in seq_along(x)) {
             qr <- x[[id_qr]]
             name <- ifelse(
-                test = is.null(names(x)) || nchar(names(x)[id_qr]) == 0,
+                test = is.null(names(x)) || nchar(names(x)[id_qr]) == 0L,
                 yes = paste0("QR_", id_qr),
                 no = names(x)[id_qr]
             )
@@ -417,8 +417,8 @@ export_xlsx.mQR_matrix <- function(
             qr <- x[[id_qr]]
             name <- ifelse(
                 test = is.null(names(x))
-                || nchar(names(x)[id_qr]) == 0
-                || sum(names(x) == names(x)[id_qr]) > 1,
+                || nchar(names(x)[id_qr]) == 0L
+                || sum(names(x) == names(x)[id_qr]) > 1L,
                 yes = paste0("QR_", id_qr),
                 no = names(x)[id_qr]
             )

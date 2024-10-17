@@ -4,7 +4,7 @@
 \alias{weighted_score}
 \title{Weighted score calculation}
 \usage{
-weighted_score(x, pond = 1)
+weighted_score(x, pond = 1L)
 }
 \arguments{
 \item{x}{a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} object}

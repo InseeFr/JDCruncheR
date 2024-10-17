@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+* New item `grade` to the `jdc_thresholds` option to specify the different grades when computing the score
+
 
 ## [0.3.1] - 2024-10-10
 
