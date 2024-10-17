@@ -15,25 +15,31 @@ recode_vec <- function(x, recode_variable) {
 #'
 #' Permet de calculer un score global à partir d'un bilan qualité
 #'
-#' @param x objet de type \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}.
+#' @param x Objet de type \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}.
 #' @param score_pond formule utilisée pour calculer le score global.
 #' @param modalities modalités triées par ordre d'importance dans le calcul du
 #' score (voir détails).
-#' @param normalize_score_value chiffre indiquant la valeur de référence pour la
+#' @param normalize_score_value Chiffre indiquant la valeur de référence pour la
 #' normalisation des pondérations utilisées lors du calcul du score. Si le
 #' paramètre n'est pas renseigné, les poids ne seront pas normalisés.
-#' @param na.rm booléen indiquant si les valeurs manquantes doivent être
+#' @param na.rm Booléen indiquant si les valeurs manquantes doivent être
 #' enlevées pour le calcul du score.
-#' @param n_contrib_score entier indiquant le nombre de variables à créer dans
+#' @param n_contrib_score Entier indiquant le nombre de variables à créer dans
 #' la matrice des valeurs du bilan qualité contenant les \code{n_contrib_score}
 #' plus grandes contributrices au score (voir détails). S'il n'est pas spécifié,
 #' aucune variable n'est créée.
-#' @param conditional_indicator une \code{list} contenant des listes ayant 3
+#' @param conditional_indicator \code{list} contenant des listes ayant 3
 #' éléments : "indicator", "conditions" et "condition_modalities". Permet de
 #' réduire à 1 le poids de certains indicateurs en fonction des valeurs d'autres
 #' variables (voir détails).
+#' @param thresholds \code{list} de vecteurs numériques. Seuils appliqués aux
+#' différents tests afin de classer en modalités \code{Good}, \code{Uncertain},
+#' \code{Bad} et \code{Severe}.
+#' Par défault, la valeur de l'option \code{"jdc_threshold"} est utilisée.
+#' Vous pouvez appeler la fonction \code{\link{get_thresholds}} pour voir à quoi
+#' doit ressemble l'objet \code{thresholds}.
+#' @param ... Autres paramètres non utilisés.
 #'
-#' @param ... autres paramètres non utilisés.
 #' @details La fonction \code{compute_score} permet de calculer un score à
 #' partir des modalités d'un bilan qualité. Pour cela, chaque modalité est
 #' associée à un poids défini par le paramètre \code{modalities}. Ainsi, le
@@ -137,8 +143,14 @@ NULL
 #' "indicator", "conditions" and "condition_modalities". To reduce down to 1 the
 #' weight of chosen indicators depending on other variables' values (cf.
 #' details).
-#'
+#' @param thresholds \code{list} of numerical vectors. Thresholds applied to the
+#' various tests in order to classify into modalities \code{Good},
+#' \code{Uncertain}, \code{Bad} and \code{Severe}.
+#' By default, the value of the \code{"jdc_threshold"} option is used.
+#' You can call the \code{\link{get_thresholds}} function to see what the
+#' \code{thresholds} object should look like.
 #' @param ... other unused parameters.
+#'
 #' @details The function \code{compute_score} calculates a score from the
 #' modalities of a quality report: to each modality corresponds a weight that
 #' depends on the parameter \code{modalities}. The default parameter is
@@ -246,10 +258,10 @@ compute_score.QR_matrix <- function(
     # Computing score from modalities
     # Creation of an additionnal row to store the maximum score to normalise the score variable
     QR_modalities <- x$modalities[names(score_pond)] |>
-        lapply(recode_vec, recode_variable = thresholds[["score"]]) |>
+        lapply(recode_vec, recode_variable = thresholds[["grade"]]) |>
         lapply(as.numeric) |>
         as.data.frame() |>
-        rbind(max(thresholds[["score"]]))
+        rbind(max(thresholds[["grade"]]))
 
     # Weight changes with the conditional_indicator parameter
     if (!missing(conditional_indicator) && length(conditional_indicator) > 0) {

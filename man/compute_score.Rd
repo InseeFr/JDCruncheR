@@ -18,6 +18,7 @@
   na.rm = FALSE,
   n_contrib_score,
   conditional_indicator,
+  thresholds = getOption("jdc_thresholds"),
   ...
 )
 
@@ -46,6 +47,13 @@ variable is created.}
 "indicator", "conditions" and "condition_modalities". To reduce down to 1 the
 weight of chosen indicators depending on other variables' values (cf.
 details).}
+
+\item{thresholds}{\code{list} of numerical vectors. Thresholds applied to the
+various tests in order to classify into modalities \code{Good},
+\code{Uncertain}, \code{Bad} and \code{Severe}.
+By default, the value of the \code{"jdc_threshold"} option is used.
+You can call the \code{\link{get_thresholds}} function to see what the
+\code{thresholds} object should look like.}
 
 \item{...}{other unused parameters.}
 }

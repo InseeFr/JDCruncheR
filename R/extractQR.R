@@ -8,6 +8,12 @@
 #' \code{sep = ";"})
 #' @param dec séparateur décimal utilisé dans le fichier csv (par défaut
 #' \code{dec = ","})
+#' @param thresholds \code{list} de vecteurs numériques. Seuils appliqués aux
+#' différents tests afin de classer en modalités \code{Good}, \code{Uncertain},
+#' \code{Bad} et \code{Severe}.
+#' Par défault, la valeur de l'option \code{"jdc_threshold"} est utilisée.
+#' Vous pouvez appeler la fonction \code{\link{get_thresholds}} pour voir à quoi
+#' doit ressemble l'objet \code{thresholds}.
 #'
 #' @details La fonction permet d'extraire un bilan qualité à partir d'un
 #' fichier csv contenant l'ensemble des
@@ -69,6 +75,12 @@ NULL
 #' @param sep the separator used in the csv file (by default, \code{sep = ";"})
 #' @param dec the decimal separator used in the csv file (by default,
 #' \code{dec = ","})
+#' @param thresholds \code{list} of numerical vectors. Thresholds applied to the
+#' various tests in order to classify into modalities \code{Good},
+#' \code{Uncertain}, \code{Bad} and \code{Severe}.
+#' By default, the value of the \code{"jdc_threshold"} option is used.
+#' You can call the \code{\link{get_thresholds}} function to see what the
+#' \code{thresholds} object should look like.
 #'
 #' @details This function generates a quality report from a csv file containing
 #' diagnostics (usually from the file \emph{demetra_m.csv}).
@@ -119,7 +131,7 @@ NULL
 #' @importFrom utils read.csv
 #' @seealso [Traduction française][fr-extract_QR()]
 #' @export
-extract_QR <- function(matrix_output_file, sep = ";", dec = ",") {
+extract_QR <- function(matrix_output_file, sep = ";", dec = ",", thresholds = getOption("jdc_thresholds")) {
     if (missing(matrix_output_file) || is.null(matrix_output_file)) {
         stop("Please call extract_QR() on a csv file containing at least one cruncher output matrix (demetra_m.csv for example)")
     }
@@ -169,10 +181,10 @@ extract_QR <- function(matrix_output_file, sep = ";", dec = ",") {
     demetra_m <- cbind(
         demetra_m,
         extractARIMA(demetra_m),
-        extractStatQ(demetra_m),
-        extractOOS_test(demetra_m),
-        extractNormalityTests(demetra_m),
-        extractOutliers(demetra_m)
+        extractStatQ(demetra_m, thresholds),
+        extractOOS_test(demetra_m, thresholds),
+        extractNormalityTests(demetra_m, thresholds),
+        extractOutliers(demetra_m, thresholds)
     )
 
     values_name <- unlist(sapply(X = present_variables, FUN = paste0, "_pvalue"))

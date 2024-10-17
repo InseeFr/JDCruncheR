@@ -97,7 +97,7 @@ get_thresholds <- function(test_name, default = TRUE) {
         q_m2 = c(Good = 1, Bad = Inf),
         pct_outliers = c(Good = 3, Uncertain = 5, Bad = Inf),
 
-        score = c(Good = 0, Uncertain = 1, Bad = 3, Severe = 5)
+        grade = c(Good = 0, Uncertain = 1, Bad = 3, Severe = 5)
     )
 
     if (default) {

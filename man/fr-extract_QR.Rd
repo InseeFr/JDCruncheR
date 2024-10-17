@@ -12,6 +12,13 @@
 
 \item{dec}{séparateur décimal utilisé dans le fichier csv (par défaut
 \code{dec = ","})}
+
+\item{thresholds}{\code{list} de vecteurs numériques. Seuils appliqués aux
+différents tests afin de classer en modalités \code{Good}, \code{Uncertain},
+\code{Bad} et \code{Severe}.
+Par défault, la valeur de l'option \code{"jdc_threshold"} est utilisée.
+Vous pouvez appeler la fonction \code{\link{get_thresholds}} pour voir à quoi
+doit ressemble l'objet \code{thresholds}.}
 }
 \value{
 Un objet de type \code{\link{QR_matrix}}.

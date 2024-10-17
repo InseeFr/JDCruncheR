@@ -5,7 +5,12 @@
 \alias{extract_QR}
 \title{Extraction of a quality report}
 \usage{
-extract_QR(matrix_output_file, sep = ";", dec = ",")
+extract_QR(
+  matrix_output_file,
+  sep = ";",
+  dec = ",",
+  thresholds = getOption("jdc_thresholds")
+)
 }
 \arguments{
 \item{matrix_output_file}{the csv file containing the diagnostics matrix.}
@@ -14,6 +19,13 @@ extract_QR(matrix_output_file, sep = ";", dec = ",")
 
 \item{dec}{the decimal separator used in the csv file (by default,
 \code{dec = ","})}
+
+\item{thresholds}{\code{list} of numerical vectors. Thresholds applied to the
+various tests in order to classify into modalities \code{Good},
+\code{Uncertain}, \code{Bad} and \code{Severe}.
+By default, the value of the \code{"jdc_threshold"} option is used.
+You can call the \code{\link{get_thresholds}} function to see what the
+\code{thresholds} object should look like.}
 }
 \value{
 a \code{\link{QR_matrix}} object.
