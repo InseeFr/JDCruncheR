@@ -11,6 +11,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 * New item `grade` to the `jdc_thresholds` option to specify the different grades when computing the score
+* New arguments `file` which will replace `matrix_output_file` for `extract_QR()`
+* New arguments `x` which can contains a diagnostic matrix for `extract_QR()`
+
+### Fixed
+
+* bug in `recode_vec()` when changing the grades with `factor` object
 
 
 ## [0.3.1] - 2024-10-10

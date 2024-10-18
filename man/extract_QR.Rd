@@ -6,6 +6,8 @@
 \title{Extraction of a quality report}
 \usage{
 extract_QR(
+  file,
+  x,
   matrix_output_file,
   sep = ";",
   dec = ",",
@@ -13,6 +15,11 @@ extract_QR(
 )
 }
 \arguments{
+\item{file}{the csv file containing the diagnostics matrix. This argument
+supersedes the argument \code{matrix_output_file}.}
+
+\item{x}{data.frame containing the diagnostics matrix.}
+
 \item{matrix_output_file}{the csv file containing the diagnostics matrix.}
 
 \item{sep}{the separator used in the csv file (by default, \code{sep = ";"})}
@@ -58,6 +65,11 @@ etc.) as well as additional variables that don't have a modality/quality
 \item \code{score_formula} that will store the formula used to calculate the
 score (when relevant). Its initial value is \code{NULL}.
 }
+
+If \code{x} is supplied, the \code{file} and \code{matrix_output_file}
+arguments are ignored. The \code{file} argument also designates the path to
+the file containing the diagnostic matrix (which can be imported into R in
+parallel and used with the \code{x} argument).
 }
 \examples{
 # Path of matrix demetra_m
@@ -68,7 +80,7 @@ demetra_path <- file.path(
 )
 
 # Extract the quality report from the demetra_m file
-QR <- extract_QR(demetra_path)
+QR <- extract_QR(file = demetra_path)
 
 print(QR)
 

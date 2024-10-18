@@ -104,6 +104,71 @@ set_thresholds(test_name = "grade", thresholds = c(Good = 0, Uncertain = 0.1, Ba
 get_thresholds(test_name = "grade", default = FALSE)
 ```
 
+#### Calculer un bilan qualité
+
+Par exemple, en partant d'une matrice `demetra_m.csv` :
+
+|        | n   | start      | end        | mean | skewness |     | kurtosis |     | lb2  |     | p | d | q | bp | bd | bq | m7  | q   | q.m2 |
+|--------|-----|------------|------------|------|----------|-----|----------|-----|------|-----|---|---|---|----|----|----|-----|-----|------|
+| France | 88  | 2012-10-01 | 2020-01-01 | 0.6  | 0.0      | 0.9 | 2.9      | 0.8 | 36.1 | 0.0 | 0 | 1 | 1 | 0  | 1  | 1  | 0.2 | 0.5 | 2.0  |
+| Spain  | 78  | 2015-10-01 | 2022-03-01 | 0.4  | -0.4     | 0.0 | 4.6      | 0.0 | 17.3 | 0.7 | 0 | 0 | 1 | 0  | 1  | 1  | 0.8 | 1.5 | 1.3  |
+| Greece | 112 | 2010-10-01 | 2020-01-01 | 0.5  | -0.3     | 0.0 | 3.7      | 0.0 | 46.9 | 0.0 | 3 | 1 | 1 | 0  | 1  | 1  | 0.3 | 0.4 | 0.8  |
+
+On peut générer un bilan qualité :
+
+```{r fr-set-demetra_m, eval = TRUE, echo = FALSE}
+demetra_m <- data.frame(
+    X = c("France", "Spain", "Greece"), 
+    n = c(88L, 78L, 112L), 
+    start = c("2012-10-01", "2015-10-01", "2010-10-01"), 
+    end = c("2020-01-01", "2022-03-01", "2020-01-01"), 
+    mean = c(0.608599, 0.418266, 0.51853), 
+    skewness = c(0.014553, -0.414881, -0.336935), 
+    X.1 = c(0.9093, 0.0011, 0.0083), 
+    kurtosis = c(2.931535, 4.628171, 3.739243), 
+    X.2 = c(0.7886, 0, 0.0038), 
+    lb2 = c(36.14241, 17.263369, 46.853219), 
+    X.3 = c(0.0293, 0.7487, 4e-04), 
+    p = c(0L, 0L, 3L), 
+    d = c(1L, 0L, 1L), 
+    q = c(1L, 1L, 1L), 
+    bp = c(0L, 0L, 0L), 
+    bd = c(1L, 1L, 1L), 
+    bq = c(1L, 1L, 1L), 
+    m7 = c(0.239737242, 0.785293416, 0.309003156), 
+    q.1 = c(0.510868052, 1.524804319, 1.131292538), 
+    q.m2 = c(2.00493169, 1.342476763, 0.816821294)
+)
+```
+
+```{r fr-extract_QR, eval = TRUE, warning = FALSE}
+BQ <- extract_QR(x = demetra_m)
+print(BQ$modalities)
+```
+
+#### Calculer un score
+
+Il est possible maintenant de calculer un score à partir du bilan qualité
+
+```{r fr-compute_score, eval = TRUE, warning = FALSE}
+BQ_score <- compute_score(
+    x = BQ,
+    score_pond = c(
+        oos_mean = 15L, 
+        residuals_kurtosis = 15L, 
+        residuals_homoskedasticity = 5L, 
+        residuals_skewness = 5L, 
+        m7 = 5L, 
+        q_m2 = 5L
+    )
+)
+extract_score(x = BQ_score)
+```
+
+#### Exporter un bilan qualité
+
+Enfin il est possible d'exporter un bilan qualité via la fonction `export_xlsx`.
+
 ### Autres informations
 
 Pour plus d'informations sur l'installation et la configuration du package **{JDCruncheR}**, vous pouvez visiter la page [wiki](https://github.com/jdemetra/jwsacruncher/wiki)
@@ -186,6 +251,71 @@ To change the value of the grade, you can use the `set_thresholds()` function:
 set_thresholds(test_name = "grade", thresholds = c(Good = 0, Uncertain = 0.1, Bad = 1, Severe = 10))
 get_thresholds(test_name = "grade", default = FALSE)
 ```
+
+#### Calculate a quality report
+
+For example, starting from a matrix `demetra_m.csv` :
+
+|        | n   | start      | end        | mean | skewness |     | kurtosis |     | lb2  |     | p | d | q | bp | bd | bq | m7  | q   | q.m2 |
+|--------|-----|------------|------------|------|----------|-----|----------|-----|------|-----|---|---|---|----|----|----|-----|-----|------|
+| France | 88  | 2012-10-01 | 2020-01-01 | 0.6  | 0.0      | 0.9 | 2.9      | 0.8 | 36.1 | 0.0 | 0 | 1 | 1 | 0  | 1  | 1  | 0.2 | 0.5 | 2.0  |
+| Spain  | 78  | 2015-10-01 | 2022-03-01 | 0.4  | -0.4     | 0.0 | 4.6      | 0.0 | 17.3 | 0.7 | 0 | 0 | 1 | 0  | 1  | 1  | 0.8 | 1.5 | 1.3  |
+| Greece | 112 | 2010-10-01 | 2020-01-01 | 0.5  | -0.3     | 0.0 | 3.7      | 0.0 | 46.9 | 0.0 | 3 | 1 | 1 | 0  | 1  | 1  | 0.3 | 0.4 | 0.8  |
+
+A quality report can be generated:
+
+```{r en-set-demetra_m, eval = TRUE, echo = FALSE}
+demetra_m <- data.frame(
+    X = c("France", "Spain", "Greece"), 
+    n = c(88L, 78L, 112L), 
+    start = c("2012-10-01", "2015-10-01", "2010-10-01"), 
+    end = c("2020-01-01", "2022-03-01", "2020-01-01"), 
+    mean = c(0.608599, 0.418266, 0.51853), 
+    skewness = c(0.014553, -0.414881, -0.336935), 
+    X.1 = c(0.9093, 0.0011, 0.0083), 
+    kurtosis = c(2.931535, 4.628171, 3.739243), 
+    X.2 = c(0.7886, 0, 0.0038), 
+    lb2 = c(36.14241, 17.263369, 46.853219), 
+    X.3 = c(0.0293, 0.7487, 4e-04), 
+    p = c(0L, 0L, 3L), 
+    d = c(1L, 0L, 1L), 
+    q = c(1L, 1L, 1L), 
+    bp = c(0L, 0L, 0L), 
+    bd = c(1L, 1L, 1L), 
+    bq = c(1L, 1L, 1L), 
+    m7 = c(0.239737242, 0.785293416, 0.309003156), 
+    q.1 = c(0.510868052, 1.524804319, 1.131292538), 
+    q.m2 = c(2.00493169, 1.342476763, 0.816821294)
+)
+```
+
+```{r en-extract_QR, eval = TRUE, warning = FALSE}
+BQ <- extract_QR(x = demetra_m)
+print(BQ$modalities)
+```
+
+#### Calculate a score
+
+It is now possible to calculate a score from the quality report:
+
+```{r en-compute_score, eval = TRUE, warning = FALSE}
+BQ_score <- compute_score(
+    x = BQ,
+    score_pond = c(
+        oos_mean = 15L, 
+        residuals_kurtosis = 15L, 
+        residuals_homoskedasticity = 5L, 
+        residuals_skewness = 5L, 
+        m7 = 5L, 
+        q_m2 = 5L
+    )
+)
+extract_score(x = BQ_score)
+```
+
+#### Exporting a quality report
+
+Finally, you can export a quality report using the `export_xlsx` function.
 
 ### Other informations
 

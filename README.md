@@ -141,7 +141,11 @@ get_thresholds(default = TRUE)
 #> 
 #> $pct_outliers
 #>      Good Uncertain       Bad 
-#>         3         5       Inf
+#>         3         5       Inf 
+#> 
+#> $grade
+#>      Good Uncertain       Bad    Severe 
+#>         0         1         3         5
 ```
 
 Pour changer la valeur de l’option, on peut utiliser la fonction
@@ -171,7 +175,8 @@ fonction `get_thresholds()` :
 
 ``` r
 get_thresholds("grade", default = TRUE)
-#> NULL
+#>      Good Uncertain       Bad    Severe 
+#>         0         1         3         5
 ```
 
 Pour changer la valeur de la note, on peut utiliser la fonction
@@ -184,6 +189,60 @@ get_thresholds(test_name = "grade", default = FALSE)
 #>      Good Uncertain       Bad    Severe 
 #>       0.0       0.1       1.0      10.0
 ```
+
+#### Calculer un bilan qualité
+
+Par exemple, en partant d’une matrice `demetra_m.csv` :
+
+|  | n | start | end | mean | skewness |  | kurtosis |  | lb2 |  | p | d | q | bp | bd | bq | m7 | q | q.m2 |
+|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|
+| France | 88 | 2012-10-01 | 2020-01-01 | 0.6 | 0.0 | 0.9 | 2.9 | 0.8 | 36.1 | 0.0 | 0 | 1 | 1 | 0 | 1 | 1 | 0.2 | 0.5 | 2.0 |
+| Spain | 78 | 2015-10-01 | 2022-03-01 | 0.4 | -0.4 | 0.0 | 4.6 | 0.0 | 17.3 | 0.7 | 0 | 0 | 1 | 0 | 1 | 1 | 0.8 | 1.5 | 1.3 |
+| Greece | 112 | 2010-10-01 | 2020-01-01 | 0.5 | -0.3 | 0.0 | 3.7 | 0.0 | 46.9 | 0.0 | 3 | 1 | 1 | 0 | 1 | 1 | 0.3 | 0.4 | 0.8 |
+
+On peut générer un bilan qualité :
+
+``` r
+BQ <- extract_QR(x = demetra_m)
+print(BQ$modalities)
+#>   series residuals_homoskedasticity residuals_skewness residuals_kurtosis
+#> 1 France                       Good               Good               Good
+#> 2  Spain                        Bad                Bad                Bad
+#> 3 Greece                        Bad                Bad                Bad
+#>   oos_mean oos_mse   m7    q q_m2 pct_outliers
+#> 1     Good    <NA> Good Good  Bad         <NA>
+#> 2     Good    <NA> Good  Bad  Bad         <NA>
+#> 3     Good    <NA> Good  Bad Good         <NA>
+```
+
+#### Calculer un score
+
+Il est possible maintenant de calculer un score à partir du bilan
+qualité
+
+``` r
+BQ_score <- compute_score(
+    x = BQ,
+    score_pond = c(
+        oos_mean = 15L, 
+        residuals_kurtosis = 15L, 
+        residuals_homoskedasticity = 5L, 
+        residuals_skewness = 5L, 
+        m7 = 5L, 
+        q_m2 = 5L
+    )
+)
+extract_score(x = BQ_score)
+#>   series score
+#> 1 France    60
+#> 2  Spain   110
+#> 3 Greece   100
+```
+
+#### Exporter un bilan qualité
+
+Enfin il est possible d’exporter un bilan qualité via la fonction
+`export_xlsx`.
 
 ### Autres informations
 
@@ -319,7 +378,11 @@ get_thresholds(default = TRUE)
 #> 
 #> $pct_outliers
 #>      Good Uncertain       Bad 
-#>         3         5       Inf
+#>         3         5       Inf 
+#> 
+#> $grade
+#>      Good Uncertain       Bad    Severe 
+#>         0         1         3         5
 ```
 
 To change the value of the option, you can use the fonction
@@ -349,7 +412,8 @@ function:
 
 ``` r
 get_thresholds("grade", default = TRUE)
-#> NULL
+#>      Good Uncertain       Bad    Severe 
+#>         0         1         3         5
 ```
 
 To change the value of the grade, you can use the `set_thresholds()`
@@ -362,6 +426,59 @@ get_thresholds(test_name = "grade", default = FALSE)
 #>      Good Uncertain       Bad    Severe 
 #>       0.0       0.1       1.0      10.0
 ```
+
+#### Calculate a quality report
+
+For example, starting from a matrix `demetra_m.csv` :
+
+|  | n | start | end | mean | skewness |  | kurtosis |  | lb2 |  | p | d | q | bp | bd | bq | m7 | q | q.m2 |
+|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|
+| France | 88 | 2012-10-01 | 2020-01-01 | 0.6 | 0.0 | 0.9 | 2.9 | 0.8 | 36.1 | 0.0 | 0 | 1 | 1 | 0 | 1 | 1 | 0.2 | 0.5 | 2.0 |
+| Spain | 78 | 2015-10-01 | 2022-03-01 | 0.4 | -0.4 | 0.0 | 4.6 | 0.0 | 17.3 | 0.7 | 0 | 0 | 1 | 0 | 1 | 1 | 0.8 | 1.5 | 1.3 |
+| Greece | 112 | 2010-10-01 | 2020-01-01 | 0.5 | -0.3 | 0.0 | 3.7 | 0.0 | 46.9 | 0.0 | 3 | 1 | 1 | 0 | 1 | 1 | 0.3 | 0.4 | 0.8 |
+
+A quality report can be generated:
+
+``` r
+BQ <- extract_QR(x = demetra_m)
+print(BQ$modalities)
+#>   series residuals_homoskedasticity residuals_skewness residuals_kurtosis
+#> 1 France                       Good               Good               Good
+#> 2  Spain                        Bad                Bad                Bad
+#> 3 Greece                        Bad                Bad                Bad
+#>   oos_mean oos_mse   m7    q q_m2 pct_outliers
+#> 1     Good    <NA> Good Good  Bad         <NA>
+#> 2     Good    <NA> Good  Bad  Bad         <NA>
+#> 3     Good    <NA> Good  Bad Good         <NA>
+```
+
+#### Calculate a score
+
+It is now possible to calculate a score from the quality report:
+
+``` r
+BQ_score <- compute_score(
+    x = BQ,
+    score_pond = c(
+        oos_mean = 15L, 
+        residuals_kurtosis = 15L, 
+        residuals_homoskedasticity = 5L, 
+        residuals_skewness = 5L, 
+        m7 = 5L, 
+        q_m2 = 5L
+    )
+)
+extract_score(x = BQ_score)
+#>   series score
+#> 1 France    60
+#> 2  Spain   110
+#> 3 Greece   100
+```
+
+#### Exporting a quality report
+
+Finally, you can export a quality report using the `export_xlsx`
+function.
 
 ### Other informations
 

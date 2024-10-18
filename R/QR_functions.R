@@ -1,12 +1,11 @@
 recode_vec <- function(x, recode_variable) {
     if (is.factor(x)) {
-        levels(x) <- recode_variable[levels(x)]
-    } else {
-        for (index in seq_along(recode_variable)) {
-            values_from <- names(recode_variable)[index]
-            values_to <- recode_variable[index]
-            x[x == values_from] <- values_to
-        }
+        return(recode_vec(x = as.character(x), recode_variable = recode_variable))
+    }
+    for (index in seq_along(recode_variable)) {
+        values_from <- names(recode_variable)[index]
+        values_to <- recode_variable[index]
+        x[x == values_from] <- values_to
     }
     return(x)
 }

@@ -1,9 +1,14 @@
-#' Extraction d'un bilan qualité
+#' @title Extraction d'un bilan qualité
 #'
+#' @description
 #' Permet d'extraire un bilan qualité à partir du fichier CSV contenant la
 #' matrice des diagnostics.
 #'
-#' @param matrix_output_file fichier CSV contenant la matrice des diagnostics.
+#' @param matrix_output_file Chaîne de caracère. Chemin vers le fichier CSV
+#' contenant la matrice des diagnostics.
+#' @param file Chaîne de caracère. Chemin vers le fichier CSV contenant la
+#' matrice des diagnostics. Cet argument remplace l'argument
+#' \code{matrix_output_file}.
 #' @param sep séparateur de caractères utilisé dans le fichier csv (par défaut
 #' \code{sep = ";"})
 #' @param dec séparateur décimal utilisé dans le fichier csv (par défaut
@@ -30,6 +35,7 @@
 #'
 #' Le résultat de cette fonction est un objet \code{\link{QR_matrix}} qui est
 #' une liste de trois paramètres :
+#'
 #' * le paramètre \code{modalities} est un \code{data.frame} contenant un
 #'   ensemble de variables sous forme catégorielle (Good, Uncertain, Bad,
 #'   Severe).
@@ -39,6 +45,12 @@
 #'   modalité (fréquence de la série et modèle ARIMA).
 #' * le paramètre \code{score_formula} est initié à \code{NULL} : il contiendra
 #'   la formule utilisée pour calculer le score (si le calcul est fait).
+#'
+#' Si \code{x} est fourni, les arguments \code{fichier} et
+#' \code{matrix_output_file} sont ignorés. L'argument \code{fichier} désigne
+#' également le chemin vers le fichier qui contient la matrice de diagnostic
+#' (qui peut être importée en parallèle dans R et utilisée avec l'argument
+#' \code{x}).
 #'
 #' @encoding UTF-8
 #' @return Un objet de type \code{\link{QR_matrix}}.
@@ -51,7 +63,7 @@
 #' )
 #'
 #' # Extraire le bilan qualité à partir du fichier demetra_m.csv
-#' QR <- extract_QR(demetra_path)
+#' QR <- extract_QR(file = demetra_path)
 #'
 #' print(QR)
 #'
@@ -66,12 +78,16 @@ NULL
 #> NULL
 
 
-#' Extraction of a quality report
+#' @title Extraction of a quality report
 #'
+#' @description
 #' To extract a quality report from the csv file containing the diagnostics
 #' matrix.
 #'
 #' @param matrix_output_file the csv file containing the diagnostics matrix.
+#' @param file the csv file containing the diagnostics matrix. This argument
+#' supersedes the argument \code{matrix_output_file}.
+#' @param x data.frame containing the diagnostics matrix.
 #' @param sep the separator used in the csv file (by default, \code{sep = ";"})
 #' @param dec the decimal separator used in the csv file (by default,
 #' \code{dec = ","})
@@ -95,6 +111,7 @@ NULL
 #'
 #' This function returns a \code{\link{QR_matrix}} object, which is a list of 3
 #' objects:
+#'
 #' * \code{modalities}, a \code{data.frame} containing several indicators and
 #'   their categorical quality (Good, Uncertain, Bad, Severe).
 #' * \code{values}, a \code{data.frame} containing the same indicators and the
@@ -103,6 +120,11 @@ NULL
 #'   (series frequency and arima model).
 #' * \code{score_formula} that will store the formula used to calculate the
 #'   score (when relevant). Its initial value is \code{NULL}.
+#'
+#' If \code{x} is supplied, the \code{file} and \code{matrix_output_file}
+#' arguments are ignored. The \code{file} argument also designates the path to
+#' the file containing the diagnostic matrix (which can be imported into R in
+#' parallel and used with the \code{x} argument).
 #'
 #' @encoding UTF-8
 #'
@@ -118,7 +140,7 @@ NULL
 #' )
 #'
 #' # Extract the quality report from the demetra_m file
-#' QR <- extract_QR(demetra_path)
+#' QR <- extract_QR(file = demetra_path)
 #'
 #' print(QR)
 #'
@@ -131,28 +153,42 @@ NULL
 #' @importFrom utils read.csv
 #' @seealso [Traduction française][fr-extract_QR()]
 #' @export
-extract_QR <- function(matrix_output_file,
+extract_QR <- function(file,
+                       x,
+                       matrix_output_file,
                        sep = ";",
                        dec = ",",
                        thresholds = getOption("jdc_thresholds")) {
-    if (missing(matrix_output_file) || is.null(matrix_output_file)) {
-        stop("Please call extract_QR() on a csv file containing at least one cruncher output matrix (demetra_m.csv for example)")
-    }
-    if (length(matrix_output_file) == 0L
-        || !file.exists(matrix_output_file)
-        || !endsWith(x = matrix_output_file, suffix = ".csv")) {
-        stop("The chosen file desn't exist or isn't a csv file")
+    if (!missing(matrix_output_file)) {
+        warning("The `matrix_output_file` argument is deprecated",
+                " and will be removed in the future. ",
+                "Please use the `file` argument instead or ",
+                "the `x` argument which may contain a diagnostic matrix ",
+                "that has already been imported.")
+        file <- matrix_output_file
     }
 
-    demetra_m <- read.csv(
-        file = matrix_output_file,
-        sep = sep,
-        dec = dec,
-        stringsAsFactors = FALSE,
-        na.strings = c("NA", "?"),
-        fileEncoding = "latin1",
-        quote = ""
-    )
+    if (missing(x) && missing(file)) {
+        stop("Please call extract_QR() on a csv file containing at least one cruncher output matrix (demetra_m.csv for example) with the argument `file` or directly on a matrix with the argument `x`")
+    } else if (missing(x)) {
+        if (length(file) == 0L
+            || !file.exists(file)
+            || !endsWith(x = file, suffix = ".csv")) {
+            stop("The chosen file desn't exist or isn't a csv file")
+        }
+
+        demetra_m <- read.csv(
+            file = file,
+            sep = sep,
+            dec = dec,
+            stringsAsFactors = FALSE,
+            na.strings = c("NA", "?"),
+            fileEncoding = "latin1",
+            quote = ""
+        )
+    } else {
+        demetra_m <- x
+    }
 
     if (nrow(demetra_m) == 0L || ncol(demetra_m) == 0L) {
         stop("The chosen csv file is empty")
@@ -268,12 +304,22 @@ extractFrequency <- function(demetra_m) {
         m = as.numeric(format(end, "%m"))
     )
     freq <- c(12L, 6L, 4L, 3L, 2L)
-    nobs_compute <- matrix(sapply(freq, function(x) {
-        x * (end[, 1L] - start[, 1L]) + (end[, 2L] - start[, 2L]) / (12. / x)
-    }), nrow = nrow(demetra_m))
-    return(sapply(seq_len(nrow(nobs_compute)), function(i) {
-        freq[which((nobs_compute[i, ] == n[i]) | (nobs_compute[i, ] + 1L == n[i]) | (nobs_compute[i, ] - 1L == n[i]))[1L]]
-    }))
+    nobs_compute <- matrix(
+        data = sapply(
+            X = freq,
+            FUN = function(x) {
+                x * (end[, 1L] - start[, 1L]) + (end[, 2L] - start[, 2L]) / (12. / x)
+            }
+        ),
+        nrow = nrow(demetra_m)
+    )
+    output <- sapply(
+        X = seq_len(nrow(nobs_compute)),
+        FUN = function(i) {
+            freq[which((nobs_compute[i, ] == n[i]) | (nobs_compute[i, ] + 1L == n[i]) | (nobs_compute[i, ] - 1L == n[i]))[1L]]
+        }
+    )
+    return(output)
 }
 
 extractARIMA <- function(demetra_m) {
