@@ -169,7 +169,10 @@ extract_QR <- function(file,
     }
 
     if (missing(x) && missing(file)) {
-        stop("Please call extract_QR() on a csv file containing at least one cruncher output matrix (demetra_m.csv for example) with the argument `file` or directly on a matrix with the argument `x`")
+        stop("Please call extract_QR() on a csv file containing at least ",
+             "one cruncher output matrix (demetra_m.csv for example) ",
+             "with the argument `file` ",
+             "or directly on a matrix with the argument `x`")
     } else if (missing(x)) {
         if (length(file) == 0L
             || !file.exists(file)

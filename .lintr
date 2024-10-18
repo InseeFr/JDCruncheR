@@ -9,9 +9,6 @@ linters: lintr::all_linters(
         undesirable_function_linter = NULL,
         nonportable_path_linter = NULL,
         unused_import_linter = NULL,
-        absolute_path_linter = NULL,
-        library_call_linter = NULL,
-        namespace_linter = NULL,
         function_argument_linter = NULL
     )
 encoding: "UTF-8"
