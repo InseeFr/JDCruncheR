@@ -47,7 +47,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-* Github Action to check the package
+* GitHub Action to check the package
 * New functions to manage the `jdc_thresholds` option
 
 

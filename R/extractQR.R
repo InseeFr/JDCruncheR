@@ -154,11 +154,11 @@ NULL
 #' @seealso [Traduction française][fr-extract_QR()]
 #' @export
 extract_QR <- function(file,
-                       x,
-                       matrix_output_file,
-                       sep = ";",
-                       dec = ",",
-                       thresholds = getOption("jdc_thresholds")) {
+                        x,
+                        matrix_output_file,
+                        sep = ";",
+                        dec = ",",
+                        thresholds = getOption("jdc_thresholds")) {
     if (!missing(matrix_output_file)) {
         warning("The `matrix_output_file` argument is deprecated",
                 " and will be removed in the future. ",
@@ -197,95 +197,38 @@ extract_QR <- function(file,
         stop("The chosen csv file is empty")
     }
 
-    tests_variables <- c(
-        "qs.test.on.sa", "f.test.on.sa..seasonal.dummies.",
-        "qs.test.on.i", "f.test.on.i..seasonal.dummies.",
-        "f.test.on.sa..td.", "f.test.on.i..td.", "independence", "normality"
-    )
-    missing_variables <- setdiff(tests_variables, colnames(demetra_m))
-    present_variables <- intersect(tests_variables, colnames(demetra_m))
-    index_present_variables <- match(present_variables, tests_variables)
-    if (length(missing_variables) != 0L) {
-        warning(
-            "The following variables are missing from the diagnostics matrix:\n",
-            toString(missing_variables),
-            "\n\nIf you are using a workspace with JDemetra+ in v2, please re-compute the export.",
-            "\nIf you are using a workspace with JDemetra+ in v3, ignore this warning."
-        )
-    }
-
-    demetra_m$series <- gsub(
+    series <- gsub(
         "(^ *)|(* $)", "",
         gsub("(^.* \\* )|(\\[frozen\\])", "", demetra_m[, 1L])
     )
-    demetra_m$frequency <- extractFrequency(demetra_m)
 
-    demetra_m <- cbind(
-        demetra_m,
-        extractARIMA(demetra_m),
-        extractStatQ(demetra_m, thresholds),
-        extractOOS_test(demetra_m, thresholds),
-        extractNormalityTests(demetra_m, thresholds),
-        extractOutliers(demetra_m, thresholds)
+    stat_Q <- extractStatQ(demetra_m, thresholds)
+    stat_OOS <- extractOOS_test(demetra_m, thresholds)
+    normality <- extractNormalityTests(demetra_m, thresholds)
+    outliers <- extractOutliers(demetra_m, thresholds)
+    test <- extractTest(demetra_m, thresholds)
+
+    QR_modalities <- data.frame(
+        series = series,
+        normality$modalities,
+        test$modalities,
+        stat_OOS$modalities,
+        stat_Q$modalities,
+        outliers$modalities
+    )
+    QR_values <- data.frame(
+        series = series,
+        normality$values,
+        test$values,
+        stat_OOS$values,
+        stat_Q$values,
+        outliers$values,
+        frequency = extractFrequency(demetra_m),
+        arima_model = extractARIMA(demetra_m)
     )
 
-    values_name <- unlist(sapply(X = present_variables, FUN = paste0, "_pvalue"))
-    colnames(demetra_m)[match(present_variables, colnames(demetra_m)) + 1L] <- values_name
-
-    modalities_variables <- c(
-        "series",
-        present_variables,
-        "homoskedasticity_modality", "skewness_modality", "kurtosis_modality", "oos_mean_modality",
-        "oos_mse_modality", "m7_modality", "q_modality", "q_m2_modality", "pct_outliers_modality"
-    )
-
-    values_variables <- c(
-        "series",
-        values_name,
-        "homoskedasticity_pvalue", "skewness_pvalue", "kurtosis_pvalue", "oos_mean_pvalue",
-        "oos_mse_pvalue", "m7", "q_value", "q_m2_value", "pct_outliers_value",
-        "frequency", "arima_model"
-    )
-
-    if (!all(
-        modalities_variables %in% colnames(demetra_m),
-        values_variables %in% colnames(demetra_m)
-    )) {
-        missing_variables <- unique(c(
-            modalities_variables[!modalities_variables %in% colnames(demetra_m)],
-            values_variables[!values_variables %in% colnames(demetra_m)]
-        ))
-        missing_variables <- paste(missing_variables, collapse = "\n")
-        stop(
-            "The following variables are missing from the diagnostics matrix:",
-            "\n", missing_variables, "\n",
-            "\nPlease re-compute the export."
-        )
-    }
-
-    names_QR_variables <- c(
-        "series",
-
-        c("qs_residual_sa_on_sa", "f_residual_sa_on_sa",
-          "qs_residual_sa_on_i", "f_residual_sa_on_i",
-          "f_residual_td_on_sa", "f_residual_td_on_i",
-          "residuals_independency", "residuals_normality")[index_present_variables],
-
-        "residuals_homoskedasticity", "residuals_skewness", "residuals_kurtosis",
-        "oos_mean", "oos_mse", "m7", "q", "q_m2", "pct_outliers"
-    )
-    QR_modalities <- demetra_m[, modalities_variables]
-    QR_values <- demetra_m[, values_variables]
-    rownames(QR_modalities) <- rownames(QR_values) <- NULL
-    colnames(QR_values)[seq_along(names_QR_variables)] <- colnames(QR_modalities) <- names_QR_variables
-    QR_modalities[, -1L] <- lapply(
-        X = QR_modalities[, -1L],
-        FUN = factor,
-        levels = c("Good", "Uncertain", "Bad", "Severe"),
-        ordered = TRUE
-    )
     QR <- QR_matrix(modalities = QR_modalities, values = QR_values)
-    QR
+    return(QR)
 }
 
 extractFrequency <- function(demetra_m) {
@@ -375,7 +318,7 @@ extractARIMA <- function(demetra_m) {
         "(", arima$arima_p, ",", arima$arima_d, ",", arima$arima_q, ")",
         "(", arima$arima_bp, ",", arima$arima_bd, ",", arima$arima_bq, ")"
     )
-    return(arima)
+    return(arima$arima_model)
 }
 
 extractStatQ <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
@@ -429,8 +372,8 @@ extractStatQ <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
         }
     }
 
-    stat_Q <- data.frame(
-        q_modality = cut(
+    stat_Q_modalities <- data.frame(
+        q = cut(
             x = as.numeric(demetra_m[, col_q]),
             breaks = c(-Inf, thresholds[["q"]]),
             labels = names(thresholds[["q"]]),
@@ -438,8 +381,7 @@ extractStatQ <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
             include.lowest = TRUE,
             ordered_result = TRUE
         ),
-        q_value = demetra_m[, col_q],
-        q_m2_modality = cut(
+        q_m2 = cut(
             x = as.numeric(demetra_m[, col_q_m2]),
             breaks = c(-Inf, thresholds[["q_m2"]]),
             labels = names(thresholds[["q_m2"]]),
@@ -447,11 +389,15 @@ extractStatQ <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
             include.lowest = TRUE,
             ordered_result = TRUE
         ),
-        q_m2_value = demetra_m[, col_q_m2],
+        stringsAsFactors = FALSE
+    )
+    stat_Q_values <- data.frame(
+        q = demetra_m[, col_q],
+        q_m2 = demetra_m[, col_q_m2],
         stringsAsFactors = FALSE
     )
 
-    return(stat_Q)
+    return(list(modalities = stat_Q_modalities, values = stat_Q_values))
 }
 
 extractOOS_test <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
@@ -494,8 +440,8 @@ extractOOS_test <- function(demetra_m, thresholds = getOption("jdc_thresholds"))
         stop("Error in the extraction of the mse in the out of sample diagnostics: multiple column")
     }
 
-    stat_OOS <- data.frame(
-        oos_mean_modality = cut(
+    stat_OOS_modalities <- data.frame(
+        oos_mean = cut(
             x = as.numeric(demetra_m[, col_mean]),
             breaks = c(-Inf, thresholds[["oos_mean"]]),
             labels = names(thresholds[["oos_mean"]]),
@@ -503,8 +449,7 @@ extractOOS_test <- function(demetra_m, thresholds = getOption("jdc_thresholds"))
             include.lowest = TRUE,
             ordered_result = TRUE
         ),
-        oos_mean_pvalue = as.numeric(demetra_m[, col_mean]),
-        oos_mse_modality = cut(
+        oos_mse = cut(
             x = as.numeric(val_mse),
             breaks = c(-Inf, thresholds[["oos_mse"]]),
             labels = names(thresholds[["oos_mse"]]),
@@ -512,10 +457,16 @@ extractOOS_test <- function(demetra_m, thresholds = getOption("jdc_thresholds"))
             include.lowest = TRUE,
             ordered_result = TRUE
         ),
-        oos_mse_pvalue = as.numeric(val_mse),
         stringsAsFactors = FALSE
     )
-    return(stat_OOS)
+
+    stat_OOS_values <- data.frame(
+        oos_mean = as.numeric(demetra_m[, col_mean]),
+        oos_mse = as.numeric(val_mse),
+        stringsAsFactors = FALSE
+    )
+
+    return(list(modalities = stat_OOS_modalities, values = stat_OOS_values))
 }
 
 extractNormalityTests <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
@@ -547,11 +498,16 @@ extractNormalityTests <- function(demetra_m, thresholds = getOption("jdc_thresho
         stop("the matrix has wrong format.")
     }
 
-    normality <- data.frame(
-        skewness_pvalue = skewness_pvalue,
-        kurtosis_pvalue = kurtosis_pvalue,
-        homoskedasticity_pvalue = homoskedasticity_pvalue,
-        skewness_modality = cut(
+    normality_modalities <- data.frame(
+        residuals_homoskedasticity = cut(
+            x = skewness_pvalue,
+            breaks = c(-Inf, thresholds[["residuals_normality"]]),
+            labels = names(thresholds[["residuals_normality"]]),
+            right = FALSE,
+            include.lowest = TRUE,
+            ordered_result = TRUE
+        ),
+        residuals_skewness = cut(
             x = skewness_pvalue,
             breaks = c(-Inf, thresholds[["residuals_skewness"]]),
             labels = names(thresholds[["residuals_skewness"]]),
@@ -559,51 +515,134 @@ extractNormalityTests <- function(demetra_m, thresholds = getOption("jdc_thresho
             include.lowest = TRUE,
             ordered_result = TRUE
         ),
-        kurtosis_modality = cut(
+        residuals_kurtosis = cut(
             x = skewness_pvalue,
             breaks = c(-Inf, thresholds[["residuals_kurtosis"]]),
             labels = names(thresholds[["residuals_kurtosis"]]),
             right = FALSE,
             include.lowest = TRUE,
             ordered_result = TRUE
-        ),
-        homoskedasticity_modality = cut(
-            x = skewness_pvalue,
-            breaks = c(-Inf, thresholds[["residuals_normality"]]),
-            labels = names(thresholds[["residuals_normality"]]),
-            right = FALSE,
-            include.lowest = TRUE,
-            ordered_result = TRUE
         )
     )
-    return(normality)
+    normality_values <- data.frame(
+        residuals_homoskedasticity = homoskedasticity_pvalue,
+        residuals_skewness = skewness_pvalue,
+        residuals_kurtosis = kurtosis_pvalue
+    )
+
+    return(list(modalities = normality_modalities, values = normality_values))
 }
 
 extractOutliers <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
 
-    col_nbr_outliers <- match("number.of.outliers", colnames(demetra_m))
-    if (all(is.na(col_nbr_outliers))) {
-        pct_outliers_modality <- rep(NA_character_, nrow(demetra_m))
+    if (!all(c("n", "nout") %in% colnames(demetra_m))) {
+        warning(
+            "The following variables are missing from the diagnostics matrix:\n",
+            toString(c("span.n", "regression.nout")),
+            "\n\nPlease re-compute the export."
+        )
+
         pct_outliers_value <- rep(NA_real_, nrow(demetra_m))
-    } else if (length(col_nbr_outliers) == 1L) {
-        pct_outliers_modality <- demetra_m[, col_nbr_outliers]
-        pct_outliers_value <- demetra_m[, col_nbr_outliers + 1L] * 100L
-    } else if (length(col_nbr_outliers) > 1L) {
-        stop("Error in the extraction of the number of outliers: multiple column")
+    } else {
+        pct_outliers_value <- 100 * as.integer(demetra_m[["nout"]]) / as.integer(demetra_m[["n"]])
     }
 
-    outliers <- data.frame(
-        pct_outliers_modality = pct_outliers_modality,
-        pct_outliers_value = pct_outliers_value,
-        m7_modality = cut(
+    outliers_modalities <- data.frame(
+        m7 = cut(
             x = as.numeric(demetra_m$m7),
             breaks = c(-Inf, thresholds[["m7"]]),
             labels = names(thresholds[["m7"]]),
             right = FALSE,
             include.lowest = TRUE,
             ordered_result = TRUE
+        ),
+        pct_outliers = cut(
+            x = pct_outliers_value,
+            breaks = c(-Inf, thresholds[["pct_outliers"]]),
+            labels = names(thresholds[["pct_outliers"]]),
+            right = FALSE,
+            include.lowest = TRUE,
+            ordered_result = TRUE
         )
     )
+    outliers_values <- data.frame(
+        m7 = as.numeric(demetra_m$m7),
+        pct_outliers = pct_outliers_value
+    )
 
-    return(outliers)
+    return(list(modalities = outliers_modalities, values = outliers_values))
+}
+
+extractTest <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
+
+    tests_variables_v3 <- c(
+        "seas.sa.qs", "seas.sa.f",
+        "seas.i.qs", "seas.i.f",
+        "td.sa.last", "td.i.last",
+        "independence", "normality"
+    )
+    tests_variables_v2 <- c(
+        "qs.test.on.sa", "f.test.on.sa..seasonal.dummies.",
+        "qs.test.on.i", "f.test.on.i..seasonal.dummies.",
+        "f.test.on.sa..td.", "f.test.on.i..td.", "independence", "normality"
+    )
+
+    present_variables_v2 <- intersect(tests_variables_v2, colnames(demetra_m))
+    present_variables_v3 <- intersect(tests_variables_v3, colnames(demetra_m))
+
+    if (length(present_variables_v2) == 0L
+        && length(present_variables_v3) == 0L) {
+
+        warning(
+            "The following variables are missing from the diagnostics matrix:\n",
+            "- If you are using a workspace with JDemetra+ in v2 : ", toString(tests_variables_v2),
+            "- If you are using a workspace with JDemetra+ in v3 : ", toString(tests_variables_v3),
+            "\n\nPlease re-compute the export.",
+        )
+    } else if (length(present_variables_v2) == 0L) {
+        # WS en V3
+        tests_variables <- tests_variables_v3
+    } else if (length(present_variables_v3) == 0L) {
+        # WS en V2
+        tests_variables <- tests_variables_v2
+    }
+
+    present_variables <- intersect(tests_variables, colnames(demetra_m))
+    index_present_variables <- match(present_variables, tests_variables)
+    missing_variables <- setdiff(tests_variables, colnames(demetra_m))
+    if (length(missing_variables) > 0L) {
+        warning(
+            "The following variables are missing from the diagnostics matrix:\n",
+            toString(missing_variables),
+            "\n\nPlease re-compute the export."
+        )
+    }
+
+    index_variables <- match(present_variables, colnames(demetra_m)) + 1L
+
+    test_values <- demetra_m[, index_variables, drop = FALSE]
+    colnames(test_values) <- c(
+            "qs_residual_sa_on_sa", "f_residual_sa_on_sa",
+            "qs_residual_sa_on_i", "f_residual_sa_on_i",
+            "f_residual_td_on_sa", "f_residual_td_on_i",
+            "residuals_independency", "residuals_normality"
+        )[index_present_variables]
+
+    test_modalities <- lapply(
+        X = colnames(test_values),
+        FUN = \(series_name) {
+            cut(
+                x = as.numeric(test_values[[series_name]]),
+                breaks = c(-Inf, thresholds[[series_name]]),
+                labels = names(thresholds[[series_name]]),
+                right = FALSE,
+                include.lowest = TRUE,
+                ordered_result = TRUE
+            )
+        }
+    ) |>
+        as.data.frame()
+    colnames(test_modalities) <- colnames(test_values)
+
+    return(list(modalities = test_modalities, values = test_values))
 }
