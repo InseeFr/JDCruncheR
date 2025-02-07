@@ -257,11 +257,16 @@ compute_score.QR_matrix <- function(
 
     # Computing score from modalities
     # Creation of an additionnal row to store the maximum score to normalise the score variable
-    QR_modalities <- x[["modalities"]][names(score_pond)] |>
-        lapply(recode_vec, recode_variable = thresholds[["grade"]]) |>
-        lapply(as.numeric) |>
-        as.data.frame() |>
-        rbind(max(thresholds[["grade"]]))
+    QR_modalities <- lapply(
+        X = x[["modalities"]][names(score_pond)],
+        FUN = recode_vec,
+        recode_variable = thresholds[["grade"]]
+    )
+    QR_modalities <- lapply(X = QR_modalities, FUN = as.numeric)
+    QR_modalities <- rbind(
+        as.data.frame(QR_modalities),
+        max(thresholds[["grade"]])
+    )
 
     # Weight changes with the conditional_indicator parameter
     if (!missing(conditional_indicator) && length(conditional_indicator) > 0L) {

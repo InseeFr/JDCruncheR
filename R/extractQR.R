@@ -621,7 +621,7 @@ extractTest <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
         "residuals_independency", "residuals_normality"
     )[index_present_variables]
 
-    test_modalities <- lapply(
+    test_modalities <- as.data.frame(lapply(
         X = colnames(test_values),
         FUN = \(series_name) {
             cut(
@@ -633,8 +633,7 @@ extractTest <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
                 ordered_result = TRUE
             )
         }
-    ) |>
-        as.data.frame()
+    ))
     colnames(test_modalities) <- colnames(test_values)
 
     return(list(modalities = test_modalities, values = test_values))
