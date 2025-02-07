@@ -623,7 +623,7 @@ extractTest <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
 
     test_modalities <- as.data.frame(lapply(
         X = colnames(test_values),
-        FUN = \(series_name) {
+        FUN = function(series_name) {
             cut(
                 x = as.numeric(test_values[[series_name]]),
                 breaks = c(-Inf, thresholds[[series_name]]),
