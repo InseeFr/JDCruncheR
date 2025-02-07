@@ -1,12 +1,8 @@
 pandoc: 3.1.11
 pkgdown: 2.1.1
 pkgdown_sha: ~
-articles:
-  Lancement_cruncher_pdf: Lancement_cruncher_pdf.html
-  Lancement_cruncher: Lancement_cruncher.html
-  Using_the_cruncher_with_JDCruncheR_pdf: Using_the_cruncher_with_JDCruncheR_pdf.html
-  Using_the_cruncher_with_JDCruncheR: Using_the_cruncher_with_JDCruncheR.html
-last_built: 2024-10-10T13:00Z
+articles: {}
+last_built: 2025-02-07T12:53Z
 urls:
   reference: https://inseefr.github.io/JDCruncheR/reference
   article: https://inseefr.github.io/JDCruncheR/articles

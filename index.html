@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Interface Between the JDemetra+ Cruncher and R, and Quality Report Generator">
 <meta name="description" content="Tool for generating quality reports from cruncher outputs (and calculating series scores). The latest version of the cruncher can be downloaded here: &lt;https://github.com/jdemetra/jwsacruncher/releases&gt;.">
 <meta property="og:description" content="Tool for generating quality reports from cruncher outputs (and calculating series scores). The latest version of the cruncher can be downloaded here: &lt;https://github.com/jdemetra/jwsacruncher/releases&gt;.">
@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="index.html">JDCruncheR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,25 +69,28 @@
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header">
 <img src="logo.svg" class="logo" alt=""><h1 id="jdcruncher-">
-<code>{JDCruncheR}</code> 
+<strong>{JDCruncheR}</strong> 
 <a class="anchor" aria-label="anchor" href="#jdcruncher-"></a>
 </h1>
 </div>
 <!-- badges: start -->
 
-<div class="section level2">
-<h2 id="français-">Français 🇫🇷<a class="anchor" aria-label="anchor" href="#fran%C3%A7ais-"></a>
+<div class="section level2" align="center">
+<h2 id="id_-readme-en-français---readme-in-english">
+<a href="#pr%C3%A9sentation">🇫🇷 README en français</a> | <a href="#overview">🇬🇧 README in english</a>
+<a class="anchor" aria-label="anchor" href="#id_-readme-en-fran%C3%A7ais---readme-in-english"></a>
 </h2>
+<div align="left">
 <div class="section level3">
 <h3 id="présentation">Présentation<a class="anchor" aria-label="anchor" href="#pr%C3%A9sentation"></a>
 </h3>
-<p>Le but premier du package <a href="https://github.com/InseeFr/JDCruncheR" class="external-link">JDCruncheR</a> est de fournir un accès rapide et facile au cruncher (<code>JWSACruncher</code>) depuis R. Le cruncher est un outil de mise à jour des workspaces de JDemetra+ sans avoir à ouvrir la GUI (Graphical User Interface). La dernière version peut être téléchargée ici : <a href="https://github.com/jdemetra/jwsacruncher/releases" class="external-link uri">https://github.com/jdemetra/jwsacruncher/releases</a>. Pour plus d’information, vous pouvez visiter la page <a href="https://github.com/jdemetra/jwsacruncher/wiki" class="external-link">wiki</a>.</p>
-<p>Avec <a href="https://github.com/InseeFr/JDCruncheR" class="external-link">JDCruncheR</a>, vous pouvez aussi générer des <em>bilans qualité</em> utilisant l’output du cruncher. Ce bilan est un résumé des diagnostiques de la désaisonnalisation. Il peut être utilisé pour repérer les séries les plus problématiques qui nécessitent une analyse plus fine. Cela est très utile lorsqu’on a beaucoup de séries à désaisonnaliser.</p>
+<p>Le but premier du package <strong>{JDCruncheR}</strong> est de fournir un accès rapide et facile au cruncher (<code>JWSACruncher</code>) depuis R. Le cruncher est un outil de mise à jour des workspaces de JDemetra+ sans avoir à ouvrir la GUI (Graphical User Interface). La dernière version peut être téléchargée ici : <a href="https://github.com/jdemetra/jwsacruncher/releases" class="external-link uri">https://github.com/jdemetra/jwsacruncher/releases</a>. Pour plus d’information, vous pouvez visiter la page <a href="https://github.com/jdemetra/jwsacruncher/wiki" class="external-link">wiki</a>.</p>
+<p>Avec <strong>{JDCruncheR}</strong>, vous pouvez aussi générer des <em>bilans qualité</em> utilisant l’output du cruncher. Ce bilan est un résumé des diagnostiques de la désaisonnalisation. Il peut être utilisé pour repérer les séries les plus problématiques qui nécessitent une analyse plus fine. Cela est très utile lorsqu’on a beaucoup de séries à désaisonnaliser.</p>
 </div>
 <div class="section level3">
 <h3 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h3>
-<p><strong>🎉 <a href="https://github.com/InseeFr/JDCruncheR" class="external-link">JDCruncheR</a> est maintenant disponible sur le CRAN ! 🎉</strong></p>
+<p><strong>🎉 {JDCruncheR} est maintenant disponible sur le CRAN ! 🎉</strong></p>
 <p>Pour installer, il suffit de lancer la ligne de code suivante :</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"JDCruncheR"</span><span class="op">)</span></span></code></pre></div>
@@ -97,17 +100,24 @@
 <span><span class="co"># install.packages("remotes")</span></span>
 <span></span>
 <span><span class="co"># Installer la version en cours de développement depuis GitHub</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"InseeFr/JDCruncheR"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"InseeFr/JDCruncheR"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h3>
+<div class="section level4">
+<h4 id="chargement-du-package">Chargement du package<a class="anchor" aria-label="anchor" href="#chargement-du-package"></a>
+</h4>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/InseeFr/JDCruncheR" class="external-link">"JDCruncheR"</a></span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="changer-les-seuils-des-tests-statistiques">Changer les seuils des tests statistiques<a class="anchor" aria-label="anchor" href="#changer-les-seuils-des-tests-statistiques"></a>
+</h4>
 <p>Les seuils des tests du bilan qualité sont personnalisables. Pour cela, il faut modifier l’option <code>"jdc_thresholds"</code>.</p>
 <p>Pour récupérer les valeurs des tests par défault, il faut appeler la fonction <code><a href="reference/get_thresholds.html">get_thresholds()</a></code> :</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/get_thresholds.html">get_thresholds</a></span><span class="op">(</span><span class="st">"m7"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/get_thresholds.html">get_thresholds</a></span><span class="op">(</span><span class="st">"m7"</span>, default <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   Good    Bad Severe </span></span>
 <span><span class="co">#&gt;      1      2    Inf</span></span>
 <span><span class="fu"><a href="reference/get_thresholds.html">get_thresholds</a></span><span class="op">(</span>default <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -177,7 +187,11 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $pct_outliers</span></span>
 <span><span class="co">#&gt;      Good Uncertain       Bad </span></span>
-<span><span class="co">#&gt;         3         5       Inf</span></span></code></pre></div>
+<span><span class="co">#&gt;         3         5       Inf </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $grade</span></span>
+<span><span class="co">#&gt;      Good Uncertain       Bad    Severe </span></span>
+<span><span class="co">#&gt;         0         1         3         5</span></span></code></pre></div>
 <p>Pour changer la valeur de l’option, on peut utiliser la fonction <code><a href="reference/set_thresholds.html">set_thresholds()</a></code> :</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Fixer les seuils à une certaine valeur</span></span>
@@ -192,45 +206,225 @@
 <span><span class="co">#&gt;   Good    Bad Severe </span></span>
 <span><span class="co">#&gt;      1      2    Inf</span></span></code></pre></div>
 </div>
+<div class="section level4">
+<h4 id="changer-les-notes-des-modalités-good-uncertain-bad-et-severe">Changer les notes des modalités <code>Good</code>, <code>Uncertain</code>, <code>Bad</code> et <code>Severe</code>
+<a class="anchor" aria-label="anchor" href="#changer-les-notes-des-modalit%C3%A9s-good-uncertain-bad-et-severe"></a>
+</h4>
+<p>Le mécanisme est le même que pour les seuils des tests statistiques avec la valeur <code>"grade"</code> :</p>
+<p>Pour récupérer la valeur par défault des notes, il faut appeler la fonction <code><a href="reference/get_thresholds.html">get_thresholds()</a></code> :</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/get_thresholds.html">get_thresholds</a></span><span class="op">(</span><span class="st">"grade"</span>, default <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt;      Good Uncertain       Bad    Severe </span></span>
+<span><span class="co">#&gt;         0         1         3         5</span></span></code></pre></div>
+<p>Pour changer la valeur de la note, on peut utiliser la fonction <code><a href="reference/set_thresholds.html">set_thresholds()</a></code> :</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Fixer les notes à une certaine valeur</span></span>
+<span><span class="fu"><a href="reference/set_thresholds.html">set_thresholds</a></span><span class="op">(</span>test_name <span class="op">=</span> <span class="st">"grade"</span>, thresholds <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>Good <span class="op">=</span> <span class="fl">0</span>, Uncertain <span class="op">=</span> <span class="fl">0.1</span>, Bad <span class="op">=</span> <span class="fl">1</span>, Severe <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/get_thresholds.html">get_thresholds</a></span><span class="op">(</span>test_name <span class="op">=</span> <span class="st">"grade"</span>, default <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt;      Good Uncertain       Bad    Severe </span></span>
+<span><span class="co">#&gt;       0.0       0.1       1.0      10.0</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="calculer-un-bilan-qualité">Calculer un bilan qualité<a class="anchor" aria-label="anchor" href="#calculer-un-bilan-qualit%C3%A9"></a>
+</h4>
+<p>Par exemple, en partant d’une matrice <code>demetra_m.csv</code> :</p>
+<table class="table">
+<colgroup>
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+</colgroup>
+<thead><tr class="header">
+<th></th>
+<th>n</th>
+<th>start</th>
+<th>end</th>
+<th>mean</th>
+<th>skewness</th>
+<th></th>
+<th>kurtosis</th>
+<th></th>
+<th>lb2</th>
+<th></th>
+<th>p</th>
+<th>d</th>
+<th>q</th>
+<th>bp</th>
+<th>bd</th>
+<th>bq</th>
+<th>m7</th>
+<th>q</th>
+<th>q.m2</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>France</td>
+<td>88</td>
+<td>2012-10-01</td>
+<td>2020-01-01</td>
+<td>0.6</td>
+<td>0.0</td>
+<td>0.9</td>
+<td>2.9</td>
+<td>0.8</td>
+<td>36.1</td>
+<td>0.0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0.2</td>
+<td>0.5</td>
+<td>2.0</td>
+</tr>
+<tr class="even">
+<td>Spain</td>
+<td>78</td>
+<td>2015-10-01</td>
+<td>2022-03-01</td>
+<td>0.4</td>
+<td>-0.4</td>
+<td>0.0</td>
+<td>4.6</td>
+<td>0.0</td>
+<td>17.3</td>
+<td>0.7</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0.8</td>
+<td>1.5</td>
+<td>1.3</td>
+</tr>
+<tr class="odd">
+<td>Greece</td>
+<td>112</td>
+<td>2010-10-01</td>
+<td>2020-01-01</td>
+<td>0.5</td>
+<td>-0.3</td>
+<td>0.0</td>
+<td>3.7</td>
+<td>0.0</td>
+<td>46.9</td>
+<td>0.0</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0.3</td>
+<td>0.4</td>
+<td>0.8</td>
+</tr>
+</tbody>
+</table>
+<p>On peut générer un bilan qualité :</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">BQ</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/extract_QR.html">extract_QR</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">demetra_m</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">BQ</span><span class="op">$</span><span class="va">modalities</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   series residuals_homoskedasticity residuals_skewness residuals_kurtosis</span></span>
+<span><span class="co">#&gt; 1 France                       Good               Good               Good</span></span>
+<span><span class="co">#&gt; 2  Spain                        Bad                Bad                Bad</span></span>
+<span><span class="co">#&gt; 3 Greece                        Bad                Bad                Bad</span></span>
+<span><span class="co">#&gt;   oos_mean oos_mse   m7    q q_m2 pct_outliers</span></span>
+<span><span class="co">#&gt; 1     Good    &lt;NA&gt; Good Good  Bad         &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2     Good    &lt;NA&gt; Good  Bad  Bad         &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 3     Good    &lt;NA&gt; Good  Bad Good         &lt;NA&gt;</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="calculer-un-score">Calculer un score<a class="anchor" aria-label="anchor" href="#calculer-un-score"></a>
+</h4>
+<p>Il est possible maintenant de calculer un score à partir du bilan qualité</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">BQ_score</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/compute_score.html">compute_score</a></span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="va">BQ</span>,</span>
+<span>    score_pond <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>        oos_mean <span class="op">=</span> <span class="fl">15L</span>, </span>
+<span>        residuals_kurtosis <span class="op">=</span> <span class="fl">15L</span>, </span>
+<span>        residuals_homoskedasticity <span class="op">=</span> <span class="fl">5L</span>, </span>
+<span>        residuals_skewness <span class="op">=</span> <span class="fl">5L</span>, </span>
+<span>        m7 <span class="op">=</span> <span class="fl">5L</span>, </span>
+<span>        q_m2 <span class="op">=</span> <span class="fl">5L</span></span>
+<span>    <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/extract_score.html">extract_score</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">BQ_score</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   series score</span></span>
+<span><span class="co">#&gt; 1 France    60</span></span>
+<span><span class="co">#&gt; 2  Spain   110</span></span>
+<span><span class="co">#&gt; 3 Greece   100</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="exporter-un-bilan-qualité">Exporter un bilan qualité<a class="anchor" aria-label="anchor" href="#exporter-un-bilan-qualit%C3%A9"></a>
+</h4>
+<p>Enfin il est possible d’exporter un bilan qualité via la fonction <code>export_xlsx</code>.</p>
+</div>
+</div>
 <div class="section level3">
 <h3 id="autres-informations">Autres informations<a class="anchor" aria-label="anchor" href="#autres-informations"></a>
 </h3>
-<p>Pour plus d’informations sur l’installation et la configuration du package <a href="https://github.com/InseeFr/JDCruncheR" class="external-link">JDCruncheR</a>, vous pouvez visiter la page <a href="https://github.com/jdemetra/jwsacruncher/wiki" class="external-link">wiki</a></p>
+<p>Pour plus d’informations sur l’installation et la configuration du package <strong>{JDCruncheR}</strong>, vous pouvez visiter la page <a href="https://github.com/jdemetra/jwsacruncher/wiki" class="external-link">wiki</a></p>
 <p>Pour une description plus complète des packages R pour JDemetra+ voir le document de travail Insee <a href="https://www.insee.fr/fr/statistiques/5019786" class="external-link">Les packages R pour JDemetra+ : une aide à la désaisonnalisation</a></p>
 </div>
-</div>
-<div class="section level2">
-<h2 id="english-">English 🇬🇧<a class="anchor" aria-label="anchor" href="#english-"></a>
-</h2>
 <div class="section level3">
 <h3 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h3>
-<p>The primary objective of the <a href="https://github.com/InseeFr/JDCruncheR" class="external-link">JDCruncheR</a> package is to provide a quick and easy access to the JDemetra+ cruncher (<code>JWSACruncher</code>) from R. The cruncher is a tool for updating JDemetra+ workspaces, without having to open the graphical user interface. The latest version can be downloaded here: <a href="https://github.com/jdemetra/jwsacruncher/releases" class="external-link uri">https://github.com/jdemetra/jwsacruncher/releases</a>. For more information, please refer to the <a href="https://github.com/jdemetra/jwsacruncher/wiki" class="external-link">wiki page</a>.</p>
-<p>With <a href="https://github.com/InseeFr/JDCruncheR" class="external-link">JDCruncheR</a>, you can also generate a <em>quality report</em> based on the cruncher’s output. This report is a formatted summary of the seasonal adjustment process master diagnostics and parameters. It can be used to spot the most problematic series which will require a finer analysis. This is most useful when dealing with a large number of series.</p>
+<p>The primary objective of the <strong>{JDCruncheR}</strong> package is to provide a quick and easy access to the JDemetra+ cruncher (<code>JWSACruncher</code>) from R. The cruncher is a tool for updating JDemetra+ workspaces, without having to open the graphical user interface. The latest version can be downloaded here: <a href="https://github.com/jdemetra/jwsacruncher/releases" class="external-link uri">https://github.com/jdemetra/jwsacruncher/releases</a>. For more information, please refer to the <a href="https://github.com/jdemetra/jwsacruncher/wiki" class="external-link">wiki page</a>.</p>
+<p>With <strong>{JDCruncheR}</strong>, you can also generate a <em>quality report</em> based on the cruncher’s output. This report is a formatted summary of the seasonal adjustment process master diagnostics and parameters. It can be used to spot the most problematic series which will require a finer analysis. This is most useful when dealing with a large number of series.</p>
 </div>
 <div class="section level3">
 <h3 id="installation-1">Installation<a class="anchor" aria-label="anchor" href="#installation-1"></a>
 </h3>
-<p><strong>🎉 <a href="https://github.com/InseeFr/JDCruncheR" class="external-link">JDCruncheR</a> is now available on CRAN! 🎉</strong></p>
+<p><strong>🎉 {JDCruncheR} is now available on CRAN! 🎉</strong></p>
 <p>To install it, you have to launch the following command line:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"JDCruncheR"</span><span class="op">)</span></span></code></pre></div>
 <p>To get the current development version from GitHub:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># If remotes packages is not installed</span></span>
 <span><span class="co"># install.packages("remotes")</span></span>
 <span></span>
 <span><span class="co"># Install development version from GitHub</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"InseeFr/JDCruncheR"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"InseeFr/JDCruncheR"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a>
 </h3>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="section level4">
+<h4 id="loading-the-package">Loading the package<a class="anchor" aria-label="anchor" href="#loading-the-package"></a>
+</h4>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/InseeFr/JDCruncheR" class="external-link">"JDCruncheR"</a></span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="changing-statistical-test-thresholds">Changing statistical test thresholds<a class="anchor" aria-label="anchor" href="#changing-statistical-test-thresholds"></a>
+</h4>
 <p>The thresholds of the QR tests can be customised You have to modify the option <code>"jdc_thresholds"</code>.</p>
 <p>To get the (default or not) values of the thresholds of the tests, you can call the fonction <code><a href="reference/get_thresholds.html">get_thresholds()</a></code> :</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/get_thresholds.html">get_thresholds</a></span><span class="op">(</span><span class="st">"m7"</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   Good    Bad Severe </span></span>
 <span><span class="co">#&gt;      1      2    Inf</span></span>
@@ -301,9 +495,13 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $pct_outliers</span></span>
 <span><span class="co">#&gt;      Good Uncertain       Bad </span></span>
-<span><span class="co">#&gt;         3         5       Inf</span></span></code></pre></div>
+<span><span class="co">#&gt;         3         5       Inf </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $grade</span></span>
+<span><span class="co">#&gt;      Good Uncertain       Bad    Severe </span></span>
+<span><span class="co">#&gt;         0         1         3         5</span></span></code></pre></div>
 <p>To change the value of the option, you can use the fonction <code><a href="reference/set_thresholds.html">set_thresholds()</a></code>:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Set threshold to imposed value</span></span>
 <span><span class="fu"><a href="reference/set_thresholds.html">set_thresholds</a></span><span class="op">(</span>test_name <span class="op">=</span> <span class="st">"m7"</span>, thresholds <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>Good <span class="op">=</span> <span class="fl">0.8</span>, Bad <span class="op">=</span> <span class="fl">1.4</span>, Severe <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/get_thresholds.html">get_thresholds</a></span><span class="op">(</span>test_name <span class="op">=</span> <span class="st">"m7"</span>, default <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
@@ -316,11 +514,188 @@
 <span><span class="co">#&gt;   Good    Bad Severe </span></span>
 <span><span class="co">#&gt;      1      2    Inf</span></span></code></pre></div>
 </div>
+<div class="section level4">
+<h4 id="changing-the-scores-for-the-good-uncertain-bad-and-severe-modalities">Changing the scores for the <code>Good</code>, <code>Uncertain</code>, <code>Bad</code> and <code>Severe</code> modalities<a class="anchor" aria-label="anchor" href="#changing-the-scores-for-the-good-uncertain-bad-and-severe-modalities"></a>
+</h4>
+<p>The mechanism is the same as for the statistical test thresholds with the <code>"grade"</code> value:</p>
+<p>To retrieve the default grade value, call the <code><a href="reference/get_thresholds.html">get_thresholds()</a></code> function:</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/get_thresholds.html">get_thresholds</a></span><span class="op">(</span><span class="st">"grade"</span>, default <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt;      Good Uncertain       Bad    Severe </span></span>
+<span><span class="co">#&gt;         0         1         3         5</span></span></code></pre></div>
+<p>To change the value of the grade, you can use the <code><a href="reference/set_thresholds.html">set_thresholds()</a></code> function:</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Set grades to a certain value</span></span>
+<span><span class="fu"><a href="reference/set_thresholds.html">set_thresholds</a></span><span class="op">(</span>test_name <span class="op">=</span> <span class="st">"grade"</span>, thresholds <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>Good <span class="op">=</span> <span class="fl">0</span>, Uncertain <span class="op">=</span> <span class="fl">0.1</span>, Bad <span class="op">=</span> <span class="fl">1</span>, Severe <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/get_thresholds.html">get_thresholds</a></span><span class="op">(</span>test_name <span class="op">=</span> <span class="st">"grade"</span>, default <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt;      Good Uncertain       Bad    Severe </span></span>
+<span><span class="co">#&gt;       0.0       0.1       1.0      10.0</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="calculate-a-quality-report">Calculate a quality report<a class="anchor" aria-label="anchor" href="#calculate-a-quality-report"></a>
+</h4>
+<p>For example, starting from a matrix <code>demetra_m.csv</code> :</p>
+<table class="table">
+<colgroup>
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="4%">
+</colgroup>
+<thead><tr class="header">
+<th></th>
+<th>n</th>
+<th>start</th>
+<th>end</th>
+<th>mean</th>
+<th>skewness</th>
+<th></th>
+<th>kurtosis</th>
+<th></th>
+<th>lb2</th>
+<th></th>
+<th>p</th>
+<th>d</th>
+<th>q</th>
+<th>bp</th>
+<th>bd</th>
+<th>bq</th>
+<th>m7</th>
+<th>q</th>
+<th>q.m2</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>France</td>
+<td>88</td>
+<td>2012-10-01</td>
+<td>2020-01-01</td>
+<td>0.6</td>
+<td>0.0</td>
+<td>0.9</td>
+<td>2.9</td>
+<td>0.8</td>
+<td>36.1</td>
+<td>0.0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0.2</td>
+<td>0.5</td>
+<td>2.0</td>
+</tr>
+<tr class="even">
+<td>Spain</td>
+<td>78</td>
+<td>2015-10-01</td>
+<td>2022-03-01</td>
+<td>0.4</td>
+<td>-0.4</td>
+<td>0.0</td>
+<td>4.6</td>
+<td>0.0</td>
+<td>17.3</td>
+<td>0.7</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0.8</td>
+<td>1.5</td>
+<td>1.3</td>
+</tr>
+<tr class="odd">
+<td>Greece</td>
+<td>112</td>
+<td>2010-10-01</td>
+<td>2020-01-01</td>
+<td>0.5</td>
+<td>-0.3</td>
+<td>0.0</td>
+<td>3.7</td>
+<td>0.0</td>
+<td>46.9</td>
+<td>0.0</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0.3</td>
+<td>0.4</td>
+<td>0.8</td>
+</tr>
+</tbody>
+</table>
+<p>A quality report can be generated:</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">BQ</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/extract_QR.html">extract_QR</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">demetra_m</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">BQ</span><span class="op">$</span><span class="va">modalities</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   series residuals_homoskedasticity residuals_skewness residuals_kurtosis</span></span>
+<span><span class="co">#&gt; 1 France                       Good               Good               Good</span></span>
+<span><span class="co">#&gt; 2  Spain                        Bad                Bad                Bad</span></span>
+<span><span class="co">#&gt; 3 Greece                        Bad                Bad                Bad</span></span>
+<span><span class="co">#&gt;   oos_mean oos_mse   m7    q q_m2 pct_outliers</span></span>
+<span><span class="co">#&gt; 1     Good    &lt;NA&gt; Good Good  Bad         &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2     Good    &lt;NA&gt; Good  Bad  Bad         &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 3     Good    &lt;NA&gt; Good  Bad Good         &lt;NA&gt;</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="calculate-a-score">Calculate a score<a class="anchor" aria-label="anchor" href="#calculate-a-score"></a>
+</h4>
+<p>It is now possible to calculate a score from the quality report:</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">BQ_score</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/compute_score.html">compute_score</a></span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="va">BQ</span>,</span>
+<span>    score_pond <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>        oos_mean <span class="op">=</span> <span class="fl">15L</span>, </span>
+<span>        residuals_kurtosis <span class="op">=</span> <span class="fl">15L</span>, </span>
+<span>        residuals_homoskedasticity <span class="op">=</span> <span class="fl">5L</span>, </span>
+<span>        residuals_skewness <span class="op">=</span> <span class="fl">5L</span>, </span>
+<span>        m7 <span class="op">=</span> <span class="fl">5L</span>, </span>
+<span>        q_m2 <span class="op">=</span> <span class="fl">5L</span></span>
+<span>    <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/extract_score.html">extract_score</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">BQ_score</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   series score</span></span>
+<span><span class="co">#&gt; 1 France    60</span></span>
+<span><span class="co">#&gt; 2  Spain   110</span></span>
+<span><span class="co">#&gt; 3 Greece   100</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="exporting-a-quality-report">Exporting a quality report<a class="anchor" aria-label="anchor" href="#exporting-a-quality-report"></a>
+</h4>
+<p>Finally, you can export a quality report using the <code>export_xlsx</code> function.</p>
+</div>
+</div>
 <div class="section level3">
 <h3 id="other-informations">Other informations<a class="anchor" aria-label="anchor" href="#other-informations"></a>
 </h3>
-<p>For more informations on installing and configuring the <a href="https://github.com/InseeFr/JDCruncheR" class="external-link">JDCruncheR</a> package, you can visit the <a href="https://github.com/jdemetra/jwsacruncher/wiki" class="external-link">wiki</a> page.</p>
+<p>For more informations on installing and configuring the <strong>{JDCruncheR}</strong> package, you can visit the <a href="https://github.com/jdemetra/jwsacruncher/wiki" class="external-link">wiki</a> page.</p>
 <p>For a more comprehensive description of the R packages for JDemetra+ check the Insee working paper <a href="https://www.insee.fr/en/statistiques/5019812" class="external-link">R Tools for JDemetra+: Seasonal adjustment made easier</a></p>
+</div>
 </div>
 </div>
 </div>
@@ -336,7 +711,8 @@
 <div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li>EUPL</li>
+<li>file <a href="LICENSE-text.html">LICENSE</a>
+</li>
 </ul>
 </div>
 
