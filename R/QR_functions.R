@@ -114,7 +114,7 @@ recode_vec <- function(x, recode_variable) {
 #' print(QR)
 #'
 #' # Extraire les modalités de la matrice
-#' QR$modalities$score
+#' QR[["modalities"]][["score"]]
 #'
 #' @keywords internal
 #' @name fr-compute_score
@@ -220,7 +220,7 @@ NULL
 #' print(QR)
 #'
 #' # Extract the modalities matrix:
-#' QR$modalities$score
+#' QR[["modalities"]][["score"]]
 #'
 #' @name compute_score
 #' @rdname compute_score
@@ -251,13 +251,13 @@ compute_score.QR_matrix <- function(
         thresholds = getOption("jdc_thresholds"),
         ...) {
 
-    if (!all(names(score_pond) %in% colnames(x$modalities))) {
+    if (!all(names(score_pond) %in% colnames(x[["modalities"]]))) {
         stop("Missing variables: please check the score_pond parameter")
     }
 
     # Computing score from modalities
     # Creation of an additionnal row to store the maximum score to normalise the score variable
-    QR_modalities <- x$modalities[names(score_pond)] |>
+    QR_modalities <- x[["modalities"]][names(score_pond)] |>
         lapply(recode_vec, recode_variable = thresholds[["grade"]]) |>
         lapply(as.numeric) |>
         as.data.frame() |>
@@ -276,24 +276,24 @@ compute_score.QR_matrix <- function(
             }
 
             indicator_variables <- c(
-                indicator_condition$indicator,
-                indicator_condition$conditions
+                indicator_condition[["indicator"]],
+                indicator_condition[["conditions"]]
             )
-            if (!all(indicator_variables %in% colnames(x$modalities))) {
+            if (!all(indicator_variables %in% colnames(x[["modalities"]]))) {
                 stop("Missing variables: please check the indicator_variables parameter")
             }
 
             # Series for which at least one conditions is verified
             series_to_change <- rowSums(sapply(
-                indicator_condition$conditions,
+                indicator_condition[["conditions"]],
                 function(name) {
-                    x$modalities[, name] %in% indicator_condition$conditions_modalities
+                    x[["modalities"]][, name] %in% indicator_condition[["conditions_modalities"]]
                 }
             ), na.rm = TRUE)
             series_to_change <- which(series_to_change > 0L)
-            if (indicator_condition$indicator[1L] %in% names(score_pond)) {
-                QR_modalities[series_to_change, indicator_condition$indicator[1L]] <-
-                    QR_modalities[series_to_change, indicator_condition$indicator[1L]] / score_pond[indicator_condition$indicator[1L]]
+            if (indicator_condition[["indicator"]][[1L]] %in% names(score_pond)) {
+                QR_modalities[series_to_change, indicator_condition[["indicator"]][[1L]]] <-
+                    QR_modalities[series_to_change, indicator_condition[["indicator"]][[1L]]] / score_pond[indicator_condition[["indicator"]][[1L]]]
             }
         }
     }
@@ -315,18 +315,18 @@ compute_score.QR_matrix <- function(
     }
     score <- score[-total_pond_id]
 
-    x$modalities[, grep(
+    x[["modalities"]][, grep(
         "(_highest_contrib_score$)|(score)",
-        colnames(x$modalities)
+        colnames(x[["modalities"]])
     )] <- NULL
-    x$values[, grep(
+    x[["values"]][, grep(
         "(_highest_contrib_score$)|(score)",
-        colnames(x$values)
+        colnames(x[["values"]])
     )] <- NULL
 
-    x$modalities$score <- score
-    x$values$score <- score
-    x$score_formula <- paste(
+    x[["modalities"]][["score"]] <- score
+    x[["values"]][["score"]] <- score
+    x[["score_formula"]] <- paste(
         score_pond, "*",
         names(score_pond),
         collapse = " + "
@@ -353,9 +353,9 @@ compute_score.QR_matrix <- function(
             seq_along(score_pond),
             "_highest_contrib_score"
         )
-        ncol_before_contrib <- ncol(x$values)
-        x$values <- cbind(x$values, contrib[, seq_len(n_contrib_score)])
-        colnames(x$values)[seq_len(n_contrib_score) + ncol_before_contrib] <-
+        ncol_before_contrib <- ncol(x[["values"]])
+        x[["values"]] <- cbind(x[["values"]], contrib[, seq_len(n_contrib_score)])
+        colnames(x[["values"]])[seq_len(n_contrib_score) + ncol_before_contrib] <-
             paste0(
                 seq_len(n_contrib_score),
                 "_highest_contrib_score"
@@ -411,7 +411,7 @@ compute_score.default <- function(x, ...) {
 #' print(QR)
 #'
 #' # Extraire le score pondéré
-#' QR$modalities$score_pond
+#' QR[["modalities"]][["score_pond"]]
 #'
 #' @return L'objet en entrée avec le score recalculé
 #' @keywords internal
@@ -447,7 +447,7 @@ NULL
 #' print(QR)
 #'
 #' # Extract the weighted score
-#' QR$modalities$score_pond
+#' QR[["modalities"]][["score_pond"]]
 #'
 #' @family QR_matrix functions
 #' @return the input with an additionnal weighted score
@@ -465,16 +465,16 @@ weighted_score.default <- function(x, pond = 1L) {
 #' @export
 weighted_score.QR_matrix <- function(x, pond = 1L) {
     if (is.character(pond)) {
-        if (is.na(match(pond, colnames(x$values)))) {
+        if (is.na(match(pond, colnames(x[["values"]])))) {
             stop("The variable ", pond, " doesn't exist")
         }
-        pond <- x$values[, pond]
+        pond <- x[["values"]][, pond]
     }
-    if (!is.na(match("score", colnames(x$modalities)))) {
-        x$modalities$score_pond <- x$modalities$score * pond
+    if (!is.na(match("score", colnames(x[["modalities"]])))) {
+        x[["modalities"]][["score_pond"]] <- x[["modalities"]][["score"]] * pond
     }
-    if (!is.na(match("score", colnames(x$values)))) {
-        x$values$score_pond <- x$values$score * pond
+    if (!is.na(match("score", colnames(x[["values"]])))) {
+        x[["values"]][["score_pond"]] <- x[["values"]][["score"]] * pond
     }
     return(x)
 }
@@ -532,13 +532,13 @@ weighted_score.mQR_matrix <- function(x, pond = 1L) {
 #'
 #' # Calculer le score
 #' QR <- compute_score(QR, n_contrib_score = 2)
-#' print(QR$modalities$score)
+#' print(QR[["modalities"]][["score"]])
 #'
 #' # Trier les scores
 #'
 #' # Pour trier par ordre croissant sur le score
 #' QR <- sort(QR, sort_variables = "score")
-#' print(QR$modalities$score)
+#' print(QR[["modalities"]][["score"]])
 #'
 #' @keywords internal
 #' @name fr-sort.QR_matrix
@@ -571,13 +571,13 @@ NULL
 #'
 #' # Compute the score
 #' QR <- compute_score(QR, n_contrib_score = 2)
-#' print(QR$modalities$score)
+#' print(QR[["modalities"]][["score"]])
 #'
 #' # Sort the scores
 #'
 #' # To sort by ascending scores
 #' QR <- sort(QR, sort_variables = "score")
-#' print(QR$modalities$score)
+#' print(QR[["modalities"]][["score"]])
 #'
 #' @family QR_matrix functions
 #' @name sort
@@ -585,14 +585,14 @@ NULL
 #' @seealso [Traduction française][fr-sort.QR_matrix()]
 #' @export
 sort.QR_matrix <- function(x, decreasing = FALSE, sort_variables = "score", ...) {
-    modalities <- x$modalities
+    modalities <- x[["modalities"]]
     if (anyNA(match(sort_variables, colnames(modalities)))) {
         stop("There is an error in the variables' names")
     }
     modalities <- c(modalities[sort_variables], decreasing = decreasing)
     ordered_matrixBQ <- do.call(order, modalities)
-    x$modalities <- x$modalities[ordered_matrixBQ, ]
-    x$values <- x$values[ordered_matrixBQ, ]
+    x[["modalities"]] <- x[["modalities"]][ordered_matrixBQ, ]
+    x[["values"]] <- x[["values"]][ordered_matrixBQ, ]
     return(x)
 }
 #' @rdname sort
@@ -729,15 +729,15 @@ extract_score.QR_matrix <- function(x,
                                     format_output = c("data.frame", "vector"),
                                     weighted_score = FALSE) {
     if (weighted_score) {
-        score <- x$modalities$score_pond
+        score <- x[["modalities"]][["score_pond"]]
         if (is.null(score)) {
-            score <- x$modalities$score
+            score <- x[["modalities"]][["score"]]
             score_variable <- "score"
         } else {
             score_variable <- "score_pond"
         }
     } else {
-        score <- x$modalities$score
+        score <- x[["modalities"]][["score"]]
         score_variable <- "score"
     }
 
@@ -748,9 +748,9 @@ extract_score.QR_matrix <- function(x,
     format_output <- match.arg(format_output)
     res <- switch(
         format_output,
-        data.frame = x$modalities[, c("series", score_variable)],
+        data.frame = x[["modalities"]][, c("series", score_variable)],
         vector = {
-            names(score) <- x$modalities$series
+            names(score) <- x[["modalities"]][["series"]]
             score
         }
     )
@@ -872,13 +872,13 @@ remove_indicators.QR_matrix <- function(x, ...) {
     indicators <- c(...)
     indicators <- setdiff(indicators, "series")
 
-    modalities_to_remove <- which(colnames(x$modalities) %in% indicators)
-    values_to_remove <- which(colnames(x$values) %in% indicators)
+    modalities_to_remove <- which(colnames(x[["modalities"]]) %in% indicators)
+    values_to_remove <- which(colnames(x[["values"]]) %in% indicators)
     if (length(modalities_to_remove) > 0L) {
-        x$modalities <- x$modalities[, -modalities_to_remove]
+        x[["modalities"]] <- x[["modalities"]][, -modalities_to_remove]
     }
     if (length(values_to_remove) > 0L) {
-        x$values <- x$values[, -values_to_remove]
+        x[["values"]] <- x[["values"]][, -values_to_remove]
     }
     return(x)
 }
@@ -900,13 +900,13 @@ retain_indicators.QR_matrix <- function(x, ...) {
     indicators <- c(...)
     indicators <- c("series", indicators)
 
-    modalities_to_retain <- which(colnames(x$modalities) %in% indicators)
-    values_to_retain <- which(colnames(x$values) %in% indicators)
+    modalities_to_retain <- which(colnames(x[["modalities"]]) %in% indicators)
+    values_to_retain <- which(colnames(x[["values"]]) %in% indicators)
     if (length(modalities_to_retain) > 0L) {
-        x$modalities <- x$modalities[, modalities_to_retain]
+        x[["modalities"]] <- x[["modalities"]][, modalities_to_retain]
     }
     if (length(values_to_retain) > 0L) {
-        x$values <- x$values[, values_to_retain]
+        x[["values"]] <- x[["values"]][, values_to_retain]
     }
     return(x)
 }
@@ -1003,7 +1003,7 @@ rbind.QR_matrix <- function(..., check_formula = TRUE) {
             if (!is.QR_matrix(x)) {
                 stop("All arguments of this function must be QR_matrix objects", call. = FALSE)
             }
-            x$score_formula
+            x[["score_formula"]]
         })
         list_formula_unique <- unique(list_formula)
         if (length(list_formula) != length(list_QR_matrix)
@@ -1013,7 +1013,7 @@ rbind.QR_matrix <- function(..., check_formula = TRUE) {
         if (is.list(list_formula_unique)) {
             score_formula <- NULL
         } else {
-            score_formula <- list_QR_matrix[[1L]]$formula
+            score_formula <- list_QR_matrix[[1L]][["formula"]]
         }
     } else {
         score_formula <- NULL
@@ -1025,12 +1025,12 @@ rbind.QR_matrix <- function(..., check_formula = TRUE) {
             if (!is.QR_matrix(x)) {
                 stop("All arguments of this function must be QR_matrix objects", call. = FALSE)
             }
-            x$modalities
+            x[["modalities"]]
         })
     )
     values <- do.call(
         rbind,
-        lapply(list_QR_matrix, function(x) x$values)
+        lapply(list_QR_matrix, function(x) x[["values"]])
     )
     QR <- QR_matrix(
         modalities = modalities, values = values,
@@ -1143,20 +1143,20 @@ add_indicator.QR_matrix <- function(x, indicator, variable_name, ...) {
     if (missing(variable_name)) {
         variable_name <- colnames(indicator)[-1L]
     }
-    values <- x$values
+    values <- x[["values"]]
     n_col <- ncol(values)
-    values$initial_sort <- seq_len(nrow(values))
+    values[["initial_sort"]] <- seq_len(nrow(values))
     values <- merge(
         values, indicator,
         by = "series",
         all.x = TRUE, all.y = FALSE, ...
     )
-    values <- values[order(values$initial_sort, decreasing = FALSE), ]
+    values <- values[order(values[["initial_sort"]], decreasing = FALSE), ]
 
-    values$initial_sort <- NULL
+    values[["initial_sort"]] <- NULL
     colnames(values)[-seq_len(n_col)] <- variable_name
 
-    x$values <- values
+    x[["values"]] <- values
 
     return(x)
 }
@@ -1228,8 +1228,8 @@ recode_indicator_num.QR_matrix <- function(
         breaks = c(0., 0.01, 0.05, 0.1, 1.),
         labels = c("Good", "Uncertain", "Bad", "Severe"),
         ...) {
-    modalities <- x$modalities
-    values <- x$values
+    modalities <- x[["modalities"]]
+    values <- x[["values"]]
     for (var in variable_name) {
         if (var %in% colnames(values)) {
             modalities[, var] <- cut(
@@ -1242,7 +1242,7 @@ recode_indicator_num.QR_matrix <- function(
         }
     }
 
-    x$modalities <- modalities
+    x[["modalities"]] <- modalities
 
     return(x)
 }

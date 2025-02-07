@@ -120,7 +120,7 @@ QR <- compute_score(QR, n_contrib_score = 2)
 print(QR)
 
 # Extraire les modalités de la matrice
-QR$modalities$score
+QR[["modalities"]][["score"]]
 
 }
 \keyword{internal}

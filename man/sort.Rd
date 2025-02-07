@@ -41,13 +41,13 @@ QR <- extract_QR(demetra_path)
 
 # Compute the score
 QR <- compute_score(QR, n_contrib_score = 2)
-print(QR$modalities$score)
+print(QR[["modalities"]][["score"]])
 
 # Sort the scores
 
 # To sort by ascending scores
 QR <- sort(QR, sort_variables = "score")
-print(QR$modalities$score)
+print(QR[["modalities"]][["score"]])
 
 }
 \seealso{

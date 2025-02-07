@@ -38,7 +38,7 @@ QR <- weighted_score(QR, 2)
 print(QR)
 
 # Extract the weighted score
-QR$modalities$score_pond
+QR[["modalities"]][["score_pond"]]
 
 }
 \seealso{

@@ -31,7 +31,7 @@ Suggests:
     kableExtra,
     pkgdown, 
     rmarkdown
-License: EUPL
+License: file LICENSE
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true

@@ -134,7 +134,7 @@ QR <- compute_score(QR, n_contrib_score = 2)
 print(QR)
 
 # Extract the modalities matrix:
-QR$modalities$score
+QR[["modalities"]][["score"]]
 
 }
 \seealso{

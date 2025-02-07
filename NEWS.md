@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 * bug in `recode_vec()` when changing the grades with `factor` object
+* `extractQR()` works with v3 now
 
 
 ## [0.3.1] - 2024-10-10

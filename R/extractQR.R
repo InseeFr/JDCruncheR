@@ -1,3 +1,4 @@
+
 #' @title Extraction d'un bilan qualité
 #'
 #' @description
@@ -68,7 +69,7 @@
 #' print(QR)
 #'
 #' # Extraire les modalités de la matrice
-#' QR$modalities
+#' QR[["modalities"]]
 #' # Or:
 #' QR[["modalities"]]
 #'
@@ -145,7 +146,7 @@ NULL
 #' print(QR)
 #'
 #' # Extract the modalities matrix:
-#' QR$modalities
+#' QR[["modalities"]]
 #' # Or:
 #' QR[["modalities"]]
 #'
@@ -154,11 +155,11 @@ NULL
 #' @seealso [Traduction française][fr-extract_QR()]
 #' @export
 extract_QR <- function(file,
-                        x,
-                        matrix_output_file,
-                        sep = ";",
-                        dec = ",",
-                        thresholds = getOption("jdc_thresholds")) {
+                       x,
+                       matrix_output_file,
+                       sep = ";",
+                       dec = ",",
+                       thresholds = getOption("jdc_thresholds")) {
     if (!missing(matrix_output_file)) {
         warning("The `matrix_output_file` argument is deprecated",
                 " and will be removed in the future. ",
@@ -210,19 +211,19 @@ extract_QR <- function(file,
 
     QR_modalities <- data.frame(
         series = series,
-        normality$modalities,
-        test$modalities,
-        stat_OOS$modalities,
-        stat_Q$modalities,
-        outliers$modalities
+        normality[["modalities"]],
+        test[["modalities"]],
+        stat_OOS[["modalities"]],
+        stat_Q[["modalities"]],
+        outliers[["modalities"]]
     )
     QR_values <- data.frame(
         series = series,
-        normality$values,
-        test$values,
-        stat_OOS$values,
-        stat_Q$values,
-        outliers$values,
+        normality[["values"]],
+        test[["values"]],
+        stat_OOS[["values"]],
+        stat_Q[["values"]],
+        outliers[["values"]],
         frequency = extractFrequency(demetra_m),
         arima_model = extractARIMA(demetra_m)
     )
@@ -237,9 +238,9 @@ extractFrequency <- function(demetra_m) {
              "(missing either the start date, ",
              "the end date or the number of observations)")
     }
-    start <- as.Date(demetra_m$start, format = "%Y-%m-%d")
-    end <- as.Date(demetra_m$end, format = "%Y-%m-%d")
-    n <- demetra_m$n
+    start <- as.Date(demetra_m[["start"]], format = "%Y-%m-%d")
+    end <- as.Date(demetra_m[["end"]], format = "%Y-%m-%d")
+    n <- demetra_m[["n"]]
 
     start <- data.frame(
         y = as.numeric(format(start, "%Y")),
@@ -259,11 +260,14 @@ extractFrequency <- function(demetra_m) {
         ),
         nrow = nrow(demetra_m)
     )
-    output <- sapply(
+    output <- vapply(
         X = seq_len(nrow(nobs_compute)),
         FUN = function(i) {
-            freq[which((nobs_compute[i, ] == n[i]) | (nobs_compute[i, ] + 1L == n[i]) | (nobs_compute[i, ] - 1L == n[i]))[1L]]
-        }
+            freq[which((nobs_compute[i, ] == n[i])
+                       | (nobs_compute[i, ] + 1L == n[i])
+                       | (nobs_compute[i, ] - 1L == n[i]))[[1L]]]
+        },
+        FUN.VALUE = integer(1L)
     )
     return(output)
 }
@@ -274,11 +278,11 @@ extractARIMA <- function(demetra_m) {
 
     if (length(q_possibles) > 1L) {
         val_q <- demetra_m[, q_possibles]
-        integer_col <- which(sapply(val_q, is.integer))
+        integer_col <- which(vapply(val_q, is.integer, FUN.VALUE = logical(1L)))
         if (length(integer_col) == 0L) {
             val_q <- rep(NA_integer_, nrow(demetra_m))
         } else if (length(integer_col) == 1L) {
-            val_q <- val_q[, integer_col[1L]]
+            val_q <- val_q[, integer_col[[1L]]]
         }
     } else if (length(q_possibles) == 1L) {
         val_q <- demetra_m[, q_possibles]
@@ -288,11 +292,11 @@ extractARIMA <- function(demetra_m) {
 
     if (length(bp_possibles) > 1L) {
         val_bp <- demetra_m[, bp_possibles]
-        integer_col <- which(sapply(val_bp, is.integer))
+        integer_col <- which(vapply(val_bp, is.integer, FUN.VALUE = logical(1L)))
         if (length(integer_col) == 0L) {
             val_bp <- rep(NA_integer_, nrow(demetra_m))
         } else {
-            val_bp <- val_bp[, integer_col[1L]]
+            val_bp <- val_bp[, integer_col[[1L]]]
         }
     } else if (length(bp_possibles) == 1L) {
         val_bp <- demetra_m[, bp_possibles]
@@ -314,11 +318,11 @@ extractARIMA <- function(demetra_m) {
         arima_bd = demetra_m[, "bd"],
         arima_bq = demetra_m[, "bq"]
     )
-    arima$arima_model <- paste0(
-        "(", arima$arima_p, ",", arima$arima_d, ",", arima$arima_q, ")",
-        "(", arima$arima_bp, ",", arima$arima_bd, ",", arima$arima_bq, ")"
+    arima[["arima_model"]] <- paste0(
+        "(", arima[["arima_p"]], ",", arima[["arima_d"]], ",", arima[["arima_q"]], ")",
+        "(", arima[["arima_bp"]], ",", arima[["arima_bd"]], ",", arima[["arima_bq"]], ")"
     )
-    return(arima$arima_model)
+    return(arima[["arima_model"]])
 }
 
 extractStatQ <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
@@ -340,11 +344,11 @@ extractStatQ <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
         )))
 
         if (length(num_cols) > 1L) {
-            stop("Error in the extraction of the Q stats: multiple colum found")
+            stop("Error in the extraction of the Q stats: multiple columns found")
         } else if (length(num_cols) == 1L) {
             col_q <- q_possibles[num_cols]
         } else if (length(NA_cols) > 0L) {
-            col_q <- q_possibles[NA_cols[1L]]
+            col_q <- q_possibles[NA_cols[[1L]]]
         } else {
             stop("Error in the extraction of the Q stats")
         }
@@ -366,7 +370,7 @@ extractStatQ <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
         } else if (length(num_cols) == 1L) {
             col_q_m2 <- q_m2_possibles[num_cols]
         } else if (length(NA_cols) > 0L) {
-            col_q_m2 <- q_m2_possibles[NA_cols[1L]]
+            col_q_m2 <- q_m2_possibles[NA_cols[[1L]]]
         } else {
             stop("Error in the extraction of the Q-M2 stats")
         }
@@ -420,7 +424,7 @@ extractOOS_test <- function(demetra_m, thresholds = getOption("jdc_thresholds"))
         } else if (length(num_cols) == 1L) {
             col_mean <- mean_possibles[num_cols]
         } else if (length(NA_cols) > 0L) {
-            col_mean <- mean_possibles[NA_cols[1L]]
+            col_mean <- mean_possibles[NA_cols[[1L]]]
         } else {
             stop("Error in the extraction of the mean in the out of sample diagnostics")
         }
@@ -471,29 +475,42 @@ extractOOS_test <- function(demetra_m, thresholds = getOption("jdc_thresholds"))
 
 extractNormalityTests <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
     tests_possibles <- grep("(^skewness$)|(^kurtosis$)|(^lb2$)", colnames(demetra_m))
-    if (length(tests_possibles) != 3L) {
-        stop("At least one test is missing, among: skewness, kurtosis, lb2")
+    if (length(tests_possibles) < 3L) {
+        stop(
+            "At least one test is missing, among: skewness, kurtosis, lb2",
+            "Re-compute the cruncher export with the options:",
+            " residuals.skewness:3, residuals.kurtosis:3 and residuals.lb2:3"
+        )
+    } else if (length(tests_possibles) > 3L) {
+        stop("There are several variables with the same name ",
+             "(among skewness, kurtosis, lb2)")
     }
 
-    if (is.character(demetra_m$skewness)
-        && is.character(demetra_m$kurtosis)
-        && is.character(demetra_m$lb2)) {
-        if (length(grep(pattern = "^X\\.(\\d){1,}$", x = colnames(demetra_m)[rep(tests_possibles, each = 2L) + rep(seq_len(2L), 3L)])) != 6L) {
-            stop("Re-compute the cruncher export with the options: residuals.skewness:3, residuals.kurtosis:3 and residuals.lb2:3")
-        }
-        skewness_pvalue <- demetra_m[, tests_possibles[1L] + 2L]
-        kurtosis_pvalue <- demetra_m[, tests_possibles[2L] + 2L]
-        homoskedasticity_pvalue <- demetra_m[, tests_possibles[3L] + 2L]
+    if (is.character(demetra_m[["skewness"]])
+        && is.character(demetra_m[["kurtosis"]])
+        && is.character(demetra_m[["lb2"]])) {
 
-    } else if (is.numeric(demetra_m$skewness)
-               && is.numeric(demetra_m$kurtosis)
-               && is.numeric(demetra_m$lb2)) {
-        if (length(grep(pattern = "^X\\.(\\d){1,}$", x = colnames(demetra_m)[tests_possibles + 1L])) != 3L) {
-            stop("Re-compute the cruncher export with the options: residuals.skewness:2, residuals.kurtosis:2 and residuals.lb2:2")
+        next_index <- rep(tests_possibles, each = 2L) + rep(seq_len(2L), 3L)
+        next_colnames <- colnames(demetra_m)[next_index]
+
+        if (length(grep(pattern = "^X\\.(\\d){1,}$", x = next_colnames, fixed = FALSE)) != 6L) {
+            stop("Re-compute the cruncher export with the options:",
+                 " residuals.skewness:3, residuals.kurtosis:3 and residuals.lb2:3")
         }
-        skewness_pvalue <- demetra_m[, tests_possibles[1L] + 1L]
-        kurtosis_pvalue <- demetra_m[, tests_possibles[2L] + 1L]
-        homoskedasticity_pvalue <- demetra_m[, tests_possibles[3L] + 1L]
+        skewness_pvalue <- demetra_m[, tests_possibles[[1L]] + 2L]
+        kurtosis_pvalue <- demetra_m[, tests_possibles[[2L]] + 2L]
+        homoskedasticity_pvalue <- demetra_m[, tests_possibles[[3L]] + 2L]
+
+    } else if (is.numeric(demetra_m[["skewness"]])
+               && is.numeric(demetra_m[["kurtosis"]])
+               && is.numeric(demetra_m[["lb2"]])) {
+        if (length(grep(pattern = "^X\\.(\\d){1,}$", x = colnames(demetra_m)[tests_possibles + 1L], fixed = FALSE)) != 3L) {
+            stop("Re-compute the cruncher export with the options:",
+                 " residuals.skewness:2, residuals.kurtosis:2 and residuals.lb2:2")
+        }
+        skewness_pvalue <- demetra_m[, tests_possibles[[1L]] + 1L]
+        kurtosis_pvalue <- demetra_m[, tests_possibles[[2L]] + 1L]
+        homoskedasticity_pvalue <- demetra_m[, tests_possibles[[3L]] + 1L]
     } else {
         stop("the matrix has wrong format.")
     }
@@ -535,21 +552,22 @@ extractNormalityTests <- function(demetra_m, thresholds = getOption("jdc_thresho
 
 extractOutliers <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
 
-    if (!all(c("n", "nout") %in% colnames(demetra_m))) {
+    if (all(c("n", "nout") %in% colnames(demetra_m))) {
+        pct_outliers_value <- 100.0 * as.integer(demetra_m[["nout"]]) / as.integer(demetra_m[["n"]])
+    } else {
         warning(
             "The following variables are missing from the diagnostics matrix:\n",
             toString(c("span.n", "regression.nout")),
             "\n\nPlease re-compute the export."
         )
-
         pct_outliers_value <- rep(NA_real_, nrow(demetra_m))
-    } else {
-        pct_outliers_value <- 100 * as.integer(demetra_m[["nout"]]) / as.integer(demetra_m[["n"]])
     }
+
+    m7 <- as.numeric(demetra_m[["m7"]])
 
     outliers_modalities <- data.frame(
         m7 = cut(
-            x = as.numeric(demetra_m$m7),
+            x = m7,
             breaks = c(-Inf, thresholds[["m7"]]),
             labels = names(thresholds[["m7"]]),
             right = FALSE,
@@ -566,7 +584,7 @@ extractOutliers <- function(demetra_m, thresholds = getOption("jdc_thresholds"))
         )
     )
     outliers_values <- data.frame(
-        m7 = as.numeric(demetra_m$m7),
+        m7 = m7,
         pct_outliers = pct_outliers_value
     )
 
@@ -575,37 +593,12 @@ extractOutliers <- function(demetra_m, thresholds = getOption("jdc_thresholds"))
 
 extractTest <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
 
-    tests_variables_v3 <- c(
+    tests_variables <- c(
         "seas.sa.qs", "seas.sa.f",
         "seas.i.qs", "seas.i.f",
         "td.sa.last", "td.i.last",
         "independence", "normality"
     )
-    tests_variables_v2 <- c(
-        "qs.test.on.sa", "f.test.on.sa..seasonal.dummies.",
-        "qs.test.on.i", "f.test.on.i..seasonal.dummies.",
-        "f.test.on.sa..td.", "f.test.on.i..td.", "independence", "normality"
-    )
-
-    present_variables_v2 <- intersect(tests_variables_v2, colnames(demetra_m))
-    present_variables_v3 <- intersect(tests_variables_v3, colnames(demetra_m))
-
-    if (length(present_variables_v2) == 0L
-        && length(present_variables_v3) == 0L) {
-
-        warning(
-            "The following variables are missing from the diagnostics matrix:\n",
-            "- If you are using a workspace with JDemetra+ in v2 : ", toString(tests_variables_v2),
-            "- If you are using a workspace with JDemetra+ in v3 : ", toString(tests_variables_v3),
-            "\n\nPlease re-compute the export.",
-        )
-    } else if (length(present_variables_v2) == 0L) {
-        # WS en V3
-        tests_variables <- tests_variables_v3
-    } else if (length(present_variables_v3) == 0L) {
-        # WS en V2
-        tests_variables <- tests_variables_v2
-    }
 
     present_variables <- intersect(tests_variables, colnames(demetra_m))
     index_present_variables <- match(present_variables, tests_variables)
@@ -622,11 +615,11 @@ extractTest <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
 
     test_values <- demetra_m[, index_variables, drop = FALSE]
     colnames(test_values) <- c(
-            "qs_residual_sa_on_sa", "f_residual_sa_on_sa",
-            "qs_residual_sa_on_i", "f_residual_sa_on_i",
-            "f_residual_td_on_sa", "f_residual_td_on_i",
-            "residuals_independency", "residuals_normality"
-        )[index_present_variables]
+        "qs_residual_sa_on_sa", "f_residual_sa_on_sa",
+        "qs_residual_sa_on_i", "f_residual_sa_on_i",
+        "f_residual_td_on_sa", "f_residual_td_on_i",
+        "residuals_independency", "residuals_normality"
+    )[index_present_variables]
 
     test_modalities <- lapply(
         X = colnames(test_values),

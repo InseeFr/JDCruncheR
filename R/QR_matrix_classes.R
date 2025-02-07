@@ -177,9 +177,9 @@ print.QR_matrix <- function(x,
                             print_variables = TRUE,
                             print_score_formula = TRUE,
                             ...) {
-    nb_var <- nrow(x$modalities)
-    nb_var_modalities <- ncol(x$modalities)
-    nb_var_values <- ncol(x$values)
+    nb_var <- nrow(x[["modalities"]])
+    nb_var_modalities <- ncol(x[["modalities"]])
+    nb_var_values <- ncol(x[["values"]])
 
     if (is.null(nb_var)
         || is.null(nb_var_modalities)
@@ -214,8 +214,8 @@ print.QR_matrix <- function(x,
     cat("\n")
     if (print_variables) {
         cat("\n")
-        names_var_modalities <- colnames(x$modalities)
-        names_var_values <- colnames(x$values)
+        names_var_modalities <- colnames(x[["modalities"]])
+        names_var_values <- colnames(x[["values"]])
         names_var_values_sup <- names_var_values[!names_var_values %in% names_var_modalities]
         names_var_modalities <- paste(names_var_values, collapse = "  ")
         names_var_values_sup <- paste(names_var_values_sup, collapse = "  ")
@@ -263,11 +263,11 @@ print.QR_matrix <- function(x,
             mean(score_value, na.rm = TRUE), sd(score_value, na.rm = TRUE)
         ))
     }
-    if (print_score_formula && !is.null(x$score_formula)) {
+    if (print_score_formula && !is.null(x[["score_formula"]])) {
         cat("\n\n")
         cat(sprintf(
             "The following formula was used to calculate the score:\n%s",
-            as.character(x$score_formula)
+            as.character(x[["score_formula"]])
         ))
     }
     return(invisible(x))

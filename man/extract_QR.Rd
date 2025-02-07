@@ -85,7 +85,7 @@ QR <- extract_QR(file = demetra_path)
 print(QR)
 
 # Extract the modalities matrix:
-QR$modalities
+QR[["modalities"]]
 # Or:
 QR[["modalities"]]
 

@@ -80,7 +80,7 @@ QR <- extract_QR(file = demetra_path)
 print(QR)
 
 # Extraire les modalités de la matrice
-QR$modalities
+QR[["modalities"]]
 # Or:
 QR[["modalities"]]
 
