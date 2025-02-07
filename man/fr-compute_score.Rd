@@ -5,31 +5,38 @@
 \alias{fr-compute_score}
 \title{Calcul d'un score global}
 \arguments{
-\item{x}{objet de type \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}.}
+\item{x}{Objet de type \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}.}
 
 \item{score_pond}{formule utilisée pour calculer le score global.}
 
 \item{modalities}{modalités triées par ordre d'importance dans le calcul du
 score (voir détails).}
 
-\item{normalize_score_value}{chiffre indiquant la valeur de référence pour la
+\item{normalize_score_value}{Chiffre indiquant la valeur de référence pour la
 normalisation des pondérations utilisées lors du calcul du score. Si le
 paramètre n'est pas renseigné, les poids ne seront pas normalisés.}
 
-\item{na.rm}{booléen indiquant si les valeurs manquantes doivent être
+\item{na.rm}{Booléen indiquant si les valeurs manquantes doivent être
 enlevées pour le calcul du score.}
 
-\item{n_contrib_score}{entier indiquant le nombre de variables à créer dans
+\item{n_contrib_score}{Entier indiquant le nombre de variables à créer dans
 la matrice des valeurs du bilan qualité contenant les \code{n_contrib_score}
 plus grandes contributrices au score (voir détails). S'il n'est pas spécifié,
 aucune variable n'est créée.}
 
-\item{conditional_indicator}{une \code{list} contenant des listes ayant 3
+\item{conditional_indicator}{\code{list} contenant des listes ayant 3
 éléments : "indicator", "conditions" et "condition_modalities". Permet de
 réduire à 1 le poids de certains indicateurs en fonction des valeurs d'autres
 variables (voir détails).}
 
-\item{...}{autres paramètres non utilisés.}
+\item{thresholds}{\code{list} de vecteurs numériques. Seuils appliqués aux
+différents tests afin de classer en modalités \code{Good}, \code{Uncertain},
+\code{Bad} et \code{Severe}.
+Par défault, la valeur de l'option \code{"jdc_threshold"} est utilisée.
+Vous pouvez appeler la fonction \code{\link{get_thresholds}} pour voir à quoi
+doit ressemble l'objet \code{thresholds}.}
+
+\item{...}{Autres paramètres non utilisés.}
 }
 \value{
 Un objet de type \code{\link{QR_matrix}} ou \code{\link{mQR_matrix}}.
@@ -113,7 +120,7 @@ QR <- compute_score(QR, n_contrib_score = 2)
 print(QR)
 
 # Extraire les modalités de la matrice
-QR$modalities$score
+QR[["modalities"]][["score"]]
 
 }
 \keyword{internal}

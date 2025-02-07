@@ -6,8 +6,8 @@
 ^\.github$
 
 ^README\.Rmd$
-^README\.html$
 ^README-.*\.png$
+^README\.html$
 
 ^Meta$
 ^docs$
@@ -27,5 +27,19 @@ cran-comments.md
 ^revdep$
 ^reconf\.sh$
 
-^LICENCE$
-^LICENSE$
+^pom\.xml$
+
+^CITATION\.cff$
+^LICENSE.md$
+LICENCE
+
+^\.httr-oauth$
+^\.zenodo\.json$
+
+^checklist.yml$
+^codecov\.yml$
+^data-raw$
+^dev$
+
+^man-roxygen$
+^organisation.yml$

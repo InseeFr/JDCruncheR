@@ -5,13 +5,25 @@
 \alias{fr-extract_QR}
 \title{Extraction d'un bilan qualité}
 \arguments{
-\item{matrix_output_file}{fichier CSV contenant la matrice des diagnostics.}
+\item{matrix_output_file}{Chaîne de caracère. Chemin vers le fichier CSV
+contenant la matrice des diagnostics.}
+
+\item{file}{Chaîne de caracère. Chemin vers le fichier CSV contenant la
+matrice des diagnostics. Cet argument remplace l'argument
+\code{matrix_output_file}.}
 
 \item{sep}{séparateur de caractères utilisé dans le fichier csv (par défaut
 \code{sep = ";"})}
 
 \item{dec}{séparateur décimal utilisé dans le fichier csv (par défaut
 \code{dec = ","})}
+
+\item{thresholds}{\code{list} de vecteurs numériques. Seuils appliqués aux
+différents tests afin de classer en modalités \code{Good}, \code{Uncertain},
+\code{Bad} et \code{Severe}.
+Par défault, la valeur de l'option \code{"jdc_threshold"} est utilisée.
+Vous pouvez appeler la fonction \code{\link{get_thresholds}} pour voir à quoi
+doit ressemble l'objet \code{thresholds}.}
 }
 \value{
 Un objet de type \code{\link{QR_matrix}}.
@@ -47,6 +59,12 @@ modalité (fréquence de la série et modèle ARIMA).
 \item le paramètre \code{score_formula} est initié à \code{NULL} : il contiendra
 la formule utilisée pour calculer le score (si le calcul est fait).
 }
+
+Si \code{x} est fourni, les arguments \code{fichier} et
+\code{matrix_output_file} sont ignorés. L'argument \code{fichier} désigne
+également le chemin vers le fichier qui contient la matrice de diagnostic
+(qui peut être importée en parallèle dans R et utilisée avec l'argument
+\code{x}).
 }
 \examples{
 # Chemin menant au fichier demetra_m.csv
@@ -57,12 +75,12 @@ demetra_path <- file.path(
 )
 
 # Extraire le bilan qualité à partir du fichier demetra_m.csv
-QR <- extract_QR(demetra_path)
+QR <- extract_QR(file = demetra_path)
 
 print(QR)
 
 # Extraire les modalités de la matrice
-QR$modalities
+QR[["modalities"]]
 # Or:
 QR[["modalities"]]
 

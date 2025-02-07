@@ -1,7 +1,7 @@
 Package: JDCruncheR
 Type: Package
 Title: Interface Between the 'JDemetra+' Cruncher and R, and Quality Report Generator
-Version: 0.3.1
+Version: 0.3.2
 Authors@R: c(
     person(given = "Tanguy", 
            family = "Barthelemy", role = c("aut", "cre", "art"),
@@ -31,7 +31,7 @@ Suggests:
     kableExtra,
     pkgdown, 
     rmarkdown
-License: EUPL
+License: file LICENSE
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: true

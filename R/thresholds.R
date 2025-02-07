@@ -92,10 +92,12 @@ get_thresholds <- function(test_name, default = TRUE) {
         oos_mean = c(Bad = 0.01, Uncertain = 0.1, Good = Inf),
         oos_mse = c(Bad = 0.01, Uncertain = 0.1, Good = Inf),
 
-        m7 = c(Good = 1, Bad = 2, Severe = Inf),
-        q = c(Good = 1, Bad = Inf),
-        q_m2 = c(Good = 1, Bad = Inf),
-        pct_outliers = c(Good = 3, Uncertain = 5, Bad = Inf)
+        m7 = c(Good = 1., Bad = 2., Severe = Inf),
+        q = c(Good = 1., Bad = Inf),
+        q_m2 = c(Good = 1., Bad = Inf),
+        pct_outliers = c(Good = 3., Uncertain = 5., Bad = Inf),
+
+        grade = c(Good = 0., Uncertain = 1., Bad = 3., Severe = 5.)
     )
 
     if (default) {

@@ -9,15 +9,16 @@
 \usage{
 \method{compute_score}{QR_matrix}(
   x,
-  score_pond = c(qs_residual_sa_on_sa = 30, f_residual_sa_on_sa = 30, qs_residual_sa_on_i
-    = 20, f_residual_sa_on_i = 20, f_residual_td_on_sa = 30, f_residual_td_on_i = 20,
-    oos_mean = 15, oos_mse = 10, residuals_independency = 15, residuals_homoskedasticity
-    = 5, residuals_skewness = 5, m7 = 5, q_m2 = 5),
+  score_pond = c(qs_residual_sa_on_sa = 30L, f_residual_sa_on_sa = 30L,
+    qs_residual_sa_on_i = 20L, f_residual_sa_on_i = 20L, f_residual_td_on_sa = 30L,
+    f_residual_td_on_i = 20L, oos_mean = 15L, oos_mse = 10L, residuals_independency =
+    15L, residuals_homoskedasticity = 5L, residuals_skewness = 5L, m7 = 5L, q_m2 = 5L),
   modalities = c("Good", "Uncertain", "", "Bad", "Severe"),
   normalize_score_value,
   na.rm = FALSE,
   n_contrib_score,
   conditional_indicator,
+  thresholds = getOption("jdc_thresholds"),
   ...
 )
 
@@ -46,6 +47,13 @@ variable is created.}
 "indicator", "conditions" and "condition_modalities". To reduce down to 1 the
 weight of chosen indicators depending on other variables' values (cf.
 details).}
+
+\item{thresholds}{\code{list} of numerical vectors. Thresholds applied to the
+various tests in order to classify into modalities \code{Good},
+\code{Uncertain}, \code{Bad} and \code{Severe}.
+By default, the value of the \code{"jdc_threshold"} option is used.
+You can call the \code{\link{get_thresholds}} function to see what the
+\code{thresholds} object should look like.}
 
 \item{...}{other unused parameters.}
 }
@@ -126,7 +134,7 @@ QR <- compute_score(QR, n_contrib_score = 2)
 print(QR)
 
 # Extract the modalities matrix:
-QR$modalities$score
+QR[["modalities"]][["score"]]
 
 }
 \seealso{

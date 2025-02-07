@@ -36,13 +36,13 @@ QR <- extract_QR(demetra_path)
 
 # Calculer le score
 QR <- compute_score(QR, n_contrib_score = 2)
-print(QR$modalities$score)
+print(QR[["modalities"]][["score"]])
 
 # Trier les scores
 
 # Pour trier par ordre croissant sur le score
 QR <- sort(QR, sort_variables = "score")
-print(QR$modalities$score)
+print(QR[["modalities"]][["score"]])
 
 }
 \keyword{internal}

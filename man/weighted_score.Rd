@@ -4,7 +4,7 @@
 \alias{weighted_score}
 \title{Weighted score calculation}
 \usage{
-weighted_score(x, pond = 1)
+weighted_score(x, pond = 1L)
 }
 \arguments{
 \item{x}{a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} object}
@@ -38,7 +38,7 @@ QR <- weighted_score(QR, 2)
 print(QR)
 
 # Extract the weighted score
-QR$modalities$score_pond
+QR[["modalities"]][["score_pond"]]
 
 }
 \seealso{
