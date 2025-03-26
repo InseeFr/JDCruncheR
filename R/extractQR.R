@@ -30,7 +30,7 @@ find_variable <- function(
     # Colonnes adjacentes
     for (idx in id_cols) {
         k <- 1L
-        while(grepl(pattern = "^X\\.(\\d){1,}$", colnames(demetra_m)[idx + k])) {
+        while (grepl(pattern = "^X\\.(\\d){1,}$", colnames(demetra_m)[idx + k])) {
             cols <- c(cols, idx + k)
             k <- k + 1L
         }
@@ -39,7 +39,7 @@ find_variable <- function(
     #Type de la colonne
     type_cols <- unlist(lapply(
         X = demetra_m[, cols, drop = FALSE],
-        FUN = function(x)
+        FUN = function(x) {
             all(switch(
                 type,
                 double = is.double(x),
@@ -47,14 +47,14 @@ find_variable <- function(
                 character = is.character(x),
                 logical = is.logical(x)
             ))
+        }
     ))
     cols <- cols[type_cols]
 
     if (p_value && length(cols) > 0L) {
         p_cols <- which(unlist(lapply(
             X = demetra_m[, cols, drop = FALSE],
-            FUN = function(x)
-                all(x >= 0 & x <= 1)
+            FUN = function(x) all(x >= 0L & x <= 1L)
         )))
         cols <- cols[p_cols]
     }

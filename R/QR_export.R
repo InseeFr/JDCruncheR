@@ -346,7 +346,7 @@ export_xlsx.mQR_matrix <- function(
         for (id_qr in seq_along(x)) {
             qr <- x[[id_qr]]
             name <- ifelse(
-                test = is.null(names(x)) || nchar(names(x)[id_qr]) == 0L,
+                test = is.null(names(x)) || !nzchar(names(x)[id_qr]),
                 yes = paste0("QR_", id_qr),
                 no = names(x)[id_qr]
             )
@@ -370,7 +370,7 @@ export_xlsx.mQR_matrix <- function(
         for (id_qr in seq_along(x)) {
             qr <- x[[id_qr]]
             name <- ifelse(
-                test = is.null(names(x)) || nchar(names(x)[id_qr]) == 0L,
+                test = is.null(names(x)) || !nzchar(names(x)[id_qr]),
                 yes = paste0("QR_", id_qr),
                 no = names(x)[id_qr]
             )
@@ -417,7 +417,7 @@ export_xlsx.mQR_matrix <- function(
             qr <- x[[id_qr]]
             name <- ifelse(
                 test = is.null(names(x))
-                || nchar(names(x)[id_qr]) == 0L
+                || !nzchar(names(x)[id_qr])
                 || sum(names(x) == names(x)[id_qr]) > 1L,
                 yes = paste0("QR_", id_qr),
                 no = names(x)[id_qr]

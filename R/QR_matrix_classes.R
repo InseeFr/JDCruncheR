@@ -226,7 +226,7 @@ print.QR_matrix <- function(x,
             names_var_modalities
         ))
         cat("\n")
-        if (all(names_var_values_sup == "")) {
+        if (all(!nzchar(names_var_values_sup))) {
             cat("There's no additionnal variable in the values matrix")
         } else {
             cat(sprintf(
