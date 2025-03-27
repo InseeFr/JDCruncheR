@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+* Re-organise and simplify the process to integrate item to the demetra_m matrix (from v2 and v3)
 
 ## [0.3.3] - 2025-02-20
 

@@ -247,7 +247,7 @@ compute_score.QR_matrix <- function(
         normalize_score_value,
         na.rm = FALSE,
         n_contrib_score,
-        conditional_indicator,
+        conditional_indicator = NULL,
         thresholds = getOption("jdc_thresholds"),
         ...) {
 
@@ -269,7 +269,7 @@ compute_score.QR_matrix <- function(
     )
 
     # Weight changes with the conditional_indicator parameter
-    if (!missing(conditional_indicator) && length(conditional_indicator) > 0L) {
+    if (length(conditional_indicator) > 0L) {
         for (i in seq_along(conditional_indicator)) {
             indicator_condition <- conditional_indicator[[i]]
 
@@ -289,12 +289,16 @@ compute_score.QR_matrix <- function(
             }
 
             # Series for which at least one conditions is verified
-            series_to_change <- rowSums(sapply(
-                indicator_condition[["conditions"]],
-                function(name) {
-                    x[["modalities"]][, name] %in% indicator_condition[["conditions_modalities"]]
-                }
-            ), na.rm = TRUE)
+            series_to_change <- rowSums(
+                x = vapply(
+                    X = indicator_condition[["conditions"]],
+                    FUN = function(name) {
+                        x[["modalities"]][, name] %in% indicator_condition[["conditions_modalities"]]
+                    },
+                    FUN.VALUE = logical(1L)
+                ),
+                na.rm = TRUE
+            )
             series_to_change <- which(series_to_change > 0L)
             if (indicator_condition[["indicator"]][[1L]] %in% names(score_pond)) {
                 QR_modalities[series_to_change, indicator_condition[["indicator"]][[1L]]] <-
@@ -1004,12 +1008,16 @@ rbind.QR_matrix <- function(..., check_formula = TRUE) {
         return(QR_matrix())
     }
     if (check_formula) {
-        list_formula <- sapply(list_QR_matrix, function(x) {
-            if (!is.QR_matrix(x)) {
-                stop("All arguments of this function must be QR_matrix objects", call. = FALSE)
-            }
-            x[["score_formula"]]
-        })
+        list_formula <- vapply(
+            X = list_QR_matrix,
+            FUN = function(x) {
+                if (!is.QR_matrix(x)) {
+                    stop("All arguments of this function must be QR_matrix objects", call. = FALSE)
+                }
+                x[["score_formula"]]
+            },
+            FUN.VALUE = character(1L)
+        )
         list_formula_unique <- unique(list_formula)
         if (length(list_formula) != length(list_QR_matrix)
             || length(list_formula_unique) != 1L) {

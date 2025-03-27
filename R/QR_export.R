@@ -207,7 +207,7 @@ export_xlsx.QR_matrix <- function(x,
                                   ...) {
 
     ext <- tools::file_ext(file)
-    if (nchar(ext) == 0L) {
+    if (!nzchar(ext)) {
         file <- paste0(file, ".xslx")
     } else if (ext != "xlsx") {
         stop("The format of the file must be .xlsx .")
@@ -346,15 +346,16 @@ export_xlsx.mQR_matrix <- function(
         for (id_qr in seq_along(x)) {
             qr <- x[[id_qr]]
             name <- ifelse(
-                test = is.null(names(x)) || nchar(names(x)[id_qr]) == 0L,
+                test = is.null(names(x)) || !nzchar(names(x)[id_qr]),
                 yes = paste0("QR_", id_qr),
                 no = names(x)[id_qr]
             )
-            file <- file.path(export_dir, paste0(name, ".xlsx"))
-            export_xlsx(x = qr,
-                        file = file,
-                        auto_format = auto_format,
-                        overwrite = overwrite)
+            export_xlsx(
+                x = qr,
+                file = file.path(export_dir, paste0(name, ".xlsx")),
+                auto_format = auto_format,
+                overwrite = overwrite
+            )
         }
     } else if (layout_file == "ByComponent") {
 
@@ -370,7 +371,7 @@ export_xlsx.mQR_matrix <- function(
         for (id_qr in seq_along(x)) {
             qr <- x[[id_qr]]
             name <- ifelse(
-                test = is.null(names(x)) || nchar(names(x)[id_qr]) == 0L,
+                test = is.null(names(x)) || !nzchar(names(x)[id_qr]),
                 yes = paste0("QR_", id_qr),
                 no = names(x)[id_qr]
             )
@@ -417,7 +418,7 @@ export_xlsx.mQR_matrix <- function(
             qr <- x[[id_qr]]
             name <- ifelse(
                 test = is.null(names(x))
-                || nchar(names(x)[id_qr]) == 0L
+                || !nzchar(names(x)[id_qr])
                 || sum(names(x) == names(x)[id_qr]) > 1L,
                 yes = paste0("QR_", id_qr),
                 no = names(x)[id_qr]
@@ -451,8 +452,11 @@ export_xlsx.mQR_matrix <- function(
             }
         }
 
-        file <- file.path(export_dir, "mQR.xlsx")
-        openxlsx::saveWorkbook(wb = wb_mqr, file = file, overwrite = overwrite)
+        openxlsx::saveWorkbook(
+            wb = wb_mqr,
+            file = file.path(export_dir, "mQR.xlsx"),
+            overwrite = overwrite
+        )
     }
 
     return(invisible(x))
