@@ -23,7 +23,7 @@ find_variable <- function(
         pattern,
         type = c("double", "integer", "character", "logical"),
         p_value = FALSE,
-        variable) {
+        variable = "") {
 
     cols <- id_cols <- grep(pattern = pattern, colnames(demetra_m))
 
@@ -279,8 +279,8 @@ extract_QR <- function(file,
     normality <- extractDistributionTests(demetra_m, thresholds)
     outliers <- extractOutliers(demetra_m, thresholds)
     test <- extractSeasTest(demetra_m, thresholds)
-    frequency <- extractFrequency(demetra_m)
-    arima <- extractARIMA(demetra_m)
+    frequency_series <- extractFrequency(demetra_m)
+    arima_model <- extractARIMA(demetra_m)
 
     QR_modalities <- data.frame(
         series = series,
@@ -297,8 +297,8 @@ extract_QR <- function(file,
         stat_OOS[["values"]],
         stat_Q[["values"]],
         outliers[["values"]],
-        frequency = frequency[["values"]],
-        arima_model = arima[["values"]]
+        frequency = frequency_series[["values"]],
+        arima_model = arima_model[["values"]]
     )
 
     QR <- QR_matrix(modalities = QR_modalities, values = QR_values)
@@ -309,21 +309,21 @@ extractFrequency <- function(demetra_m) {
 
     missing_var <- NULL
 
-    start <- find_variable(
+    start_date <- find_variable(
         demetra_m,
         pattern = "(^span\\.start$)|(^start$)",
         type = "character",
         variable = "start"
     )
-    if (all(is.na(start))) missing_var <- c(missing_var, "span.start")
+    if (all(is.na(start_date))) missing_var <- c(missing_var, "span.start")
 
-    end <- find_variable(
+    end_date <- find_variable(
         demetra_m,
         pattern = "(^span\\.end$)|(^end$)",
         type = "character",
         variable = "end"
     )
-    if (all(is.na(end))) missing_var <- c(missing_var, "span.end")
+    if (all(is.na(end_date))) missing_var <- c(missing_var, "span.end")
 
     n <- find_variable(
         demetra_m,
@@ -333,24 +333,25 @@ extractFrequency <- function(demetra_m) {
     )
     if (all(is.na(n))) missing_var <- c(missing_var, "span.n")
 
-    start <- as.Date(start, format = "%Y-%m-%d")
-    end <- as.Date(end, format = "%Y-%m-%d")
+    start_date <- as.Date(start_date, format = "%Y-%m-%d")
+    end_date <- as.Date(end_date, format = "%Y-%m-%d")
 
-    start <- data.frame(
-        y = as.numeric(format(start, "%Y")),
-        m = as.numeric(format(start, "%m"))
+    start_date <- data.frame(
+        y = as.numeric(format(start_date, "%Y")),
+        m = as.numeric(format(start_date, "%m"))
     )
-    end <- data.frame(
-        y = as.numeric(format(end, "%Y")),
-        m = as.numeric(format(end, "%m"))
+    end_date <- data.frame(
+        y = as.numeric(format(end_date, "%Y")),
+        m = as.numeric(format(end_date, "%m"))
     )
     freq <- c(12L, 6L, 4L, 3L, 2L)
     nobs_compute <- matrix(
-        data = sapply(
+        data = vapply(
             X = freq,
             FUN = function(x) {
-                x * (end[, 1L] - start[, 1L]) + (end[, 2L] - start[, 2L]) / (12. / x)
-            }
+                x * (end_date[, 1L] - start_date[, 1L]) + (end_date[, 2L] - start_date[, 2L]) / (12L / x)
+            },
+            FUN.VALUE = double(nrow(demetra_m))
         ),
         nrow = nrow(demetra_m)
     )
@@ -419,7 +420,7 @@ extractARIMA <- function(demetra_m) {
     )
     if (all(is.na(arima_bq))) missing_var <- c(missing_var, "arima.bq")
 
-    arima <- data.frame(
+    arima_df <- data.frame(
         arima_p = arima_p,
         arima_d = arima_d,
         arima_q = arima_q,
@@ -427,11 +428,11 @@ extractARIMA <- function(demetra_m) {
         arima_bd = arima_bd,
         arima_bq = arima_bq
     )
-    arima[["arima_model"]] <- paste0(
-        "(", arima[["arima_p"]], ",", arima[["arima_d"]], ",", arima[["arima_q"]], ")",
-        "(", arima[["arima_bp"]], ",", arima[["arima_bd"]], ",", arima[["arima_bq"]], ")"
+    arima_df[["arima_model"]] <- paste0(
+        "(", arima_df[["arima_p"]], ",", arima_df[["arima_d"]], ",", arima_df[["arima_q"]], ")",
+        "(", arima_df[["arima_bp"]], ",", arima_df[["arima_bd"]], ",", arima_df[["arima_bq"]], ")"
     )
-    return(list(values = arima[["arima_model"]],
+    return(list(values = arima_df[["arima_model"]],
                 missing = missing_var))
 }
 
@@ -571,7 +572,7 @@ extractDistributionTests <- function(demetra_m, thresholds = getOption("jdc_thre
 
     normality_pvalue <- find_variable(
         demetra_m,
-        pattern = "(^residuals\\.lb$)|(^lb$)",
+        pattern = "(^residuals\\.lb$)|(^lb$)|(^normality$)",
         type = "double",
         variable = "normality",
         p_value = TRUE
@@ -580,7 +581,7 @@ extractDistributionTests <- function(demetra_m, thresholds = getOption("jdc_thre
 
     independency_pvalue <- find_variable(
         demetra_m,
-        pattern = "(^residuals\\.doornikhansen$)|(^doornikhansen$)|(^dh$)",
+        pattern = "(^residuals\\.doornikhansen$)|(^doornikhansen$)|(^dh$)|(^independence$)",
         type = "double",
         variable = "independency",
         p_value = TRUE

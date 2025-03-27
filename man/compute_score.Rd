@@ -17,7 +17,7 @@
   normalize_score_value,
   na.rm = FALSE,
   n_contrib_score,
-  conditional_indicator,
+  conditional_indicator = NULL,
   thresholds = getOption("jdc_thresholds"),
   ...
 )
