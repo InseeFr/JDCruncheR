@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">JDCruncheR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.3.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -105,18 +105,20 @@ for now)</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Extract the quality report from the demetra_m file</span></span></span>
 <span class="r-in"><span><span class="va">QR</span> <span class="op">&lt;-</span> <span class="fu"><a href="extract_QR.html">extract_QR</a></span><span class="op">(</span><span class="va">demetra_path</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Multiple column found for extraction of q statistic</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> first column selected</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Compute the score</span></span></span>
 <span class="r-in"><span><span class="va">QR</span> <span class="op">&lt;-</span> <span class="fu"><a href="compute_score.html">compute_score</a></span><span class="op">(</span><span class="va">QR</span>, n_contrib_score <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">QR</span><span class="op">[[</span><span class="st">"modalities"</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="st">"score"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  60 105 350 295  75 340 560 605 550 575 460 355 530</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 145  45 300 310  30 195 560 560 505 545 255 310 535</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Sort the scores</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># To sort by ascending scores</span></span></span>
 <span class="r-in"><span><span class="va">QR</span> <span class="op">&lt;-</span> <span class="fu">sort</span><span class="op">(</span><span class="va">QR</span>, sort_variables <span class="op">=</span> <span class="st">"score"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">QR</span><span class="op">[[</span><span class="st">"modalities"</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="st">"score"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  60  75 105 295 340 350 355 460 530 550 560 575 605</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  30  45 145 195 255 300 310 310 505 535 545 560 560</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

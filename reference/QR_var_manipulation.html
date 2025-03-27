@@ -13,7 +13,7 @@ be removed.'><meta property="og:image" content="https://inseefr.github.io/JDCrun
 
     <a class="navbar-brand me-2" href="../index.html">JDCruncheR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.3.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -100,6 +100,8 @@ is a QR_matrix, an object of class QR_matrix is returned. If the input
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Extract the quality report from the demetra_m file</span></span></span>
 <span class="r-in"><span><span class="va">QR</span> <span class="op">&lt;-</span> <span class="fu"><a href="extract_QR.html">extract_QR</a></span><span class="op">(</span><span class="va">demetra_path</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Multiple column found for extraction of q statistic</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> first column selected</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Compute the score</span></span></span>
 <span class="r-in"><span><span class="va">QR</span> <span class="op">&lt;-</span> <span class="fu"><a href="compute_score.html">compute_score</a></span><span class="op">(</span><span class="va">QR</span>, n_contrib_score <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
@@ -114,8 +116,8 @@ is a QR_matrix, an object of class QR_matrix is returned. If the input
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> There's no additionnal variable in the values matrix</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> The smallest score is 60 and the greatest is 605</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> The average score is 373.846 and its standard deviation is 195.737</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The smallest score is 30 and the greatest is 560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The average score is 330.385 and its standard deviation is 194.866</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The following formula was used to calculate the score:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 30 * qs_residual_sa_on_sa + 30 * f_residual_sa_on_sa + 20 * qs_residual_sa_on_i + 20 * f_residual_sa_on_i + 30 * f_residual_td_on_sa + 20 * f_residual_td_on_i + 15 * oos_mean + 10 * oos_mse + 15 * residuals_independency + 5 * residuals_homoskedasticity + 5 * residuals_skewness + 5 * m7 + 5 * q_m2</span>
@@ -128,8 +130,8 @@ is a QR_matrix, an object of class QR_matrix is returned. If the input
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> There's no additionnal variable in the values matrix</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> The smallest score is 60 and the greatest is 605</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> The average score is 373.846 and its standard deviation is 195.737</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The smallest score is 30 and the greatest is 560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The average score is 330.385 and its standard deviation is 194.866</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The following formula was used to calculate the score:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 30 * qs_residual_sa_on_sa + 30 * f_residual_sa_on_sa + 20 * qs_residual_sa_on_i + 20 * f_residual_sa_on_i + 30 * f_residual_td_on_sa + 20 * f_residual_td_on_i + 15 * oos_mean + 10 * oos_mse + 15 * residuals_independency + 5 * residuals_homoskedasticity + 5 * residuals_skewness + 5 * m7 + 5 * q_m2</span>

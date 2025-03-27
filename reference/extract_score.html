@@ -9,7 +9,7 @@ mQR_matrix objects."><meta property="og:image" content="https://inseefr.github.i
 
     <a class="navbar-brand me-2" href="../index.html">JDCruncheR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.3.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -105,6 +105,8 @@ elements or vectors).</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Extract the quality report from the demetra_m file</span></span></span>
 <span class="r-in"><span><span class="va">QR</span> <span class="op">&lt;-</span> <span class="fu"><a href="extract_QR.html">extract_QR</a></span><span class="op">(</span><span class="va">demetra_path</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Multiple column found for extraction of q statistic</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> first column selected</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Compute the score</span></span></span>
 <span class="r-in"><span><span class="va">QR1</span> <span class="op">&lt;-</span> <span class="fu"><a href="compute_score.html">compute_score</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">QR</span>, n_contrib_score <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
@@ -119,51 +121,51 @@ elements or vectors).</p>
 <span class="r-in"><span><span class="co"># Extract score</span></span></span>
 <span class="r-in"><span><span class="fu">extract_score</span><span class="op">(</span><span class="va">QR1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    series score</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  RF0610    60</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  RF0620   105</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  RF0811   350</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  RF0812   295</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  RF0893    75</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  RF0899   340</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  RF0610   145</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  RF0620    45</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  RF0811   300</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  RF0812   310</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  RF0893    30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  RF0899   195</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 7  RF1011   560</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8  RF1012   605</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9  RF1013   550</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10 RF1020   575</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11 RF1031   460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12 RF1032   355</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13 RF1039   530</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8  RF1012   560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9  RF1013   505</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10 RF1020   545</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11 RF1031   255</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12 RF1032   310</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13 RF1039   535</span>
 <span class="r-in"><span><span class="fu">extract_score</span><span class="op">(</span><span class="va">mQR</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $a</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    series score</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  RF0610    60</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  RF0620   105</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  RF0811   350</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  RF0812   295</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  RF0893    75</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  RF0899   340</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  RF0610   145</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  RF0620    45</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  RF0811   300</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  RF0812   310</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  RF0893    30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  RF0899   195</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 7  RF1011   560</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8  RF1012   605</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9  RF1013   550</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10 RF1020   575</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11 RF1031   460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12 RF1032   355</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13 RF1039   530</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8  RF1012   560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9  RF1013   505</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10 RF1020   545</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11 RF1031   255</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12 RF1032   310</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13 RF1039   535</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $b</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    series score</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  RF0610    10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  RF0620   135</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  RF0811   295</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  RF0610    70</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  RF0620    45</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  RF0811   215</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4  RF0812   250</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  RF0893    90</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  RF0899   340</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7  RF1011   250</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8  RF1012   340</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9  RF1013   460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10 RF1020   340</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11 RF1031   295</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12 RF1032   340</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13 RF1039   275</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  RF0893     0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  RF0899   150</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7  RF1011   425</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8  RF1012   425</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9  RF1013   475</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10 RF1020   365</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11 RF1031   110</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12 RF1032   250</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13 RF1039   380</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
