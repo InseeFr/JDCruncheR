@@ -8,9 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.4] - 2025-03-27
+
 ### Changed
 
 * Re-organise and simplify the process to integrate item to the demetra_m matrix (from v2 and v3)
+
 
 ## [0.3.3] - 2025-02-20
 
@@ -123,7 +126,8 @@ Bug fixed in the functions `retain_indicators()` and `remove_indicator()`.
  * addition of the parameter `log_file` to the functions `cruncher()` and `cruncher_and_param()` to export the cruncher log if required.
  * update of the options `default_matrix_item` and `default_tsmatrix_series`, in accordance with the parameters of version 2.2.0 of JDemetra+.
  
-[unreleased]: https://github.com/InseeFr/JDCruncheR/compare/v0.3.3...HEAD
+[unreleased]: https://github.com/InseeFr/JDCruncheR/compare/v0.3.4...HEAD
+[0.3.4]: https://github.com/InseeFr/JDCruncheR/compare/v0.3.3...v0.3.4
 [0.3.3]: https://github.com/InseeFr/JDCruncheR/compare/v0.3.2...v0.3.3
 [0.3.2]: https://github.com/InseeFr/JDCruncheR/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/InseeFr/JDCruncheR/compare/v0.3.0...v0.3.1
