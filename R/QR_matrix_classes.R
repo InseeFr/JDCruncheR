@@ -344,7 +344,10 @@ print.mQR_matrix <- function(x, score_statistics = TRUE, ...) {
                 }
 
                 if (is.null(score_value)) {
-                    cat(sprintf("There is no calculated score for the quality report n.%d%s", i, bq_name))
+                    cat(sprintf(
+                        "There is no calculated score for the quality report n.%d%s",
+                        i, bq_name
+                    ))
                 } else {
                     cat(sprintf(
                         "The quality report n.%d%s has an average score of %g\n", i, bq_name,
