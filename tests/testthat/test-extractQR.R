@@ -1,6 +1,9 @@
 testthat::test_that("QR works", {
 
-    war1 <- "Some items are missing. Please re-compute the cruncher export with the options:diagnostics.out-of-sample.mean:2, diagnostics.out-of-sample.mse:2"
+    war1 <- paste("Some items are missing.",
+                  "Please re-compute the cruncher export with the options:",
+                  "diagnostics.out-of-sample.mean:2,",
+                  "diagnostics.out-of-sample.mse:2")
     msg1 <- "Multiple column found for extraction of normality
 Last column selected"
     msg2 <- "Multiple column found for extraction of independency
@@ -21,7 +24,8 @@ Last column selected"
             object = {
                 QR2 <- extract_QR(file = path2)
             },
-            regexp = msg1),
+            regexp = msg1
+        ),
         regexp = msg2
     )
 
