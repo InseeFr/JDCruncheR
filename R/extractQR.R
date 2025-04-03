@@ -24,7 +24,16 @@ find_variable <- function(
         pattern,
         type = c("double", "integer", "character", "logical"),
         p_value = FALSE,
-        variable = "") {
+        variable = "",
+        exact = FALSE) {
+
+    if (!exact) {
+        pattern <- gsub(
+            x = pattern,
+            pattern = "$",
+            replacement = "(\\.(\\d){1,})?$", fixed = TRUE
+        )
+    }
 
     cols <- id_cols <- grep(pattern = pattern, colnames(demetra_m))
 
@@ -61,14 +70,31 @@ find_variable <- function(
     }
 
     if (length(cols) == 0L) {
+        # Aucune colonne
         return(create_NA_type(type = type, len = nrow(demetra_m)))
-    } else if (length(cols) > 1L) {
-        message("Multiple column found for extraction of ", variable, "\n",
-                ifelse(p_value, "Last column selected", "first column selected"))
-        return(demetra_m[, cols[ifelse(p_value, length(cols), 1L)], drop = TRUE])
-    } else {
+    } else if (length(cols) == 1L) {
+        # 1 seule colonnes
         return(demetra_m[, cols, drop = TRUE])
     }
+
+    # Multiples colonnes
+
+    # cond: les multiples colonnes sont elles égales ?
+    cond <- all(apply(
+        X = demetra_m[, cols, drop = FALSE],
+        MARGIN = 2L,
+        FUN = \(serie) serie == demetra_m[, cols[1L], drop = TRUE]
+    ))
+
+    if (cond) {
+        id <- 1L
+    } else {
+        message("Multiple column found for extraction of ", variable, "\n",
+                ifelse(p_value, "Last column selected", "First column selected"))
+        id <- ifelse(p_value, length(cols), 1L)
+    }
+
+    return(demetra_m[, cols[id], drop = TRUE])
 }
 
 #' @title Extraction d'un bilan qualité
@@ -405,7 +431,7 @@ extractARIMA <- function(demetra_m) {
 
     arima_q <- find_variable(
         demetra_m,
-        pattern = "(^arima\\.q$)|(^q\\.*\\d*$)",
+        pattern = "(^arima\\.q$)|(^q$)",
         type = "integer",
         variable = "arima.q"
     )
@@ -413,7 +439,7 @@ extractARIMA <- function(demetra_m) {
 
     arima_bp <- find_variable(
         demetra_m,
-        pattern = "(^arima\\.bp$)|(^bp\\.*\\d*$)",
+        pattern = "(^arima\\.bp$)|(^bp$)",
         type = "integer",
         variable = "arima.bp"
     )
@@ -457,7 +483,7 @@ extractStatQ <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
 
     q_value <- find_variable(
         demetra_m,
-        pattern = "(^m\\.statistics\\.q$)|(^q\\.*\\d*$)",
+        pattern = "(^m\\.statistics\\.q$)|(^q$)",
         type = "double",
         variable = "q statistic"
     )
@@ -507,7 +533,7 @@ extractOOS_test <- function(demetra_m, thresholds = getOption("jdc_thresholds"))
 
     mean_value <- find_variable(
         demetra_m,
-        pattern = "(^mean\\.*\\d*$)",
+        pattern = "(^mean$)",
         type = "double",
         variable = "mean",
         p_value = TRUE
@@ -516,7 +542,7 @@ extractOOS_test <- function(demetra_m, thresholds = getOption("jdc_thresholds"))
 
     mse_value <- find_variable(
         demetra_m,
-        pattern = "(^mse\\.*\\d*$)",
+        pattern = "(^mse$)",
         type = "double",
         variable = "mse",
         p_value = TRUE
@@ -784,7 +810,7 @@ extractSeasTest <- function(demetra_m, thresholds = getOption("jdc_thresholds"))
 
     f_residual_td_on_sa <- find_variable(
         demetra_m,
-        pattern = "(^diagnostics\\.td\\.sa\\.last$)|(^td\\.sa\\.last$)",
+        pattern = "(^diagnostics\\.td\\.sa\\.last(\\.(\\d){1,})?$)|(^td\\.sa\\.last(\\.(\\d){1,})?$)",
         type = "double",
         variable = "f_residual_td_on_sa",
         p_value = TRUE
@@ -798,7 +824,7 @@ extractSeasTest <- function(demetra_m, thresholds = getOption("jdc_thresholds"))
 
     f_residual_td_on_i <- find_variable(
         demetra_m,
-        pattern = "(^diagnostics\\.td\\.i\\.last$)|(^td\\.i\\.last$)",
+        pattern = "(^diagnostics\\.td\\.i\\.last(\\.(\\d){1,})?$)|(^td\\.i\\.last(\\.(\\d){1,})?$)",
         type = "double",
         variable = "f_residual_td_on_i",
         p_value = TRUE
