@@ -83,7 +83,8 @@ find_variable <- function(
     cond <- all(apply(
         X = demetra_m[, cols, drop = FALSE],
         MARGIN = 2L,
-        FUN = \(serie) serie == demetra_m[, cols[1L], drop = TRUE]
+        FUN = `==`,
+        demetra_m[, cols[1L], drop = TRUE]
     ))
 
     if (cond) {
