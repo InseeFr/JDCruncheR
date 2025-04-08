@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+* `na.rm = TRUE` by default in `compute_score()`
 * `extract_QR` accept demetra_m with duplicated columns
 
 

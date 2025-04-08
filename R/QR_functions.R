@@ -245,14 +245,15 @@ compute_score.QR_matrix <- function(
         ),
         modalities = c("Good", "Uncertain", "", "Bad", "Severe"),
         normalize_score_value,
-        na.rm = FALSE,
+        na.rm = TRUE,
         n_contrib_score,
         conditional_indicator = NULL,
         thresholds = getOption("jdc_thresholds"),
         ...) {
 
     if (!all(names(score_pond) %in% colnames(x[["modalities"]]))) {
-        stop("Missing variables: please check the `score_pond` parameter.", call. = FALSE)
+        stop("Missing variables: please check the `score_pond` parameter.",
+             call. = FALSE)
     }
 
     # Computing score from modalities
@@ -305,7 +306,8 @@ compute_score.QR_matrix <- function(
             series_to_change <- which(series_to_change > 0L)
             fi <- indicators[[1L]]
             if (fi %in% names(score_pond)) {
-                QR_modalities[series_to_change, fi] <- QR_modalities[series_to_change, fi] / score_pond[fi]
+                new_value <- QR_modalities[series_to_change, fi] / score_pond[fi]
+                QR_modalities[series_to_change, fi] <- new_value
             }
         }
     }
@@ -1013,7 +1015,8 @@ rbind.QR_matrix <- function(..., check_formula = TRUE) {
             X = list_QR_matrix,
             FUN = function(x) {
                 if (!is.QR_matrix(x)) {
-                    stop("All arguments of this function must be QR_matrix objects", call. = FALSE)
+                    stop("All arguments of this function must be QR_matrix objects",
+                         call. = FALSE)
                 }
                 x[["score_formula"]]
             },
@@ -1022,7 +1025,8 @@ rbind.QR_matrix <- function(..., check_formula = TRUE) {
         list_formula_unique <- unique(list_formula)
         if (length(list_formula) != length(list_QR_matrix)
             || length(list_formula_unique) != 1L) {
-            stop("All QR_matrices must have the same score formulas.", call. = FALSE)
+            stop("All QR_matrices must have the same score formulas.",
+                 call. = FALSE)
         }
         if (is.list(list_formula_unique)) {
             score_formula <- NULL
@@ -1037,7 +1041,8 @@ rbind.QR_matrix <- function(..., check_formula = TRUE) {
         rbind,
         lapply(list_QR_matrix, function(x) {
             if (!is.QR_matrix(x)) {
-                stop("All arguments of this function must be QR_matrix objects", call. = FALSE)
+                stop("All arguments of this function must be QR_matrix objects",
+                     call. = FALSE)
             }
             x[["modalities"]]
         })

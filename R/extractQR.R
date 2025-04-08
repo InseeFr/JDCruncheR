@@ -339,7 +339,8 @@ extract_QR <- function(file,
     )
 
     if (length(missing_items) > 0L) {
-        warning("Some items are missing. Please re-compute the cruncher export with the options: ",
+        warning("Some items are missing. ",
+                "Please re-compute the cruncher export with the options: ",
                 toString(missing_items), call. = FALSE)
     }
 

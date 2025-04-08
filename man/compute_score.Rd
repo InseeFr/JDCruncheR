@@ -15,7 +15,7 @@
     15L, residuals_homoskedasticity = 5L, residuals_skewness = 5L, m7 = 5L, q_m2 = 5L),
   modalities = c("Good", "Uncertain", "", "Bad", "Severe"),
   normalize_score_value,
-  na.rm = FALSE,
+  na.rm = TRUE,
   n_contrib_score,
   conditional_indicator = NULL,
   thresholds = getOption("jdc_thresholds"),
