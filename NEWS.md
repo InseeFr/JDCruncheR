@@ -132,7 +132,7 @@ Bug fixed in the functions `retain_indicators()` and `remove_indicator()`.
  * addition of the parameter `log_file` to the functions `cruncher()` and `cruncher_and_param()` to export the cruncher log if required.
  * update of the options `default_matrix_item` and `default_tsmatrix_series`, in accordance with the parameters of version 2.2.0 of JDemetra+.
  
-[unreleased]: https://github.com/InseeFr/JDCruncheR/compare/v0.3.4...HEAD
+[Unreleased]: https://github.com/InseeFr/JDCruncheR/compare/v0.3.4...HEAD
 [0.3.4]: https://github.com/InseeFr/JDCruncheR/compare/v0.3.3...v0.3.4
 [0.3.3]: https://github.com/InseeFr/JDCruncheR/compare/v0.3.2...v0.3.3
 [0.3.2]: https://github.com/InseeFr/JDCruncheR/compare/v0.3.1...v0.3.2
