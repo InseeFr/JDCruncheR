@@ -210,7 +210,7 @@ export_xlsx.QR_matrix <- function(x,
     if (!nzchar(ext)) {
         file <- paste0(file, ".xslx")
     } else if (ext != "xlsx") {
-        stop("The format of the file must be .xlsx .")
+        stop("The format of the file must be .xlsx .", call. = FALSE)
     }
 
     wb_qr <- openxlsx::createWorkbook(
@@ -268,7 +268,7 @@ export_xlsx <- function(x, ...) {
 #' @family QR_matrix functions
 #' @export
 export_xlsx.default <- function(x, ...) {
-    stop("A QR_matrix or mQR_matrix object is required!")
+    stop("A QR_matrix or mQR_matrix object is required!", call. = FALSE)
 }
 
 
@@ -344,14 +344,14 @@ export_xlsx.mQR_matrix <- function(
 
     if (layout_file == "ByQRMatrix") {
         for (id_qr in seq_along(x)) {
-            qr <- x[[id_qr]]
+            qr_matrix <- x[[id_qr]]
             name <- ifelse(
                 test = is.null(names(x)) || !nzchar(names(x)[id_qr]),
                 yes = paste0("QR_", id_qr),
                 no = names(x)[id_qr]
             )
             export_xlsx(
-                x = qr,
+                x = qr_matrix,
                 file = file.path(export_dir, paste0(name, ".xlsx")),
                 auto_format = auto_format,
                 overwrite = overwrite
@@ -369,7 +369,7 @@ export_xlsx.mQR_matrix <- function(
         )
 
         for (id_qr in seq_along(x)) {
-            qr <- x[[id_qr]]
+            qr_matrix <- x[[id_qr]]
             name <- ifelse(
                 test = is.null(names(x)) || !nzchar(names(x)[id_qr]),
                 yes = paste0("QR_", id_qr),
@@ -382,19 +382,19 @@ export_xlsx.mQR_matrix <- function(
             openxlsx::writeData(
                 wb = wb_modalities,
                 sheet = name,
-                x = qr[["modalities"]],
+                x = qr_matrix[["modalities"]],
                 headerStyle = if (auto_format) header_style else NULL
             )
             openxlsx::writeData(
                 wb = wb_values,
                 sheet = name,
-                x = qr[["values"]],
+                x = qr_matrix[["values"]],
                 headerStyle = if (auto_format) header_style else NULL
             )
             if (auto_format) {
-                wb_modalities <- apply_BQ_style(wb = wb_modalities, x = qr,
+                wb_modalities <- apply_BQ_style(wb = wb_modalities, x = qr_matrix,
                                                 modalities_sheet = name)
-                wb_values <- apply_BQ_style(wb = wb_values, x = qr,
+                wb_values <- apply_BQ_style(wb = wb_values, x = qr_matrix,
                                             values_sheet = name)
             }
         }
@@ -415,7 +415,7 @@ export_xlsx.mQR_matrix <- function(
                                            subject = "Seasonal Adjustment")
 
         for (id_qr in seq_along(x)) {
-            qr <- x[[id_qr]]
+            qr_matrix <- x[[id_qr]]
             name <- ifelse(
                 test = is.null(names(x))
                 || !nzchar(names(x)[id_qr])
@@ -436,17 +436,17 @@ export_xlsx.mQR_matrix <- function(
             openxlsx::writeData(
                 wb = wb_mqr,
                 sheet = paste0(name, "_modalities"),
-                x = qr[["modalities"]],
+                x = qr_matrix[["modalities"]],
                 headerStyle = if (auto_format) header_style else NULL
             )
             openxlsx::writeData(
                 wb = wb_mqr,
                 sheet = paste0(name, "_values"),
-                x = qr[["values"]],
+                x = qr_matrix[["values"]],
                 headerStyle = if (auto_format) header_style else NULL
             )
             if (auto_format) {
-                wb_mqr <- apply_BQ_style(wb = wb_mqr, x = qr,
+                wb_mqr <- apply_BQ_style(wb = wb_mqr, x = qr_matrix,
                                          modalities_sheet = paste0(name, "_modalities"),
                                          values_sheet = paste0(name, "_values"))
             }
