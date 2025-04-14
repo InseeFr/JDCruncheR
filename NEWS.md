@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.5] - 2025-04-14
+
+
 ### Changed
 
 * `na.rm = TRUE` by default in `compute_score()` #36
@@ -132,7 +135,8 @@ Bug fixed in the functions `retain_indicators()` and `remove_indicator()`.
  * addition of the parameter `log_file` to the functions `cruncher()` and `cruncher_and_param()` to export the cruncher log if required.
  * update of the options `default_matrix_item` and `default_tsmatrix_series`, in accordance with the parameters of version 2.2.0 of JDemetra+.
  
-[Unreleased]: https://github.com/InseeFr/JDCruncheR/compare/v0.3.4...HEAD
+[Unreleased]: https://github.com/InseeFr/JDCruncheR/compare/v0.3.5...HEAD
+[0.3.5]: https://github.com/InseeFr/JDCruncheR/compare/v0.3.4...v0.3.5
 [0.3.4]: https://github.com/InseeFr/JDCruncheR/compare/v0.3.3...v0.3.4
 [0.3.3]: https://github.com/InseeFr/JDCruncheR/compare/v0.3.2...v0.3.3
 [0.3.2]: https://github.com/InseeFr/JDCruncheR/compare/v0.3.1...v0.3.2
