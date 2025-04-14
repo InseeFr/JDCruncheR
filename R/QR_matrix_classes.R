@@ -129,8 +129,9 @@ is.mQR_matrix <- function(x) {
 
 
 
-#' Affichage des objets QR_matrix et mQR_matrix
+#' @title Affichage des objets QR_matrix et mQR_matrix
 #'
+#' @description
 #' Pour afficher un objet QR_matrix ou mQR_matrix.
 #'
 #' @param x objet de type \code{\link{mQR_matrix}} ou \code{\link{mQR_matrix}}.
@@ -329,7 +330,8 @@ print.mQR_matrix <- function(x, score_statistics = TRUE, ...) {
             ))
             cat(sprintf(
                 "The smallest score is %1g and the greatest is %2g\n",
-                min(all_score, na.rm = TRUE), max(all_score, na.rm = TRUE)
+                min(all_score, na.rm = TRUE),
+                max(all_score, na.rm = TRUE)
             ))
 
             for (i in seq_along(score_values)) {
@@ -350,18 +352,19 @@ print.mQR_matrix <- function(x, score_statistics = TRUE, ...) {
                     ))
                 } else {
                     cat(sprintf(
-                        "The quality report n.%d%s has an average score of %g\n", i, bq_name,
+                        "The quality report n.%d%s has an average score of %g\n",
+                        i, bq_name,
                         mean(score_value, na.rm = TRUE)
                     ))
                     cat(sprintf(
                         "The smallest score is %1g and the greatest is %2g\n",
-                        min(score_value, na.rm = TRUE), max(score_value, na.rm = TRUE)
+                        min(score_value, na.rm = TRUE),
+                        max(score_value, na.rm = TRUE)
                     ))
                 }
             }
         }
     }
-
 
     return(invisible(x))
 }

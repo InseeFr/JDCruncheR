@@ -72,32 +72,39 @@ set_thresholds <- function(test_name,
 #'
 get_thresholds <- function(test_name, default = TRUE) {
 
+    def1 <- c(Severe = 0.001, Bad = 0.01, Uncertain = 0.05, Good = Inf)
+    def2 <- c(Bad = 0.01, Uncertain = 0.1, Good = Inf)
+    def3 <- c(Good = 1., Bad = 2., Severe = Inf)
+    def4 <- c(Good = 1., Bad = Inf)
+    def5 <- c(Good = 3., Uncertain = 5., Bad = Inf)
+    def6 <- c(Good = 0., Uncertain = 1., Bad = 3., Severe = 5.)
+
     default_thresholds <- list(
-        qs_residual_sa_on_sa = c(Severe = 0.001, Bad = 0.01, Uncertain = 0.05, Good = Inf),
-        qs_residual_sa_on_i = c(Severe = 0.001, Bad = 0.01, Uncertain = 0.05, Good = Inf),
+        qs_residual_sa_on_sa = def1,
+        qs_residual_sa_on_i = def1,
 
-        f_residual_sa_on_sa = c(Severe = 0.001, Bad = 0.01, Uncertain = 0.05, Good = Inf),
-        f_residual_sa_on_i = c(Severe = 0.001, Bad = 0.01, Uncertain = 0.05, Good = Inf),
+        f_residual_sa_on_sa = def1,
+        f_residual_sa_on_i = def1,
 
-        f_residual_td_on_sa = c(Severe = 0.001, Bad = 0.01, Uncertain = 0.05, Good = Inf),
-        f_residual_td_on_i = c(Severe = 0.001, Bad = 0.01, Uncertain = 0.05, Good = Inf),
+        f_residual_td_on_sa = def1,
+        f_residual_td_on_i = def1,
 
-        residuals_independency = c(Bad = 0.01, Uncertain = 0.1, Good = Inf),
-        residuals_homoskedasticity = c(Bad = 0.01, Uncertain = 0.1, Good = Inf),
+        residuals_independency = def2,
+        residuals_homoskedasticity = def2,
 
-        residuals_skewness = c(Bad = 0.01, Uncertain = 0.1, Good = Inf),
-        residuals_kurtosis = c(Bad = 0.01, Uncertain = 0.1, Good = Inf),
-        residuals_normality = c(Bad = 0.01, Uncertain = 0.1, Good = Inf),
+        residuals_skewness = def2,
+        residuals_kurtosis = def2,
+        residuals_normality = def2,
 
-        oos_mean = c(Bad = 0.01, Uncertain = 0.1, Good = Inf),
-        oos_mse = c(Bad = 0.01, Uncertain = 0.1, Good = Inf),
+        oos_mean = def2,
+        oos_mse = def2,
 
-        m7 = c(Good = 1., Bad = 2., Severe = Inf),
-        q = c(Good = 1., Bad = Inf),
-        q_m2 = c(Good = 1., Bad = Inf),
-        pct_outliers = c(Good = 3., Uncertain = 5., Bad = Inf),
+        m7 = def3,
+        q = def4,
+        q_m2 = def4,
+        pct_outliers = def5,
 
-        grade = c(Good = 0., Uncertain = 1., Bad = 3., Severe = 5.)
+        grade = def6
     )
 
     if (default) {

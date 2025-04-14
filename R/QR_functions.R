@@ -1,6 +1,7 @@
 recode_vec <- function(x, recode_variable) {
     if (is.factor(x)) {
-        return(recode_vec(x = as.character(x), recode_variable = recode_variable))
+        return(recode_vec(x = as.character(x),
+                          recode_variable = recode_variable))
     }
     for (index in seq_along(recode_variable)) {
         values_from <- names(recode_variable)[index]
@@ -905,7 +906,8 @@ retain_indicators <- function(x, ...) {
 }
 #' @export
 retain_indicators.default <- function(x, ...) {
-    stop("This function requires a QR_matrix or mQR_matrix object.", call. = FALSE)
+    stop("This function requires a QR_matrix or mQR_matrix object.",
+         call. = FALSE)
 }
 #' @export
 retain_indicators.QR_matrix <- function(x, ...) {
@@ -1129,7 +1131,8 @@ add_indicator <- function(x, indicator, variable_name, ...) {
 }
 #' @export
 add_indicator.default <- function(x, indicator, variable_name, ...) {
-    stop("This function requires a QR_matrix or mQR_matrix object.", call. = FALSE)
+    stop("This function requires a QR_matrix or mQR_matrix object.",
+         call. = FALSE)
 }
 #' @export
 add_indicator.QR_matrix <- function(x, indicator, variable_name, ...) {
@@ -1140,11 +1143,13 @@ add_indicator.QR_matrix <- function(x, indicator, variable_name, ...) {
         indicator <- data.frame(series = names(indicator), val = indicator)
     }
     if (!is.data.frame(indicator)) {
-        stop("The function input must be a vector or a data.frame!", call. = FALSE)
+        stop("The function input must be a vector or a data.frame!",
+             call. = FALSE)
     }
 
     if (!"series" %in% colnames(indicator)) {
-        stop("The data.frame is missing a column named \"series\"", call. = FALSE)
+        stop("The data.frame is missing a column named \"series\"",
+             call. = FALSE)
     }
     if (ncol(indicator) < 2L) {
         stop("The data.frame must have at least two columns", call. = FALSE)
@@ -1181,7 +1186,12 @@ add_indicator.QR_matrix <- function(x, indicator, variable_name, ...) {
 }
 #' @export
 add_indicator.mQR_matrix <- function(x, indicator, variable_name, ...) {
-    return(mQR_matrix(lapply(x, add_indicator, variable_name = variable_name, ...)))
+    output <- lapply(
+        X = x,
+        FUN = add_indicator,
+        variable_name = variable_name, ...
+    )
+    return(mQR_matrix(output))
 }
 
 
@@ -1237,8 +1247,13 @@ recode_indicator_num <- function(
     UseMethod("recode_indicator_num", x)
 }
 #' @export
-recode_indicator_num.default <- function(x, variable_name, breaks, labels, ...) {
-    stop("This function requires a QR_matrix or mQR_matrix object", call. = FALSE)
+recode_indicator_num.default <- function(x,
+                                         variable_name,
+                                         breaks,
+                                         labels,
+                                         ...) {
+    stop("This function requires a QR_matrix or mQR_matrix object",
+         call. = FALSE)
 }
 #' @export
 recode_indicator_num.QR_matrix <- function(
