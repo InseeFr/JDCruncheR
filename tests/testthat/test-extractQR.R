@@ -15,14 +15,14 @@ Last column selected"
 
     path1 <- testthat::test_path("data", "demetra_m1.csv")
     expect_warning(object = {
-        QR1 <- extract_QR(file = path1)
+        qr1 <- extract_QR(file = path1)
     }, regexp = war1)
 
     path2 <- testthat::test_path("data", "demetra_m2.csv")
     expect_message(
         object = expect_message(
             object = {
-                QR2 <- extract_QR(file = path2)
+                qr2 <- extract_QR(file = path2)
             },
             regexp = msg1
         ),
@@ -34,7 +34,7 @@ Last column selected"
         object = expect_message(
             object = expect_warning(
                 object = {
-                    QR3 <- extract_QR(file = path3)
+                    qr3 <- extract_QR(file = path3)
                 },
                 regexp = war1
             ),

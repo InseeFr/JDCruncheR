@@ -392,10 +392,14 @@ export_xlsx.mQR_matrix <- function(
                 headerStyle = if (auto_format) header_style else NULL
             )
             if (auto_format) {
-                wb_modalities <- apply_BQ_style(wb = wb_modalities, x = qr_matrix,
-                                                modalities_sheet = name)
-                wb_values <- apply_BQ_style(wb = wb_values, x = qr_matrix,
-                                            values_sheet = name)
+                wb_modalities <- apply_BQ_style(
+                    wb = wb_modalities, x = qr_matrix,
+                    modalities_sheet = name
+                )
+                wb_values <- apply_BQ_style(
+                    wb = wb_values, x = qr_matrix,
+                    values_sheet = name
+                )
             }
         }
 
@@ -446,9 +450,11 @@ export_xlsx.mQR_matrix <- function(
                 headerStyle = if (auto_format) header_style else NULL
             )
             if (auto_format) {
-                wb_mqr <- apply_BQ_style(wb = wb_mqr, x = qr_matrix,
-                                         modalities_sheet = paste0(name, "_modalities"),
-                                         values_sheet = paste0(name, "_values"))
+                wb_mqr <- apply_BQ_style(
+                    wb = wb_mqr, x = qr_matrix,
+                    modalities_sheet = paste0(name, "_modalities"),
+                    values_sheet = paste0(name, "_values")
+                )
             }
         }
 

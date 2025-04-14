@@ -90,8 +90,10 @@ find_variable <- function(
     if (cond) {
         id <- 1L
     } else {
-        message("Multiple column found for extraction of ", variable, "\n",
-                ifelse(p_value, "Last column selected", "First column selected"))
+        message(
+            "Multiple column found for extraction of ", variable, "\n",
+            ifelse(p_value, "Last column selected", "First column selected")
+        )
         id <- ifelse(p_value, length(cols), 1L)
     }
 
@@ -277,7 +279,8 @@ extract_QR <- function(file,
         if (length(file) == 0L
             || !file.exists(file)
             || !endsWith(x = file, suffix = ".csv")) {
-            stop("The chosen file desn't exist or isn't a csv file", call. = FALSE)
+            stop("The chosen file desn't exist or isn't a csv file",
+                 call. = FALSE)
         }
 
         demetra_m <- read.csv(
@@ -472,8 +475,16 @@ extractARIMA <- function(demetra_m) {
         arima_bq = arima_bq
     )
     arima_df[["arima_model"]] <- paste0(
-        "(", arima_df[["arima_p"]], ",", arima_df[["arima_d"]], ",", arima_df[["arima_q"]], ")",
-        "(", arima_df[["arima_bp"]], ",", arima_df[["arima_bd"]], ",", arima_df[["arima_bq"]], ")"
+        "(",
+        arima_df[["arima_p"]], ",",
+        arima_df[["arima_d"]], ",",
+        arima_df[["arima_q"]],
+        ")",
+        "(",
+        arima_df[["arima_bp"]], ",",
+        arima_df[["arima_bd"]], ",",
+        arima_df[["arima_bq"]],
+        ")"
     )
     return(list(values = arima_df[["arima_model"]],
                 missing = missing_var))
@@ -497,7 +508,9 @@ extractStatQ <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
         type = "double",
         variable = "q-m2 statistic"
     )
-    if (all(is.na(q_m2_value))) missing_var <- c(missing_var, "m-statistics.q-m2")
+    if (all(is.na(q_m2_value))) {
+        missing_var <- c(missing_var, "m-statistics.q-m2")
+    }
 
     stat_Q_modalities <- data.frame(
         q = cut(
@@ -529,7 +542,8 @@ extractStatQ <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
                 missing = missing_var))
 }
 
-extractOOS_test <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
+extractOOS_test <- function(demetra_m,
+                            thresholds = getOption("jdc_thresholds")) {
 
     missing_var <- NULL
 
@@ -540,7 +554,9 @@ extractOOS_test <- function(demetra_m, thresholds = getOption("jdc_thresholds"))
         variable = "mean",
         p_value = TRUE
     )
-    if (all(is.na(mean_value))) missing_var <- c(missing_var, "diagnostics.out-of-sample.mean:2")
+    if (all(is.na(mean_value))) {
+        missing_var <- c(missing_var, "diagnostics.out-of-sample.mean:2")
+    }
 
     mse_value <- find_variable(
         demetra_m,
@@ -549,7 +565,9 @@ extractOOS_test <- function(demetra_m, thresholds = getOption("jdc_thresholds"))
         variable = "mse",
         p_value = TRUE
     )
-    if (all(is.na(mse_value))) missing_var <- c(missing_var, "diagnostics.out-of-sample.mse:2")
+    if (all(is.na(mse_value))) {
+        missing_var <- c(missing_var, "diagnostics.out-of-sample.mse:2")
+    }
 
     stat_OOS_modalities <- data.frame(
         oos_mean = cut(
@@ -582,7 +600,8 @@ extractOOS_test <- function(demetra_m, thresholds = getOption("jdc_thresholds"))
                 missing = missing_var))
 }
 
-extractDistributionTests <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
+extractDistributionTests <- function(demetra_m,
+                                     thresholds = getOption("jdc_thresholds")) {
 
     missing_var <- NULL
 
@@ -593,7 +612,9 @@ extractDistributionTests <- function(demetra_m, thresholds = getOption("jdc_thre
         variable = "kurtosis",
         p_value = TRUE
     )
-    if (all(is.na(kurtosis_pvalue))) missing_var <- c(missing_var, "residuals.kurtosis:3")
+    if (all(is.na(kurtosis_pvalue))) {
+        missing_var <- c(missing_var, "residuals.kurtosis:3")
+    }
 
     skewness_pvalue <- find_variable(
         demetra_m,
@@ -602,7 +623,9 @@ extractDistributionTests <- function(demetra_m, thresholds = getOption("jdc_thre
         variable = "skewness",
         p_value = TRUE
     )
-    if (all(is.na(skewness_pvalue))) missing_var <- c(missing_var, "residuals.skewness:3")
+    if (all(is.na(skewness_pvalue))) {
+        missing_var <- c(missing_var, "residuals.skewness:3")
+    }
 
     homoskedasticity_pvalue <- find_variable(
         demetra_m,
@@ -611,7 +634,9 @@ extractDistributionTests <- function(demetra_m, thresholds = getOption("jdc_thre
         variable = "homoskedasticity",
         p_value = TRUE
     )
-    if (all(is.na(homoskedasticity_pvalue))) missing_var <- c(missing_var, "residuals.lb2:3")
+    if (all(is.na(homoskedasticity_pvalue))){
+        missing_var <- c(missing_var, "residuals.lb2:3")
+    }
 
     normality_pvalue <- find_variable(
         demetra_m,
@@ -620,7 +645,9 @@ extractDistributionTests <- function(demetra_m, thresholds = getOption("jdc_thre
         variable = "normality",
         p_value = TRUE
     )
-    if (all(is.na(normality_pvalue))) missing_var <- c(missing_var, "residuals.lb:3")
+    if (all(is.na(normality_pvalue))) {
+        missing_var <- c(missing_var, "residuals.lb:3")
+    }
 
     independency_pvalue <- find_variable(
         demetra_m,
@@ -692,7 +719,8 @@ extractDistributionTests <- function(demetra_m, thresholds = getOption("jdc_thre
                 missing = missing_var))
 }
 
-extractOutliers <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
+extractOutliers <- function(demetra_m,
+                            thresholds = getOption("jdc_thresholds")) {
 
     missing_var <- NULL
 
@@ -750,7 +778,8 @@ extractOutliers <- function(demetra_m, thresholds = getOption("jdc_thresholds"))
                 missing = missing_var))
 }
 
-extractSeasTest <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
+extractSeasTest <- function(demetra_m,
+                            thresholds = getOption("jdc_thresholds")) {
 
     missing_var <- NULL
 
