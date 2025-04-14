@@ -38,7 +38,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Score calculation</h1>
-      <small class="dont-index">Source: <a href="https://github.com/InseeFr/JDCruncheR/blob/v0.3.4/R/QR_functions.R" class="external-link"><code>R/QR_functions.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/InseeFr/JDCruncheR/blob/master/R/QR_functions.R" class="external-link"><code>R/QR_functions.R</code></a></small>
       <div class="d-none name"><code>compute_score.Rd</code></div>
     </div>
 
@@ -57,7 +57,7 @@
 <span>    <span class="fl">15L</span>, residuals_homoskedasticity <span class="op">=</span> <span class="fl">5L</span>, residuals_skewness <span class="op">=</span> <span class="fl">5L</span>, m7 <span class="op">=</span> <span class="fl">5L</span>, q_m2 <span class="op">=</span> <span class="fl">5L</span><span class="op">)</span>,</span>
 <span>  modalities <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Good"</span>, <span class="st">"Uncertain"</span>, <span class="st">""</span>, <span class="st">"Bad"</span>, <span class="st">"Severe"</span><span class="op">)</span>,</span>
 <span>  <span class="va">normalize_score_value</span>,</span>
-<span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">n_contrib_score</span>,</span>
 <span>  conditional_indicator <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  thresholds <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"jdc_thresholds"</span><span class="op">)</span>,</span>
@@ -192,7 +192,9 @@ independancy test ("residuals_independency") or the homoscedasticity test
 <span class="r-in"><span><span class="co"># Extract the quality report from the demetra_m file</span></span></span>
 <span class="r-in"><span><span class="va">QR</span> <span class="op">&lt;-</span> <span class="fu"><a href="extract_QR.html">extract_QR</a></span><span class="op">(</span><span class="va">demetra_path</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Multiple column found for extraction of q statistic</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> first column selected</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> First column selected</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Multiple column found for extraction of q-m2 statistic</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> First column selected</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Calculer le score</span></span></span>
 <span class="r-in"><span><span class="va">QR</span> <span class="op">&lt;-</span> <span class="fu">compute_score</span><span class="op">(</span><span class="va">QR</span>, n_contrib_score <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>

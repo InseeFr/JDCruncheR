@@ -40,7 +40,7 @@ mQR_matrix."><meta property="og:image" content="https://inseefr.github.io/JDCrun
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Extraction du score</h1>
-      <small class="dont-index">Source: <a href="https://github.com/InseeFr/JDCruncheR/blob/v0.3.4/R/QR_functions.R" class="external-link"><code>R/QR_functions.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/InseeFr/JDCruncheR/blob/master/R/QR_functions.R" class="external-link"><code>R/QR_functions.R</code></a></small>
       <div class="d-none name"><code>fr-extract_score.Rd</code></div>
     </div>
 
@@ -96,7 +96,9 @@ Pour les objets <code><a href="QR_matrix.html">mQR_matrix</a></code>, c'est une 
 <span class="r-in"><span><span class="co"># Extraire le bilan qualité à partir du fichier demetra_m.csv</span></span></span>
 <span class="r-in"><span><span class="va">QR</span> <span class="op">&lt;-</span> <span class="fu"><a href="extract_QR.html">extract_QR</a></span><span class="op">(</span><span class="va">demetra_path</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Multiple column found for extraction of q statistic</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> first column selected</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> First column selected</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Multiple column found for extraction of q-m2 statistic</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> First column selected</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Calculer le score</span></span></span>
 <span class="r-in"><span><span class="va">QR1</span> <span class="op">&lt;-</span> <span class="fu"><a href="compute_score.html">compute_score</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">QR</span>, n_contrib_score <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>

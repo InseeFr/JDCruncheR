@@ -40,7 +40,7 @@ matrice des diagnostics."><meta property="og:image" content="https://inseefr.git
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Extraction d'un bilan qualité</h1>
-      <small class="dont-index">Source: <a href="https://github.com/InseeFr/JDCruncheR/blob/v0.3.4/R/extractQR.R" class="external-link"><code>R/extractQR.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/InseeFr/JDCruncheR/blob/master/R/extractQR.R" class="external-link"><code>R/extractQR.R</code></a></small>
       <div class="d-none name"><code>fr-extract_QR.Rd</code></div>
     </div>
 
@@ -130,7 +130,9 @@ la formule utilisée pour calculer le score (si le calcul est fait).</p></li>
 <span class="r-in"><span><span class="co"># Extraire le bilan qualité à partir du fichier demetra_m.csv</span></span></span>
 <span class="r-in"><span><span class="va">QR</span> <span class="op">&lt;-</span> <span class="fu"><a href="extract_QR.html">extract_QR</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">demetra_path</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Multiple column found for extraction of q statistic</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> first column selected</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> First column selected</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Multiple column found for extraction of q-m2 statistic</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> First column selected</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">QR</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The quality report matrix has 13 observations</span>
