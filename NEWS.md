@@ -8,8 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.3.5] - 2025-04-14
+### Added
 
+* New item for demetra_m in v3 (`diagnostics.fcast-outsample-mean`, `diagnostics.fcast-outsample-variance`)
+
+
+## [0.3.5] - 2025-04-14
 
 ### Changed
 

@@ -549,24 +549,24 @@ extractOOS_test <- function(demetra_m,
 
     mean_value <- find_variable(
         demetra_m,
-        pattern = "(^mean$)",
+        pattern = "(^diagnostics\\.fcast\\.outsample\\.mean$)|(^mean$)",
         type = "double",
         variable = "mean",
         p_value = TRUE
     )
     if (all(is.na(mean_value))) {
-        missing_var <- c(missing_var, "diagnostics.out-of-sample.mean:2")
+        missing_var <- c(missing_var, "diagnostics.out-of-sample.mean:2", "diagnostics.fcast-outsample-mean:2")
     }
 
     mse_value <- find_variable(
         demetra_m,
-        pattern = "(^mse$)",
+        pattern = "(^diagnostics\\.fcast\\.outsample\\.variance$)|(^mse$)",
         type = "double",
         variable = "mse",
         p_value = TRUE
     )
     if (all(is.na(mse_value))) {
-        missing_var <- c(missing_var, "diagnostics.out-of-sample.mse:2")
+        missing_var <- c(missing_var, "diagnostics.out-of-sample.mse:2", "diagnostics.fcast-outsample-variance:2")
     }
 
     stat_OOS_modalities <- data.frame(
