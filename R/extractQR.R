@@ -52,7 +52,7 @@ find_variable <- function(
         FUN = function(x) {
             all(switch(
                 type,
-                double = is.double(x),
+                double = is.double(x) || is.integer(x),
                 integer = is.integer(x),
                 character = is.character(x),
                 logical = is.logical(x)
@@ -342,9 +342,15 @@ extract_QR <- function(file,
     )
 
     if (length(missing_items) > 0L) {
-        warning("Some items are missing. ",
-                "Please re-compute the cruncher export with the options: ",
-                toString(missing_items), call. = FALSE)
+        warning(
+            "Some items are missing. ",
+            "Please re-compute the cruncher export with the options: ",
+            toString(missing_items),
+            "\n\n",
+            "If you extract element with rjwsacruncher::cruncher_and_param(),",
+            " don't forget to put `short_column_headers = FALSE`.",
+            call. = FALSE
+        )
     }
 
     QR <- QR_matrix(modalities = QR_modalities, values = QR_values)
@@ -379,37 +385,42 @@ extractFrequency <- function(demetra_m) {
     )
     if (all(is.na(n))) missing_var <- c(missing_var, "span.n")
 
-    start_date <- as.Date(start_date, format = "%Y-%m-%d")
-    end_date <- as.Date(end_date, format = "%Y-%m-%d")
+    if (!all(is.na(start_date)) && !all(is.na(end_date))) {
 
-    start_date <- data.frame(
-        y = as.numeric(format(start_date, "%Y")),
-        m = as.numeric(format(start_date, "%m"))
-    )
-    end_date <- data.frame(
-        y = as.numeric(format(end_date, "%Y")),
-        m = as.numeric(format(end_date, "%m"))
-    )
-    freq <- c(12L, 6L, 4L, 3L, 2L)
-    nobs_compute <- matrix(
-        data = vapply(
-            X = freq,
-            FUN = function(x) {
-                x * (end_date[, 1L] - start_date[, 1L]) + (end_date[, 2L] - start_date[, 2L]) / (12L / x)
+        start_date <- as.Date(start_date, format = "%Y-%m-%d")
+        end_date <- as.Date(end_date, format = "%Y-%m-%d")
+
+        start_date <- data.frame(
+            y = as.numeric(format(start_date, "%Y")),
+            m = as.numeric(format(start_date, "%m"))
+        )
+        end_date <- data.frame(
+            y = as.numeric(format(end_date, "%Y")),
+            m = as.numeric(format(end_date, "%m"))
+        )
+        freq <- c(12L, 6L, 4L, 3L, 2L)
+        nobs_compute <- matrix(
+            data = vapply(
+                X = freq,
+                FUN = function(x) {
+                    x * (end_date[, 1L] - start_date[, 1L]) + (end_date[, 2L] - start_date[, 2L]) / (12L / x)
+                },
+                FUN.VALUE = double(nrow(demetra_m))
+            ),
+            nrow = nrow(demetra_m)
+        )
+        output <- vapply(
+            X = seq_len(nrow(nobs_compute)),
+            FUN = function(i) {
+                freq[which((nobs_compute[i, ] == n[i])
+                           | (nobs_compute[i, ] + 1L == n[i])
+                           | (nobs_compute[i, ] - 1L == n[i]))[[1L]]]
             },
-            FUN.VALUE = double(nrow(demetra_m))
-        ),
-        nrow = nrow(demetra_m)
-    )
-    output <- vapply(
-        X = seq_len(nrow(nobs_compute)),
-        FUN = function(i) {
-            freq[which((nobs_compute[i, ] == n[i])
-                       | (nobs_compute[i, ] + 1L == n[i])
-                       | (nobs_compute[i, ] - 1L == n[i]))[[1L]]]
-        },
-        FUN.VALUE = integer(1L)
-    )
+            FUN.VALUE = integer(1L)
+        )
+    } else {
+        output <- rep(NA_integer_, nrow(demetra_m))
+    }
     return(list(values = output,
                 missing = missing_var))
 }
