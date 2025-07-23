@@ -1,14 +1,16 @@
-Package: JDCruncheR
 Type: Package
-Title: Interface Between the 'JDemetra+' Cruncher and R, and Quality Report Generator
+Package: JDCruncheR
+Title: Interface Between the 'JDemetra+' Cruncher and R, and Quality
+    Report Generator
 Version: 0.3.5.9000
 Authors@R: c(
     person(given = "Tanguy", 
-           family = "Barthelemy", role = c("aut", "cre", "art"),
+           family = "Barthelemy", 
+           role = c("aut", "cre", "art"),
            email ="tanguy.barthelemy@insee.fr"),
     person(given = "Alain",
            family = "Quartier-la-Tente",
-           role = c("aut"),
+           role = "aut",
            email = "alain.quartier-la-tente@insee.fr",
            comment = c(ORCID = "0000-0001-7890-3857")),
     person(given = NULL, 
@@ -16,10 +18,15 @@ Authors@R: c(
            role = "cph",
            comment = "https://www.insee.fr/"),
     person(given = "Anna", 
-           family = "Smyk", role = c("aut"),
+           family = "Smyk", role = "aut",
            email ="anna.smyk@insee.fr"))
-Description: Tool for generating quality reports from cruncher outputs (and calculating series scores). The latest version of the cruncher can be downloaded here: <https://github.com/jdemetra/jwsacruncher/releases>.
-URL: https://github.com/InseeFr/JDCruncheR, https://inseefr.github.io/JDCruncheR/
+Description: Tool for generating quality reports from cruncher outputs
+    (and calculating series scores). The latest version of the cruncher
+    can be downloaded here:
+    <https://github.com/jdemetra/jwsacruncher/releases>.
+License: EUPL
+URL: https://github.com/InseeFr/JDCruncheR,
+    https://inseefr.github.io/JDCruncheR/
 BugReports: https://github.com/InseeFr/JDCruncheR/issues
 Depends:
     R (>= 4.1)
@@ -29,14 +36,9 @@ Imports:
     tools,
     utils
 Suggests:
-    knitr,
-    kableExtra,
-    pkgdown,
-    rmarkdown,
     testthat (>= 3.0.0)
-License: EUPL
+Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.3.2
 Roxygen: list(markdown = TRUE)
-Config/testthat/edition: 3
+RoxygenNote: 7.3.2
