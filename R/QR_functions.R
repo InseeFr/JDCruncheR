@@ -368,18 +368,22 @@ compute_score.QR_matrix <- function(
         QR_modalities <- QR_modalities[-total_pond_id, ]
         n_contrib_score <- round(min(n_contrib_score, length(score_pond)))
 
-        contrib <- t(sapply(seq_len(nrow(QR_modalities)), function(i) {
-            ligne_i <- QR_modalities[i, ]
-            res <- colnames(QR_modalities)[order(
-                t(ligne_i),
-                decreasing = TRUE,
-                na.last = TRUE
-            )]
-            ligne_i <- ligne_i[, res]
-            lignes_a_modif <- which(is.na(ligne_i) | ligne_i == 0L)
-            res[lignes_a_modif] <- ""
-            res
-        }))
+        contrib <- t(vapply(
+            X = seq_len(nrow(QR_modalities)),
+            FUN = function(i) {
+                ligne_i <- QR_modalities[i, ]
+                res <- colnames(QR_modalities)[order(
+                    t(ligne_i),
+                    decreasing = TRUE,
+                    na.last = TRUE
+                )]
+                ligne_i <- ligne_i[, res]
+                lignes_a_modif <- which(is.na(ligne_i) | ligne_i == 0L)
+                res[lignes_a_modif] <- ""
+                res
+            },
+            FUN.VALUE = character(ncol(QR_modalities))
+        ))
 
         colnames(contrib) <- paste0(
             seq_along(score_pond),

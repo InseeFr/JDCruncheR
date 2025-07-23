@@ -898,11 +898,11 @@ extractSeasTest <- function(
 
     f_residual_td_on_sa <- find_variable(
         demetra_m,
-        pattern = paste0(
+        pattern = paste(
             "(^diagnostics\\.td\\.sa\\.last$)",
             "(^td\\.sa\\.last$)",
             sep = "|"
-        )
+        ),
         type = "double",
         variable = "f_residual_td_on_sa",
         p_value = TRUE
