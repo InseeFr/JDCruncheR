@@ -1,7 +1,9 @@
 recode_vec <- function(x, recode_variable) {
     if (is.factor(x)) {
-        return(recode_vec(x = as.character(x),
-                          recode_variable = recode_variable))
+        return(recode_vec(
+            x = as.character(x),
+            recode_variable = recode_variable
+        ))
     }
     for (index in seq_along(recode_variable)) {
         values_from <- names(recode_variable)[index]
@@ -122,7 +124,6 @@ recode_vec <- function(x, recode_variable) {
 NULL
 #> NULL
 
-
 #' Score calculation
 #'
 #' To calculate a score for each series from a quality report
@@ -228,33 +229,35 @@ NULL
 #' @seealso [Traduction française][fr-compute_score()]
 #' @export
 compute_score.QR_matrix <- function(
-        x,
-        score_pond = c(
-            qs_residual_sa_on_sa = 30L,
-            f_residual_sa_on_sa = 30L,
-            qs_residual_sa_on_i = 20L,
-            f_residual_sa_on_i = 20L,
-            f_residual_td_on_sa = 30L,
-            f_residual_td_on_i = 20L,
-            oos_mean = 15L,
-            oos_mse = 10L,
-            residuals_independency = 15L,
-            residuals_homoskedasticity = 5L,
-            residuals_skewness = 5L,
-            m7 = 5L,
-            q_m2 = 5L
-        ),
-        modalities = c("Good", "Uncertain", "", "Bad", "Severe"),
-        normalize_score_value,
-        na.rm = TRUE,
-        n_contrib_score,
-        conditional_indicator = NULL,
-        thresholds = getOption("jdc_thresholds"),
-        ...) {
-
+    x,
+    score_pond = c(
+        qs_residual_sa_on_sa = 30L,
+        f_residual_sa_on_sa = 30L,
+        qs_residual_sa_on_i = 20L,
+        f_residual_sa_on_i = 20L,
+        f_residual_td_on_sa = 30L,
+        f_residual_td_on_i = 20L,
+        oos_mean = 15L,
+        oos_mse = 10L,
+        residuals_independency = 15L,
+        residuals_homoskedasticity = 5L,
+        residuals_skewness = 5L,
+        m7 = 5L,
+        q_m2 = 5L
+    ),
+    modalities = c("Good", "Uncertain", "", "Bad", "Severe"),
+    normalize_score_value = NULL,
+    na.rm = TRUE,
+    n_contrib_score = NULL,
+    conditional_indicator = NULL,
+    thresholds = getOption("jdc_thresholds"),
+    ...
+) {
     if (!all(names(score_pond) %in% colnames(x[["modalities"]]))) {
-        stop("Missing variables: please check the `score_pond` parameter.",
-             call. = FALSE)
+        stop(
+            "Missing variables: please check the `score_pond` parameter.",
+            call. = FALSE
+        )
     }
 
     # Computing score from modalities
@@ -276,12 +279,17 @@ compute_score.QR_matrix <- function(
             indicator_condition <- conditional_indicator[[i]]
             indicators <- indicator_condition[["indicator"]]
 
-            if (anyNA(match(
-                c("indicator", "conditions", "conditions_modalities"),
-                names(indicator_condition)
-            ))) {
-                stop("There is an error in the specification of the ",
-                     "`indicator_condition` variable.", call. = FALSE)
+            if (
+                anyNA(match(
+                    c("indicator", "conditions", "conditions_modalities"),
+                    names(indicator_condition)
+                ))
+            ) {
+                stop(
+                    "There is an error in the specification of the ",
+                    "`indicator_condition` variable.",
+                    call. = FALSE
+                )
             }
 
             indicator_variables <- c(
@@ -289,8 +297,11 @@ compute_score.QR_matrix <- function(
                 indicator_condition[["conditions"]]
             )
             if (!all(indicator_variables %in% colnames(x[["modalities"]]))) {
-                stop("Missing variables: please check the ",
-                     "`indicator_variables` parameter.", call. = FALSE)
+                stop(
+                    "Missing variables: please check the ",
+                    "`indicator_variables` parameter.",
+                    call. = FALSE
+                )
             }
 
             # Series for which at least one conditions is verified
@@ -298,7 +309,8 @@ compute_score.QR_matrix <- function(
                 x = vapply(
                     X = indicator_condition[["conditions"]],
                     FUN = function(name) {
-                        x[["modalities"]][, name] %in% indicator_condition[["conditions_modalities"]]
+                        x[["modalities"]][, name] %in%
+                            indicator_condition[["conditions_modalities"]]
                     },
                     FUN.VALUE = logical(1L)
                 ),
@@ -307,14 +319,16 @@ compute_score.QR_matrix <- function(
             series_to_change <- which(series_to_change > 0L)
             fi <- indicators[[1L]]
             if (fi %in% names(score_pond)) {
-                new_value <- QR_modalities[series_to_change, fi] / score_pond[fi]
+                new_value <- QR_modalities[series_to_change, fi] /
+                    score_pond[fi]
                 QR_modalities[series_to_change, fi] <- new_value
             }
         }
     }
 
     for (nom_var in names(score_pond)) {
-        QR_modalities[, nom_var] <- QR_modalities[, nom_var] * score_pond[nom_var]
+        QR_modalities[, nom_var] <- QR_modalities[, nom_var] *
+            score_pond[nom_var]
     }
     score <- base::rowSums(
         QR_modalities,
@@ -322,7 +336,7 @@ compute_score.QR_matrix <- function(
     )
 
     total_pond_id <- length(score)
-    if (!missing(normalize_score_value)) {
+    if (!is.null(normalize_score_value)) {
         if (!is.numeric(normalize_score_value)) {
             stop("The score's reference value must be a number!", call. = FALSE)
         }
@@ -342,12 +356,13 @@ compute_score.QR_matrix <- function(
     x[["modalities"]][["score"]] <- score
     x[["values"]][["score"]] <- score
     x[["score_formula"]] <- paste(
-        score_pond, "*",
+        score_pond,
+        "*",
         names(score_pond),
         collapse = " + "
     )
 
-    if (!missing(n_contrib_score)
+    if (!is.null(n_contrib_score)
         && is.numeric(n_contrib_score)
         && n_contrib_score >= 1L) {
         QR_modalities <- QR_modalities[-total_pond_id, ]
@@ -355,9 +370,11 @@ compute_score.QR_matrix <- function(
 
         contrib <- t(sapply(seq_len(nrow(QR_modalities)), function(i) {
             ligne_i <- QR_modalities[i, ]
-            res <- colnames(QR_modalities)[order(t(ligne_i),
-                                                 decreasing = TRUE,
-                                                 na.last = TRUE)]
+            res <- colnames(QR_modalities)[order(
+                t(ligne_i),
+                decreasing = TRUE,
+                na.last = TRUE
+            )]
             ligne_i <- ligne_i[, res]
             lignes_a_modif <- which(is.na(ligne_i) | ligne_i == 0L)
             res[lignes_a_modif] <- ""
@@ -369,8 +386,13 @@ compute_score.QR_matrix <- function(
             "_highest_contrib_score"
         )
         ncol_before_contrib <- ncol(x[["values"]])
-        x[["values"]] <- cbind(x[["values"]], contrib[, seq_len(n_contrib_score)])
-        colnames(x[["values"]])[seq_len(n_contrib_score) + ncol_before_contrib] <-
+        x[["values"]] <- cbind(
+            x[["values"]],
+            contrib[, seq_len(n_contrib_score)]
+        )
+        colnames(x[["values"]])[
+            seq_len(n_contrib_score) + ncol_before_contrib
+        ] <-
             paste0(
                 seq_len(n_contrib_score),
                 "_highest_contrib_score"
@@ -391,10 +413,11 @@ compute_score <- function(x, ...) {
 }
 #' @export
 compute_score.default <- function(x, ...) {
-    stop("The function requires a QR_matrix or mQR_matrix object!", call. = FALSE)
+    stop(
+        "The function requires a QR_matrix or mQR_matrix object!",
+        call. = FALSE
+    )
 }
-
-
 
 
 #' Calcul d'un score pondéré pour chaque observation
@@ -433,7 +456,6 @@ compute_score.default <- function(x, ...) {
 #' @name fr-weighted_score
 NULL
 #> NULL
-
 
 #' Weighted score calculation
 #'
@@ -475,7 +497,10 @@ weighted_score <- function(x, pond = 1L) {
 }
 #' @export
 weighted_score.default <- function(x, pond = 1L) {
-    stop("This function requires a QR_matrix or mQR_matrix object.", call. = FALSE)
+    stop(
+        "This function requires a QR_matrix or mQR_matrix object.",
+        call. = FALSE
+    )
 }
 #' @export
 weighted_score.QR_matrix <- function(x, pond = 1L) {
@@ -497,7 +522,10 @@ weighted_score.QR_matrix <- function(x, pond = 1L) {
 weighted_score.mQR_matrix <- function(x, pond = 1L) {
     if (is.list(pond)) {
         if (length(pond) < length(x)) {
-            stop("There are fewer weight sets than quality reports!", call. = FALSE)
+            stop(
+                "There are fewer weight sets than quality reports!",
+                call. = FALSE
+            )
         }
         result <- lapply(
             X = seq_along(x),
@@ -558,7 +586,6 @@ weighted_score.mQR_matrix <- function(x, pond = 1L) {
 NULL
 #> NULL
 
-
 #' QR_matrix and mQR_matrix sorting
 #'
 #' To sort the quality reports on one or several variables
@@ -597,7 +624,12 @@ NULL
 #' @rdname sort
 #' @seealso [Traduction française][fr-sort.QR_matrix()]
 #' @export
-sort.QR_matrix <- function(x, decreasing = FALSE, sort_variables = "score", ...) {
+sort.QR_matrix <- function(
+    x,
+    decreasing = FALSE,
+    sort_variables = "score",
+    ...
+) {
     modalities <- x[["modalities"]]
     if (anyNA(match(sort_variables, colnames(modalities)))) {
         stop("There is an error in the variables' names.", call. = FALSE)
@@ -610,22 +642,22 @@ sort.QR_matrix <- function(x, decreasing = FALSE, sort_variables = "score", ...)
 }
 #' @rdname sort
 #' @export
-sort.mQR_matrix <- function(x,
-                            decreasing = FALSE,
-                            sort_variables = "score",
-                            ...) {
+sort.mQR_matrix <- function(
+    x,
+    decreasing = FALSE,
+    sort_variables = "score",
+    ...
+) {
     result <- lapply(
         X = x,
         FUN = sort,
         sort_variables = sort_variables,
-        decreasing = decreasing, ...
+        decreasing = decreasing,
+        ...
     )
     result <- mQR_matrix(result)
     return(result)
 }
-
-
-
 
 
 #' @title Extraction du score
@@ -680,7 +712,6 @@ sort.mQR_matrix <- function(x,
 NULL
 #> NULL
 
-
 #' Score extraction
 #'
 #' To extract score variables from \code{\link{QR_matrix}} or
@@ -727,20 +758,27 @@ NULL
 #'
 #' @seealso [Traduction française][fr-extract_score()]
 #' @export
-extract_score <- function(x,
-                          format_output = c("data.frame", "vector"),
-                          weighted_score = FALSE) {
+extract_score <- function(
+    x,
+    format_output = c("data.frame", "vector"),
+    weighted_score = FALSE
+) {
     UseMethod("extract_score", x)
 }
 
 #' @export
 extract_score.default <- function(x, format_output, weighted_score) {
-    stop("This function requires a QR_matrix or mQR_matrix object.", call. = FALSE)
+    stop(
+        "This function requires a QR_matrix or mQR_matrix object.",
+        call. = FALSE
+    )
 }
 #' @export
-extract_score.QR_matrix <- function(x,
-                                    format_output = c("data.frame", "vector"),
-                                    weighted_score = FALSE) {
+extract_score.QR_matrix <- function(
+    x,
+    format_output = c("data.frame", "vector"),
+    weighted_score = FALSE
+) {
     if (weighted_score) {
         score <- x[["modalities"]][["score_pond"]]
         if (is.null(score)) {
@@ -770,9 +808,11 @@ extract_score.QR_matrix <- function(x,
     return(res)
 }
 #' @export
-extract_score.mQR_matrix <- function(x,
-                                     format_output = c("data.frame", "vector"),
-                                     weighted_score = FALSE) {
+extract_score.mQR_matrix <- function(
+    x,
+    format_output = c("data.frame", "vector"),
+    weighted_score = FALSE
+) {
     return(lapply(
         X = x,
         FUN = extract_score,
@@ -780,9 +820,6 @@ extract_score.mQR_matrix <- function(x,
         weighted_score = weighted_score
     ))
 }
-
-
-
 
 
 #' Manipulation de la liste des indicateurs
@@ -828,7 +865,6 @@ extract_score.mQR_matrix <- function(x,
 #' @name fr-remove_indicators
 NULL
 #> NULL
-
 
 #' Editing the indicators list
 #'
@@ -878,7 +914,10 @@ remove_indicators <- function(x, ...) {
 }
 #' @export
 remove_indicators.default <- function(x, ...) {
-    stop("This function requires a QR_matrix or mQR_matrix object.", call. = FALSE)
+    stop(
+        "This function requires a QR_matrix or mQR_matrix object.",
+        call. = FALSE
+    )
 }
 #' @export
 remove_indicators.QR_matrix <- function(x, ...) {
@@ -906,8 +945,10 @@ retain_indicators <- function(x, ...) {
 }
 #' @export
 retain_indicators.default <- function(x, ...) {
-    stop("This function requires a QR_matrix or mQR_matrix object.",
-         call. = FALSE)
+    stop(
+        "This function requires a QR_matrix or mQR_matrix object.",
+        call. = FALSE
+    )
 }
 #' @export
 retain_indicators.QR_matrix <- function(x, ...) {
@@ -969,7 +1010,6 @@ retain_indicators.mQR_matrix <- function(x, ...) {
 NULL
 #> NULL
 
-
 #' @title Combining QR_matrix objects
 #'
 #' @description
@@ -1017,18 +1057,24 @@ rbind.QR_matrix <- function(..., check_formula = TRUE) {
             X = list_QR_matrix,
             FUN = function(x) {
                 if (!is.QR_matrix(x)) {
-                    stop("All arguments of this function must be QR_matrix objects",
-                         call. = FALSE)
+                    stop(
+                        "All arguments of this function must be QR_matrix objects",
+                        call. = FALSE
+                    )
                 }
                 x[["score_formula"]]
             },
             FUN.VALUE = character(1L)
         )
         list_formula_unique <- unique(list_formula)
-        if (length(list_formula) != length(list_QR_matrix)
-            || length(list_formula_unique) != 1L) {
-            stop("All QR_matrices must have the same score formulas.",
-                 call. = FALSE)
+        if (
+            length(list_formula) != length(list_QR_matrix) ||
+                length(list_formula_unique) != 1L
+        ) {
+            stop(
+                "All QR_matrices must have the same score formulas.",
+                call. = FALSE
+            )
         }
         if (is.list(list_formula_unique)) {
             score_formula <- NULL
@@ -1043,8 +1089,10 @@ rbind.QR_matrix <- function(..., check_formula = TRUE) {
         rbind,
         lapply(list_QR_matrix, function(x) {
             if (!is.QR_matrix(x)) {
-                stop("All arguments of this function must be QR_matrix objects",
-                     call. = FALSE)
+                stop(
+                    "All arguments of this function must be QR_matrix objects",
+                    call. = FALSE
+                )
             }
             x[["modalities"]]
         })
@@ -1054,7 +1102,8 @@ rbind.QR_matrix <- function(..., check_formula = TRUE) {
         lapply(list_QR_matrix, function(x) x[["values"]])
     )
     QR <- QR_matrix(
-        modalities = modalities, values = values,
+        modalities = modalities,
+        values = values,
         score_formula = score_formula
     )
     return(QR)
@@ -1094,7 +1143,6 @@ rbind.QR_matrix <- function(..., check_formula = TRUE) {
 NULL
 #> NULL
 
-
 #' Adding an indicator in QR_matrix objects
 #'
 #' Function to add indicators in \code{\link{QR_matrix}} objects.
@@ -1131,8 +1179,10 @@ add_indicator <- function(x, indicator, variable_name, ...) {
 }
 #' @export
 add_indicator.default <- function(x, indicator, variable_name, ...) {
-    stop("This function requires a QR_matrix or mQR_matrix object.",
-         call. = FALSE)
+    stop(
+        "This function requires a QR_matrix or mQR_matrix object.",
+        call. = FALSE
+    )
 }
 #' @export
 add_indicator.QR_matrix <- function(x, indicator, variable_name, ...) {
@@ -1143,13 +1193,17 @@ add_indicator.QR_matrix <- function(x, indicator, variable_name, ...) {
         indicator <- data.frame(series = names(indicator), val = indicator)
     }
     if (!is.data.frame(indicator)) {
-        stop("The function input must be a vector or a data.frame!",
-             call. = FALSE)
+        stop(
+            "The function input must be a vector or a data.frame!",
+            call. = FALSE
+        )
     }
 
     if (!"series" %in% colnames(indicator)) {
-        stop("The data.frame is missing a column named \"series\"",
-             call. = FALSE)
+        stop(
+            "The data.frame is missing a column named \"series\"",
+            call. = FALSE
+        )
     }
     if (ncol(indicator) < 2L) {
         stop("The data.frame must have at least two columns", call. = FALSE)
@@ -1171,9 +1225,12 @@ add_indicator.QR_matrix <- function(x, indicator, variable_name, ...) {
     n_col <- ncol(values)
     values[["initial_sort"]] <- seq_len(nrow(values))
     values <- merge(
-        values, indicator,
+        values,
+        indicator,
         by = "series",
-        all.x = TRUE, all.y = FALSE, ...
+        all.x = TRUE,
+        all.y = FALSE,
+        ...
     )
     values <- values[order(values[["initial_sort"]], decreasing = FALSE), ]
 
@@ -1189,7 +1246,8 @@ add_indicator.mQR_matrix <- function(x, indicator, variable_name, ...) {
     output <- lapply(
         X = x,
         FUN = add_indicator,
-        variable_name = variable_name, ...
+        variable_name = variable_name,
+        ...
     )
     return(mQR_matrix(output))
 }
@@ -1216,7 +1274,6 @@ add_indicator.mQR_matrix <- function(x, indicator, variable_name, ...) {
 NULL
 #> NULL
 
-
 #' @title Converting "values variables" into "modalities variables"
 #'
 #' @description
@@ -1239,29 +1296,35 @@ NULL
 #' @seealso [Traduction française][fr-recode_indicator_num()]
 #' @export
 recode_indicator_num <- function(
-        x,
-        variable_name,
-        breaks = c(0., 0.01, 0.05, 0.1, 1.),
-        labels = c("Good", "Uncertain", "Bad", "Severe"),
-        ...) {
+    x,
+    variable_name,
+    breaks = c(0., 0.01, 0.05, 0.1, 1.),
+    labels = c("Good", "Uncertain", "Bad", "Severe"),
+    ...
+) {
     UseMethod("recode_indicator_num", x)
 }
 #' @export
-recode_indicator_num.default <- function(x,
-                                         variable_name,
-                                         breaks,
-                                         labels,
-                                         ...) {
-    stop("This function requires a QR_matrix or mQR_matrix object",
-         call. = FALSE)
+recode_indicator_num.default <- function(
+    x,
+    variable_name,
+    breaks,
+    labels,
+    ...
+) {
+    stop(
+        "This function requires a QR_matrix or mQR_matrix object",
+        call. = FALSE
+    )
 }
 #' @export
 recode_indicator_num.QR_matrix <- function(
-        x,
-        variable_name,
-        breaks = c(0., 0.01, 0.05, 0.1, 1.),
-        labels = c("Good", "Uncertain", "Bad", "Severe"),
-        ...) {
+    x,
+    variable_name,
+    breaks = c(0., 0.01, 0.05, 0.1, 1.),
+    labels = c("Good", "Uncertain", "Bad", "Severe"),
+    ...
+) {
     modalities <- x[["modalities"]]
     values <- x[["values"]]
     for (var in variable_name) {
@@ -1282,17 +1345,20 @@ recode_indicator_num.QR_matrix <- function(
 }
 #' @export
 recode_indicator_num.mQR_matrix <- function(
-        x,
-        variable_name,
-        breaks = c(0., 0.01, 0.05, 0.1, 1.),
-        labels = c("Good", "Uncertain", "Bad", "Severe"),
-        ...) {
-    return(mQR_matrix(x = lapply(
-        X = x,
-        FUN = recode_indicator_num,
-        variable_name = variable_name,
-        breaks = breaks,
-        labels = labels,
-        ...
-    )))
+    x,
+    variable_name,
+    breaks = c(0., 0.01, 0.05, 0.1, 1.),
+    labels = c("Good", "Uncertain", "Bad", "Severe"),
+    ...
+) {
+    return(mQR_matrix(
+        x = lapply(
+            X = x,
+            FUN = recode_indicator_num,
+            variable_name = variable_name,
+            breaks = breaks,
+            labels = labels,
+            ...
+        )
+    ))
 }

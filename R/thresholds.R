@@ -31,8 +31,7 @@
 #' # Set all thresholds to default
 #' set_thresholds()
 #'
-set_thresholds <- function(test_name,
-                           thresholds) {
+set_thresholds <- function(test_name, thresholds) {
     default_thresholds <- get_thresholds(default = TRUE)
     if (missing(test_name)) {
         all_thresholds <- default_thresholds
@@ -71,7 +70,6 @@ set_thresholds <- function(test_name,
 #' get_thresholds(test_name = "oos_mean", default = FALSE)
 #'
 get_thresholds <- function(test_name, default = TRUE) {
-
     def1 <- c(Severe = 0.001, Bad = 0.01, Uncertain = 0.05, Good = Inf)
     def2 <- c(Bad = 0.01, Uncertain = 0.1, Good = Inf)
     def3 <- c(Good = 1., Bad = 2., Severe = Inf)

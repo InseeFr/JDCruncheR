@@ -1,7 +1,15 @@
-
-create_NA_type <- function(type = c("character", "integer", "double", "logical",
-                                    "complex", "raw", "Date"),
-                           len = 1L) {
+create_NA_type <- function(
+    type = c(
+        "character",
+        "integer",
+        "double",
+        "logical",
+        "complex",
+        "raw",
+        "Date"
+    ),
+    len = 1L
+) {
     type <- match.arg(type)
     output <- rep(
         x = switch(
@@ -20,18 +28,19 @@ create_NA_type <- function(type = c("character", "integer", "double", "logical",
 }
 
 find_variable <- function(
-        demetra_m,
-        pattern,
-        type = c("double", "integer", "character", "logical"),
-        p_value = FALSE,
-        variable = "",
-        exact = FALSE) {
-
+    demetra_m,
+    pattern,
+    type = c("double", "integer", "character", "logical"),
+    p_value = FALSE,
+    variable = "",
+    exact = FALSE
+) {
     if (!exact) {
         pattern <- gsub(
             x = pattern,
             pattern = "$",
-            replacement = "(\\.(\\d){1,})?$", fixed = TRUE
+            replacement = "(\\.(\\d){1,})?$",
+            fixed = TRUE
         )
     }
 
@@ -40,7 +49,9 @@ find_variable <- function(
     # Colonnes adjacentes
     for (idx in id_cols) {
         k <- 1L
-        while (grepl(pattern = "^X\\.(\\d){1,}$", colnames(demetra_m)[idx + k])) {
+        while (
+            grepl(pattern = "^X\\.(\\d){1,}$", colnames(demetra_m)[idx + k])
+        ) {
             cols <- c(cols, idx + k)
             k <- k + 1L
         }
@@ -91,7 +102,9 @@ find_variable <- function(
         id <- 1L
     } else {
         message(
-            "Multiple column found for extraction of ", variable, "\n",
+            "Multiple column found for extraction of ",
+            variable,
+            "\n",
             ifelse(p_value, "Last column selected", "First column selected")
         )
         id <- ifelse(p_value, length(cols), 1L)
@@ -179,7 +192,6 @@ find_variable <- function(
 NULL
 #> NULL
 
-
 #' @title Extraction of a quality report
 #'
 #' @description
@@ -255,32 +267,44 @@ NULL
 #' @importFrom utils read.csv
 #' @seealso [Traduction française][fr-extract_QR()]
 #' @export
-extract_QR <- function(file,
-                       x,
-                       matrix_output_file,
-                       sep = ";",
-                       dec = ",",
-                       thresholds = getOption("jdc_thresholds")) {
+extract_QR <- function(
+    file,
+    x,
+    matrix_output_file,
+    sep = ";",
+    dec = ",",
+    thresholds = getOption("jdc_thresholds")
+) {
     if (!missing(matrix_output_file)) {
-        warning("The `matrix_output_file` argument is deprecated",
-                " and will be removed in the future. ",
-                "Please use the `file` argument instead or ",
-                "the `x` argument which may contain a diagnostic matrix ",
-                "that has already been imported.", call. = FALSE)
+        warning(
+            "The `matrix_output_file` argument is deprecated",
+            " and will be removed in the future. ",
+            "Please use the `file` argument instead or ",
+            "the `x` argument which may contain a diagnostic matrix ",
+            "that has already been imported.",
+            call. = FALSE
+        )
         file <- matrix_output_file
     }
 
     if (missing(x) && missing(file)) {
-        stop("Please call extract_QR() on a csv file containing at least ",
-             "one cruncher output matrix (demetra_m.csv for example) ",
-             "with the argument `file` ",
-             "or directly on a matrix with the argument `x`", call. = FALSE)
+        stop(
+            "Please call extract_QR() on a csv file containing at least ",
+            "one cruncher output matrix (demetra_m.csv for example) ",
+            "with the argument `file` ",
+            "or directly on a matrix with the argument `x`",
+            call. = FALSE
+        )
     } else if (missing(x)) {
-        if (length(file) == 0L
-            || !file.exists(file)
-            || !endsWith(x = file, suffix = ".csv")) {
-            stop("The chosen file desn't exist or isn't a csv file",
-                 call. = FALSE)
+        if (
+            length(file) == 0L ||
+                !file.exists(file) ||
+                !endsWith(x = file, suffix = ".csv")
+        ) {
+            stop(
+                "The chosen file desn't exist or isn't a csv file",
+                call. = FALSE
+            )
         }
 
         demetra_m <- read.csv(
@@ -301,7 +325,8 @@ extract_QR <- function(file,
     }
 
     series <- gsub(
-        "(^ *)|(* $)", "",
+        "(^ *)|(* $)",
+        "",
         gsub("(^.* \\* )|(\\[frozen\\])", "", demetra_m[, 1L])
     )
 
@@ -358,7 +383,6 @@ extract_QR <- function(file,
 }
 
 extractFrequency <- function(demetra_m) {
-
     missing_var <- NULL
 
     start_date <- find_variable(
@@ -386,7 +410,6 @@ extractFrequency <- function(demetra_m) {
     if (all(is.na(n))) missing_var <- c(missing_var, "span.n")
 
     if (!all(is.na(start_date)) && !all(is.na(end_date))) {
-
         start_date <- as.Date(start_date, format = "%Y-%m-%d")
         end_date <- as.Date(end_date, format = "%Y-%m-%d")
 
@@ -403,7 +426,9 @@ extractFrequency <- function(demetra_m) {
             data = vapply(
                 X = freq,
                 FUN = function(x) {
-                    x * (end_date[, 1L] - start_date[, 1L]) + (end_date[, 2L] - start_date[, 2L]) / (12L / x)
+                    x *
+                        (end_date[, 1L] - start_date[, 1L]) +
+                        (end_date[, 2L] - start_date[, 2L]) / (12L / x)
                 },
                 FUN.VALUE = double(nrow(demetra_m))
             ),
@@ -412,21 +437,21 @@ extractFrequency <- function(demetra_m) {
         output <- vapply(
             X = seq_len(nrow(nobs_compute)),
             FUN = function(i) {
-                freq[which((nobs_compute[i, ] == n[i])
-                           | (nobs_compute[i, ] + 1L == n[i])
-                           | (nobs_compute[i, ] - 1L == n[i]))[[1L]]]
+                freq[which(
+                    (nobs_compute[i, ] == n[i]) |
+                        (nobs_compute[i, ] + 1L == n[i]) |
+                        (nobs_compute[i, ] - 1L == n[i])
+                )[[1L]]]
             },
             FUN.VALUE = integer(1L)
         )
     } else {
         output <- rep(NA_integer_, nrow(demetra_m))
     }
-    return(list(values = output,
-                missing = missing_var))
+    return(list(values = output, missing = missing_var))
 }
 
 extractARIMA <- function(demetra_m) {
-
     missing_var <- NULL
 
     arima_p <- find_variable(
@@ -487,22 +512,24 @@ extractARIMA <- function(demetra_m) {
     )
     arima_df[["arima_model"]] <- paste0(
         "(",
-        arima_df[["arima_p"]], ",",
-        arima_df[["arima_d"]], ",",
+        arima_df[["arima_p"]],
+        ",",
+        arima_df[["arima_d"]],
+        ",",
         arima_df[["arima_q"]],
         ")",
         "(",
-        arima_df[["arima_bp"]], ",",
-        arima_df[["arima_bd"]], ",",
+        arima_df[["arima_bp"]],
+        ",",
+        arima_df[["arima_bd"]],
+        ",",
         arima_df[["arima_bq"]],
         ")"
     )
-    return(list(values = arima_df[["arima_model"]],
-                missing = missing_var))
+    return(list(values = arima_df[["arima_model"]], missing = missing_var))
 }
 
 extractStatQ <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
-
     missing_var <- NULL
 
     q_value <- find_variable(
@@ -548,14 +575,17 @@ extractStatQ <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
         stringsAsFactors = FALSE
     )
 
-    return(list(modalities = stat_Q_modalities,
-                values = stat_Q_values,
-                missing = missing_var))
+    return(list(
+        modalities = stat_Q_modalities,
+        values = stat_Q_values,
+        missing = missing_var
+    ))
 }
 
-extractOOS_test <- function(demetra_m,
-                            thresholds = getOption("jdc_thresholds")) {
-
+extractOOS_test <- function(
+    demetra_m,
+    thresholds = getOption("jdc_thresholds")
+) {
     missing_var <- NULL
 
     mean_value <- find_variable(
@@ -566,7 +596,11 @@ extractOOS_test <- function(demetra_m,
         p_value = TRUE
     )
     if (all(is.na(mean_value))) {
-        missing_var <- c(missing_var, "diagnostics.out-of-sample.mean:2", "diagnostics.fcast-outsample-mean:2")
+        missing_var <- c(
+            missing_var,
+            "diagnostics.out-of-sample.mean:2",
+            "diagnostics.fcast-outsample-mean:2"
+        )
     }
 
     mse_value <- find_variable(
@@ -577,7 +611,11 @@ extractOOS_test <- function(demetra_m,
         p_value = TRUE
     )
     if (all(is.na(mse_value))) {
-        missing_var <- c(missing_var, "diagnostics.out-of-sample.mse:2", "diagnostics.fcast-outsample-variance:2")
+        missing_var <- c(
+            missing_var,
+            "diagnostics.out-of-sample.mse:2",
+            "diagnostics.fcast-outsample-variance:2"
+        )
     }
 
     stat_OOS_modalities <- data.frame(
@@ -606,14 +644,17 @@ extractOOS_test <- function(demetra_m,
         stringsAsFactors = FALSE
     )
 
-    return(list(modalities = stat_OOS_modalities,
-                values = stat_OOS_values,
-                missing = missing_var))
+    return(list(
+        modalities = stat_OOS_modalities,
+        values = stat_OOS_values,
+        missing = missing_var
+    ))
 }
 
-extractDistributionTests <- function(demetra_m,
-                                     thresholds = getOption("jdc_thresholds")) {
-
+extractDistributionTests <- function(
+    demetra_m,
+    thresholds = getOption("jdc_thresholds")
+) {
     missing_var <- NULL
 
     kurtosis_pvalue <- find_variable(
@@ -645,7 +686,7 @@ extractDistributionTests <- function(demetra_m,
         variable = "homoskedasticity",
         p_value = TRUE
     )
-    if (all(is.na(homoskedasticity_pvalue))){
+    if (all(is.na(homoskedasticity_pvalue))) {
         missing_var <- c(missing_var, "residuals.lb2:3")
     }
 
@@ -673,7 +714,6 @@ extractDistributionTests <- function(demetra_m,
             values = c("residuals.dh:3", "residuals.doornikhansen:3")
         )
     }
-
 
     distribution_modalities <- data.frame(
         residuals_homoskedasticity = cut(
@@ -725,14 +765,17 @@ extractDistributionTests <- function(demetra_m,
         residuals_independency = independency_pvalue
     )
 
-    return(list(modalities = distribution_modalities,
-                values = distribution_values,
-                missing = missing_var))
+    return(list(
+        modalities = distribution_modalities,
+        values = distribution_values,
+        missing = missing_var
+    ))
 }
 
-extractOutliers <- function(demetra_m,
-                            thresholds = getOption("jdc_thresholds")) {
-
+extractOutliers <- function(
+    demetra_m,
+    thresholds = getOption("jdc_thresholds")
+) {
     missing_var <- NULL
 
     n <- find_variable(
@@ -784,14 +827,17 @@ extractOutliers <- function(demetra_m,
         pct_outliers = pct_outliers_value
     )
 
-    return(list(modalities = outliers_modalities,
-                values = outliers_values,
-                missing = missing_var))
+    return(list(
+        modalities = outliers_modalities,
+        values = outliers_values,
+        missing = missing_var
+    ))
 }
 
-extractSeasTest <- function(demetra_m,
-                            thresholds = getOption("jdc_thresholds")) {
-
+extractSeasTest <- function(
+    demetra_m,
+    thresholds = getOption("jdc_thresholds")
+) {
     missing_var <- NULL
 
     qs_residual_sa_on_sa <- find_variable(
@@ -852,7 +898,11 @@ extractSeasTest <- function(demetra_m,
 
     f_residual_td_on_sa <- find_variable(
         demetra_m,
-        pattern = "(^diagnostics\\.td\\.sa\\.last(\\.(\\d){1,})?$)|(^td\\.sa\\.last(\\.(\\d){1,})?$)",
+        pattern = paste0(
+            "(^diagnostics\\.td\\.sa\\.last$)",
+            "(^td\\.sa\\.last$)",
+            sep = "|"
+        )
         type = "double",
         variable = "f_residual_td_on_sa",
         p_value = TRUE
@@ -866,7 +916,7 @@ extractSeasTest <- function(demetra_m,
 
     f_residual_td_on_i <- find_variable(
         demetra_m,
-        pattern = "(^diagnostics\\.td\\.i\\.last(\\.(\\d){1,})?$)|(^td\\.i\\.last(\\.(\\d){1,})?$)",
+        pattern = "(^diagnostics\\.td\\.i\\.last$)|(^td\\.i\\.last$)",
         type = "double",
         variable = "f_residual_td_on_i",
         p_value = TRUE
@@ -879,9 +929,12 @@ extractSeasTest <- function(demetra_m,
     }
 
     test_values <- cbind(
-        qs_residual_sa_on_sa, f_residual_sa_on_sa,
-        qs_residual_sa_on_i, f_residual_sa_on_i,
-        f_residual_td_on_sa, f_residual_td_on_i
+        qs_residual_sa_on_sa,
+        f_residual_sa_on_sa,
+        qs_residual_sa_on_i,
+        f_residual_sa_on_i,
+        f_residual_td_on_sa,
+        f_residual_td_on_i
     )
 
     test_modalities <- as.data.frame(lapply(
@@ -899,7 +952,9 @@ extractSeasTest <- function(demetra_m,
     ))
     colnames(test_modalities) <- colnames(test_values)
 
-    return(list(modalities = test_modalities,
-                values = test_values,
-                missing = missing_var))
+    return(list(
+        modalities = test_modalities,
+        values = test_values,
+        missing = missing_var
+    ))
 }
