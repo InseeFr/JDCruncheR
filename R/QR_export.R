@@ -1,4 +1,3 @@
-
 header_style <- openxlsx::createStyle(
     fontColour = "#ffffff",
     fgFill = "#4F80BD",
@@ -7,25 +6,29 @@ header_style <- openxlsx::createStyle(
 )
 severe_style <- openxlsx::createStyle(
     fontColour = "#ffffff",
-    fgFill = "black", bgFill = "black",
+    fgFill = "black",
+    bgFill = "black",
     borderColour = "grey30",
     border = "TopBottomLeftRight"
 )
 bad_style <- openxlsx::createStyle(
     fontColour = "#9C0006",
-    fgFill = "#FFC7CE", bgFill = "#FFC7CE",
+    fgFill = "#FFC7CE",
+    bgFill = "#FFC7CE",
     borderColour = "grey30",
     border = "TopBottomLeftRight"
 )
 good_style <- openxlsx::createStyle(
     fontColour = "#006100",
-    fgFill = "#C6EFCE", bgFill = "#C6EFCE",
+    fgFill = "#C6EFCE",
+    bgFill = "#C6EFCE",
     borderColour = "grey30",
     border = "TopBottomLeftRight"
 )
 uncertain_style <- openxlsx::createStyle(
     fontColour = "#9c6a00",
-    fgFill = "#ffeec7", bgFill = "#ffeec7",
+    fgFill = "#ffeec7",
+    bgFill = "#ffeec7",
     borderColour = "grey30",
     border = "TopBottomLeftRight"
 )
@@ -40,13 +43,13 @@ rowname_style <- openxlsx::createStyle(
 )
 
 
-apply_BQ_style <- function(wb,
-                           x,
-                           values_sheet = NULL,
-                           modalities_sheet = NULL) {
-
+apply_BQ_style <- function(
+    wb,
+    x,
+    values_sheet = NULL,
+    modalities_sheet = NULL
+) {
     if (!is.null(modalities_sheet)) {
-
         # Apply BQ style cell Modalities
         openxlsx::conditionalFormatting(
             wb = wb,
@@ -103,7 +106,6 @@ apply_BQ_style <- function(wb,
     }
 
     if (!is.null(values_sheet)) {
-
         # Appliquer les styles aux bordures
         openxlsx::addStyle(
             wb = wb,
@@ -119,7 +121,10 @@ apply_BQ_style <- function(wb,
             name_col <- colnames(x[["values"]])[id_col]
             if (name_col %in% colnames(x[["modalities"]])) {
                 for (id_row in seq_len(ncol(x[["values"]]))) {
-                    cell_value <- as.character(x[["modalities"]][id_row, name_col])
+                    cell_value <- as.character(x[["modalities"]][
+                        id_row,
+                        name_col
+                    ])
                     cell_style <- switch(
                         cell_value,
                         Bad = bad_style,
@@ -179,7 +184,6 @@ apply_BQ_style <- function(wb,
 NULL
 #> NULL
 
-
 #' @title Exporting QR_matrix objects in an Excel file
 #'
 #' @description
@@ -200,12 +204,13 @@ NULL
 #' @family QR_matrix functions
 #' @seealso [Traduction française][fr-export_xlsx.QR_matrix()]
 #' @export
-export_xlsx.QR_matrix <- function(x,
-                                  file,
-                                  auto_format = TRUE,
-                                  overwrite = TRUE,
-                                  ...) {
-
+export_xlsx.QR_matrix <- function(
+    x,
+    file,
+    auto_format = TRUE,
+    overwrite = TRUE,
+    ...
+) {
     ext <- tools::file_ext(file)
     if (!nzchar(ext)) {
         file <- paste0(file, ".xslx")
@@ -235,9 +240,12 @@ export_xlsx.QR_matrix <- function(x,
     )
 
     if (auto_format) {
-        wb_qr <- apply_BQ_style(wb = wb_qr, x = x,
-                                values_sheet = "Values",
-                                modalities_sheet = "Modalities")
+        wb_qr <- apply_BQ_style(
+            wb = wb_qr,
+            x = x,
+            values_sheet = "Values",
+            modalities_sheet = "Modalities"
+        )
     }
 
     openxlsx::saveWorkbook(wb = wb_qr, file = file, overwrite = overwrite)
@@ -272,8 +280,6 @@ export_xlsx.default <- function(x, ...) {
 }
 
 
-
-
 #' Export des objets mQR_matrix dans des fichiers Excel
 #'
 #' Permet d'exporter dans des fichiers Excel une liste de bilan qualité
@@ -303,7 +309,6 @@ export_xlsx.default <- function(x, ...) {
 NULL
 #> NULL
 
-
 #' Exporting mQR_matrix objects in Excel files
 #'
 #' To export several quality reports in Excel files
@@ -328,13 +333,13 @@ NULL
 #' @seealso [Traduction française][fr-export_xlsx.mQR_matrix()]
 #' @export
 export_xlsx.mQR_matrix <- function(
-        x,
-        export_dir,
-        layout_file = c("ByComponent", "ByQRMatrix", "AllTogether"),
-        auto_format = TRUE,
-        overwrite = TRUE,
-        ...) {
-
+    x,
+    export_dir,
+    layout_file = c("ByComponent", "ByQRMatrix", "AllTogether"),
+    auto_format = TRUE,
+    overwrite = TRUE,
+    ...
+) {
     #by component = 1file / component (different QR in same file) = 2 files
     #by QRMatrix = 1file / QR (different component in same file)
     #All together = All Qr and components in same file
@@ -358,7 +363,6 @@ export_xlsx.mQR_matrix <- function(
             )
         }
     } else if (layout_file == "ByComponent") {
-
         wb_modalities <- openxlsx::createWorkbook(
             title = "Modalities of the QR",
             subject = "Seasonal Adjustment"
@@ -393,11 +397,13 @@ export_xlsx.mQR_matrix <- function(
             )
             if (auto_format) {
                 wb_modalities <- apply_BQ_style(
-                    wb = wb_modalities, x = qr_matrix,
+                    wb = wb_modalities,
+                    x = qr_matrix,
                     modalities_sheet = name
                 )
                 wb_values <- apply_BQ_style(
-                    wb = wb_values, x = qr_matrix,
+                    wb = wb_values,
+                    x = qr_matrix,
                     values_sheet = name
                 )
             }
@@ -406,24 +412,28 @@ export_xlsx.mQR_matrix <- function(
         file_modalities <- file.path(export_dir, "modalities.xlsx")
         file_values <- file.path(export_dir, "values.xlsx")
 
-        openxlsx::saveWorkbook(wb = wb_modalities,
-                               file = file_modalities,
-                               overwrite = overwrite)
-        openxlsx::saveWorkbook(wb = wb_values,
-                               file = file_values,
-                               overwrite = overwrite)
-
+        openxlsx::saveWorkbook(
+            wb = wb_modalities,
+            file = file_modalities,
+            overwrite = overwrite
+        )
+        openxlsx::saveWorkbook(
+            wb = wb_values,
+            file = file_values,
+            overwrite = overwrite
+        )
     } else if (layout_file == "AllTogether") {
-
-        wb_mqr <- openxlsx::createWorkbook(title = "Multiple QR",
-                                           subject = "Seasonal Adjustment")
+        wb_mqr <- openxlsx::createWorkbook(
+            title = "Multiple QR",
+            subject = "Seasonal Adjustment"
+        )
 
         for (id_qr in seq_along(x)) {
             qr_matrix <- x[[id_qr]]
             name <- ifelse(
-                test = is.null(names(x))
-                || !nzchar(names(x)[id_qr])
-                || sum(names(x) == names(x)[id_qr]) > 1L,
+                test = is.null(names(x)) ||
+                    !nzchar(names(x)[id_qr]) ||
+                    sum(names(x) == names(x)[id_qr]) > 1L,
                 yes = paste0("QR_", id_qr),
                 no = names(x)[id_qr]
             )
@@ -451,7 +461,8 @@ export_xlsx.mQR_matrix <- function(
             )
             if (auto_format) {
                 wb_mqr <- apply_BQ_style(
-                    wb = wb_mqr, x = qr_matrix,
+                    wb = wb_mqr,
+                    x = qr_matrix,
                     modalities_sheet = paste0(name, "_modalities"),
                     values_sheet = paste0(name, "_values")
                 )

@@ -14,9 +14,9 @@
     f_residual_td_on_i = 20L, oos_mean = 15L, oos_mse = 10L, residuals_independency =
     15L, residuals_homoskedasticity = 5L, residuals_skewness = 5L, m7 = 5L, q_m2 = 5L),
   modalities = c("Good", "Uncertain", "", "Bad", "Severe"),
-  normalize_score_value,
+  normalize_score_value = NULL,
   na.rm = TRUE,
-  n_contrib_score,
+  n_contrib_score = NULL,
   conditional_indicator = NULL,
   thresholds = getOption("jdc_thresholds"),
   ...
