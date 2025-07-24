@@ -45,3 +45,5 @@ LICENSE
 ^man-roxygen$
 ^organisation.yml$
 ^cran-comments\.md$
+
+^air\.toml$

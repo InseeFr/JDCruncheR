@@ -362,9 +362,11 @@ compute_score.QR_matrix <- function(
         collapse = " + "
     )
 
-    if (!is.null(n_contrib_score)
-        && is.numeric(n_contrib_score)
-        && n_contrib_score >= 1L) {
+    if (
+        !is.null(n_contrib_score) &&
+            is.numeric(n_contrib_score) &&
+            n_contrib_score >= 1L
+    ) {
         QR_modalities <- QR_modalities[-total_pond_id, ]
         n_contrib_score <- round(min(n_contrib_score, length(score_pond)))
 
