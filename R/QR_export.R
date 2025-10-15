@@ -120,7 +120,7 @@ apply_BQ_style <- function(
         for (id_col in seq_len(ncol(x[["values"]]))) {
             name_col <- colnames(x[["values"]])[id_col]
             if (name_col %in% colnames(x[["modalities"]])) {
-                for (id_row in seq_len(ncol(x[["values"]]))) {
+                for (id_row in seq_len(nrow(x[["values"]]))) {
                     cell_value <- as.character(x[["modalities"]][
                         id_row,
                         name_col
