@@ -113,6 +113,19 @@ find_variable <- function(
     return(demetra_m[, cols[id], drop = TRUE])
 }
 
+read_demetra_m <- function(file, sep = ";", dec = ",") {
+    demetra_m <- read.csv(
+        file = file,
+        sep = sep,
+        dec = dec,
+        stringsAsFactors = FALSE,
+        na.strings = c("NA", "?"),
+        fileEncoding = "latin1",
+        quote = ""
+    )
+    return(demetra_m)
+}
+
 #' @title Extraction d'un bilan qualité
 #'
 #' @description
@@ -306,16 +319,7 @@ extract_QR <- function(
                 call. = FALSE
             )
         }
-
-        demetra_m <- read.csv(
-            file = file,
-            sep = sep,
-            dec = dec,
-            stringsAsFactors = FALSE,
-            na.strings = c("NA", "?"),
-            fileEncoding = "latin1",
-            quote = ""
-        )
+        demetra_m <- read_demetra_m(file, sep = sep, dec = dec)
     } else {
         demetra_m <- x
     }
