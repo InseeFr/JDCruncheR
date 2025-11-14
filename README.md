@@ -75,7 +75,7 @@ get_thresholds("m7", default = TRUE)
 #>   Good    Bad Severe 
 #>      1      2    Inf
 get_thresholds(default = TRUE)
-#> $qs_residual_sa_on_sa
+#> $qs_residual_s_on_sa
 #>    Severe       Bad Uncertain      Good 
 #>     0.001     0.010     0.050       Inf 
 #> 
@@ -83,7 +83,7 @@ get_thresholds(default = TRUE)
 #>    Severe       Bad Uncertain      Good 
 #>     0.001     0.010     0.050       Inf 
 #> 
-#> $f_residual_sa_on_sa
+#> $f_residual_s_on_sa
 #>    Severe       Bad Uncertain      Good 
 #>     0.001     0.010     0.050       Inf 
 #> 
@@ -312,7 +312,7 @@ get_thresholds("m7")
 #>   Good    Bad Severe 
 #>      1      2    Inf
 get_thresholds(default = TRUE)
-#> $qs_residual_sa_on_sa
+#> $qs_residual_s_on_sa
 #>    Severe       Bad Uncertain      Good 
 #>     0.001     0.010     0.050       Inf 
 #> 
@@ -320,7 +320,7 @@ get_thresholds(default = TRUE)
 #>    Severe       Bad Uncertain      Good 
 #>     0.001     0.010     0.050       Inf 
 #> 
-#> $f_residual_sa_on_sa
+#> $f_residual_s_on_sa
 #>    Severe       Bad Uncertain      Good 
 #>     0.001     0.010     0.050       Inf 
 #> 

@@ -32,8 +32,8 @@ demetra_path <- file.path(
 QR <- extract_QR(demetra_path)
 
 # Calculer differents scores
-QR1 <- compute_score(QR, score_pond = c(m7 = 2, q = 3, qs_residual_sa_on_sa = 5))
-QR2 <- compute_score(QR, score_pond = c(m7 = 2, qs_residual_sa_on_sa = 5))
+QR1 <- compute_score(QR, score_pond = c(m7 = 2, q = 3, qs_residual_s_on_sa = 5))
+QR2 <- compute_score(QR, score_pond = c(m7 = 2, qs_residual_s_on_sa = 5))
 
 # Fusionner 2 bilans qualité
 try(rbind(QR1, QR2)) # Une erreur est renvoyée

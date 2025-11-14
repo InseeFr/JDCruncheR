@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-* Solved the partial coloring bug in the output file. The value tab is now colored in its entirety, not just part of it.
+* Solved the partial coloring bug in the output file. The value tab is now colored in its entirety, not just part of it. #44
 
 
 ## [0.3.6] - 2025-07-24

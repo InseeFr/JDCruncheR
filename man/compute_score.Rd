@@ -9,10 +9,10 @@
 \usage{
 \method{compute_score}{QR_matrix}(
   x,
-  score_pond = c(qs_residual_sa_on_sa = 30L, f_residual_sa_on_sa = 30L,
-    qs_residual_sa_on_i = 20L, f_residual_sa_on_i = 20L, f_residual_td_on_sa = 30L,
-    f_residual_td_on_i = 20L, oos_mean = 15L, oos_mse = 10L, residuals_independency =
-    15L, residuals_homoskedasticity = 5L, residuals_skewness = 5L, m7 = 5L, q_m2 = 5L),
+  score_pond = c(qs_residual_s_on_sa = 30L, f_residual_s_on_sa = 30L, qs_residual_sa_on_i
+    = 20L, f_residual_sa_on_i = 20L, f_residual_td_on_sa = 30L, f_residual_td_on_i = 20L,
+    oos_mean = 15L, oos_mse = 10L, residuals_independency = 15L,
+    residuals_homoskedasticity = 5L, residuals_skewness = 5L, m7 = 5L, q_m2 = 5L),
   modalities = c("Good", "Uncertain", "", "Bad", "Severe"),
   normalize_score_value = NULL,
   na.rm = TRUE,
@@ -73,9 +73,9 @@ respectively 0, 1, 2 and 3.
 The score calculation is based on the \code{score_pond} parameter, which is a
 named integer vector containing the weights to apply to the (modalities
 matrix) variables. For example, with
-\code{score_pond = c(qs_residual_sa_on_sa = 10, f_residual_td_on_sa = 5)},
-the score will be based on the variables \code{qs_residual_sa_on_sa} and
-\code{f_residual_td_on_sa}. The \code{qs_residual_sa_on_sa} grades will be
+\code{score_pond = c(qs_residual_s_on_sa = 10, f_residual_td_on_sa = 5)},
+the score will be based on the variables \code{qs_residual_s_on_sa} and
+\code{f_residual_td_on_sa}. The \code{qs_residual_s_on_sa} grades will be
 multiplied by 10 and the \code{f_residual_td_on_sa grades}, by 5. To ignore
 the missing values when calculating a score, use the parameter
 \code{na.rm = TRUE}.
