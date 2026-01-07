@@ -56,10 +56,10 @@ Le calcul du score se fait grâce au paramètre \code{score_pond}, qui est un
 vecteur numérique nommé contenant des poids et dont les noms correspondent
 aux variables de la matrice des modalités à utiliser dans le score. Ainsi,
 avec le paramètre
-\code{score_pond = c(qs_residual_sa_on_sa = 10, f_residual_td_on_sa = 5)}
-le score sera calculé à partir des deux variables \code{qs_residual_sa_on_sa}
+\code{score_pond = c(qs_residual_s_on_sa = 10, f_residual_td_on_sa = 5)}
+le score sera calculé à partir des deux variables \code{qs_residual_s_on_sa}
 et \code{f_residual_td_on_sa}. Les notes associées aux modalités de la
-variable \code{qs_residual_sa_on_sa} seront multipliées par 10 et celles
+variable \code{qs_residual_s_on_sa} seront multipliées par 10 et celles
 associées à la variable \code{f_residual_td_on_sa} seront multipliées par 5.
 Dans le calcul du score, certaines variables peuvent être manquantes: pour ne
 pas prendre en compte ces valeurs dans le calcul, il suffit d'utiliser le

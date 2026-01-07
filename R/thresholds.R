@@ -78,10 +78,10 @@ get_thresholds <- function(test_name, default = TRUE) {
     def6 <- c(Good = 0., Uncertain = 1., Bad = 3., Severe = 5.)
 
     default_thresholds <- list(
-        qs_residual_sa_on_sa = def1,
+        qs_residual_s_on_sa = def1,
         qs_residual_sa_on_i = def1,
 
-        f_residual_sa_on_sa = def1,
+        f_residual_s_on_sa = def1,
         f_residual_sa_on_i = def1,
 
         f_residual_td_on_sa = def1,

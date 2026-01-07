@@ -1,5 +1,5 @@
 testthat::test_that("QR works", {
-    msg1 <- "Multiple column found for extraction of f_residual_sa_on_sa
+    msg1 <- "Multiple column found for extraction of f_residual_s_on_sa
 Last column selected"
     msg2 <- "Multiple column found for extraction of f_residual_sa_on_i
 Last column selected"

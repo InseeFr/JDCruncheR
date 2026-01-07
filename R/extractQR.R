@@ -113,6 +113,19 @@ find_variable <- function(
     return(demetra_m[, cols[id], drop = TRUE])
 }
 
+read_demetra_m <- function(file, sep = ";", dec = ",") {
+    demetra_m <- read.csv(
+        file = file,
+        sep = sep,
+        dec = dec,
+        stringsAsFactors = FALSE,
+        na.strings = c("NA", "?"),
+        fileEncoding = "latin1",
+        quote = ""
+    )
+    return(demetra_m)
+}
+
 #' @title Extraction d'un bilan qualité
 #'
 #' @description
@@ -306,16 +319,7 @@ extract_QR <- function(
                 call. = FALSE
             )
         }
-
-        demetra_m <- read.csv(
-            file = file,
-            sep = sep,
-            dec = dec,
-            stringsAsFactors = FALSE,
-            na.strings = c("NA", "?"),
-            fileEncoding = "latin1",
-            quote = ""
-        )
+        demetra_m <- read_demetra_m(file, sep = sep, dec = dec)
     } else {
         demetra_m <- x
     }
@@ -840,14 +844,14 @@ extractSeasTest <- function(
 ) {
     missing_var <- NULL
 
-    qs_residual_sa_on_sa <- find_variable(
+    qs_residual_s_on_sa <- find_variable(
         demetra_m,
         pattern = "(^diagnostics\\.seas\\.sa\\.qs$)|(^seas\\.sa\\.qs$)",
         type = "double",
-        variable = "qs_residual_sa_on_sa",
+        variable = "qs_residual_s_on_sa",
         p_value = TRUE
     )
-    if (all(is.na(qs_residual_sa_on_sa))) {
+    if (all(is.na(qs_residual_s_on_sa))) {
         missing_var <- append(
             x = missing_var,
             values = c("diagnostics.seas-sa-qs:2", "diagnostics.seas-sa-qs")
@@ -868,14 +872,14 @@ extractSeasTest <- function(
         )
     }
 
-    f_residual_sa_on_sa <- find_variable(
+    f_residual_s_on_sa <- find_variable(
         demetra_m,
         pattern = "(^diagnostics\\.seas\\.sa\\.f$)|(^seas\\.sa.f$)",
         type = "double",
-        variable = "f_residual_sa_on_sa",
+        variable = "f_residual_s_on_sa",
         p_value = TRUE
     )
-    if (all(is.na(f_residual_sa_on_sa))) {
+    if (all(is.na(f_residual_s_on_sa))) {
         missing_var <- append(
             x = missing_var,
             values = c("diagnostics.seas-sa-f:2", "diagnostics.seas-sa-f")
@@ -929,8 +933,8 @@ extractSeasTest <- function(
     }
 
     test_values <- cbind(
-        qs_residual_sa_on_sa,
-        f_residual_sa_on_sa,
+        qs_residual_s_on_sa,
+        f_residual_s_on_sa,
         qs_residual_sa_on_i,
         f_residual_sa_on_i,
         f_residual_td_on_sa,
