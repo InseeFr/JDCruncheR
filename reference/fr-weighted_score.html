@@ -92,7 +92,7 @@ liste de pondérations pour les objets <code><a href="QR_matrix.html">mQR_matrix
 <span class="r-out co"><span class="r-pr">#&gt;</span> There are 19 indicators in the modalities matrix and 23 indicators in the values matrix</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The quality report matrix contains the following variables:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> series  residuals_homoskedasticity  residuals_skewness  residuals_kurtosis  residuals_normality  residuals_independency  qs_residual_sa_on_sa  f_residual_sa_on_sa  qs_residual_sa_on_i  f_residual_sa_on_i  f_residual_td_on_sa  f_residual_td_on_i  oos_mean  oos_mse  q  q_m2  m7  pct_outliers  frequency  arima_model  score  1_highest_contrib_score  2_highest_contrib_score</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> series  residuals_homoskedasticity  residuals_skewness  residuals_kurtosis  residuals_normality  residuals_independency  qs_residual_s_on_sa  f_residual_s_on_sa  qs_residual_sa_on_i  f_residual_sa_on_i  f_residual_td_on_sa  f_residual_td_on_i  oos_mean  oos_mse  q  q_m2  m7  pct_outliers  frequency  arima_model  score  1_highest_contrib_score  2_highest_contrib_score</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The variables exclusively found in the values matrix are:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> frequency  arima_model  1_highest_contrib_score  2_highest_contrib_score</span>
@@ -101,7 +101,7 @@ liste de pondérations pour les objets <code><a href="QR_matrix.html">mQR_matrix
 <span class="r-out co"><span class="r-pr">#&gt;</span> The average score is 330.385 and its standard deviation is 194.866</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The following formula was used to calculate the score:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30 * qs_residual_sa_on_sa + 30 * f_residual_sa_on_sa + 20 * qs_residual_sa_on_i + 20 * f_residual_sa_on_i + 30 * f_residual_td_on_sa + 20 * f_residual_td_on_i + 15 * oos_mean + 10 * oos_mse + 15 * residuals_independency + 5 * residuals_homoskedasticity + 5 * residuals_skewness + 5 * m7 + 5 * q_m2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30 * qs_residual_s_on_sa + 30 * f_residual_s_on_sa + 20 * qs_residual_sa_on_i + 20 * f_residual_sa_on_i + 30 * f_residual_td_on_sa + 20 * f_residual_td_on_i + 15 * oos_mean + 10 * oos_mse + 15 * residuals_independency + 5 * residuals_homoskedasticity + 5 * residuals_skewness + 5 * m7 + 5 * q_m2</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Pondérer le score</span></span></span>
 <span class="r-in"><span><span class="va">QR</span> <span class="op">&lt;-</span> <span class="fu"><a href="weighted_score.html">weighted_score</a></span><span class="op">(</span><span class="va">QR</span>, <span class="fl">2</span><span class="op">)</span></span></span>
@@ -110,7 +110,7 @@ liste de pondérations pour les objets <code><a href="QR_matrix.html">mQR_matrix
 <span class="r-out co"><span class="r-pr">#&gt;</span> There are 20 indicators in the modalities matrix and 24 indicators in the values matrix</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The quality report matrix contains the following variables:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> series  residuals_homoskedasticity  residuals_skewness  residuals_kurtosis  residuals_normality  residuals_independency  qs_residual_sa_on_sa  f_residual_sa_on_sa  qs_residual_sa_on_i  f_residual_sa_on_i  f_residual_td_on_sa  f_residual_td_on_i  oos_mean  oos_mse  q  q_m2  m7  pct_outliers  frequency  arima_model  score  1_highest_contrib_score  2_highest_contrib_score  score_pond</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> series  residuals_homoskedasticity  residuals_skewness  residuals_kurtosis  residuals_normality  residuals_independency  qs_residual_s_on_sa  f_residual_s_on_sa  qs_residual_sa_on_i  f_residual_sa_on_i  f_residual_td_on_sa  f_residual_td_on_i  oos_mean  oos_mse  q  q_m2  m7  pct_outliers  frequency  arima_model  score  1_highest_contrib_score  2_highest_contrib_score  score_pond</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The variables exclusively found in the values matrix are:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> frequency  arima_model  1_highest_contrib_score  2_highest_contrib_score</span>
@@ -119,7 +119,7 @@ liste de pondérations pour les objets <code><a href="QR_matrix.html">mQR_matrix
 <span class="r-out co"><span class="r-pr">#&gt;</span> The average score is 330.385 and its standard deviation is 194.866</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The following formula was used to calculate the score:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30 * qs_residual_sa_on_sa + 30 * f_residual_sa_on_sa + 20 * qs_residual_sa_on_i + 20 * f_residual_sa_on_i + 30 * f_residual_td_on_sa + 20 * f_residual_td_on_i + 15 * oos_mean + 10 * oos_mse + 15 * residuals_independency + 5 * residuals_homoskedasticity + 5 * residuals_skewness + 5 * m7 + 5 * q_m2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30 * qs_residual_s_on_sa + 30 * f_residual_s_on_sa + 20 * qs_residual_sa_on_i + 20 * f_residual_sa_on_i + 30 * f_residual_td_on_sa + 20 * f_residual_td_on_i + 15 * oos_mean + 10 * oos_mse + 15 * residuals_independency + 5 * residuals_homoskedasticity + 5 * residuals_skewness + 5 * m7 + 5 * q_m2</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Extraire le score pondéré</span></span></span>
 <span class="r-in"><span><span class="va">QR</span><span class="op">[[</span><span class="st">"modalities"</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="st">"score_pond"</span><span class="op">]</span><span class="op">]</span></span></span>
@@ -136,7 +136,7 @@ liste de pondérations pour les objets <code><a href="QR_matrix.html">mQR_matrix
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

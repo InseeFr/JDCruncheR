@@ -51,10 +51,10 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for class 'QR_matrix'</span></span>
 <span><span class="fu">compute_score</span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
-<span>  score_pond <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>qs_residual_sa_on_sa <span class="op">=</span> <span class="fl">30L</span>, f_residual_sa_on_sa <span class="op">=</span> <span class="fl">30L</span>,</span>
-<span>    qs_residual_sa_on_i <span class="op">=</span> <span class="fl">20L</span>, f_residual_sa_on_i <span class="op">=</span> <span class="fl">20L</span>, f_residual_td_on_sa <span class="op">=</span> <span class="fl">30L</span>,</span>
-<span>    f_residual_td_on_i <span class="op">=</span> <span class="fl">20L</span>, oos_mean <span class="op">=</span> <span class="fl">15L</span>, oos_mse <span class="op">=</span> <span class="fl">10L</span>, residuals_independency <span class="op">=</span></span>
-<span>    <span class="fl">15L</span>, residuals_homoskedasticity <span class="op">=</span> <span class="fl">5L</span>, residuals_skewness <span class="op">=</span> <span class="fl">5L</span>, m7 <span class="op">=</span> <span class="fl">5L</span>, q_m2 <span class="op">=</span> <span class="fl">5L</span><span class="op">)</span>,</span>
+<span>  score_pond <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>qs_residual_s_on_sa <span class="op">=</span> <span class="fl">30L</span>, f_residual_s_on_sa <span class="op">=</span> <span class="fl">30L</span>, qs_residual_sa_on_i</span>
+<span>    <span class="op">=</span> <span class="fl">20L</span>, f_residual_sa_on_i <span class="op">=</span> <span class="fl">20L</span>, f_residual_td_on_sa <span class="op">=</span> <span class="fl">30L</span>, f_residual_td_on_i <span class="op">=</span> <span class="fl">20L</span>,</span>
+<span>    oos_mean <span class="op">=</span> <span class="fl">15L</span>, oos_mse <span class="op">=</span> <span class="fl">10L</span>, residuals_independency <span class="op">=</span> <span class="fl">15L</span>,</span>
+<span>    residuals_homoskedasticity <span class="op">=</span> <span class="fl">5L</span>, residuals_skewness <span class="op">=</span> <span class="fl">5L</span>, m7 <span class="op">=</span> <span class="fl">5L</span>, q_m2 <span class="op">=</span> <span class="fl">5L</span><span class="op">)</span>,</span>
 <span>  modalities <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Good"</span>, <span class="st">"Uncertain"</span>, <span class="st">""</span>, <span class="st">"Bad"</span>, <span class="st">"Severe"</span><span class="op">)</span>,</span>
 <span>  normalize_score_value <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -136,9 +136,9 @@ respectively 0, 1, 2 and 3.</p>
 <p>The score calculation is based on the <code>score_pond</code> parameter, which is a
 named integer vector containing the weights to apply to the (modalities
 matrix) variables. For example, with
-<code>score_pond = c(qs_residual_sa_on_sa = 10, f_residual_td_on_sa = 5)</code>,
-the score will be based on the variables <code>qs_residual_sa_on_sa</code> and
-<code>f_residual_td_on_sa</code>. The <code>qs_residual_sa_on_sa</code> grades will be
+<code>score_pond = c(qs_residual_s_on_sa = 10, f_residual_td_on_sa = 5)</code>,
+the score will be based on the variables <code>qs_residual_s_on_sa</code> and
+<code>f_residual_td_on_sa</code>. The <code>qs_residual_s_on_sa</code> grades will be
 multiplied by 10 and the <code>f_residual_td_on_sa grades</code>, by 5. To ignore
 the missing values when calculating a score, use the parameter
 <code>na.rm = TRUE</code>.</p>
@@ -205,7 +205,7 @@ independancy test ("residuals_independency") or the homoscedasticity test
 <span class="r-out co"><span class="r-pr">#&gt;</span> There are 19 indicators in the modalities matrix and 23 indicators in the values matrix</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The quality report matrix contains the following variables:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> series  residuals_homoskedasticity  residuals_skewness  residuals_kurtosis  residuals_normality  residuals_independency  qs_residual_sa_on_sa  f_residual_sa_on_sa  qs_residual_sa_on_i  f_residual_sa_on_i  f_residual_td_on_sa  f_residual_td_on_i  oos_mean  oos_mse  q  q_m2  m7  pct_outliers  frequency  arima_model  score  1_highest_contrib_score  2_highest_contrib_score</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> series  residuals_homoskedasticity  residuals_skewness  residuals_kurtosis  residuals_normality  residuals_independency  qs_residual_s_on_sa  f_residual_s_on_sa  qs_residual_sa_on_i  f_residual_sa_on_i  f_residual_td_on_sa  f_residual_td_on_i  oos_mean  oos_mse  q  q_m2  m7  pct_outliers  frequency  arima_model  score  1_highest_contrib_score  2_highest_contrib_score</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The variables exclusively found in the values matrix are:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> frequency  arima_model  1_highest_contrib_score  2_highest_contrib_score</span>
@@ -214,7 +214,7 @@ independancy test ("residuals_independency") or the homoscedasticity test
 <span class="r-out co"><span class="r-pr">#&gt;</span> The average score is 330.385 and its standard deviation is 194.866</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The following formula was used to calculate the score:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30 * qs_residual_sa_on_sa + 30 * f_residual_sa_on_sa + 20 * qs_residual_sa_on_i + 20 * f_residual_sa_on_i + 30 * f_residual_td_on_sa + 20 * f_residual_td_on_i + 15 * oos_mean + 10 * oos_mse + 15 * residuals_independency + 5 * residuals_homoskedasticity + 5 * residuals_skewness + 5 * m7 + 5 * q_m2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30 * qs_residual_s_on_sa + 30 * f_residual_s_on_sa + 20 * qs_residual_sa_on_i + 20 * f_residual_sa_on_i + 30 * f_residual_td_on_sa + 20 * f_residual_td_on_i + 15 * oos_mean + 10 * oos_mse + 15 * residuals_independency + 5 * residuals_homoskedasticity + 5 * residuals_skewness + 5 * m7 + 5 * q_m2</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Extract the modalities matrix:</span></span></span>
 <span class="r-in"><span><span class="va">QR</span><span class="op">[[</span><span class="st">"modalities"</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="st">"score"</span><span class="op">]</span><span class="op">]</span></span></span>
@@ -231,7 +231,7 @@ independancy test ("residuals_independency") or the homoscedasticity test
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>
