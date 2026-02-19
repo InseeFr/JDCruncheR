@@ -13,7 +13,7 @@ Pour plus d’information, vous pouvez visiter la page
 [wiki](https://github.com/jdemetra/jwsacruncher/wiki).
 
 Avec **{JDCruncheR}**, vous pouvez aussi générer des *bilans qualité*
-utilisant l’output du cruncher. Ce bilan est un résumé des diagnostiques
+utilisant l’output du cruncher. Ce bilan est un résumé des diagnostics
 de la désaisonnalisation. Il peut être utilisé pour repérer les séries
 les plus problématiques qui nécessitent une analyse plus fine. Cela est
 très utile lorsqu’on a beaucoup de séries à désaisonnaliser.
