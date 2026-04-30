@@ -25,6 +25,7 @@ L'objet en entrée avec le score recalculé
 ## Examples
 
 ``` r
+
 # Chemin menant au fichier demetra_m.csv
 demetra_path <- file.path(
     system.file("extdata", package = "JDCruncheR"),

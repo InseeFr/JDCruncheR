@@ -26,6 +26,7 @@ If `test_name` is missing, all threshold will be returned.
 ## Examples
 
 ``` r
+
 # Get all default thresholds
 get_thresholds(default = TRUE)
 #> $qs_residual_s_on_sa

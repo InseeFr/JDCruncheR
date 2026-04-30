@@ -16,6 +16,8 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   now colored in its entirety, not just part of it.
   [\#44](https://github.com/InseeFr/JDCruncheR/issues/44)
 - `sa_on_sa` statistics are renamed in `s_on_sa`
+- QR produced if missing values
+- compute_score works now with `conditional_indicator`
 
 ### [0.3.6](https://github.com/InseeFr/JDCruncheR/compare/v0.3.5...v0.3.6) - 2025-07-24
 
@@ -178,9 +180,9 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 #### Fixed
 
-Bug fixed in the functions
-[`retain_indicators()`](https://inseefr.github.io/JDCruncheR/reference/QR_var_manipulation.md)
-and `remove_indicator()`.
+- Bug fixed in the functions
+  [`retain_indicators()`](https://inseefr.github.io/JDCruncheR/reference/QR_var_manipulation.md)
+  and `remove_indicator()`.
 
 ### [0.2.0](https://github.com/InseeFr/JDCruncheR/releases/tag/v0.2.0) - 2017-11-18
 

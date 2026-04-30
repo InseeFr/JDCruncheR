@@ -35,6 +35,7 @@ thresholds of the test `test_name` are updated with the value
 ## Examples
 
 ``` r
+
 # Set "m7"
 set_thresholds(
     test_name = "m7",

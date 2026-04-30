@@ -25,12 +25,14 @@ très utile lorsqu’on a beaucoup de séries à désaisonnaliser.
 Pour installer, il suffit de lancer la ligne de code suivante :
 
 ``` r
+
 install.packages("JDCruncheR")
 ```
 
 Pour obtenir la version en cours de développement depuis GitHub :
 
 ``` r
+
 # Si le package remotes n'est pas installé
 # install.packages("remotes")
 
@@ -43,6 +45,7 @@ remotes::install_github("InseeFr/JDCruncheR")
 #### Chargement du package
 
 ``` r
+
 library("JDCruncheR")
 ```
 
@@ -57,6 +60,7 @@ fonction
 :
 
 ``` r
+
 get_thresholds("m7", default = TRUE)
 #>   Good    Bad Severe 
 #>      1      2    Inf
@@ -139,6 +143,7 @@ Pour changer la valeur de l’option, on peut utiliser la fonction
 :
 
 ``` r
+
 # Fixer les seuils à une certaine valeur
 set_thresholds(test_name = "m7", thresholds = c(Good = 0.8, Bad = 1.4, Severe = Inf))
 get_thresholds(test_name = "m7", default = FALSE)
@@ -163,6 +168,7 @@ fonction
 :
 
 ``` r
+
 get_thresholds("grade", default = TRUE)
 #>      Good Uncertain       Bad    Severe 
 #>         0         1         3         5
@@ -173,6 +179,7 @@ Pour changer la valeur de la note, on peut utiliser la fonction
 :
 
 ``` r
+
 # Fixer les notes à une certaine valeur
 set_thresholds(test_name = "grade", thresholds = c(Good = 0, Uncertain = 0.1, Bad = 1, Severe = 10))
 get_thresholds(test_name = "grade", default = FALSE)
@@ -184,15 +191,16 @@ get_thresholds(test_name = "grade", default = FALSE)
 
 Par exemple, en partant d’une matrice `demetra_m.csv` :
 
-|        | n   | start      | end        | mean | skewness |     | kurtosis |     | lb2  |     | p   | d   | q   | bp  | bd  | bq  | m7  | q   | q.m2 |
-|--------|-----|------------|------------|------|----------|-----|----------|-----|------|-----|-----|-----|-----|-----|-----|-----|-----|-----|------|
-| France | 88  | 2012-10-01 | 2020-01-01 | 0.6  | 0.0      | 0.9 | 2.9      | 0.8 | 36.1 | 0.0 | 0   | 1   | 1   | 0   | 1   | 1   | 0.2 | 0.5 | 2.0  |
-| Spain  | 78  | 2015-10-01 | 2022-03-01 | 0.4  | -0.4     | 0.0 | 4.6      | 0.0 | 17.3 | 0.7 | 0   | 0   | 1   | 0   | 1   | 1   | 0.8 | 1.5 | 1.3  |
-| Greece | 112 | 2010-10-01 | 2020-01-01 | 0.5  | -0.3     | 0.0 | 3.7      | 0.0 | 46.9 | 0.0 | 3   | 1   | 1   | 0   | 1   | 1   | 0.3 | 0.4 | 0.8  |
+|  | n | start | end | mean | skewness |  | kurtosis |  | lb2 |  | p | d | q | bp | bd | bq | m7 | q | q.m2 |
+|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|
+| France | 88 | 2012-10-01 | 2020-01-01 | 0.6 | 0.0 | 0.9 | 2.9 | 0.8 | 36.1 | 0.0 | 0 | 1 | 1 | 0 | 1 | 1 | 0.2 | 0.5 | 2.0 |
+| Spain | 78 | 2015-10-01 | 2022-03-01 | 0.4 | -0.4 | 0.0 | 4.6 | 0.0 | 17.3 | 0.7 | 0 | 0 | 1 | 0 | 1 | 1 | 0.8 | 1.5 | 1.3 |
+| Greece | 112 | 2010-10-01 | 2020-01-01 | 0.5 | -0.3 | 0.0 | 3.7 | 0.0 | 46.9 | 0.0 | 3 | 1 | 1 | 0 | 1 | 1 | 0.3 | 0.4 | 0.8 |
 
 On peut générer un bilan qualité :
 
 ``` r
+
 BQ <- extract_QR(x = demetra_m)
 print(BQ$modalities)
 #>   series residuals_homoskedasticity residuals_skewness residuals_kurtosis
@@ -211,6 +219,7 @@ Il est possible maintenant de calculer un score à partir du bilan
 qualité
 
 ``` r
+
 BQ_score <- compute_score(
     x = BQ,
     score_pond = c(
@@ -268,12 +277,14 @@ series.
 To install it, you have to launch the following command line:
 
 ``` r
+
 install.packages("JDCruncheR")
 ```
 
 To get the current development version from GitHub:
 
 ``` r
+
 # If remotes packages is not installed
 # install.packages("remotes")
 
@@ -286,6 +297,7 @@ remotes::install_github("InseeFr/JDCruncheR")
 #### Loading the package
 
 ``` r
+
 library("JDCruncheR")
 ```
 
@@ -300,6 +312,7 @@ can call the fonction
 :
 
 ``` r
+
 get_thresholds("m7")
 #>   Good    Bad Severe 
 #>      1      2    Inf
@@ -381,6 +394,7 @@ To change the value of the option, you can use the fonction
 [`set_thresholds()`](https://inseefr.github.io/JDCruncheR/reference/set_thresholds.md):
 
 ``` r
+
 # Set threshold to imposed value
 set_thresholds(test_name = "m7", thresholds = c(Good = 0.8, Bad = 1.4, Severe = Inf))
 get_thresholds(test_name = "m7", default = FALSE)
@@ -404,6 +418,7 @@ To retrieve the default grade value, call the
 function:
 
 ``` r
+
 get_thresholds("grade", default = TRUE)
 #>      Good Uncertain       Bad    Severe 
 #>         0         1         3         5
@@ -414,6 +429,7 @@ To change the value of the grade, you can use the
 function:
 
 ``` r
+
 # Set grades to a certain value
 set_thresholds(test_name = "grade", thresholds = c(Good = 0, Uncertain = 0.1, Bad = 1, Severe = 10))
 get_thresholds(test_name = "grade", default = FALSE)
@@ -425,15 +441,16 @@ get_thresholds(test_name = "grade", default = FALSE)
 
 For example, starting from a matrix `demetra_m.csv` :
 
-|        | n   | start      | end        | mean | skewness |     | kurtosis |     | lb2  |     | p   | d   | q   | bp  | bd  | bq  | m7  | q   | q.m2 |
-|--------|-----|------------|------------|------|----------|-----|----------|-----|------|-----|-----|-----|-----|-----|-----|-----|-----|-----|------|
-| France | 88  | 2012-10-01 | 2020-01-01 | 0.6  | 0.0      | 0.9 | 2.9      | 0.8 | 36.1 | 0.0 | 0   | 1   | 1   | 0   | 1   | 1   | 0.2 | 0.5 | 2.0  |
-| Spain  | 78  | 2015-10-01 | 2022-03-01 | 0.4  | -0.4     | 0.0 | 4.6      | 0.0 | 17.3 | 0.7 | 0   | 0   | 1   | 0   | 1   | 1   | 0.8 | 1.5 | 1.3  |
-| Greece | 112 | 2010-10-01 | 2020-01-01 | 0.5  | -0.3     | 0.0 | 3.7      | 0.0 | 46.9 | 0.0 | 3   | 1   | 1   | 0   | 1   | 1   | 0.3 | 0.4 | 0.8  |
+|  | n | start | end | mean | skewness |  | kurtosis |  | lb2 |  | p | d | q | bp | bd | bq | m7 | q | q.m2 |
+|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|
+| France | 88 | 2012-10-01 | 2020-01-01 | 0.6 | 0.0 | 0.9 | 2.9 | 0.8 | 36.1 | 0.0 | 0 | 1 | 1 | 0 | 1 | 1 | 0.2 | 0.5 | 2.0 |
+| Spain | 78 | 2015-10-01 | 2022-03-01 | 0.4 | -0.4 | 0.0 | 4.6 | 0.0 | 17.3 | 0.7 | 0 | 0 | 1 | 0 | 1 | 1 | 0.8 | 1.5 | 1.3 |
+| Greece | 112 | 2010-10-01 | 2020-01-01 | 0.5 | -0.3 | 0.0 | 3.7 | 0.0 | 46.9 | 0.0 | 3 | 1 | 1 | 0 | 1 | 1 | 0.3 | 0.4 | 0.8 |
 
 A quality report can be generated:
 
 ``` r
+
 BQ <- extract_QR(x = demetra_m)
 print(BQ$modalities)
 #>   series residuals_homoskedasticity residuals_skewness residuals_kurtosis
@@ -451,6 +468,7 @@ print(BQ$modalities)
 It is now possible to calculate a score from the quality report:
 
 ``` r
+
 BQ_score <- compute_score(
     x = BQ,
     score_pond = c(
