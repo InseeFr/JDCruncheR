@@ -198,6 +198,20 @@ extractM7 <- function(demetra_m) {
     return(list(values = m7, missing = missing_var))
 }
 
+extractTD_ftest <- function(demetra_m) {
+    missing_var <- NULL
+
+    td_ftest <- find_variable(
+        demetra_m,
+        pattern = "(^regression\\.td\\.ftest$)|(^td\\.ftest$)",
+        type = "double",
+        variable = "td-ftest"
+    )
+    if (all(is.na(td_ftest))) missing_var <- c(missing_var, "regression.td-ftest")
+
+    return(list(values = td_ftest, missing = missing_var))
+}
+
 extractFrequency <- function(demetra_m) {
     missing_var <- NULL
 
