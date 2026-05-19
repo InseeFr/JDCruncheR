@@ -170,6 +170,34 @@ extractNobs <- function(demetra_m) {
     return(list(values = nobs, missing = missing_var))
 }
 
+extractNout <- function(demetra_m) {
+    missing_var <- NULL
+
+    nout <- find_variable(
+        demetra_m,
+        pattern = "(^regression\\.nout$)|(^nout$)",
+        type = "integer",
+        variable = "nout"
+    )
+    if (all(is.na(nout))) missing_var <- c(missing_var, "regression.nout")
+
+    return(list(values = nout, missing = missing_var))
+}
+
+extractM7 <- function(demetra_m) {
+    missing_var <- NULL
+
+    m7 <- find_variable(
+        demetra_m,
+        pattern = "(^m\\.statistics\\.m7$)|(^m7$)",
+        type = "double",
+        variable = "m7"
+    )
+    if (all(is.na(m7))) missing_var <- c(missing_var, "m-statistics.m7")
+
+    return(list(values = m7, missing = missing_var))
+}
+
 extractFrequency <- function(demetra_m) {
     missing_var <- NULL
 
@@ -555,31 +583,19 @@ extractOutliers <- function(
 ) {
     missing_var <- NULL
 
-    n <- find_variable(
-        demetra_m,
-        pattern = "(^span\\.n$)|(^n$)",
-        type = "integer",
-        variable = "n"
-    )
-    if (all(is.na(n))) missing_var <- c(missing_var, "span.n")
+    nobs <- extractNobs(demetra_m)
+    missing_var <- c(missing_var, nobs$missing)
+    nobs <- nobs$values
 
-    nout <- find_variable(
-        demetra_m,
-        pattern = "(^regression\\.nout$)|(^nout$)",
-        type = "integer",
-        variable = "nout"
-    )
-    if (all(is.na(nout))) missing_var <- c(missing_var, "regression.nout")
+    nout <- extractNout(demetra_m)
+    missing_var <- c(missing_var, nout$missing)
+    nout <- nout$values
 
-    pct_outliers_value <- 100.0 * nout / n
+    m7 <- extractM7(demetra_m)
+    missing_var <- c(missing_var, m7$missing)
+    m7 <- m7$values
 
-    m7 <- find_variable(
-        demetra_m,
-        pattern = "(^m\\.statistics\\.m7$)|(^m7$)",
-        type = "double",
-        variable = "m7"
-    )
-    if (all(is.na(m7))) missing_var <- c(missing_var, "m-statistics.m7")
+    pct_outliers_value <- 100.0 * nout / nobs
 
     outliers_modalities <- data.frame(
         m7 = cut(
