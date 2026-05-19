@@ -42,12 +42,12 @@ To export several quality reports in Excel files
 \seealso{
 \link[=fr-export_xlsx.mQR_matrix]{Traduction française}
 
-Other QR_matrix functions: 
-\code{\link{export_xlsx}()},
-\code{\link{export_xlsx.QR_matrix}()},
-\code{\link{extract_QR}()},
-\code{\link{rbind.QR_matrix}()},
-\code{\link{sort}()},
-\code{\link{weighted_score}()}
+Other QR_matrix functions:
+\code{\link[=export_xlsx]{export_xlsx()}},
+\code{\link[=export_xlsx.QR_matrix]{export_xlsx.QR_matrix()}},
+\code{\link[=extract_QR]{extract_QR()}},
+\code{\link[=rbind.QR_matrix]{rbind.QR_matrix()}},
+\code{\link{sort}},
+\code{\link[=weighted_score]{weighted_score()}}
 }
 \concept{QR_matrix functions}

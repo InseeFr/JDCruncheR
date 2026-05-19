@@ -5,14 +5,7 @@
 \alias{extract_QR}
 \title{Extraction of a quality report}
 \usage{
-extract_QR(
-  file,
-  x,
-  matrix_output_file,
-  sep = ";",
-  dec = ",",
-  thresholds = getOption("jdc_thresholds")
-)
+extract_QR(file, x, thresholds = getOption("jdc_thresholds"), ...)
 }
 \arguments{
 \item{file}{the csv file containing the diagnostics matrix. This argument
@@ -20,19 +13,16 @@ supersedes the argument \code{matrix_output_file}.}
 
 \item{x}{data.frame containing the diagnostics matrix.}
 
-\item{matrix_output_file}{the csv file containing the diagnostics matrix.}
-
-\item{sep}{the separator used in the csv file (by default, \code{sep = ";"})}
-
-\item{dec}{the decimal separator used in the csv file (by default,
-\code{dec = ","})}
-
 \item{thresholds}{\code{list} of numerical vectors. Thresholds applied to the
 various tests in order to classify into modalities \code{Good},
 \code{Uncertain}, \code{Bad} and \code{Severe}.
 By default, the value of the \code{"jdc_threshold"} option is used.
 You can call the \code{\link{get_thresholds}} function to see what the
 \code{thresholds} object should look like.}
+
+\item{...}{Other paramemeter to pass to \code{read_demetra_m} such as \code{sep} (the
+separator used in the csv file. By default, \code{sep = ";"}) and \code{dec} (the
+decimal separator used in the csv file. By default, \code{dec = ","})}
 }
 \value{
 a \code{\link{QR_matrix}} object.
@@ -93,12 +83,12 @@ QR[["modalities"]]
 \seealso{
 \link[=fr-extract_QR]{Traduction française}
 
-Other QR_matrix functions: 
-\code{\link{export_xlsx}()},
-\code{\link{export_xlsx.QR_matrix}()},
-\code{\link{export_xlsx.mQR_matrix}()},
-\code{\link{rbind.QR_matrix}()},
-\code{\link{sort}()},
-\code{\link{weighted_score}()}
+Other QR_matrix functions:
+\code{\link[=export_xlsx]{export_xlsx()}},
+\code{\link[=export_xlsx.QR_matrix]{export_xlsx.QR_matrix()}},
+\code{\link[=export_xlsx.mQR_matrix]{export_xlsx.mQR_matrix()}},
+\code{\link[=rbind.QR_matrix]{rbind.QR_matrix()}},
+\code{\link{sort}},
+\code{\link[=weighted_score]{weighted_score()}}
 }
 \concept{QR_matrix functions}

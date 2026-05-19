@@ -54,8 +54,8 @@ extract_score(QR) # is NULL because we removed the score indicator
 \seealso{
 \link[=fr-remove_indicators]{Traduction française}
 
-Other var QR_matrix manipulation: 
-\code{\link{add_indicator}()},
-\code{\link{recode_indicator_num}()}
+Other var QR_matrix manipulation:
+\code{\link[=add_indicator]{add_indicator()}},
+\code{\link[=recode_indicator_num]{recode_indicator_num()}}
 }
 \concept{var QR_matrix manipulation}
