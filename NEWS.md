@@ -15,6 +15,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * QR produced if missing values
 * compute_score works now with `conditional_indicator`
 
+### Changed
+
+* The arguments `sep` and `dec` to specify the import specification are now in `...` in the function `extractQR()`.
+
+### Removed
+
+* The argument `matrix_output_file` is removed and replaced by `file` in the function `extractQR()`.
+
+
 
 ## [0.3.6] - 2025-07-24
 

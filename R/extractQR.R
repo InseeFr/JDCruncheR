@@ -213,19 +213,18 @@ NULL
 #' To extract a quality report from the csv file containing the diagnostics
 #' matrix.
 #'
-#' @param matrix_output_file the csv file containing the diagnostics matrix.
 #' @param file the csv file containing the diagnostics matrix. This argument
 #' supersedes the argument \code{matrix_output_file}.
 #' @param x data.frame containing the diagnostics matrix.
-#' @param sep the separator used in the csv file (by default, \code{sep = ";"})
-#' @param dec the decimal separator used in the csv file (by default,
-#' \code{dec = ","})
 #' @param thresholds \code{list} of numerical vectors. Thresholds applied to the
 #' various tests in order to classify into modalities \code{Good},
 #' \code{Uncertain}, \code{Bad} and \code{Severe}.
 #' By default, the value of the \code{"jdc_threshold"} option is used.
 #' You can call the \code{\link{get_thresholds}} function to see what the
 #' \code{thresholds} object should look like.
+#' @param ... Other paramemeter to pass to `read_demetra_m` such as `sep` (the
+#' separator used in the csv file. By default, \code{sep = ";"}) and `dec` (the
+#' decimal separator used in the csv file. By default, \code{dec = ","})
 #'
 #' @details This function generates a quality report from a csv file containing
 #' diagnostics (usually from the file \emph{demetra_m.csv}).
@@ -285,22 +284,9 @@ NULL
 extract_QR <- function(
         file,
         x,
-        matrix_output_file,
-        sep = ";",
-        dec = ",",
-        thresholds = getOption("jdc_thresholds")
+        thresholds = getOption("jdc_thresholds"),
+        ...
 ) {
-    if (!missing(matrix_output_file)) {
-        warning(
-            "The `matrix_output_file` argument is deprecated",
-            " and will be removed in the future. ",
-            "Please use the `file` argument instead or ",
-            "the `x` argument which may contain a diagnostic matrix ",
-            "that has already been imported.",
-            call. = FALSE
-        )
-        file <- matrix_output_file
-    }
 
     if (missing(x) && missing(file)) {
         stop(
@@ -321,7 +307,7 @@ extract_QR <- function(
                 call. = FALSE
             )
         }
-        demetra_m <- read_demetra_m(file, sep = sep, dec = dec)
+        demetra_m <- read_demetra_m(file = file, ...)
     } else {
         demetra_m <- x
     }
