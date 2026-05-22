@@ -156,6 +156,20 @@ extractEnd <- function(demetra_m) {
     return(list(values = end_date, missing = missing_var))
 }
 
+extractLog <- function(demetra_m) {
+    missing_var <- NULL
+
+    log_transform <- find_variable(
+        demetra_m,
+        pattern = "^log$",
+        type = "integer",
+        variable = "log"
+    )
+    if (all(is.na(log_transform))) missing_var <- c(missing_var, "log")
+
+    return(list(values = log_transform, missing = missing_var))
+}
+
 extractNobs <- function(demetra_m) {
     missing_var <- NULL
 
@@ -184,6 +198,20 @@ extractNout <- function(demetra_m) {
     return(list(values = nout, missing = missing_var))
 }
 
+extractNtd <- function(demetra_m) {
+    missing_var <- NULL
+
+    ntd <- find_variable(
+        demetra_m,
+        pattern = "(^regression\\.ntd$)|(^ntd$)",
+        type = "integer",
+        variable = "ntd"
+    )
+    if (all(is.na(ntd))) missing_var <- c(missing_var, "regression.ntd")
+
+    return(list(values = ntd, missing = missing_var))
+}
+
 extractM7 <- function(demetra_m) {
     missing_var <- NULL
 
@@ -198,7 +226,77 @@ extractM7 <- function(demetra_m) {
     return(list(values = m7, missing = missing_var))
 }
 
-extractTD_ftest <- function(demetra_m) {
+extractSeasonalFilter <- function(demetra_m) {
+    missing_var <- NULL
+
+    seasonal_filters <- find_variable(
+        demetra_m,
+        pattern = "(^decomposition\\.seasonal\\.filters$)|(^seasonal\\.filters$)|(^decomposition\\.d9filter$)|(^decomposition\\.seasfilter$)|(^seasfilter$)",
+        type = "character",
+        variable = "seasonal-filters"
+    )
+    if (all(is.na(seasonal_filters))) missing_var <- c(missing_var, "decomposition.seasonal-filters")
+
+    return(list(values = seasonal_filters, missing = missing_var))
+}
+
+extractTrendFilter <- function(demetra_m) {
+    missing_var <- NULL
+
+    trend_filters <- find_variable(
+        demetra_m,
+        pattern = "(^decomposition\\.trend\\.filter$)|(^trend\\.filter$)|(^decomposition\\.d12filter$)|(^decomposition\\.trendfilter$)|(^trendfilter$)",
+        type = "integer",
+        variable = "trend-filter"
+    )
+    if (all(is.na(trend_filters))) missing_var <- c(missing_var, "decomposition.trend-filter")
+
+    return(list(values = trend_filters, missing = missing_var))
+}
+
+extractQuality <- function(demetra_m) {
+    missing_var <- NULL
+
+    quality <- find_variable(
+        demetra_m,
+        pattern = "(^quality\\.summary$)|(^summary$)|(^quality$)",
+        type = "character",
+        variable = "quality"
+    )
+    if (all(is.na(quality))) missing_var <- c(missing_var, "quality.summary")
+
+    return(list(values = quality, missing = missing_var))
+}
+
+extractLeapYear <- function(demetra_m) {
+    missing_var <- NULL
+
+    lp <- find_variable(
+        demetra_m,
+        pattern = "(^regression\\.lp$)|(^lp$)",
+        type = "character",
+        variable = "lp"
+    )
+    if (all(is.na(lp))) missing_var <- c(missing_var, "regression.lp")
+
+    return(list(values = lp, missing = missing_var))
+}
+
+extractLeaster <- function(demetra_m) {
+    missing_var <- NULL
+
+    leaster <- find_variable(
+        demetra_m,
+        pattern = "(^regression\\.leaster$)|(^leaster$)",
+        type = "integer",
+        variable = "leaster"
+    )
+    if (all(is.na(leaster))) missing_var <- c(missing_var, "regression.leaster")
+
+    return(list(values = leaster, missing = missing_var))
+}
+
+extractTD_ftest <- function(demetra_m, thresholds) {
     missing_var <- NULL
 
     td_ftest <- find_variable(

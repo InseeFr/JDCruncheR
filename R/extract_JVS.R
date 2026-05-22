@@ -29,10 +29,106 @@ extract_JVS <- function(
         demetra_m <- x
     }
 
-    JVS_output <- data.frame(
-        series = series,
-        extractStatQ(demetra_m, thresholds)
-    ) |> JVS_matrix()
+    series <- gsub(
+        "(^ *)|(* $)",
+        "",
+        gsub("(^.* \\* )|(\\[frozen\\])", "", demetra_m[, 1L])
+    )
 
+    frequency_series <- extractFrequency(demetra_m)
+    nobs <- extractNobs(demetra_m)
+    start_date <- extractStart(demetra_m)
+    end_date <- extractStart(demetra_m)
+    arima_model <- extractARIMA(demetra_m)
+    leap_year <- extractLeapYear(demetra_m)
+    leaster <- extractLeaster(demetra_m)
+    ntd <- extractNtd(demetra_m)
+    nout <- extractNout(demetra_m)
+    log_transform <- extractLog(demetra_m)
+    stat_Q <- extractStatQ(demetra_m, thresholds)
+    trend_filter <- extractTrendFilter(demetra_m)
+    seas_filter <- extractSeasonalFilter(demetra_m)
+    quality <- extractQuality(demetra_m)
+    td_effect <- extractTD_ftest(demetra_m = demetra_m, thresholds)
+
+    JVS_output <- data.frame(
+        Series = series,
+        Method = NA,
+        Period = frequency_series$values,
+        Nobs = nobs$values,
+        Start = start_date$values,
+        End = end_date$values,
+        Adjustment = NA,
+        Presence_of_Seasonality_in_the_raw_series = NA,
+        Presence_of_TD_effects = NA,
+        Log_Transformation = log_transform$values,
+        ARIMA_model = arima_model$values,
+        LeapYear = leap_year$values,
+        MovingHoliday = leaster$values,
+        NbTD = ntd$values,
+        Noutliers = nout$values,
+        Outlier1 = NA,
+        Outlier2 = NA,
+        Outlier3 = NA,
+        Residual_Seasonality = NA,
+        Residual_TD_Effect = td_effect$values,
+        Q_Stat = stat_Q$values$q,
+        Final_Henderson_Filter = trend_filter$values,
+        Stage_2_Henderson_Filter = NA,
+        Seasonal_Filter = seas_filter$values,
+        Quality = quality$values,
+        Autocorrelation_of_order_1_of_the_SA_series = NA,
+        Ljung_Box_test = NA,
+        Autocorrelation_negative_and_significant = NA,
+        Irregular_standard_deviation = NA,
+        Max_Adj = NA
+    )
+
+    missing_items <- c(
+        frequency_series$missing,
+        nobs$missing,
+        start_date$missing,
+        end_date$missing,
+        log_transform$missing,
+        arima_model$missing,
+        leap_year$missing,
+        leaster$missing,
+        ntd$missing,
+        nout$missing,
+        td_effect$missing,
+        stat_Q$missing,
+        trend_filter$missing,
+        seas_filter$missing,
+        quality$missing
+    )
+
+    colnames(JVS_output) <- c(
+        "Series", "Method", "Period", "Nobs", "Start", "End", "Adjustment",
+        "Presence of Seasonality in the Raw Series", "Presence of TD effects",
+        "Log-Transformation", "ARIMA Model",
+        "LeapYear", "MovingHoliday", "NbTD",
+        "Noutliers", "Outlier1", "Outlier2", "Outlier3",
+        "Residual Seasonality in SA Series (F-test)", "Residual TD Effect",
+        "Q-Stat (for X13)", "Final Henderson Filter",
+        "Stage 2 Henderson Filter", "Seasonal Filter",
+        "Irregular Standard-Deviation", "Quality (for TS)", "Max-Adj",
+        "Autocorrelation of order 1 of the SA series",
+        "Ljung-Box Test (P-value)", "Autocorrelation negative and significant"
+    )
+
+
+    if (length(missing_items) > 0L) {
+        warning(
+            "Some items are missing. ",
+            "Please re-compute the cruncher export with the options: ",
+            toString(missing_items),
+            "\n\n",
+            "If you extract element with rjwsacruncher::cruncher_and_param(),",
+            " don't forget to put `short_column_headers = FALSE`.",
+            call. = FALSE
+        )
+    }
+
+    JVS_output <- JVS_matrix(JVS_output)
     return(JVS_output)
 }

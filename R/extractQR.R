@@ -236,7 +236,7 @@ extract_QR <- function(
             toString(missing_items),
             "\n\n",
             "If you extract element with rjwsacruncher::cruncher_and_param(),",
-            " don't forget to put `short_column_headers = FALSE`!",
+            " don't forget to put `short_column_headers = FALSE`.",
             call. = FALSE
         )
     }

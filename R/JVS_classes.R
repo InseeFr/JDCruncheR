@@ -10,7 +10,7 @@ JVS_matrix <- function(x = list(), ...) {
 #' @method JVS_matrix data.frame
 #' @export
 JVS_matrix.data.frame <- function(x) {
-    class(x) <- "JVS_matrix"
+    class(x) <- c("JVS_matrix", "data.frame")
     return(x)
 }
 
