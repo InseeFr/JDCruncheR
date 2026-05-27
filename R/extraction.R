@@ -921,3 +921,27 @@ extractSeasTest <- function(
         missing = missing_var
     ))
 }
+
+
+extractStandardDeviation <- function(i){
+    ts_i <- ts(i[,2])
+    return(sd(ts_i, na.rm = TRUE))
+}
+
+extractMaxAdj <- function(y, sa) {
+
+    y_val  <- y[, 2]
+    sa_val <- sa[, 2]
+
+    valid <- y_val != 0 & !is.na(y_val) & !is.na(sa_val)
+
+    if (sum(valid) == 0) {
+        return(Inf)
+    }
+
+    adj <- (y_val[valid] - sa_val[valid]) / y_val[valid]
+
+    max_adj <- max(adj)
+
+    return(max_adj)
+}
