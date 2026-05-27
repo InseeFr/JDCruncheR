@@ -301,11 +301,25 @@ extractAutoCorr <- function(demetra_m) {
         demetra_m,
         pattern = "(^diagnostics\\.seas\\.sa\\.ac1$)|(^seas\\.sa\\.ac1$)",
         type = "double",
-        variable = "seas.sa.ac1"
+        variable = "seas-sa-ac1"
     )
-    if (all(is.na(auto_corr))) missing_var <- c(missing_var, "diagnostics.seas.sa.ac1")
+    if (all(is.na(auto_corr))) missing_var <- c(missing_var, "diagnostics.seas-sa-ac1")
 
     return(list(values = auto_corr, missing = missing_var))
+}
+
+extractSeasCombined <- function(demetra_m) {
+    missing_var <- NULL
+
+    presence_seasonality <- find_variable(
+        demetra_m,
+        pattern = "(^diagnostics\\.seas\\.lin\\.combined$)|(^seas\\.lin\\.combined$)",
+        type = "character",
+        variable = "seas-sa-combined"
+    )
+    if (all(is.na(presence_seasonality))) missing_var <- c(missing_var, "diagnostics.seas-lin-combined")
+
+    return(list(values = presence_seasonality, missing = missing_var))
 }
 
 extract3Outliers <- function(demetra_m) {
@@ -349,9 +363,37 @@ extractTDFTest <- function(demetra_m) {
         variable = "td-ftest",
         p_value = TRUE
     )
-    if (all(is.na(td_f_test))) missing_var <- c(missing_var, "regression.td-ftest")
+    if (all(is.na(td_f_test))) missing_var <- c(missing_var, "regression.td-ftest:3")
 
     return(list(values = td_f_test, missing = missing_var))
+}
+
+extractNormality <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
+    missing_var <- NULL
+
+    normality_pvalue <- find_variable(
+        demetra_m,
+        pattern = "(^residuals\\.lb$)|(^lb$)|(^normality$)",
+        type = "double",
+        variable = "normality",
+        p_value = TRUE
+    )
+    if (all(is.na(normality_pvalue))) missing_var <- c(missing_var, "residuals.lb:3")
+
+    modalities <- cut(
+        x = as.numeric(normality_pvalue),
+        breaks = c(-Inf, thresholds[["residuals_normality"]]),
+        labels = names(thresholds[["residuals_normality"]]),
+        right = FALSE,
+        include.lowest = TRUE,
+        ordered_result = TRUE
+    )
+
+    return(list(
+        modalities = modalities,
+        values = normality_pvalue,
+        missing = missing_var
+    ))
 }
 
 extractResidualsTDEffect <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
@@ -378,6 +420,34 @@ extractResidualsTDEffect <- function(demetra_m, thresholds = getOption("jdc_thre
     return(list(
         modalities = modalities,
         values = td_ftest,
+        missing = missing_var
+    ))
+}
+
+extractResidualsSeasEffect <- function(demetra_m) {
+    missing_var <- NULL
+
+    residual_seasonality <- find_variable(
+        demetra_m,
+        pattern = "(^diagnostics\\.seas\\.sa\\.f$)|(^seas\\.sa.f$)",
+        type = "double",
+        variable = "f_residual_s_on_sa",
+        p_value = TRUE
+    )
+    if (all(is.na(residual_seasonality))) missing_var <- c(missing_var, "diagnostics.seas-sa-f:2")
+
+    modalities <- cut(
+        x = as.numeric(residual_seasonality),
+        breaks = c(-Inf, thresholds[["f_residual_s_on_sa"]]),
+        labels = names(thresholds[["f_residual_s_on_sa"]]),
+        right = FALSE,
+        include.lowest = TRUE,
+        ordered_result = TRUE
+    )
+
+    return(list(
+        modalities = modalities,
+        values = residual_seasonality,
         missing = missing_var
     ))
 }
@@ -679,16 +749,9 @@ extractDistributionTests <- function(
         missing_var <- c(missing_var, "residuals.lb2:3")
     }
 
-    normality_pvalue <- find_variable(
-        demetra_m,
-        pattern = "(^residuals\\.lb$)|(^lb$)|(^normality$)",
-        type = "double",
-        variable = "normality",
-        p_value = TRUE
-    )
-    if (all(is.na(normality_pvalue))) {
-        missing_var <- c(missing_var, "residuals.lb:3")
-    }
+    normality_test_results <- extractNormality(demetra_m, thresholds)
+    missing_var <- c(missing_var, normality_test_results$missing)
+    normality_pvalue <- normality_test_results$values
 
     independency_pvalue <- find_variable(
         demetra_m,
@@ -729,14 +792,7 @@ extractDistributionTests <- function(
             include.lowest = TRUE,
             ordered_result = TRUE
         ),
-        residuals_normality = cut(
-            x = normality_pvalue,
-            breaks = c(-Inf, thresholds[["residuals_normality"]]),
-            labels = names(thresholds[["residuals_normality"]]),
-            right = FALSE,
-            include.lowest = TRUE,
-            ordered_result = TRUE
-        ),
+        residuals_normality = normality_test_results$modalities,
         residuals_independency = cut(
             x = independency_pvalue,
             breaks = c(-Inf, thresholds[["residuals_independency"]]),
@@ -845,19 +901,9 @@ extractSeasTest <- function(
         )
     }
 
-    f_residual_s_on_sa <- find_variable(
-        demetra_m,
-        pattern = "(^diagnostics\\.seas\\.sa\\.f$)|(^seas\\.sa.f$)",
-        type = "double",
-        variable = "f_residual_s_on_sa",
-        p_value = TRUE
-    )
-    if (all(is.na(f_residual_s_on_sa))) {
-        missing_var <- append(
-            x = missing_var,
-            values = c("diagnostics.seas-sa-f:2", "diagnostics.seas-sa-f")
-        )
-    }
+    f_residual_s_on_sa <- extractSeasEffect(demetra_m)
+    missing_var <- c(missing_var, f_residual_s_on_sa$missing)
+    f_residual_s_on_sa <- f_residual_s_on_sa$values
 
     f_residual_sa_on_i <- find_variable(
         demetra_m,
