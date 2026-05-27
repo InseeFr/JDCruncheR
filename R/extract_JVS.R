@@ -35,49 +35,51 @@ extract_JVS <- function(
         gsub("(^.* \\* )|(\\[frozen\\])", "", demetra_m[, 1L])
     )
 
+    method <- extractMethod(demetra_m)
     frequency_series <- extractFrequency(demetra_m)
     nobs <- extractNobs(demetra_m)
     start_date <- extractStart(demetra_m)
-    end_date <- extractStart(demetra_m)
+    end_date <- extractEnd(demetra_m)
+    presence_td_effect <- extractTDFTest(demetra_m = demetra_m)
+    log_transform <- extractLog(demetra_m)
     arima_model <- extractARIMA(demetra_m)
     leap_year <- extractLeapYear(demetra_m)
     leaster <- extractLeaster(demetra_m)
     ntd <- extractNtd(demetra_m)
     nout <- extractNout(demetra_m)
-    log_transform <- extractLog(demetra_m)
+    outliers <- extract3Outliers(demetra_m)
+    res_td_effect <- extractResidualsTDEffect(demetra_m = demetra_m)
     stat_Q <- extractStatQ(demetra_m, thresholds)
     trend_filter <- extractTrendFilter(demetra_m)
     seas_filter <- extractSeasonalFilter(demetra_m)
     quality <- extractQuality(demetra_m)
-    td_effect <- extractTD_ftest(demetra_m = demetra_m, thresholds)
+    auto_corr <- extractAutoCorr(demetra_m)
 
     JVS_output <- data.frame(
         Series = series,
-        Method = NA,
+        Method = method$values,
         Period = frequency_series$values,
         Nobs = nobs$values,
         Start = start_date$values,
         End = end_date$values,
         Adjustment = NA,
         Presence_of_Seasonality_in_the_raw_series = NA,
-        Presence_of_TD_effects = NA,
-        Log_Transformation = log_transform$values,
+        Presence_of_TD_effects = ifelse(presence_td_effect$values > 0.05, "No", "Yes"),
+        Log_Transformation = ifelse(log_transform$values == 1, "Yes", "No"),
         ARIMA_model = arima_model$values,
         LeapYear = leap_year$values,
         MovingHoliday = leaster$values,
         NbTD = ntd$values,
         Noutliers = nout$values,
-        Outlier1 = NA,
-        Outlier2 = NA,
-        Outlier3 = NA,
+        outliers$values,
         Residual_Seasonality = NA,
-        Residual_TD_Effect = td_effect$values,
+        Residual_TD_Effect = ifelse(res_td_effect$values > 0.05, "No", "Yes"),
         Q_Stat = stat_Q$values$q,
         Final_Henderson_Filter = trend_filter$values,
         Stage_2_Henderson_Filter = NA,
         Seasonal_Filter = seas_filter$values,
         Quality = quality$values,
-        Autocorrelation_of_order_1_of_the_SA_series = NA,
+        Autocorrelation_of_order_1_of_the_SA_series = auto_corr$values,
         Ljung_Box_test = NA,
         Autocorrelation_negative_and_significant = NA,
         Irregular_standard_deviation = NA,
@@ -85,22 +87,26 @@ extract_JVS <- function(
     )
 
     missing_items <- c(
+        method$missing,
         frequency_series$missing,
         nobs$missing,
         start_date$missing,
         end_date$missing,
+        presence_td_effect$missing,
         log_transform$missing,
         arima_model$missing,
         leap_year$missing,
         leaster$missing,
         ntd$missing,
         nout$missing,
-        td_effect$missing,
+        res_td_effect$missing,
         stat_Q$missing,
         trend_filter$missing,
         seas_filter$missing,
-        quality$missing
-    )
+        quality$missing,
+        auto_corr$missing
+    ) |>
+        unique()
 
     colnames(JVS_output) <- c(
         "Series", "Method", "Period", "Nobs", "Start", "End", "Adjustment",
@@ -111,11 +117,10 @@ extract_JVS <- function(
         "Residual Seasonality in SA Series (F-test)", "Residual TD Effect",
         "Q-Stat (for X13)", "Final Henderson Filter",
         "Stage 2 Henderson Filter", "Seasonal Filter",
-        "Irregular Standard-Deviation", "Quality (for TS)", "Max-Adj",
-        "Autocorrelation of order 1 of the SA series",
-        "Ljung-Box Test (P-value)", "Autocorrelation negative and significant"
+        "Quality (for TS)",
+        "Autocorrelation of order 1 of the SA series", "Ljung-Box Test (P-value)", "Autocorrelation negative and significant",
+        "Irregular Standard-Deviation", "Max-Adj"
     )
-
 
     if (length(missing_items) > 0L) {
         warning(

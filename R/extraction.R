@@ -57,7 +57,7 @@ find_variable <- function(
         }
     }
 
-    #Type de la colonne
+    # Type de la colonne
     type_cols <- unlist(lapply(
         X = demetra_m[, cols, drop = FALSE],
         FUN = function(x) {
@@ -213,6 +213,17 @@ extractM7 <- function(demetra_m) {
     return(list(values = m7, missing = missing_var))
 }
 
+extractMethod <- function(demetra_m) {
+    missing_var <- NULL
+
+    m7 <- extractM7(demetra_m)
+    missing_var <- c(missing_var, m7$missing)
+
+    method <- ifelse(is.na(m7$values), "Tramo-Seats", "X13")
+
+    return(list(values = method, missing = missing_var))
+}
+
 extractSeasonalFilter <- function(demetra_m) {
     missing_var <- NULL
 
@@ -283,18 +294,92 @@ extractLeaster <- function(demetra_m) {
     return(list(values = leaster, missing = missing_var))
 }
 
-extractTD_ftest <- function(demetra_m, thresholds) {
+extractAutoCorr <- function(demetra_m) {
+    missing_var <- NULL
+
+    auto_corr <- find_variable(
+        demetra_m,
+        pattern = "(^diagnostics\\.seas\\.sa\\.ac1$)|(^seas\\.sa\\.ac1$)",
+        type = "double",
+        variable = "seas.sa.ac1"
+    )
+    if (all(is.na(auto_corr))) missing_var <- c(missing_var, "diagnostics.seas.sa.ac1")
+
+    return(list(values = auto_corr, missing = missing_var))
+}
+
+extract3Outliers <- function(demetra_m) {
+    pattern <- "(^regression\\.out$)|(^out$)" |>
+        gsub(
+            pattern = "$",
+            replacement = "(\\.(\\d){1,}\\.)?$",
+            fixed = TRUE
+        )
+
+    id_cols <- grep(pattern = pattern, colnames(demetra_m))
+
+    outliers <- data.frame(
+        out1 = character(nrow(demetra_m)),
+        out2 = character(nrow(demetra_m)),
+        out3 = character(nrow(demetra_m))
+    )
+
+    for (id_series in seq_len(nrow(demetra_m))) {
+        outs <- demetra_m[id_series, id_cols]
+        id_cols_out_series <- id_cols[!(is.na(outs) | outs == "")]
+        outs <- as.character(demetra_m[id_series, id_cols_out_series])
+        if (length(id_cols_out_series) > 1) {
+            t_stat <- as.numeric(demetra_m[id_series, id_cols_out_series + 2])
+            outs <- outs[order(abs(t_stat), decreasing = TRUE)[seq_len(min(3, length(id_cols_out_series)))]]
+        }
+        outs <- c(outs, rep("", 3 - length(outs)))
+        outliers[id_series, ] <- outs
+    }
+
+    return(list(values = outliers))
+}
+
+extractTDFTest <- function(demetra_m) {
+    missing_var <- NULL
+
+    td_f_test <- find_variable(
+        demetra_m,
+        pattern = "(^regression\\.td\\.ftest$)|(^td\\.ftest$)",
+        type = "double",
+        variable = "td-ftest",
+        p_value = TRUE
+    )
+    if (all(is.na(td_f_test))) missing_var <- c(missing_var, "regression.td-ftest")
+
+    return(list(values = td_f_test, missing = missing_var))
+}
+
+extractResidualsTDEffect <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
     missing_var <- NULL
 
     td_ftest <- find_variable(
         demetra_m,
-        pattern = "(^regression\\.td\\.ftest$)|(^td\\.ftest$)",
+        pattern = "(^diagnostics\\.td\\.sa\\.last$)|(^td\\.sa\\.last$)",
         type = "double",
-        variable = "td-ftest"
+        variable = "td-ftest",
+        p_value = TRUE
     )
-    if (all(is.na(td_ftest))) missing_var <- c(missing_var, "regression.td-ftest")
+    if (all(is.na(td_ftest))) missing_var <- c(missing_var, "diagnostics.td-sa-last:2")
 
-    return(list(values = td_ftest, missing = missing_var))
+    modalities <- cut(
+        x = as.numeric(td_ftest),
+        breaks = c(-Inf, thresholds[["f_residual_td_on_sa"]]),
+        labels = names(thresholds[["f_residual_td_on_sa"]]),
+        right = FALSE,
+        include.lowest = TRUE,
+        ordered_result = TRUE
+    )
+
+    return(list(
+        modalities = modalities,
+        values = td_ftest,
+        missing = missing_var
+    ))
 }
 
 extractFrequency <- function(demetra_m) {
@@ -788,23 +873,9 @@ extractSeasTest <- function(
         )
     }
 
-    f_residual_td_on_sa <- find_variable(
-        demetra_m,
-        pattern = paste(
-            "(^diagnostics\\.td\\.sa\\.last$)",
-            "(^td\\.sa\\.last$)",
-            sep = "|"
-        ),
-        type = "double",
-        variable = "f_residual_td_on_sa",
-        p_value = TRUE
-    )
-    if (all(is.na(f_residual_td_on_sa))) {
-        missing_var <- append(
-            x = missing_var,
-            values = c("diagnostics.td-sa-last:2", "diagnostics.td-sa-last")
-        )
-    }
+    f_residual_td_on_sa <- extractResidualsTDEffect(demetra_m)
+    missing_var <- c(missing_var, f_residual_td_on_sa$missing)
+    f_residual_td_on_sa <- f_residual_td_on_sa$values
 
     f_residual_td_on_i <- find_variable(
         demetra_m,
