@@ -203,6 +203,8 @@ NULL
 #'
 #' @family QR_matrix functions
 #' @seealso [Traduction française][fr-export_xlsx.QR_matrix()]
+#' @exportS3Method export_xlsx QR_matrix
+#' @method export_xlsx QR_matrix
 #' @export
 export_xlsx.QR_matrix <- function(
     x,
@@ -273,10 +275,29 @@ export_xlsx <- function(x, ...) {
     UseMethod("export_xlsx", x)
 }
 
-#' @family QR_matrix functions
+#' @exportS3Method export_xlsx default
+#' @method export_xlsx default
 #' @export
 export_xlsx.default <- function(x, ...) {
     stop("A QR_matrix or mQR_matrix object is required!", call. = FALSE)
+}
+
+#' @exportS3Method export_xlsx JVS_matrix
+#' @method export_xlsx JVS_matrix
+#' @export
+export_xlsx.JVS_matrix <- function(x, export_dir = tempdir(), ...) {
+    write.table(
+        x = x,
+        file = file.path(export_dir, "JobVacancySurveyQR.csv"),
+        sep = ";",
+        dec = ",",
+        quote = FALSE,
+        row.names = FALSE,
+        col.names = TRUE,
+        fileEncoding = "utf-8",
+        na = ""
+    )
+    return(invisible(x))
 }
 
 
@@ -331,6 +352,8 @@ NULL
 #'
 #' @family QR_matrix functions
 #' @seealso [Traduction française][fr-export_xlsx.mQR_matrix()]
+#' @exportS3Method export_xlsx mQR_matrix
+#' @method export_xlsx mQR_matrix
 #' @export
 export_xlsx.mQR_matrix <- function(
     x,
