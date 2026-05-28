@@ -1029,15 +1029,21 @@ extractSeasTest <- function(
     ))
 }
 
-
-extractStandardDeviation <- function(i) {
-    ts_i <- ts(i[, 2])
-    return(sd(ts_i, na.rm = TRUE))
+extractStandardDeviation <- function(i){
+    list_sd <- sapply(
+        i[, 2:ncol(i), drop = FALSE],
+        sd,
+        na.rm = TRUE
+    )
+    return(list(
+        values = list_sd
+    ))
 }
 
-extractMaxAdj <- function(y, sa) {
-    y_val <- y[, 2]
-    sa_val <- sa[, 2]
+extractMaxAdj_oneseries <- function(y, sa, col) {
+
+    y_val  <- y[, col]
+    sa_val <- sa[, col]
 
     valid <- y_val != 0 & !is.na(y_val) & !is.na(sa_val)
 
@@ -1050,6 +1056,21 @@ extractMaxAdj <- function(y, sa) {
     max_adj <- max(adj)
 
     return(max_adj)
+}
+
+extractMaxAdj_allseries <- function(y,sa){
+    if (ncol(y) != ncol(sa)){
+        stop("The files Y and SA do not have the same number of columns.")
+    }
+
+    list_max_adj <- sapply(
+        2:ncol(y),
+        function(col) extractMaxAdj_oneseries(y, sa, col)
+    )
+
+    return(list(
+        values = list_max_adj
+    ))
 }
 
 extractAdjustment <- function(demetra_m, s) {
