@@ -1087,6 +1087,7 @@ extractAdjustment <- function(demetra_m, s) {
     ly <- extractLeapYear(demetra_m)
     missing_var <- c(missing_var, ly$missing)
     ly <- ly$values
+    ly[is.na(ly)] <- ""
 
     cond_ca <- leaster > 0 | ntd > 0 | ly == "Leap year"
     cond_sa <- apply(X = s[, -1], MARGIN = 2L, FUN = sd) != 0L

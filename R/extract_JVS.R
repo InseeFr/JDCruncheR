@@ -1,3 +1,5 @@
+
+#' @export
 extract_JVS <- function(
     dir = NULL,
     demetra_m = NULL,
