@@ -467,7 +467,7 @@ extractResidualsTDEffect <- function(
     ))
 }
 
-extractResidualsSeasEffect <- function(demetra_m) {
+extractResidualsSeasEffect <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
     missing_var <- NULL
 
     residual_seasonality <- find_variable(

@@ -150,7 +150,7 @@ extract_JVS <- function(
         "Final Henderson Filter",
         "Stage 2 Henderson Filter",
         "Seasonal Filter",
-        "Quality (for TS)",
+        "Quality",
         "Autocorrelation of order 1 of the SA series",
         "Ljung-Box Test (P-value)",
         "Autocorrelation negative and significant",
@@ -165,7 +165,7 @@ extract_JVS <- function(
             toString(missing_items),
             "\n\n",
             "If you extract element with rjwsacruncher::cruncher_and_param(),",
-            " don't forget to put `short_column_headers = FALSE`.",
+            " don't forget to put `short_column_headers = FALSE` and `v3 = TRUE`.",
             call. = FALSE
         )
     }
