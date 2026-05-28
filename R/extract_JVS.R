@@ -53,6 +53,8 @@ extract_JVS <- function(
     quality <- extractQuality(demetra_m)
     auto_corr <- extractAutoCorr(demetra_m)
     lb_test <- extractNormality(demetra_m)
+    standard_deviation <- extractStandardDeviation(i)
+    max_adj <- extractMaxAdj_allseries(y, sa)
 
     JVS_output <- data.frame(
         Series = series,
@@ -93,8 +95,8 @@ extract_JVS <- function(
             "Warning",
             ""
         ),
-        Irregular_standard_deviation = NA,
-        Max_Adj = NA
+        Irregular_standard_deviation = standard_deviation$values,
+        Max_Adj = max_adj$values
     )
 
     missing_items <- c(
