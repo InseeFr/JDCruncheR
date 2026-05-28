@@ -1,14 +1,14 @@
 create_NA_type <- function(
-        type = c(
-            "character",
-            "integer",
-            "double",
-            "logical",
-            "complex",
-            "raw",
-            "Date"
-        ),
-        len = 1L
+    type = c(
+        "character",
+        "integer",
+        "double",
+        "logical",
+        "complex",
+        "raw",
+        "Date"
+    ),
+    len = 1L
 ) {
     type <- match.arg(type)
     output <- rep(
@@ -28,12 +28,12 @@ create_NA_type <- function(
 }
 
 find_variable <- function(
-        demetra_m,
-        pattern,
-        type = c("double", "integer", "character", "logical"),
-        p_value = FALSE,
-        variable = "",
-        exact = FALSE
+    demetra_m,
+    pattern,
+    type = c("double", "integer", "character", "logical"),
+    p_value = FALSE,
+    variable = "",
+    exact = FALSE
 ) {
     if (!exact) {
         pattern <- gsub(
@@ -124,7 +124,9 @@ extractStart <- function(demetra_m) {
         type = "character",
         variable = "start"
     )
-    if (all(is.na(start_date))) missing_var <- "span.start"
+    if (all(is.na(start_date))) {
+        missing_var <- "span.start"
+    }
 
     return(list(values = start_date, missing = missing_var))
 }
@@ -138,7 +140,9 @@ extractEnd <- function(demetra_m) {
         type = "character",
         variable = "end"
     )
-    if (all(is.na(end_date))) missing_var <- "span.end"
+    if (all(is.na(end_date))) {
+        missing_var <- "span.end"
+    }
 
     return(list(values = end_date, missing = missing_var))
 }
@@ -152,7 +156,9 @@ extractLog <- function(demetra_m) {
         type = "integer",
         variable = "log"
     )
-    if (all(is.na(log_transform))) missing_var <- c(missing_var, "log")
+    if (all(is.na(log_transform))) {
+        missing_var <- c(missing_var, "log")
+    }
 
     return(list(values = log_transform, missing = missing_var))
 }
@@ -166,7 +172,9 @@ extractNobs <- function(demetra_m) {
         type = "integer",
         variable = "n"
     )
-    if (all(is.na(nobs))) missing_var <- c(missing_var, "span.n")
+    if (all(is.na(nobs))) {
+        missing_var <- c(missing_var, "span.n")
+    }
 
     return(list(values = nobs, missing = missing_var))
 }
@@ -180,7 +188,9 @@ extractNout <- function(demetra_m) {
         type = "integer",
         variable = "nout"
     )
-    if (all(is.na(nout))) missing_var <- c(missing_var, "regression.nout")
+    if (all(is.na(nout))) {
+        missing_var <- c(missing_var, "regression.nout")
+    }
 
     return(list(values = nout, missing = missing_var))
 }
@@ -194,7 +204,9 @@ extractNtd <- function(demetra_m) {
         type = "integer",
         variable = "ntd"
     )
-    if (all(is.na(ntd))) missing_var <- c(missing_var, "regression.ntd")
+    if (all(is.na(ntd))) {
+        missing_var <- c(missing_var, "regression.ntd")
+    }
 
     return(list(values = ntd, missing = missing_var))
 }
@@ -208,7 +220,9 @@ extractM7 <- function(demetra_m) {
         type = "double",
         variable = "m7"
     )
-    if (all(is.na(m7))) missing_var <- c(missing_var, "m-statistics.m7")
+    if (all(is.na(m7))) {
+        missing_var <- c(missing_var, "m-statistics.m7")
+    }
 
     return(list(values = m7, missing = missing_var))
 }
@@ -233,7 +247,9 @@ extractSeasonalFilter <- function(demetra_m) {
         type = "character",
         variable = "seasonal-filters"
     )
-    if (all(is.na(seasonal_filters))) missing_var <- c(missing_var, "decomposition.seasonal-filters")
+    if (all(is.na(seasonal_filters))) {
+        missing_var <- c(missing_var, "decomposition.seasonal-filters")
+    }
 
     return(list(values = seasonal_filters, missing = missing_var))
 }
@@ -247,7 +263,9 @@ extractTrendFilter <- function(demetra_m) {
         type = "integer",
         variable = "trend-filter"
     )
-    if (all(is.na(trend_filters))) missing_var <- c(missing_var, "decomposition.trend-filter")
+    if (all(is.na(trend_filters))) {
+        missing_var <- c(missing_var, "decomposition.trend-filter")
+    }
 
     return(list(values = trend_filters, missing = missing_var))
 }
@@ -261,7 +279,9 @@ extractQuality <- function(demetra_m) {
         type = "character",
         variable = "quality"
     )
-    if (all(is.na(quality))) missing_var <- c(missing_var, "quality.summary")
+    if (all(is.na(quality))) {
+        missing_var <- c(missing_var, "quality.summary")
+    }
 
     return(list(values = quality, missing = missing_var))
 }
@@ -275,7 +295,9 @@ extractLeapYear <- function(demetra_m) {
         type = "character",
         variable = "lp"
     )
-    if (all(is.na(lp))) missing_var <- c(missing_var, "regression.lp")
+    if (all(is.na(lp))) {
+        missing_var <- c(missing_var, "regression.lp")
+    }
 
     return(list(values = lp, missing = missing_var))
 }
@@ -289,7 +311,9 @@ extractLeaster <- function(demetra_m) {
         type = "integer",
         variable = "leaster"
     )
-    if (all(is.na(leaster))) missing_var <- c(missing_var, "regression.leaster")
+    if (all(is.na(leaster))) {
+        missing_var <- c(missing_var, "regression.leaster")
+    }
 
     return(list(values = leaster, missing = missing_var))
 }
@@ -303,7 +327,9 @@ extractAutoCorr <- function(demetra_m) {
         type = "double",
         variable = "seas-sa-ac1"
     )
-    if (all(is.na(auto_corr))) missing_var <- c(missing_var, "diagnostics.seas-sa-ac1")
+    if (all(is.na(auto_corr))) {
+        missing_var <- c(missing_var, "diagnostics.seas-sa-ac1")
+    }
 
     return(list(values = auto_corr, missing = missing_var))
 }
@@ -317,7 +343,9 @@ extractSeasCombined <- function(demetra_m) {
         type = "character",
         variable = "seas-sa-combined"
     )
-    if (all(is.na(presence_seasonality))) missing_var <- c(missing_var, "diagnostics.seas-lin-combined")
+    if (all(is.na(presence_seasonality))) {
+        missing_var <- c(missing_var, "diagnostics.seas-lin-combined")
+    }
 
     return(list(values = presence_seasonality, missing = missing_var))
 }
@@ -344,7 +372,10 @@ extract3Outliers <- function(demetra_m) {
         outs <- as.character(demetra_m[id_series, id_cols_out_series])
         if (length(id_cols_out_series) > 1) {
             t_stat <- as.numeric(demetra_m[id_series, id_cols_out_series + 2])
-            outs <- outs[order(abs(t_stat), decreasing = TRUE)[seq_len(min(3, length(id_cols_out_series)))]]
+            outs <- outs[order(abs(t_stat), decreasing = TRUE)[seq_len(min(
+                3,
+                length(id_cols_out_series)
+            ))]]
         }
         outs <- c(outs, rep("", 3 - length(outs)))
         outliers[id_series, ] <- outs
@@ -363,12 +394,17 @@ extractTDFTest <- function(demetra_m) {
         variable = "td-ftest",
         p_value = TRUE
     )
-    if (all(is.na(td_f_test))) missing_var <- c(missing_var, "regression.td-ftest:3")
+    if (all(is.na(td_f_test))) {
+        missing_var <- c(missing_var, "regression.td-ftest:3")
+    }
 
     return(list(values = td_f_test, missing = missing_var))
 }
 
-extractNormality <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
+extractNormality <- function(
+    demetra_m,
+    thresholds = getOption("jdc_thresholds")
+) {
     missing_var <- NULL
 
     normality_pvalue <- find_variable(
@@ -378,7 +414,9 @@ extractNormality <- function(demetra_m, thresholds = getOption("jdc_thresholds")
         variable = "normality",
         p_value = TRUE
     )
-    if (all(is.na(normality_pvalue))) missing_var <- c(missing_var, "residuals.lb:3")
+    if (all(is.na(normality_pvalue))) {
+        missing_var <- c(missing_var, "residuals.lb:3")
+    }
 
     modalities <- cut(
         x = as.numeric(normality_pvalue),
@@ -396,7 +434,10 @@ extractNormality <- function(demetra_m, thresholds = getOption("jdc_thresholds")
     ))
 }
 
-extractResidualsTDEffect <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
+extractResidualsTDEffect <- function(
+    demetra_m,
+    thresholds = getOption("jdc_thresholds")
+) {
     missing_var <- NULL
 
     td_ftest <- find_variable(
@@ -406,7 +447,9 @@ extractResidualsTDEffect <- function(demetra_m, thresholds = getOption("jdc_thre
         variable = "td-ftest",
         p_value = TRUE
     )
-    if (all(is.na(td_ftest))) missing_var <- c(missing_var, "diagnostics.td-sa-last:2")
+    if (all(is.na(td_ftest))) {
+        missing_var <- c(missing_var, "diagnostics.td-sa-last:2")
+    }
 
     modalities <- cut(
         x = as.numeric(td_ftest),
@@ -434,7 +477,9 @@ extractResidualsSeasEffect <- function(demetra_m) {
         variable = "f_residual_s_on_sa",
         p_value = TRUE
     )
-    if (all(is.na(residual_seasonality))) missing_var <- c(missing_var, "diagnostics.seas-sa-f:2")
+    if (all(is.na(residual_seasonality))) {
+        missing_var <- c(missing_var, "diagnostics.seas-sa-f:2")
+    }
 
     modalities <- cut(
         x = as.numeric(residual_seasonality),
@@ -495,7 +540,9 @@ extractFrequency <- function(demetra_m) {
         output <- vapply(
             X = seq_len(nrow(nobs_compute)),
             FUN = function(i) {
-                if (is.na(nobs[i])) return(NA_integer_)
+                if (is.na(nobs[i])) {
+                    return(NA_integer_)
+                }
                 freq[which(
                     (nobs_compute[i, ] == nobs[i]) |
                         (nobs_compute[i, ] + 1L == nobs[i]) |
@@ -519,7 +566,9 @@ extractARIMA <- function(demetra_m) {
         type = "integer",
         variable = "arima.p"
     )
-    if (all(is.na(arima_p))) missing_var <- c(missing_var, "arima.p")
+    if (all(is.na(arima_p))) {
+        missing_var <- c(missing_var, "arima.p")
+    }
 
     arima_d <- find_variable(
         demetra_m,
@@ -527,7 +576,9 @@ extractARIMA <- function(demetra_m) {
         type = "integer",
         variable = "arima.d"
     )
-    if (all(is.na(arima_d))) missing_var <- c(missing_var, "arima.d")
+    if (all(is.na(arima_d))) {
+        missing_var <- c(missing_var, "arima.d")
+    }
 
     arima_q <- find_variable(
         demetra_m,
@@ -535,7 +586,9 @@ extractARIMA <- function(demetra_m) {
         type = "integer",
         variable = "arima.q"
     )
-    if (all(is.na(arima_q))) missing_var <- c(missing_var, "arima.q")
+    if (all(is.na(arima_q))) {
+        missing_var <- c(missing_var, "arima.q")
+    }
 
     arima_bp <- find_variable(
         demetra_m,
@@ -543,7 +596,9 @@ extractARIMA <- function(demetra_m) {
         type = "integer",
         variable = "arima.bp"
     )
-    if (all(is.na(arima_bp))) missing_var <- c(missing_var, "arima.bp")
+    if (all(is.na(arima_bp))) {
+        missing_var <- c(missing_var, "arima.bp")
+    }
 
     arima_bd <- find_variable(
         demetra_m,
@@ -551,7 +606,9 @@ extractARIMA <- function(demetra_m) {
         type = "integer",
         variable = "arima.bd"
     )
-    if (all(is.na(arima_bd))) missing_var <- c(missing_var, "arima.bd")
+    if (all(is.na(arima_bd))) {
+        missing_var <- c(missing_var, "arima.bd")
+    }
 
     arima_bq <- find_variable(
         demetra_m,
@@ -559,7 +616,9 @@ extractARIMA <- function(demetra_m) {
         type = "integer",
         variable = "arima.bq"
     )
-    if (all(is.na(arima_bq))) missing_var <- c(missing_var, "arima.bq")
+    if (all(is.na(arima_bq))) {
+        missing_var <- c(missing_var, "arima.bq")
+    }
 
     arima_df <- data.frame(
         arima_p = arima_p,
@@ -597,7 +656,9 @@ extractStatQ <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
         type = "double",
         variable = "q statistic"
     )
-    if (all(is.na(q_value))) missing_var <- c(missing_var, "m-statistics.q")
+    if (all(is.na(q_value))) {
+        missing_var <- c(missing_var, "m-statistics.q")
+    }
 
     q_m2_value <- find_variable(
         demetra_m,
@@ -642,8 +703,8 @@ extractStatQ <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
 }
 
 extractOOS_test <- function(
-        demetra_m,
-        thresholds = getOption("jdc_thresholds")
+    demetra_m,
+    thresholds = getOption("jdc_thresholds")
 ) {
     missing_var <- NULL
 
@@ -711,8 +772,8 @@ extractOOS_test <- function(
 }
 
 extractDistributionTests <- function(
-        demetra_m,
-        thresholds = getOption("jdc_thresholds")
+    demetra_m,
+    thresholds = getOption("jdc_thresholds")
 ) {
     missing_var <- NULL
 
@@ -818,8 +879,8 @@ extractDistributionTests <- function(
 }
 
 extractOutliers <- function(
-        demetra_m,
-        thresholds = getOption("jdc_thresholds")
+    demetra_m,
+    thresholds = getOption("jdc_thresholds")
 ) {
     missing_var <- NULL
 
@@ -868,8 +929,8 @@ extractOutliers <- function(
 }
 
 extractSeasTest <- function(
-        demetra_m,
-        thresholds = getOption("jdc_thresholds")
+    demetra_m,
+    thresholds = getOption("jdc_thresholds")
 ) {
     missing_var <- NULL
 
@@ -969,14 +1030,13 @@ extractSeasTest <- function(
 }
 
 
-extractStandardDeviation <- function(i){
-    ts_i <- ts(i[,2])
+extractStandardDeviation <- function(i) {
+    ts_i <- ts(i[, 2])
     return(sd(ts_i, na.rm = TRUE))
 }
 
 extractMaxAdj <- function(y, sa) {
-
-    y_val  <- y[, 2]
+    y_val <- y[, 2]
     sa_val <- sa[, 2]
 
     valid <- y_val != 0 & !is.na(y_val) & !is.na(sa_val)

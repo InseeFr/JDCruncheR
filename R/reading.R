@@ -11,7 +11,7 @@ read_demetra_m <- function(file, sep = ";", dec = ",") {
     return(demetra_m)
 }
 
-read_series <- function(file, sep = ";", dec = ","){
+read_series <- function(file, sep = ";", dec = ",") {
     series_df <- read.csv(
         file = file,
         sep = sep,
@@ -22,13 +22,13 @@ read_series <- function(file, sep = ";", dec = ","){
         quote = ""
     )
 
-    test_date <- as.Date(series_df[,1], format = "%Y-%m-%d")
+    test_date <- as.Date(series_df[, 1], format = "%Y-%m-%d")
 
     if (all(is.na(test_date))) {
         warning("Incorrect table format: use csv_layout = 'vtable'")
     } else {
-        series_df[,1] <- test_date
-        series_df <- series_df[order(series_df[,1]), ]
+        series_df[, 1] <- test_date
+        series_df <- series_df[order(series_df[, 1]), ]
         colnames(series_df)[1] <- "date"
     }
 

@@ -1,4 +1,3 @@
-
 #' @title Extraction d'un bilan qualité
 #'
 #' @description
@@ -153,12 +152,11 @@ NULL
 #' @seealso [Traduction française][fr-extract_QR()]
 #' @export
 extract_QR <- function(
-        file,
-        x,
-        thresholds = getOption("jdc_thresholds"),
-        ...
+    file,
+    x,
+    thresholds = getOption("jdc_thresholds"),
+    ...
 ) {
-
     if (missing(x) && missing(file)) {
         stop(
             "Please call extract_QR() on a csv file containing at least ",
@@ -170,8 +168,8 @@ extract_QR <- function(
     } else if (missing(x)) {
         if (
             length(file) == 0L ||
-            !file.exists(file) ||
-            !endsWith(x = file, suffix = ".csv")
+                !file.exists(file) ||
+                !endsWith(x = file, suffix = ".csv")
         ) {
             stop(
                 "The chosen file desn't exist or isn't a csv file",

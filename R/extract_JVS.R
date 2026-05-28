@@ -1,10 +1,9 @@
 extract_JVS <- function(
-        file,
-        x,
-        thresholds = getOption("jdc_thresholds"),
-        ...
+    file,
+    x,
+    thresholds = getOption("jdc_thresholds"),
+    ...
 ) {
-
     if (missing(x) && missing(file)) {
         stop(
             "Please call extract_JVS() on a csv file containing at least ",
@@ -16,8 +15,8 @@ extract_JVS <- function(
     } else if (missing(x)) {
         if (
             length(file) == 0L ||
-            !file.exists(file) ||
-            !endsWith(x = file, suffix = ".csv")
+                !file.exists(file) ||
+                !endsWith(x = file, suffix = ".csv")
         ) {
             stop(
                 "The chosen file desn't exist or isn't a csv file",
@@ -66,8 +65,16 @@ extract_JVS <- function(
         Start = start_date$values,
         End = end_date$values,
         Adjustment = NA,
-        Presence_of_Seasonality_in_the_raw_series = ifelse(presence_seas_effect$values == "Present", "Yes", "No"),
-        Presence_of_TD_effects = ifelse(presence_td_effect$values > 0.05 | is.na(presence_td_effect$values), "No", "Yes"),
+        Presence_of_Seasonality_in_the_raw_series = ifelse(
+            presence_seas_effect$values == "Present",
+            "Yes",
+            "No"
+        ),
+        Presence_of_TD_effects = ifelse(
+            presence_td_effect$values > 0.05 | is.na(presence_td_effect$values),
+            "No",
+            "Yes"
+        ),
         Log_Transformation = ifelse(log_transform$values == 1, "Yes", "No"),
         ARIMA_model = arima_model$values,
         LeapYear = leap_year$values,
@@ -84,7 +91,11 @@ extract_JVS <- function(
         Quality = quality$values,
         Autocorrelation_of_order_1_of_the_SA_series = auto_corr$values,
         Ljung_Box_test = lb_test$values,
-        Autocorrelation_negative_and_significant = ifelse(auto_corr$values < 0 & lb_test$values < 0.05, "Warning", ""),
+        Autocorrelation_negative_and_significant = ifelse(
+            auto_corr$values < 0 & lb_test$values < 0.05,
+            "Warning",
+            ""
+        ),
         Irregular_standard_deviation = NA,
         Max_Adj = NA
     )
@@ -115,17 +126,36 @@ extract_JVS <- function(
         unique()
 
     colnames(JVS_output) <- c(
-        "Series", "Method", "Period", "Nobs", "Start", "End", "Adjustment",
-        "Presence of Seasonality in the Raw Series", "Presence of TD effects",
-        "Log-Transformation", "ARIMA Model",
-        "LeapYear", "MovingHoliday", "NbTD",
-        "Noutliers", "Outlier1", "Outlier2", "Outlier3",
-        "Residual Seasonality in SA Series (F-test)", "Residual TD Effect",
-        "Q-Stat (for X13)", "Final Henderson Filter",
-        "Stage 2 Henderson Filter", "Seasonal Filter",
+        "Series",
+        "Method",
+        "Period",
+        "Nobs",
+        "Start",
+        "End",
+        "Adjustment",
+        "Presence of Seasonality in the Raw Series",
+        "Presence of TD effects",
+        "Log-Transformation",
+        "ARIMA Model",
+        "LeapYear",
+        "MovingHoliday",
+        "NbTD",
+        "Noutliers",
+        "Outlier1",
+        "Outlier2",
+        "Outlier3",
+        "Residual Seasonality in SA Series (F-test)",
+        "Residual TD Effect",
+        "Q-Stat (for X13)",
+        "Final Henderson Filter",
+        "Stage 2 Henderson Filter",
+        "Seasonal Filter",
         "Quality (for TS)",
-        "Autocorrelation of order 1 of the SA series", "Ljung-Box Test (P-value)", "Autocorrelation negative and significant",
-        "Irregular Standard-Deviation", "Max-Adj"
+        "Autocorrelation of order 1 of the SA series",
+        "Ljung-Box Test (P-value)",
+        "Autocorrelation negative and significant",
+        "Irregular Standard-Deviation",
+        "Max-Adj"
     )
 
     if (length(missing_items) > 0L) {
