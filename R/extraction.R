@@ -1030,8 +1030,9 @@ extractSeasTest <- function(
 }
 
 extractStandardDeviation <- function(i){
-    list_sd <- sapply(
+    list_sd <- apply(
         i[, 2:ncol(i), drop = FALSE],
+        2,
         sd,
         na.rm = TRUE
     )
@@ -1040,20 +1041,17 @@ extractStandardDeviation <- function(i){
     ))
 }
 
-extractMaxAdj_oneseries <- function(y, sa, col) {
+extractMaxAdj_oneseries <- function(y_col, sa_col) {
 
-    y_val  <- y[, col]
-    sa_val <- sa[, col]
+    valid <- y_col != 0 & !is.na(y_col) & !is.na(sa_col)
 
-    valid <- y_val != 0 & !is.na(y_val) & !is.na(sa_val)
-
-    if (sum(valid) == 0) {
+    if (!any(valid)) {
         return(Inf)
     }
 
-    adj <- (y_val[valid] - sa_val[valid]) / y_val[valid]
+    adj <- abs((y_col[valid] - sa_col[valid]) / y_col[valid])
 
-    max_adj <- max(adj)
+    max_adj <- 100 * max(adj)
 
     return(max_adj)
 }
@@ -1065,7 +1063,10 @@ extractMaxAdj_allseries <- function(y,sa){
 
     list_max_adj <- sapply(
         2:ncol(y),
-        function(col) extractMaxAdj_oneseries(y, sa, col)
+        function(col) extractMaxAdj_oneseries(
+            y[, col],
+            sa[, col]
+        )
     )
 
     return(list(
