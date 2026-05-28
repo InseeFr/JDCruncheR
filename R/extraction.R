@@ -1031,9 +1031,9 @@ extractSeasTest <- function(
 
 extractStandardDeviation <- function(i){
     list_sd <- apply(
-        i[, 2:ncol(i), drop = FALSE],
-        2,
-        sd,
+        X = i[, -1L, drop = FALSE],
+        MARGIN = 2L,
+        FUN = sd,
         na.rm = TRUE
     )
     return(list(
@@ -1041,32 +1041,33 @@ extractStandardDeviation <- function(i){
     ))
 }
 
-extractMaxAdj_oneseries <- function(y_col, sa_col) {
-
-    valid <- y_col != 0 & !is.na(y_col) & !is.na(sa_col)
+extractMaxAdj_oneseries <- function(y, sa) {
+    valid <- y != 0 & !is.na(y) & !is.na(sa)
 
     if (!any(valid)) {
         return(Inf)
     }
 
-    adj <- abs((y_col[valid] - sa_col[valid]) / y_col[valid])
-
+    adj <- abs((y[valid] - sa[valid]) / y[valid])
     max_adj <- 100 * max(adj)
 
     return(max_adj)
 }
 
-extractMaxAdj_allseries <- function(y,sa){
+extractMaxAdj_allseries <- function(y, sa){
     if (ncol(y) != ncol(sa)){
         stop("The files Y and SA do not have the same number of columns.")
     }
 
-    list_max_adj <- sapply(
-        2:ncol(y),
-        function(col) extractMaxAdj_oneseries(
-            y[, col],
-            sa[, col]
-        )
+    if (nrow(y) != nrow(sa)){
+        stop("The files Y and SA do not have the same number of rows.")
+    }
+
+    list_max_adj <- mapply(
+        FUN = extractMaxAdj_oneseries,
+        y = y[, -1],
+        sa = sa[, -1],
+        SIMPLIFY = TRUE
     )
 
     return(list(
