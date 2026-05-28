@@ -10,19 +10,19 @@ extract_JVS <- function(
 ) {
 
     # Lecture de demetra_m
-    demetra_m <- check_obj(dir = dir, x = demetra_m, reading_fun = read_demetra_m, name = "demetra_m")
+    demetra_m <- check_obj(dir = dir, x = demetra_m, reading_fun = read_demetra_m, name = "demetra_m", ...)
 
     # Lecture de y
-    y <- check_obj(dir = dir, x = y, reading_fun = read_series, name = "y")
+    y <- check_obj(dir = dir, x = y, reading_fun = read_series, name = "y", ...)
 
     # Lecture de sa
-    sa <- check_obj(dir = dir, x = sa, reading_fun = read_series, name = "sa")
+    sa <- check_obj(dir = dir, x = sa, reading_fun = read_series, name = "sa", ...)
 
     # Lecture de s
-    s <- check_obj(dir = dir, x = s, reading_fun = read_series, name = "s")
+    s <- check_obj(dir = dir, x = s, reading_fun = read_series, name = "s", ...)
 
     # Lecture de i
-    i <- check_obj(dir = dir, x = i, reading_fun = read_series, name = "i")
+    i <- check_obj(dir = dir, x = i, reading_fun = read_series, name = "i", ...)
 
     series <- gsub(
         "(^ *)|(* $)",
