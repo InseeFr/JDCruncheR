@@ -1092,7 +1092,7 @@ extractAdjustment <- function(demetra_m, s) {
     ly[is.na(ly)] <- ""
 
     cond_ca <- leaster > 0 | ntd > 0 | ly == "Leap year"
-    cond_sa <- apply(X = s[, -1], MARGIN = 2L, FUN = sd) != 0L
+    cond_sa <- apply(X = s[, -1], MARGIN = 2L, FUN = sd, na.rm = TRUE) != 0L
 
     adjustment <- paste0(
         ifelse(
