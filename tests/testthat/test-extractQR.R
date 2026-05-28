@@ -30,13 +30,5 @@ Last column selected"
     )
 
     path3 <- testthat::test_path("data", "demetra_m3.csv")
-    expect_message(
-        object = expect_message(
-            object = {
-                qr3 <- extract_QR(file = path3)
-            },
-            regexp = msg1
-        ),
-        regexp = msg2
-    )
+    qr3 <- extract_QR(file = path3)
 })

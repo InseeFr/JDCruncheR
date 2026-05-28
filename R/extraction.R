@@ -962,7 +962,7 @@ extractSeasTest <- function(
         )
     }
 
-    f_residual_s_on_sa <- extractSeasEffect(demetra_m)
+    f_residual_s_on_sa <- extractResidualsSeasEffect(demetra_m)
     missing_var <- c(missing_var, f_residual_s_on_sa$missing)
     f_residual_s_on_sa <- f_residual_s_on_sa$values
 
@@ -1050,4 +1050,39 @@ extractMaxAdj <- function(y, sa) {
     max_adj <- max(adj)
 
     return(max_adj)
+}
+
+extractAdjustment <- function(demetra_m, s) {
+    missing_var <- NULL
+
+    leaster <- extractLeaster(demetra_m)
+    missing_var <- c(missing_var, leaster$missing)
+    leaster <- leaster$values
+
+    ntd <- extractNtd(demetra_m)
+    missing_var <- c(missing_var, ntd$missing)
+    ntd <- ntd$values
+
+    ly <- extractLeapYear(demetra_m)
+    missing_var <- c(missing_var, ly$missing)
+    ly <- ly$values
+
+    cond_ca <- leaster > 0 | ntd > 0 | ly == "Leap year"
+    cond_sa <- apply(X = s[, -1], MARGIN = 2L, FUN = sd) != 0L
+
+    adjustment <- paste0(
+        ifelse(
+            test = cond_sa,
+            yes = "S",
+            no = "NS"
+        ),
+        ifelse(
+            test = cond_ca,
+            yes = "C",
+            no = ""
+        ),
+        "A"
+    )
+
+    return(list(values = adjustment, missing = missing_var))
 }

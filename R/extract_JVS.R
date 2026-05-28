@@ -1,32 +1,28 @@
 extract_JVS <- function(
-    file,
-    x,
+    dir = NULL,
+    demetra_m = NULL,
+    y = NULL,
+    sa = NULL,
+    s = NULL,
+    i = NULL,
     thresholds = getOption("jdc_thresholds"),
     ...
 ) {
-    if (missing(x) && missing(file)) {
-        stop(
-            "Please call extract_JVS() on a csv file containing at least ",
-            "one cruncher output matrix (demetra_m.csv for example) ",
-            "with the argument `file` ",
-            "or directly on a matrix with the argument `x`",
-            call. = FALSE
-        )
-    } else if (missing(x)) {
-        if (
-            length(file) == 0L ||
-                !file.exists(file) ||
-                !endsWith(x = file, suffix = ".csv")
-        ) {
-            stop(
-                "The chosen file desn't exist or isn't a csv file",
-                call. = FALSE
-            )
-        }
-        demetra_m <- read_demetra_m(file, ...)
-    } else {
-        demetra_m <- x
-    }
+
+    # Lecture de demetra_m
+    demetra_m <- check_obj(dir = dir, x = demetra_m, reading_fun = read_demetra_m, name = "demetra_m")
+
+    # Lecture de y
+    y <- check_obj(dir = dir, x = y, reading_fun = read_series, name = "y")
+
+    # Lecture de sa
+    sa <- check_obj(dir = dir, x = sa, reading_fun = read_series, name = "sa")
+
+    # Lecture de s
+    s <- check_obj(dir = dir, x = s, reading_fun = read_series, name = "s")
+
+    # Lecture de i
+    i <- check_obj(dir = dir, x = i, reading_fun = read_series, name = "i")
 
     series <- gsub(
         "(^ *)|(* $)",
@@ -39,6 +35,7 @@ extract_JVS <- function(
     nobs <- extractNobs(demetra_m)
     start_date <- extractStart(demetra_m)
     end_date <- extractEnd(demetra_m)
+    adjustment <- extractAdjustment(demetra_m, s)
     presence_seas_effect <- extractSeasCombined(demetra_m)
     presence_td_effect <- extractTDFTest(demetra_m = demetra_m)
     log_transform <- extractLog(demetra_m)
@@ -64,7 +61,7 @@ extract_JVS <- function(
         Nobs = nobs$values,
         Start = start_date$values,
         End = end_date$values,
-        Adjustment = NA,
+        Adjustment = adjustment$values,
         Presence_of_Seasonality_in_the_raw_series = ifelse(
             presence_seas_effect$values == "Present",
             "Yes",
@@ -106,6 +103,7 @@ extract_JVS <- function(
         nobs$missing,
         start_date$missing,
         end_date$missing,
+        adjustment$missing,
         presence_seas_effect$missing,
         presence_td_effect$missing,
         log_transform$missing,
