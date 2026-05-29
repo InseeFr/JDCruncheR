@@ -285,18 +285,36 @@ export_xlsx.default <- function(x, ...) {
 #' @exportS3Method export_xlsx JVS_matrix
 #' @method export_xlsx JVS_matrix
 #' @export
-export_xlsx.JVS_matrix <- function(x, export_dir = tempdir(), ...) {
-    write.table(
-        x = x,
-        file = file.path(export_dir, "JobVacancySurveyQR.csv"),
-        sep = ";",
-        dec = ",",
-        quote = FALSE,
-        row.names = FALSE,
-        col.names = TRUE,
-        fileEncoding = "utf-8",
-        na = ""
-    )
+export_xlsx.JVS_matrix <- function(x, format = c("csv", "xlsx"), export_dir = tempdir(), overwrite = TRUE, ...) {
+    if (!(format %in% c("csv", "xlsx"))){
+        stop("Wrong format, please choose 'csv' or 'xlsx'")
+    } else if (format == "csv"){
+        write.table(
+            x = x,
+            file = file.path(export_dir, "JobVacancySurveyQR.csv"),
+            sep = ";",
+            dec = ",",
+            quote = FALSE,
+            row.names = FALSE,
+            col.names = TRUE,
+            fileEncoding = "utf-8",
+            na = ""
+        )
+    } else {
+        wb_jvs <- openxlsx::createWorkbook(title = "JVSQR")
+        openxlsx::addWorksheet(wb = wb_jvs, sheetName = "JVS" )
+        openxlsx::writeData(wb = wb_jvs,
+                            sheet = "JVS",
+                            x = x,
+                            headerStyle = header_style,
+                            )
+        openxlsx::saveWorkbook(
+            wb = wb_jvs,
+            file = file.path(export_dir, "JobVacancySurveyQR.xlsx"),
+            overwrite = overwrite
+            )
+    }
+
     return(invisible(x))
 }
 
