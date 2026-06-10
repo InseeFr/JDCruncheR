@@ -193,7 +193,7 @@ extract_QR <- function(
 
     stat_Q <- extractStatQ(demetra_m, thresholds)
     stat_OOS <- extractOOS_test(demetra_m, thresholds)
-    normality <- extractDistributionTests(demetra_m, thresholds)
+    distribution <- extractDistributionTests(demetra_m, thresholds)
     outliers <- extractOutliers(demetra_m, thresholds)
     test <- extractSeasTest(demetra_m, thresholds)
     frequency_series <- extractFrequency(demetra_m)
@@ -201,7 +201,7 @@ extract_QR <- function(
 
     QR_modalities <- data.frame(
         series = series,
-        normality[["modalities"]],
+        distribution[["modalities"]],
         test[["modalities"]],
         stat_OOS[["modalities"]],
         stat_Q[["modalities"]],
@@ -209,7 +209,7 @@ extract_QR <- function(
     )
     QR_values <- data.frame(
         series = series,
-        normality[["values"]],
+        distribution[["values"]],
         test[["values"]],
         stat_OOS[["values"]],
         stat_Q[["values"]],
@@ -218,7 +218,7 @@ extract_QR <- function(
         arima_model = arima_model[["values"]]
     )
     missing_items <- c(
-        normality[["missing"]],
+        distribution[["missing"]],
         test[["missing"]],
         stat_OOS[["missing"]],
         stat_Q[["missing"]],

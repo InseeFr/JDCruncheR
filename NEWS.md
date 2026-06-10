@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 * New classes for JVS objects
+* New function exctrac_JVS  to extract the JVS plug-in
 
 ### Fixed
 
