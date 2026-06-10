@@ -286,12 +286,22 @@ export_xlsx.default <- function(x, ...) {
 #' @method export_xlsx JVS_matrix
 #' @export
 export_xlsx.JVS_matrix <- function(x, format = c("csv", "xlsx"), export_dir = tempdir(), overwrite = TRUE, ...) {
-    if (!(format %in% c("csv", "xlsx"))){
-        stop("Wrong format, please choose 'csv' or 'xlsx'")
-    } else if (format == "csv"){
+    format <- match.arg(format)
+
+    if (format == "csv"){
+        outfile <- file.path(export_dir, "JobVacancySurveyQR.csv")
+
+        if (file.exists(outfile) && !overwrite) {
+            warning(
+                sprintf("The file '%s' already exists.", outfile),
+                call. = FALSE
+            )
+            return(invisible(x))
+        }
+
         write.table(
             x = x,
-            file = file.path(export_dir, "JobVacancySurveyQR.csv"),
+            file = outfile,
             sep = ";",
             dec = ",",
             quote = FALSE,
@@ -300,21 +310,32 @@ export_xlsx.JVS_matrix <- function(x, format = c("csv", "xlsx"), export_dir = te
             fileEncoding = "utf-8",
             na = ""
         )
+
     } else {
         wb_jvs <- openxlsx::createWorkbook(title = "JVSQR")
         openxlsx::addWorksheet(wb = wb_jvs, sheetName = "JVS" )
         openxlsx::writeData(wb = wb_jvs,
                             sheet = "JVS",
                             x = x,
-                            headerStyle = header_style,
+                            headerStyle = header_style
                             )
+
+        outfile <- file.path(export_dir, "JobVacancySurveyQR.xlsx")
+
+        if (file.exists(outfile) && !overwrite) {
+            warning(
+                sprintf("The file '%s' already exists.", outfile),
+                call. = FALSE
+            )
+            return(invisible(x))
+        }
+
         openxlsx::saveWorkbook(
             wb = wb_jvs,
-            file = file.path(export_dir, "JobVacancySurveyQR.xlsx"),
+            file = outfile,
             overwrite = overwrite
-            )
+        )
     }
-
     return(invisible(x))
 }
 
