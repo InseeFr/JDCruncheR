@@ -54,7 +54,7 @@ extract_JVS <- function(
     seas_filter <- extractSeasonalFilter(demetra_m)
     quality <- extractQuality(demetra_m)
     auto_corr <- extractAutoCorr(demetra_m)
-    lb_test <- extractNormality(demetra_m)
+    lb_test <- extractIndependence(demetra_m)
     standard_deviation <- extractStandardDeviation(i)
     max_adj <- extractMaxAdj_allseries(y, sa)
 

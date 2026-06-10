@@ -401,27 +401,27 @@ extractTDFTest <- function(demetra_m) {
     return(list(values = td_f_test, missing = missing_var))
 }
 
-extractNormality <- function(
+extractIndependence <- function(
     demetra_m,
     thresholds = getOption("jdc_thresholds")
 ) {
     missing_var <- NULL
 
-    normality_pvalue <- find_variable(
+    independency_pvalue <- find_variable(
         demetra_m,
-        pattern = "(^residuals\\.lb$)|(^lb$)|(^normality$)",
+        pattern = "(^residuals\\.lb$)|(^lb$)|(^independence$)",
         type = "double",
-        variable = "normality",
+        variable = "independency",
         p_value = TRUE
     )
-    if (all(is.na(normality_pvalue))) {
+    if (all(is.na(independency_pvalue))) {
         missing_var <- c(missing_var, "residuals.lb:3")
     }
 
     modalities <- cut(
-        x = as.numeric(normality_pvalue),
-        breaks = c(-Inf, thresholds[["residuals_normality"]]),
-        labels = names(thresholds[["residuals_normality"]]),
+        x = as.numeric(independency_pvalue),
+        breaks = c(-Inf, thresholds[["residuals_independency"]]),
+        labels = names(thresholds[["residuals_independency"]]),
         right = FALSE,
         include.lowest = TRUE,
         ordered_result = TRUE
@@ -429,7 +429,7 @@ extractNormality <- function(
 
     return(list(
         modalities = modalities,
-        values = normality_pvalue,
+        values = independency_pvalue,
         missing = missing_var
     ))
 }
@@ -810,18 +810,18 @@ extractDistributionTests <- function(
         missing_var <- c(missing_var, "residuals.lb2:3")
     }
 
-    normality_test_results <- extractNormality(demetra_m, thresholds)
-    missing_var <- c(missing_var, normality_test_results$missing)
-    normality_pvalue <- normality_test_results$values
+    independency_test_results <- extractIndependence(demetra_m, thresholds)
+    missing_var <- c(missing_var, independency_test_results$missing)
+    independency_pvalue <- independency_test_results$values
 
-    independency_pvalue <- find_variable(
+    normality_pvalue <- find_variable(
         demetra_m,
-        pattern = "(^residuals\\.doornikhansen$)|(^doornikhansen$)|(^dh$)|(^independence$)",
+        pattern = "(^residuals\\.doornikhansen$)|(^doornikhansen$)|(^dh$)|(^normality$)",
         type = "double",
-        variable = "independency",
+        variable = "normality",
         p_value = TRUE
     )
-    if (all(is.na(independency_pvalue))) {
+    if (all(is.na(normality_pvalue))) {
         missing_var <- append(
             x = missing_var,
             values = c("residuals.dh:3", "residuals.doornikhansen:3")
@@ -853,15 +853,15 @@ extractDistributionTests <- function(
             include.lowest = TRUE,
             ordered_result = TRUE
         ),
-        residuals_normality = normality_test_results$modalities,
-        residuals_independency = cut(
-            x = independency_pvalue,
-            breaks = c(-Inf, thresholds[["residuals_independency"]]),
-            labels = names(thresholds[["residuals_independency"]]),
+        residuals_normality = cut(
+            x = normality_pvalue,
+            breaks = c(-Inf, thresholds[["residuals_normality"]]),
+            labels = names(thresholds[["residuals_normality"]]),
             right = FALSE,
             include.lowest = TRUE,
             ordered_result = TRUE
-        )
+        ),
+        residuals_independency = independency_test_results$modalities
     )
     distribution_values <- data.frame(
         residuals_homoskedasticity = homoskedasticity_pvalue,
