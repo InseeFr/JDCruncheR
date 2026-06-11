@@ -2,10 +2,10 @@
 % Please edit documentation in R/deprecated.R
 \name{deprecated-JDCruncheR}
 \alias{deprecated-JDCruncheR}
-\alias{export_xslx}
+\alias{export_xlsx}
 \title{Deprecated functions}
 \usage{
-export_xslx(x, ...)
+export_xlsx(x, ...)
 }
 \arguments{
 \item{x}{a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} object.}

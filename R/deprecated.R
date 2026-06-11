@@ -9,7 +9,7 @@
 #'
 #' @name deprecated-JDCruncheR
 #' @export
-export_xslx <- function(x, ...) {
+export_xlsx <- function(x, ...) {
     .Deprecated("write")
     write(x, ...)
 }

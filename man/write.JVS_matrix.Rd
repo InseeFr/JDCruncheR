@@ -2,7 +2,7 @@
 % Please edit documentation in R/export.R
 \name{write.JVS_matrix}
 \alias{write.JVS_matrix}
-\title{Exporting JVS_matrix objects in Excel or csv files}
+\title{Exporting JVS_matrix objects in CSV or Excel files}
 \usage{
 \method{write}{JVS_matrix}(
   x,
@@ -13,25 +13,23 @@
 )
 }
 \arguments{
-\item{x}{a \code{\link{mQR_matrix}} object to export.}
+\item{x}{a \code{\link{JVS_matrix}} object to export.}
 
 \item{export_dir}{export directory.}
 
-\item{overwrite}{logical indicating whether to create an Excel file if it
+\item{overwrite}{logical indicating whether to create a CSV or Excel file if it
 doesn't exist yet (\code{create = TRUE} by default)}
 
 \item{...}{other unused arguments}
 }
 \value{
 Returns invisibly (via \code{invisible(x)}) the same
-\code{\link{mQR_matrix}} object as \code{x}.
+\code{\link{JVS_matrix}} object as \code{x}.
 }
 \description{
-To export several quality reports in Excel or csv files
+To export several quality reports in CSV or Excel files
 }
 \seealso{
-\link[=fr-write.mQR_matrix]{Traduction française}
-
 Other QR_matrix functions:
 \code{\link[=extract_QR]{extract_QR()}},
 \code{\link[=rbind.QR_matrix]{rbind.QR_matrix()}},

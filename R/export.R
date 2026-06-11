@@ -283,21 +283,20 @@ write.default <- function(x, ...) {
 }
 
 
-#' Exporting JVS_matrix objects in Excel or csv files
+#' Exporting JVS_matrix objects in CSV or Excel files
 #'
-#' To export several quality reports in Excel or csv files
+#' To export several quality reports in CSV or Excel files
 #'
-#' @param x a \code{\link{mQR_matrix}} object to export.
+#' @param x a \code{\link{JVS_matrix}} object to export.
 #' @param export_dir export directory.
-#' @param overwrite logical indicating whether to create an Excel file if it
+#' @param overwrite logical indicating whether to create a CSV or Excel file if it
 #' doesn't exist yet (\code{create = TRUE} by default)
 #' @param ... other unused arguments
 #'
 #' @returns Returns invisibly (via \code{invisible(x)}) the same
-#' \code{\link{mQR_matrix}} object as \code{x}.
+#' \code{\link{JVS_matrix}} object as \code{x}.
 #'
 #' @family QR_matrix functions
-#' @seealso [Traduction française][fr-write.mQR_matrix()]
 #' @exportS3Method write JVS_matrix
 #' @method write JVS_matrix
 #' @export
