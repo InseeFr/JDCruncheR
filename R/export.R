@@ -288,6 +288,7 @@ write.default <- function(x, ...) {
 #' To export several quality reports in CSV or Excel files
 #'
 #' @param x a \code{\link{JVS_matrix}} object to export.
+#' @param format output format. One of `"csv"` or `"xlsx"`. The default is `"csv"`.
 #' @param export_dir export directory.
 #' @param overwrite logical indicating whether to create a CSV or Excel file if it
 #' doesn't exist yet (\code{create = TRUE} by default)
