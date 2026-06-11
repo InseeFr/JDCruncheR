@@ -1,3 +1,4 @@
+
 header_style <- openxlsx::createStyle(
     fontColour = "#ffffff",
     fgFill = "#4F80BD",
@@ -41,7 +42,6 @@ rowname_style <- openxlsx::createStyle(
     fgFill = "orange",
     textDecoration = "bold"
 )
-
 
 apply_BQ_style <- function(
     wb,
@@ -180,7 +180,7 @@ apply_BQ_style <- function(
 #' ultérieure.
 #'
 #' @keywords internal
-#' @name fr-export_xlsx.QR_matrix
+#' @name fr-write.QR_matrix
 NULL
 #> NULL
 
@@ -202,11 +202,11 @@ NULL
 #' created by \code{XLConnect::loadWorkbook()} for further manipulation.
 #'
 #' @family QR_matrix functions
-#' @seealso [Traduction française][fr-export_xlsx.QR_matrix()]
-#' @exportS3Method export_xlsx QR_matrix
-#' @method export_xlsx QR_matrix
+#' @seealso [Traduction française][fr-write.QR_matrix()]
+#' @exportS3Method write QR_matrix
+#' @method write QR_matrix
 #' @export
-export_xlsx.QR_matrix <- function(
+write.QR_matrix <- function(
     x,
     file,
     auto_format = TRUE,
@@ -259,7 +259,7 @@ export_xlsx.QR_matrix <- function(
 #'
 #' @param x a \code{\link{QR_matrix}} or \code{\link{mQR_matrix}} object.
 #' @param ... other parameters of the function
-#' \code{\link{export_xlsx.QR_matrix}}.
+#' \code{\link{write.QR_matrix}}.
 #'
 #' @returns
 #' If \code{x} is a \code{\link{mQR_matrix}}, the function returns invisibly
@@ -271,21 +271,43 @@ export_xlsx.QR_matrix <- function(
 #'
 #' @family QR_matrix functions
 #' @export
-export_xlsx <- function(x, ...) {
-    UseMethod("export_xlsx", x)
+write <- function(x, ...) {
+    UseMethod("write", x)
 }
 
-#' @exportS3Method export_xlsx default
-#' @method export_xlsx default
+#' @exportS3Method write default
+#' @method write default
 #' @export
-export_xlsx.default <- function(x, ...) {
+write.default <- function(x, ...) {
     stop("A QR_matrix or mQR_matrix object is required!", call. = FALSE)
 }
 
-#' @exportS3Method export_xlsx JVS_matrix
-#' @method export_xlsx JVS_matrix
+
+#' Exporting JVS_matrix objects in Excel or csv files
+#'
+#' To export several quality reports in Excel or csv files
+#'
+#' @param x a \code{\link{mQR_matrix}} object to export.
+#' @param export_dir export directory.
+#' @param overwrite logical indicating whether to create an Excel file if it
+#' doesn't exist yet (\code{create = TRUE} by default)
+#' @param ... other unused arguments
+#'
+#' @returns Returns invisibly (via \code{invisible(x)}) the same
+#' \code{\link{mQR_matrix}} object as \code{x}.
+#'
+#' @family QR_matrix functions
+#' @seealso [Traduction française][fr-write.mQR_matrix()]
+#' @exportS3Method write JVS_matrix
+#' @method write JVS_matrix
 #' @export
-export_xlsx.JVS_matrix <- function(x, format = c("csv", "xlsx"), export_dir = tempdir(), overwrite = TRUE, ...) {
+write.JVS_matrix <- function(
+    x,
+    format = c("csv", "xlsx"),
+    export_dir = tempdir(),
+    overwrite = TRUE,
+    ...
+) {
     format <- match.arg(format)
     outfile <- file.path(export_dir, paste0("JobVacancySurveyQR.", format))
 
@@ -297,7 +319,7 @@ export_xlsx.JVS_matrix <- function(x, format = c("csv", "xlsx"), export_dir = te
         return(invisible(x))
     }
 
-    if (format == "csv"){
+    if (format == "csv") {
         write.table(
             x = x,
             file = outfile,
@@ -311,12 +333,13 @@ export_xlsx.JVS_matrix <- function(x, format = c("csv", "xlsx"), export_dir = te
         )
     } else {
         wb_jvs <- openxlsx::createWorkbook(title = "JVSQR")
-        openxlsx::addWorksheet(wb = wb_jvs, sheetName = "JVS" )
-        openxlsx::writeData(wb = wb_jvs,
-                            sheet = "JVS",
-                            x = x,
-                            headerStyle = header_style
-                            )
+        openxlsx::addWorksheet(wb = wb_jvs, sheetName = "JVS")
+        openxlsx::writeData(
+            wb = wb_jvs,
+            sheet = "JVS",
+            x = x,
+            headerStyle = header_style
+        )
 
         openxlsx::saveWorkbook(
             wb = wb_jvs,
@@ -353,7 +376,7 @@ export_xlsx.JVS_matrix <- function(x, format = c("csv", "xlsx"), export_dir = te
 #' \code{\link{mQR_matrix}} que \code{x}.
 #'
 #' @keywords internal
-#' @name fr-export_xlsx.mQR_matrix
+#' @name fr-write.mQR_matrix
 NULL
 #> NULL
 
@@ -378,11 +401,11 @@ NULL
 #' \code{\link{mQR_matrix}} object as \code{x}.
 #'
 #' @family QR_matrix functions
-#' @seealso [Traduction française][fr-export_xlsx.mQR_matrix()]
-#' @exportS3Method export_xlsx mQR_matrix
-#' @method export_xlsx mQR_matrix
+#' @seealso [Traduction française][fr-write.mQR_matrix()]
+#' @exportS3Method write mQR_matrix
+#' @method write mQR_matrix
 #' @export
-export_xlsx.mQR_matrix <- function(
+write.mQR_matrix <- function(
     x,
     export_dir,
     layout_file = c("ByComponent", "ByQRMatrix", "AllTogether"),
@@ -405,7 +428,7 @@ export_xlsx.mQR_matrix <- function(
                 yes = paste0("QR_", id_qr),
                 no = names(x)[id_qr]
             )
-            export_xlsx(
+            write(
                 x = qr_matrix,
                 file = file.path(export_dir, paste0(name, ".xlsx")),
                 auto_format = auto_format,

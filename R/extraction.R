@@ -374,7 +374,10 @@ extractResidualsTDEffect <- function(
     ))
 }
 
-extractResidualsSeasEffect <- function(demetra_m, thresholds = getOption("jdc_thresholds")) {
+extractResidualsSeasEffect <- function(
+    demetra_m,
+    thresholds = getOption("jdc_thresholds")
+) {
     residual_seasonality <- find_variable(
         demetra_m,
         pattern = "(^diagnostics\\.seas\\.sa\\.f$)|(^seas\\.sa.f$)",
@@ -866,7 +869,7 @@ extractSeasTest <- function(
     ))
 }
 
-extractStandardDeviation <- function(i){
+extractStandardDeviation <- function(i) {
     list_sd <- apply(
         X = i[, -1L, drop = FALSE],
         MARGIN = 2L,
@@ -891,12 +894,12 @@ extractMaxAdj_oneseries <- function(y, sa) {
     return(max_adj)
 }
 
-extractMaxAdj_allseries <- function(y, sa){
-    if (ncol(y) != ncol(sa)){
+extractMaxAdj_allseries <- function(y, sa) {
+    if (ncol(y) != ncol(sa)) {
         stop("The files Y and SA do not have the same number of columns.")
     }
 
-    if (nrow(y) != nrow(sa)){
+    if (nrow(y) != nrow(sa)) {
         stop("The files Y and SA do not have the same number of rows.")
     }
 

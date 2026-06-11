@@ -45,11 +45,12 @@ QR[["modalities"]][["score_pond"]]
 \link[=fr-weighted_score]{Traduction française}
 
 Other QR_matrix functions:
-\code{\link[=export_xlsx]{export_xlsx()}},
-\code{\link[=export_xlsx.QR_matrix]{export_xlsx.QR_matrix()}},
-\code{\link[=export_xlsx.mQR_matrix]{export_xlsx.mQR_matrix()}},
 \code{\link[=extract_QR]{extract_QR()}},
 \code{\link[=rbind.QR_matrix]{rbind.QR_matrix()}},
-\code{\link{sort}}
+\code{\link{sort}},
+\code{\link[=write]{write()}},
+\code{\link[=write.JVS_matrix]{write.JVS_matrix()}},
+\code{\link[=write.QR_matrix]{write.QR_matrix()}},
+\code{\link[=write.mQR_matrix]{write.mQR_matrix()}}
 }
 \concept{QR_matrix functions}

@@ -1,4 +1,3 @@
-
 #' @export
 extract_JVS <- function(
     dir = NULL,
@@ -10,15 +9,26 @@ extract_JVS <- function(
     thresholds = getOption("jdc_thresholds"),
     ...
 ) {
-
     # Lecture de demetra_m
-    demetra_m <- check_obj(dir = dir, x = demetra_m, reading_fun = read_demetra_m, name = "demetra_m", ...)
+    demetra_m <- check_obj(
+        dir = dir,
+        x = demetra_m,
+        reading_fun = read_demetra_m,
+        name = "demetra_m",
+        ...
+    )
 
     # Lecture de y
     y <- check_obj(dir = dir, x = y, reading_fun = read_series, name = "y", ...)
 
     # Lecture de sa
-    sa <- check_obj(dir = dir, x = sa, reading_fun = read_series, name = "sa", ...)
+    sa <- check_obj(
+        dir = dir,
+        x = sa,
+        reading_fun = read_series,
+        name = "sa",
+        ...
+    )
 
     # Lecture de s
     s <- check_obj(dir = dir, x = s, reading_fun = read_series, name = "s", ...)

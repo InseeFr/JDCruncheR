@@ -1,6 +1,10 @@
-
-check_obj <- function(dir = NULL, x = NULL, reading_fun = NULL, name = "", ...) {
-
+check_obj <- function(
+    dir = NULL,
+    x = NULL,
+    reading_fun = NULL,
+    name = "",
+    ...
+) {
     if (!is.null(x)) {
         return(x)
     }
@@ -18,7 +22,9 @@ check_obj <- function(dir = NULL, x = NULL, reading_fun = NULL, name = "", ...) 
         )
     }
 
-    list_files <- dir[!dir.exists(dir) & file.exists(dir) & endsWith(x = dir, suffix = ".csv")]
+    list_files <- dir[
+        !dir.exists(dir) & file.exists(dir) & endsWith(x = dir, suffix = ".csv")
+    ]
     dir <- dir[dir.exists(dir)]
     if (length(dir) == 0L & length(list_files) == 0L) {
         stop(
@@ -43,18 +49,27 @@ check_obj <- function(dir = NULL, x = NULL, reading_fun = NULL, name = "", ...) 
         message(
             "Several files with same pattern has been found:\n",
             paste(list_files, collapse = "\n"),
-            "\n\nThe first one (", list_files[1L], ") will be used."
+            "\n\nThe first one (",
+            list_files[1L],
+            ") will be used."
         )
     } else if (length(list_files) == 0L) {
         stop(
-            "No files with ", name, ".csv form have been found in the directory :",
+            "No files with ",
+            name,
+            ".csv form have been found in the directory :",
             paste(dir, collapse = "\n")
         )
     }
 
     x <- reading_fun(file = list_files[1L], ...)
     if (nrow(x) == 0L || ncol(x) == 0L) {
-        stop("The chosen csv file (", list_files[1L], ") is empty.", call. = FALSE)
+        stop(
+            "The chosen csv file (",
+            list_files[1L],
+            ") is empty.",
+            call. = FALSE
+        )
     }
 
     return(x)

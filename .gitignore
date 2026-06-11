@@ -25,7 +25,7 @@
 vignettes/*.html
 vignettes/*.pdf
 Meta/
-inst/doc/
+inst/doc
 doc/
 
 # OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3

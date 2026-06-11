@@ -11,7 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 * New classes for JVS objects
-* New function exctrac_JVS  to extract the JVS plug-in
+* New function extract_JVS  to extract the JVS plug-in
+* New function to export QR, mQr and JVS matrix object: `write()`
+* New vignette to explain how to use `extract_JVS` and the whole process.
 
 ### Fixed
 
@@ -27,6 +29,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 * The argument `matrix_output_file` is removed and replaced by `file` in the function `extractQR()`.
+
+### Deprecated
+
+* The function `export_xslx()` is deprecated in favour of `write`.
 
 
 ## [0.3.6] - 2025-07-24
