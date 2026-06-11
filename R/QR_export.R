@@ -287,18 +287,17 @@ export_xlsx.default <- function(x, ...) {
 #' @export
 export_xlsx.JVS_matrix <- function(x, format = c("csv", "xlsx"), export_dir = tempdir(), overwrite = TRUE, ...) {
     format <- match.arg(format)
+    outfile <- file.path(export_dir, paste0("JobVacancySurveyQR.", format))
+
+    if (file.exists(outfile) && !overwrite) {
+        warning(
+            sprintf("The file '%s' already exists.", outfile),
+            call. = FALSE
+        )
+        return(invisible(x))
+    }
 
     if (format == "csv"){
-        outfile <- file.path(export_dir, "JobVacancySurveyQR.csv")
-
-        if (file.exists(outfile) && !overwrite) {
-            warning(
-                sprintf("The file '%s' already exists.", outfile),
-                call. = FALSE
-            )
-            return(invisible(x))
-        }
-
         write.table(
             x = x,
             file = outfile,
@@ -310,7 +309,6 @@ export_xlsx.JVS_matrix <- function(x, format = c("csv", "xlsx"), export_dir = te
             fileEncoding = "utf-8",
             na = ""
         )
-
     } else {
         wb_jvs <- openxlsx::createWorkbook(title = "JVSQR")
         openxlsx::addWorksheet(wb = wb_jvs, sheetName = "JVS" )
@@ -319,16 +317,6 @@ export_xlsx.JVS_matrix <- function(x, format = c("csv", "xlsx"), export_dir = te
                             x = x,
                             headerStyle = header_style
                             )
-
-        outfile <- file.path(export_dir, "JobVacancySurveyQR.xlsx")
-
-        if (file.exists(outfile) && !overwrite) {
-            warning(
-                sprintf("The file '%s' already exists.", outfile),
-                call. = FALSE
-            )
-            return(invisible(x))
-        }
 
         openxlsx::saveWorkbook(
             wb = wb_jvs,
