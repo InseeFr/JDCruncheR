@@ -404,25 +404,20 @@ extractResidualsSeasEffect <- function(
 
 extractFrequency <- function(demetra_m) {
     start_date <- extractStart(demetra_m)
-    start_date <- start_date$values
-
     end_date <- extractEnd(demetra_m)
-    end_date <- end_date$values
-
     nobs <- extractNobs(demetra_m)
-    nobs <- nobs$values
 
-    if (!all(is.na(start_date)) && !all(is.na(end_date))) {
-        start_date <- as.Date(start_date, format = "%Y-%m-%d")
-        end_date <- as.Date(end_date, format = "%Y-%m-%d")
+    if (!all(is.na(start_date$values)) && !all(is.na(end_date$values))) {
+        start_date$values <- as.Date(start_date$values, format = "%Y-%m-%d")
+        end_date$values <- as.Date(end_date$values, format = "%Y-%m-%d")
 
-        start_date <- data.frame(
-            y = as.numeric(format(start_date, "%Y")),
-            m = as.numeric(format(start_date, "%m"))
+        start_date$values <- data.frame(
+            y = as.numeric(format(start_date$values, "%Y")),
+            m = as.numeric(format(start_date$values, "%m"))
         )
-        end_date <- data.frame(
-            y = as.numeric(format(end_date, "%Y")),
-            m = as.numeric(format(end_date, "%m"))
+        end_date$values <- data.frame(
+            y = as.numeric(format(end_date$values, "%Y")),
+            m = as.numeric(format(end_date$values, "%m"))
         )
         freq <- c(12L, 6L, 4L, 3L, 2L)
         nobs_compute <- matrix(
@@ -430,8 +425,8 @@ extractFrequency <- function(demetra_m) {
                 X = freq,
                 FUN = function(x) {
                     x *
-                        (end_date[, 1L] - start_date[, 1L]) +
-                        (end_date[, 2L] - start_date[, 2L]) / (12L / x)
+                        (end_date$values[, 1L] - start_date$values[, 1L]) +
+                        (end_date$values[, 2L] - start_date$values[, 2L]) / (12L / x)
                 },
                 FUN.VALUE = double(nrow(demetra_m))
             ),
@@ -440,13 +435,13 @@ extractFrequency <- function(demetra_m) {
         output <- vapply(
             X = seq_len(nrow(nobs_compute)),
             FUN = function(i) {
-                if (is.na(nobs[i])) {
+                if (is.na(nobs$values[i])) {
                     return(NA_integer_)
                 }
                 freq[which(
-                    (nobs_compute[i, ] == nobs[i]) |
-                        (nobs_compute[i, ] + 1L == nobs[i]) |
-                        (nobs_compute[i, ] - 1L == nobs[i])
+                    (nobs_compute[i, ] == nobs$values[i]) |
+                        (nobs_compute[i, ] + 1L == nobs$values[i]) |
+                        (nobs_compute[i, ] - 1L == nobs$values[i])
                 )[[1L]]]
             },
             FUN.VALUE = integer(1L)
@@ -915,17 +910,12 @@ extractMaxAdj_allseries <- function(y, sa) {
 
 extractAdjustment <- function(demetra_m, s) {
     leaster <- extractLeaster(demetra_m)
-    leaster <- leaster$values
-
     ntd <- extractNtd(demetra_m)
-    ntd <- ntd$values
-
     ly <- extractLeapYear(demetra_m)
-    ly <- ly$values
-    ly[is.na(ly)] <- ""
+    ly$values[is.na(ly$values)] <- ""
 
-    cond_ca <- leaster > 0 | ntd > 0 | ly == "Leap year"
     cond_sa <- apply(X = s[, -1], MARGIN = 2L, FUN = sd, na.rm = TRUE) != 0L
+    cond_ca <- leaster$values > 0 | ntd$values > 0 | ly$values == "Leap year"
 
     adjustment <- paste0(
         ifelse(
@@ -934,7 +924,7 @@ extractAdjustment <- function(demetra_m, s) {
             no = "NS"
         ),
         ifelse(
-            test = cond_ca,
+            test = is.na(cond_ca) | cond_ca,
             yes = "C",
             no = ""
         ),
