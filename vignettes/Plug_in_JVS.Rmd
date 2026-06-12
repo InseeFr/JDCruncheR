@@ -1,0 +1,26 @@
+---
+title: "Plug-in JVS"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Plug_in_JVS}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(JDCruncheR)
+```
+
+## Creation of demetra_m.csv
+
+## Creation of report JVS
+
+## Export
+

@@ -4,9 +4,9 @@
 \name{JDCruncheR-package}
 \alias{JDCruncheR}
 \alias{JDCruncheR-package}
-\title{JDCruncheR: Interface Between the 'JDemetra+' Cruncher and R, and Quality Report Generator}
+\title{JDCruncheR: 'JDemetra+' Quality Report Generator}
 \description{
-\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+\if{html}{\figure{logo.svg}{options: style='float: right' alt='logo' width='120'}}
 
 Tool for generating quality reports from cruncher outputs (and calculating series scores). The latest version of the cruncher can be downloaded here: \url{https://github.com/jdemetra/jwsacruncher/releases}.
 }
@@ -24,6 +24,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Tanguy Barthelemy \email{tanguy.barthelemy@insee.fr} [artist]
   \item Alain Quartier-la-Tente \email{alain.quartier-la-tente@insee.fr} (\href{https://orcid.org/0000-0001-7890-3857}{ORCID})
   \item Anna Smyk \email{anna.smyk@insee.fr}
 }
