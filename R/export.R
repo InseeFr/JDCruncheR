@@ -298,8 +298,8 @@ write.default <- function(x, ...) {
 #' \code{\link{JVS_matrix}} object as \code{x}.
 #'
 #' @details
-#' - xlsx files will be exported with the package {openxlsx}.
-#' - csv files will be exported with the package {utils}.
+#' - xlsx files will be exported with the package 'openxlsx'.
+#' - csv files will be exported with the package 'utils'.
 #'
 #' @importFrom utils write.table
 #'

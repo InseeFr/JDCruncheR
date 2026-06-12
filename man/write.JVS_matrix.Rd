@@ -33,8 +33,8 @@ To export several quality reports in CSV or Excel files
 }
 \details{
 \itemize{
-\item xlsx files will be exported with the package {openxlsx}.
-\item csv files will be exported with the package {utils}.
+\item xlsx files will be exported with the package 'openxlsx'.
+\item csv files will be exported with the package 'utils'.
 }
 }
 \seealso{
