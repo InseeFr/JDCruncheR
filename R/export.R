@@ -297,6 +297,12 @@ write.default <- function(x, ...) {
 #' @returns Returns invisibly (via \code{invisible(x)}) the same
 #' \code{\link{JVS_matrix}} object as \code{x}.
 #'
+#' @details
+#' - xlsx files will be exported with the package {openxlsx}.
+#' - csv files will be exported with the package {utils}.
+#'
+#' @importFrom utils write.table
+#'
 #' @family QR_matrix functions
 #' @exportS3Method write JVS_matrix
 #' @method write JVS_matrix
@@ -320,7 +326,7 @@ write.JVS_matrix <- function(
     }
 
     if (format == "csv") {
-        write.table(
+        utils::write.table(
             x = x,
             file = outfile,
             sep = ";",

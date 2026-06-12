@@ -1,3 +1,4 @@
+#' @title JVS matrix object
 #' @name JVS_matrix
 #' @export
 JVS_matrix <- function(x = list(), ...) {

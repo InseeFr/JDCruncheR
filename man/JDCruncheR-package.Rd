@@ -4,7 +4,7 @@
 \name{JDCruncheR-package}
 \alias{JDCruncheR}
 \alias{JDCruncheR-package}
-\title{JDCruncheR: Interface Between the 'JDemetra+' Cruncher and R, and Quality Report Generator}
+\title{JDCruncheR: 'JDemetra+' Quality Report Generator}
 \description{
 \if{html}{\figure{logo.svg}{options: style='float: right' alt='logo' width='120'}}
 

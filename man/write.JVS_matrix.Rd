@@ -31,6 +31,12 @@ Returns invisibly (via \code{invisible(x)}) the same
 \description{
 To export several quality reports in CSV or Excel files
 }
+\details{
+\itemize{
+\item xlsx files will be exported with the package {openxlsx}.
+\item csv files will be exported with the package {utils}.
+}
+}
 \seealso{
 Other QR_matrix functions:
 \code{\link[=extract_QR]{extract_QR()}},
