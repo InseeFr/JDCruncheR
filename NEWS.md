@@ -11,8 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 * New classes for JVS objects
-* New function extract_JVS  to extract the JVS plug-in
-* New function to export QR, mQr and JVS matrix object: `write()`
+* New function `extract_JVS` to extract the JVS plug-in
+* New function to export QR, mQR and JVS matrix object: `write()`
 * New vignette to explain how to use `extract_JVS` and the whole process.
 
 ### Fixed
@@ -20,7 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Solved the partial coloring bug in the output file. The value tab is now colored in its entirety, not just part of it. #44
 * `sa_on_sa` statistics are renamed in `s_on_sa`
 * QR produced if missing values
-* compute_score works now with `conditional_indicator`
+* `compute_score()` works now with `conditional_indicator`
 
 ### Changed
 
@@ -32,7 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Deprecated
 
-* The function `export_xslx()` is deprecated in favour of `write`.
+* The function `export_xlsx()` is deprecated in favour of `write`.
 
 
 ## [0.3.6] - 2025-07-24
