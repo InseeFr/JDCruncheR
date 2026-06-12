@@ -201,6 +201,8 @@ NULL
 #' @returns Returns invisibly (via \code{invisible(x)}) a workbook object
 #' created by \code{XLConnect::loadWorkbook()} for further manipulation.
 #'
+#' @importFrom openxlsx createWorkbook addWorksheet writeData saveWorkbook
+#'
 #' @family QR_matrix functions
 #' @seealso [Traduction française][fr-write.QR_matrix()]
 #' @exportS3Method write QR_matrix
@@ -302,6 +304,7 @@ write.default <- function(x, ...) {
 #' - csv files will be exported with the package 'utils'.
 #'
 #' @importFrom utils write.table
+#' @importFrom openxlsx createWorkbook addWorksheet writeData saveWorkbook
 #'
 #' @family QR_matrix functions
 #' @exportS3Method write JVS_matrix
@@ -405,6 +408,8 @@ NULL
 #'
 #' @returns Returns invisibly (via \code{invisible(x)}) the same
 #' \code{\link{mQR_matrix}} object as \code{x}.
+#'
+#' @importFrom openxlsx createWorkbook addWorksheet writeData saveWorkbook
 #'
 #' @family QR_matrix functions
 #' @seealso [Traduction française][fr-write.mQR_matrix()]
