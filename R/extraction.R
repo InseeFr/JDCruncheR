@@ -403,18 +403,13 @@ extractResidualsSeasEffect <- function(
 }
 
 extractFrequency <- function(demetra_m) {
-    missing_var <- NULL
-
     start_date <- extractStart(demetra_m)
-    missing_var <- c(missing_var, start_date$missing)
     start_date <- start_date$values
 
     end_date <- extractEnd(demetra_m)
-    missing_var <- c(missing_var, end_date$missing)
     end_date <- end_date$values
 
     nobs <- extractNobs(demetra_m)
-    missing_var <- c(missing_var, nobs$missing)
     nobs <- nobs$values
 
     if (!all(is.na(start_date)) && !all(is.na(end_date))) {
@@ -459,7 +454,10 @@ extractFrequency <- function(demetra_m) {
     } else {
         output <- rep(NA_integer_, nrow(demetra_m))
     }
-    return(list(values = output, missing = missing_var))
+    return(list(
+        values = output,
+        missing = c(nobs$missing, end_date$missing, start_date$missing)
+    ))
 }
 
 extractARIMA <- function(demetra_m) {
@@ -916,18 +914,13 @@ extractMaxAdj_allseries <- function(y, sa) {
 }
 
 extractAdjustment <- function(demetra_m, s) {
-    missing_var <- NULL
-
     leaster <- extractLeaster(demetra_m)
-    missing_var <- c(missing_var, leaster$missing)
     leaster <- leaster$values
 
     ntd <- extractNtd(demetra_m)
-    missing_var <- c(missing_var, ntd$missing)
     ntd <- ntd$values
 
     ly <- extractLeapYear(demetra_m)
-    missing_var <- c(missing_var, ly$missing)
     ly <- ly$values
     ly[is.na(ly)] <- ""
 
@@ -948,5 +941,7 @@ extractAdjustment <- function(demetra_m, s) {
         "A"
     )
 
-    return(list(values = adjustment, missing = missing_var))
+    return(list(
+        values = adjustment,
+        missing = c(leaster$missing, ntd$missing, ly$missing)))
 }
