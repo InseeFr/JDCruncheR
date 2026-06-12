@@ -1,4 +1,4 @@
-# JDCruncheR: Interface Between the 'JDemetra+' Cruncher and R, and Quality Report Generator
+# JDCruncheR: 'JDemetra+' Quality Report Generator
 
 Tool for generating quality reports from cruncher outputs (and
 calculating series scores). The latest version of the cruncher can be
@@ -20,6 +20,8 @@ Useful links:
 \[artist\]
 
 Authors:
+
+- Tanguy Barthelemy <tanguy.barthelemy@insee.fr> \[artist\]
 
 - Alain Quartier-la-Tente <alain.quartier-la-tente@insee.fr>
   ([ORCID](https://orcid.org/0000-0001-7890-3857))

@@ -40,7 +40,7 @@ ligne les paramètres modalities et values."><meta property="og:image" content="
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Combiner par ligne des objets QR_matrix</h1>
-      <small class="dont-index">Source: <a href="https://github.com/InseeFr/JDCruncheR/blob/main/R/QR_functions.R" class="external-link"><code>R/QR_functions.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/InseeFr/JDCruncheR/blob/develop/R/QR_functions.R" class="external-link"><code>R/QR_functions.R</code></a></small>
       <div class="d-none name"><code>fr-rbind.QR_matrix.Rd</code></div>
     </div>
 
@@ -77,17 +77,15 @@ paramètre <code>score_formula</code> de l'objet en sortie est <code>NULL</code>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Chemin menant au fichier demetra_m.csv</span></span></span>
 <span class="r-in"><span><span class="va">demetra_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package <span class="op">=</span> <span class="st">"JDCruncheR"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>    <span class="st">"WS/ws_ipi/Output/SAProcessing-1"</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"WS/WS_world/Output/SAProcessing-1"</span>,</span></span>
 <span class="r-in"><span>    <span class="st">"demetra_m.csv"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Extraire le bilan qualité à partir du fichier demetra_m.csv</span></span></span>
 <span class="r-in"><span><span class="va">QR</span> <span class="op">&lt;-</span> <span class="fu"><a href="extract_QR.html">extract_QR</a></span><span class="op">(</span><span class="va">demetra_path</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Multiple column found for extraction of q statistic</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> First column selected</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Multiple column found for extraction of q-m2 statistic</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> First column selected</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Multiple column found for extraction of mean</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Multiple column found for extraction of diagnostics.seas-i-qs:2, diagnostics.seas-i-qs</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Last column selected</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Multiple column found for extraction of diagnostics.seas-i-f:2, diagnostics.seas-i-f</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Last column selected</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Calculer differents scores</span></span></span>
@@ -98,7 +96,7 @@ paramètre <code>score_formula</code> de l'objet en sortie est <code>NULL</code>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">QR1</span>, <span class="va">QR2</span><span class="op">)</span><span class="op">)</span> <span class="co"># Une erreur est renvoyée</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Error : All QR_matrices must have the same score formulas.</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">QR1</span>, <span class="va">QR2</span>, check_formula <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> The quality report matrix has 26 observations</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The quality report matrix has 12 observations</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> There are 19 indicators in the modalities matrix and 21 indicators in the values matrix</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The quality report matrix contains the following variables:</span>
@@ -107,8 +105,8 @@ paramètre <code>score_formula</code> de l'objet en sortie est <code>NULL</code>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The variables exclusively found in the values matrix are:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> frequency  arima_model</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> The smallest score is 0 and the greatest is 34</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> The average score is 13.9231 and its standard deviation is 12.0828</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The smallest score is 0 and the greatest is 25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The average score is 4.16667 and its standard deviation is 9.73124</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

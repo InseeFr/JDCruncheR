@@ -38,7 +38,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>QR_matrix and mQR_matrix sorting</h1>
-      <small class="dont-index">Source: <a href="https://github.com/InseeFr/JDCruncheR/blob/main/R/QR_functions.R" class="external-link"><code>R/QR_functions.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/InseeFr/JDCruncheR/blob/develop/R/QR_functions.R" class="external-link"><code>R/QR_functions.R</code></a></small>
       <div class="d-none name"><code>sort.Rd</code></div>
     </div>
 
@@ -86,12 +86,13 @@ for now)</p></dd>
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><a href="fr-sort.QR_matrix.html">Traduction française</a></p>
 <p>Other QR_matrix functions:
-<code><a href="export_xlsx.html">export_xlsx()</a></code>,
-<code><a href="export_xlsx.QR_matrix.html">export_xlsx.QR_matrix()</a></code>,
-<code><a href="export_xlsx.mQR_matrix.html">export_xlsx.mQR_matrix()</a></code>,
 <code><a href="extract_QR.html">extract_QR()</a></code>,
 <code><a href="rbind.QR_matrix.html">rbind.QR_matrix()</a></code>,
-<code><a href="weighted_score.html">weighted_score()</a></code></p></div>
+<code><a href="weighted_score.html">weighted_score()</a></code>,
+<code><a href="write.html">write()</a></code>,
+<code><a href="write.JVS_matrix.html">write.JVS_matrix()</a></code>,
+<code><a href="write.QR_matrix.html">write.QR_matrix()</a></code>,
+<code><a href="write.mQR_matrix.html">write.mQR_matrix()</a></code></p></div>
     </div>
 
     <div class="section level2">
@@ -99,30 +100,28 @@ for now)</p></dd>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Path of matrix demetra_m</span></span></span>
 <span class="r-in"><span><span class="va">demetra_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package <span class="op">=</span> <span class="st">"JDCruncheR"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>    <span class="st">"WS/ws_ipi/Output/SAProcessing-1"</span>,</span></span>
+<span class="r-in"><span>    <span class="st">"WS/WS_world/Output/SAProcessing-1"</span>,</span></span>
 <span class="r-in"><span>    <span class="st">"demetra_m.csv"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Extract the quality report from the demetra_m file</span></span></span>
 <span class="r-in"><span><span class="va">QR</span> <span class="op">&lt;-</span> <span class="fu"><a href="extract_QR.html">extract_QR</a></span><span class="op">(</span><span class="va">demetra_path</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Multiple column found for extraction of q statistic</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> First column selected</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Multiple column found for extraction of q-m2 statistic</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> First column selected</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Multiple column found for extraction of mean</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Multiple column found for extraction of diagnostics.seas-i-qs:2, diagnostics.seas-i-qs</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Last column selected</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Multiple column found for extraction of diagnostics.seas-i-f:2, diagnostics.seas-i-f</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Last column selected</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Compute the score</span></span></span>
 <span class="r-in"><span><span class="va">QR</span> <span class="op">&lt;-</span> <span class="fu"><a href="compute_score.html">compute_score</a></span><span class="op">(</span><span class="va">QR</span>, n_contrib_score <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">QR</span><span class="op">[[</span><span class="st">"modalities"</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="st">"score"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 145  45 300 310  30 195 560 560 505 545 255 310 535</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1]   0   0 195  15  10  40</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Sort the scores</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># To sort by ascending scores</span></span></span>
 <span class="r-in"><span><span class="va">QR</span> <span class="op">&lt;-</span> <span class="fu">sort</span><span class="op">(</span><span class="va">QR</span>, sort_variables <span class="op">=</span> <span class="st">"score"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">QR</span><span class="op">[[</span><span class="st">"modalities"</span><span class="op">]</span><span class="op">]</span><span class="op">[[</span><span class="st">"score"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  30  45 145 195 255 300 310 310 505 535 545 560 560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1]   0   0  10  15  40 195</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

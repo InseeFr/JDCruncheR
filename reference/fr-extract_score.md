@@ -47,17 +47,15 @@ c'est une liste de scores (`NULL` ou un vecteur).
 # Chemin menant au fichier demetra_m.csv
 demetra_path <- file.path(
     system.file("extdata", package = "JDCruncheR"),
-    "WS/ws_ipi/Output/SAProcessing-1",
+    "WS/WS_world/Output/SAProcessing-1",
     "demetra_m.csv"
 )
 
 # Extraire le bilan qualité à partir du fichier demetra_m.csv
 QR <- extract_QR(demetra_path)
-#> Multiple column found for extraction of q statistic
-#> First column selected
-#> Multiple column found for extraction of q-m2 statistic
-#> First column selected
-#> Multiple column found for extraction of mean
+#> Multiple column found for extraction of diagnostics.seas-i-qs:2, diagnostics.seas-i-qs
+#> Last column selected
+#> Multiple column found for extraction of diagnostics.seas-i-f:2, diagnostics.seas-i-f
 #> Last column selected
 
 # Calculer le score
@@ -72,51 +70,30 @@ mQR <- mQR_matrix(list(a = QR1, b = QR2))
 
 # Extraire les scores
 extract_score(QR1)
-#>    series score
-#> 1  RF0610   145
-#> 2  RF0620    45
-#> 3  RF0811   300
-#> 4  RF0812   310
-#> 5  RF0893    30
-#> 6  RF0899   195
-#> 7  RF1011   560
-#> 8  RF1012   560
-#> 9  RF1013   505
-#> 10 RF1020   545
-#> 11 RF1031   255
-#> 12 RF1032   310
-#> 13 RF1039   535
+#>                      series score
+#> 1  Siachen Glacier (frozen)     0
+#> 2 Nagorno-Karabakh (frozen)     0
+#> 3         Mongolia (frozen)   195
+#> 4            India (frozen)    15
+#> 5            Nepal (frozen)    10
+#> 6      Philippines (frozen)    40
 extract_score(mQR)
 #> $a
-#>    series score
-#> 1  RF0610   145
-#> 2  RF0620    45
-#> 3  RF0811   300
-#> 4  RF0812   310
-#> 5  RF0893    30
-#> 6  RF0899   195
-#> 7  RF1011   560
-#> 8  RF1012   560
-#> 9  RF1013   505
-#> 10 RF1020   545
-#> 11 RF1031   255
-#> 12 RF1032   310
-#> 13 RF1039   535
+#>                      series score
+#> 1  Siachen Glacier (frozen)     0
+#> 2 Nagorno-Karabakh (frozen)     0
+#> 3         Mongolia (frozen)   195
+#> 4            India (frozen)    15
+#> 5            Nepal (frozen)    10
+#> 6      Philippines (frozen)    40
 #> 
 #> $b
-#>    series score
-#> 1  RF0610    70
-#> 2  RF0620    45
-#> 3  RF0811   215
-#> 4  RF0812   250
-#> 5  RF0893     0
-#> 6  RF0899   150
-#> 7  RF1011   425
-#> 8  RF1012   425
-#> 9  RF1013   475
-#> 10 RF1020   365
-#> 11 RF1031   110
-#> 12 RF1032   250
-#> 13 RF1039   380
+#>                      series score
+#> 1  Siachen Glacier (frozen)     0
+#> 2 Nagorno-Karabakh (frozen)     0
+#> 3         Mongolia (frozen)    25
+#> 4            India (frozen)     0
+#> 5            Nepal (frozen)    15
+#> 6      Philippines (frozen)    40
 #> 
 ```

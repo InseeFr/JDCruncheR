@@ -40,28 +40,26 @@ L'objet en entrée avec les tables de bilan qualité triées.
 # Chemin menant au fichier demetra_m.csv
 demetra_path <- file.path(
     system.file("extdata", package = "JDCruncheR"),
-    "WS/ws_ipi/Output/SAProcessing-1",
+    "WS/WS_world/Output/SAProcessing-1",
     "demetra_m.csv"
 )
 
 # Extraire le bilan qualité à partir du fichier demetra_m.csv
 QR <- extract_QR(demetra_path)
-#> Multiple column found for extraction of q statistic
-#> First column selected
-#> Multiple column found for extraction of q-m2 statistic
-#> First column selected
-#> Multiple column found for extraction of mean
+#> Multiple column found for extraction of diagnostics.seas-i-qs:2, diagnostics.seas-i-qs
+#> Last column selected
+#> Multiple column found for extraction of diagnostics.seas-i-f:2, diagnostics.seas-i-f
 #> Last column selected
 
 # Calculer le score
 QR <- compute_score(QR, n_contrib_score = 2)
 print(QR[["modalities"]][["score"]])
-#>  [1] 145  45 300 310  30 195 560 560 505 545 255 310 535
+#> [1]   0   0 195  15  10  40
 
 # Trier les scores
 
 # Pour trier par ordre croissant sur le score
 QR <- sort(QR, sort_variables = "score")
 print(QR[["modalities"]][["score"]])
-#>  [1]  30  45 145 195 255 300 310 310 505 535 545 560 560
+#> [1]   0   0  10  15  40 195
 ```

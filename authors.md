@@ -16,14 +16,14 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/InseeFr/JDCruncheR/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/InseeFr/JDCruncheR/blob/develop/DESCRIPTION)
 
-Barthelemy T, Quartier-la-Tente A, Smyk A (2026). *JDCruncheR: Interface
-Between the 'JDemetra+' Cruncher and R, and Quality Report Generator*. R
-package version 0.3.6.9000, <https://github.com/InseeFr/JDCruncheR>.
+Barthelemy T, Quartier-la-Tente A, Smyk A (2026). *JDCruncheR:
+'JDemetra+' Quality Report Generator*. R package version 0.3.6.9000,
+<https://github.com/InseeFr/JDCruncheR>.
 
     @Manual{,
-      title = {JDCruncheR: Interface Between the 'JDemetra+' Cruncher and R, and Quality Report Generator},
+      title = {JDCruncheR: 'JDemetra+' Quality Report Generator},
       author = {Tanguy Barthelemy and Alain Quartier-la-Tente and Anna Smyk},
       year = {2026},
       note = {R package version 0.3.6.9000},

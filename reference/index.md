@@ -4,8 +4,12 @@
 
 Functions to generate, edit and display a quality report
 
+- [`extract_JVS()`](https://inseefr.github.io/JDCruncheR/reference/extract_JVS.md)
+  : Extraction of a JVS report
 - [`extract_QR()`](https://inseefr.github.io/JDCruncheR/reference/extract_QR.md)
   : Extraction of a quality report
+- [`JVS_matrix()`](https://inseefr.github.io/JDCruncheR/reference/JVS_matrix.md)
+  : JVS matrix object
 - [`QR_matrix()`](https://inseefr.github.io/JDCruncheR/reference/QR_matrix.md)
   [`mQR_matrix()`](https://inseefr.github.io/JDCruncheR/reference/QR_matrix.md)
   [`is.QR_matrix()`](https://inseefr.github.io/JDCruncheR/reference/QR_matrix.md)
@@ -44,12 +48,14 @@ available
 
 Functions to export a quality report
 
-- [`export_xlsx(`*`<mQR_matrix>`*`)`](https://inseefr.github.io/JDCruncheR/reference/export_xlsx.mQR_matrix.md)
+- [`write(`*`<JVS_matrix>`*`)`](https://inseefr.github.io/JDCruncheR/reference/write.JVS_matrix.md)
+  : Exporting JVS_matrix objects in CSV or Excel files
+- [`write(`*`<mQR_matrix>`*`)`](https://inseefr.github.io/JDCruncheR/reference/write.mQR_matrix.md)
   : Exporting mQR_matrix objects in Excel files
-- [`export_xlsx(`*`<QR_matrix>`*`)`](https://inseefr.github.io/JDCruncheR/reference/export_xlsx.QR_matrix.md)
+- [`write(`*`<QR_matrix>`*`)`](https://inseefr.github.io/JDCruncheR/reference/write.QR_matrix.md)
   : Exporting QR_matrix objects in an Excel file
-- [`export_xlsx()`](https://inseefr.github.io/JDCruncheR/reference/export_xlsx.md)
-  : Exporting QR_matrix or mQR_matrix objects in an Excel file
+- [`write()`](https://inseefr.github.io/JDCruncheR/reference/write.md) :
+  Exporting QR_matrix or mQR_matrix objects in an Excel file
 
 ## Threshold
 
@@ -59,3 +65,10 @@ Functions to manage, reset and custom thresholds
   : Get all (default) thresholds
 - [`set_thresholds()`](https://inseefr.github.io/JDCruncheR/reference/set_thresholds.md)
   : Set values for thresholds
+
+## Deprecated
+
+Deprecated functions
+
+- [`export_xlsx()`](https://inseefr.github.io/JDCruncheR/reference/deprecated-JDCruncheR.md)
+  : Deprecated functions

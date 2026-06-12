@@ -35,12 +35,13 @@ the input with an additionnal weighted score
 française](https://inseefr.github.io/JDCruncheR/reference/fr-weighted_score.md)
 
 Other QR_matrix functions:
-[`export_xlsx()`](https://inseefr.github.io/JDCruncheR/reference/export_xlsx.md),
-[`export_xlsx.QR_matrix()`](https://inseefr.github.io/JDCruncheR/reference/export_xlsx.QR_matrix.md),
-[`export_xlsx.mQR_matrix()`](https://inseefr.github.io/JDCruncheR/reference/export_xlsx.mQR_matrix.md),
 [`extract_QR()`](https://inseefr.github.io/JDCruncheR/reference/extract_QR.md),
 [`rbind.QR_matrix()`](https://inseefr.github.io/JDCruncheR/reference/rbind.QR_matrix.md),
-[`sort()`](https://inseefr.github.io/JDCruncheR/reference/sort.md)
+[`sort`](https://inseefr.github.io/JDCruncheR/reference/sort.md),
+[`write()`](https://inseefr.github.io/JDCruncheR/reference/write.md),
+[`write.JVS_matrix()`](https://inseefr.github.io/JDCruncheR/reference/write.JVS_matrix.md),
+[`write.QR_matrix()`](https://inseefr.github.io/JDCruncheR/reference/write.QR_matrix.md),
+[`write.mQR_matrix()`](https://inseefr.github.io/JDCruncheR/reference/write.mQR_matrix.md)
 
 ## Examples
 
@@ -48,17 +49,15 @@ Other QR_matrix functions:
 # Path of matrix demetra_m
 demetra_path <- file.path(
     system.file("extdata", package = "JDCruncheR"),
-    "WS/ws_ipi/Output/SAProcessing-1",
+    "WS/WS_world/Output/SAProcessing-1",
     "demetra_m.csv"
 )
 
 # Extract the quality report from the demetra_m file
 QR <- extract_QR(demetra_path)
-#> Multiple column found for extraction of q statistic
-#> First column selected
-#> Multiple column found for extraction of q-m2 statistic
-#> First column selected
-#> Multiple column found for extraction of mean
+#> Multiple column found for extraction of diagnostics.seas-i-qs:2, diagnostics.seas-i-qs
+#> Last column selected
+#> Multiple column found for extraction of diagnostics.seas-i-f:2, diagnostics.seas-i-f
 #> Last column selected
 
 # Compute the score
@@ -67,7 +66,7 @@ QR <- compute_score(QR, n_contrib_score = 2)
 # Weighted score
 QR <- weighted_score(QR, 2)
 print(QR)
-#> The quality report matrix has 13 observations
+#> The quality report matrix has 6 observations
 #> There are 20 indicators in the modalities matrix and 24 indicators in the values matrix
 #> 
 #> The quality report matrix contains the following variables:
@@ -76,13 +75,13 @@ print(QR)
 #> The variables exclusively found in the values matrix are:
 #> frequency  arima_model  1_highest_contrib_score  2_highest_contrib_score
 #> 
-#> The smallest score is 30 and the greatest is 560
-#> The average score is 330.385 and its standard deviation is 194.866
+#> The smallest score is 0 and the greatest is 195
+#> The average score is 43.3333 and its standard deviation is 75.7408
 #> 
 #> The following formula was used to calculate the score:
 #> 30 * qs_residual_s_on_sa + 30 * f_residual_s_on_sa + 20 * qs_residual_sa_on_i + 20 * f_residual_sa_on_i + 30 * f_residual_td_on_sa + 20 * f_residual_td_on_i + 15 * oos_mean + 10 * oos_mse + 15 * residuals_independency + 5 * residuals_homoskedasticity + 5 * residuals_skewness + 5 * m7 + 5 * q_m2
 
 # Extract the weighted score
 QR[["modalities"]][["score_pond"]]
-#>  [1]  290   90  600  620   60  390 1120 1120 1010 1090  510  620 1070
+#> [1]   0   0 390  30  20  80
 ```

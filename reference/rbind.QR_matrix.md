@@ -37,12 +37,13 @@ object.
 française](https://inseefr.github.io/JDCruncheR/reference/fr-rbind.QR_matrix.md)
 
 Other QR_matrix functions:
-[`export_xlsx()`](https://inseefr.github.io/JDCruncheR/reference/export_xlsx.md),
-[`export_xlsx.QR_matrix()`](https://inseefr.github.io/JDCruncheR/reference/export_xlsx.QR_matrix.md),
-[`export_xlsx.mQR_matrix()`](https://inseefr.github.io/JDCruncheR/reference/export_xlsx.mQR_matrix.md),
 [`extract_QR()`](https://inseefr.github.io/JDCruncheR/reference/extract_QR.md),
-[`sort()`](https://inseefr.github.io/JDCruncheR/reference/sort.md),
-[`weighted_score()`](https://inseefr.github.io/JDCruncheR/reference/weighted_score.md)
+[`sort`](https://inseefr.github.io/JDCruncheR/reference/sort.md),
+[`weighted_score()`](https://inseefr.github.io/JDCruncheR/reference/weighted_score.md),
+[`write()`](https://inseefr.github.io/JDCruncheR/reference/write.md),
+[`write.JVS_matrix()`](https://inseefr.github.io/JDCruncheR/reference/write.JVS_matrix.md),
+[`write.QR_matrix()`](https://inseefr.github.io/JDCruncheR/reference/write.QR_matrix.md),
+[`write.mQR_matrix()`](https://inseefr.github.io/JDCruncheR/reference/write.mQR_matrix.md)
 
 ## Examples
 
@@ -50,17 +51,15 @@ Other QR_matrix functions:
 # Path of matrix demetra_m
 demetra_path <- file.path(
     system.file("extdata", package = "JDCruncheR"),
-    "WS/ws_ipi/Output/SAProcessing-1",
+    "WS/WS_world/Output/SAProcessing-1",
     "demetra_m.csv"
 )
 
 # Extract the quality report from the demetra_m file
 QR <- extract_QR(demetra_path)
-#> Multiple column found for extraction of q statistic
-#> First column selected
-#> Multiple column found for extraction of q-m2 statistic
-#> First column selected
-#> Multiple column found for extraction of mean
+#> Multiple column found for extraction of diagnostics.seas-i-qs:2, diagnostics.seas-i-qs
+#> Last column selected
+#> Multiple column found for extraction of diagnostics.seas-i-f:2, diagnostics.seas-i-f
 #> Last column selected
 
 # Compute differents scores
@@ -71,7 +70,7 @@ QR2 <- compute_score(QR, score_pond = c(m7 = 2, qs_residual_s_on_sa = 5))
 try(rbind(QR1, QR2)) # Une erreur est renvoyée
 #> Error : All QR_matrices must have the same score formulas.
 rbind(QR1, QR2, check_formula = FALSE)
-#> The quality report matrix has 26 observations
+#> The quality report matrix has 12 observations
 #> There are 19 indicators in the modalities matrix and 21 indicators in the values matrix
 #> 
 #> The quality report matrix contains the following variables:
@@ -80,6 +79,6 @@ rbind(QR1, QR2, check_formula = FALSE)
 #> The variables exclusively found in the values matrix are:
 #> frequency  arima_model
 #> 
-#> The smallest score is 0 and the greatest is 34
-#> The average score is 13.9231 and its standard deviation is 12.0828
+#> The smallest score is 0 and the greatest is 25
+#> The average score is 4.16667 and its standard deviation is 9.73124
 ```
