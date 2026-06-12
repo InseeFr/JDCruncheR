@@ -16,7 +16,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/InseeFr/JDCruncheR/blob/master/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/InseeFr/JDCruncheR/blob/main/DESCRIPTION)
 
 Barthelemy T, Quartier-la-Tente A, Smyk A (2026). *JDCruncheR: Interface
 Between the 'JDemetra+' Cruncher and R, and Quality Report Generator*. R
