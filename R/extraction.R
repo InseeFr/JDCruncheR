@@ -274,6 +274,17 @@ extractSeasCombined <- function(demetra_m) {
 }
 
 extract3Outliers <- function(demetra_m) {
+
+    outliers <- data.frame(
+        out1 = character(nrow(demetra_m)),
+        out2 = character(nrow(demetra_m)),
+        out3 = character(nrow(demetra_m))
+    )
+    nout <- extractNout(demetra_m)
+    if (is.null(nout$missing) && all(nout$values == 0)) {
+        return(list(values = outliers))
+    }
+
     pattern <- "(^regression\\.out$)|(^out$)" |>
         gsub(
             pattern = "$",
@@ -283,11 +294,9 @@ extract3Outliers <- function(demetra_m) {
 
     id_cols <- grep(pattern = pattern, colnames(demetra_m))
 
-    outliers <- data.frame(
-        out1 = character(nrow(demetra_m)),
-        out2 = character(nrow(demetra_m)),
-        out3 = character(nrow(demetra_m))
-    )
+    if (length(id_cols) == 0L) {
+        return(list(values = outliers, missing = c(nout$missing, "regression.out(*)")))
+    }
 
     for (id_series in seq_len(nrow(demetra_m))) {
         outs <- demetra_m[id_series, id_cols]
@@ -304,7 +313,7 @@ extract3Outliers <- function(demetra_m) {
         outliers[id_series, ] <- outs
     }
 
-    return(list(values = outliers))
+    return(list(values = outliers, missing = nout$missing))
 }
 
 extractTDFTest <- function(demetra_m) {

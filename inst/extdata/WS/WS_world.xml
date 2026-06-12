@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ns2:demetraGenericWorkspace xmlns="ec/tss.core" xmlns:ns2="ec/tss.demetra" name="ws_ipi">
+<ns2:demetraGenericWorkspace xmlns="ec/tss.core" xmlns:ns2="ec/tss.demetra" name="WS_world">
     <ns2:items>
         <ns2:item readOnly="false">
             <ns2:family>Seasonal adjustment@multi-documents</ns2:family>

@@ -26,7 +26,7 @@ both for the \code{modalities} and the \code{values} table.
 # Path of matrix demetra_m
 demetra_path <- file.path(
     system.file("extdata", package = "JDCruncheR"),
-    "WS/ws_ipi/Output/SAProcessing-1",
+    "WS/WS_world/Output/SAProcessing-1",
     "demetra_m.csv"
 )
 

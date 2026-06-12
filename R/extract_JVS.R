@@ -55,7 +55,7 @@
 #'
 #' dir_path <- system.file(
 #' "extdata",
-#' "WS/ws_ipi/Output/SAProcessing-1",
+#' "WS/WS_world/Output/SAProcessing-1",
 #' package = "JDCruncheR"
 #' )
 #'
