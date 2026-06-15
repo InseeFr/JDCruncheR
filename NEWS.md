@@ -18,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-* Solved the partial coloring bug in the output file. The value tab is now colored in its entirety, not just part of it. #44
+* Solved the partial coloring bug in the output file. The value tab is now colored in its entirety, not just part of it. [#44](https://github.com/InseeFr/JDCruncheR/issues/44)
 * `sa_on_sa` statistics are renamed in `s_on_sa`
 * QR produced if missing values
 * `compute_score()` works now with `conditional_indicator`
@@ -55,7 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-* `na.rm = TRUE` by default in `compute_score()` #36
+* `na.rm = TRUE` by default in `compute_score()` [#36](https://github.com/InseeFr/JDCruncheR/issues/36)
 * `extract_QR` accept demetra_m with duplicated columns
 
 
