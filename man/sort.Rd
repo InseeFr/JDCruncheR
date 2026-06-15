@@ -32,7 +32,7 @@ To sort the quality reports on one or several variables
 # Path of matrix demetra_m
 demetra_path <- file.path(
     system.file("extdata", package = "JDCruncheR"),
-    "WS/ws_ipi/Output/SAProcessing-1",
+    "WS/WS_world/Output/SAProcessing-1",
     "demetra_m.csv"
 )
 
@@ -53,12 +53,13 @@ print(QR[["modalities"]][["score"]])
 \seealso{
 \link[=fr-sort.QR_matrix]{Traduction française}
 
-Other QR_matrix functions: 
-\code{\link{export_xlsx}()},
-\code{\link{export_xlsx.QR_matrix}()},
-\code{\link{export_xlsx.mQR_matrix}()},
-\code{\link{extract_QR}()},
-\code{\link{rbind.QR_matrix}()},
-\code{\link{weighted_score}()}
+Other QR_matrix functions:
+\code{\link[=extract_QR]{extract_QR()}},
+\code{\link[=rbind.QR_matrix]{rbind.QR_matrix()}},
+\code{\link[=weighted_score]{weighted_score()}},
+\code{\link[=write]{write()}},
+\code{\link[=write.JVS_matrix]{write.JVS_matrix()}},
+\code{\link[=write.QR_matrix]{write.QR_matrix()}},
+\code{\link[=write.mQR_matrix]{write.mQR_matrix()}}
 }
 \concept{QR_matrix functions}

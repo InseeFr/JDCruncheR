@@ -31,7 +31,7 @@ be removed.
 # Path of matrix demetra_m
 demetra_path <- file.path(
     system.file("extdata", package = "JDCruncheR"),
-    "WS/ws_ipi/Output/SAProcessing-1",
+    "WS/WS_world/Output/SAProcessing-1",
     "demetra_m.csv"
 )
 
@@ -54,8 +54,8 @@ extract_score(QR) # is NULL because we removed the score indicator
 \seealso{
 \link[=fr-remove_indicators]{Traduction française}
 
-Other var QR_matrix manipulation: 
-\code{\link{add_indicator}()},
-\code{\link{recode_indicator_num}()}
+Other var QR_matrix manipulation:
+\code{\link[=add_indicator]{add_indicator()}},
+\code{\link[=recode_indicator_num]{recode_indicator_num()}}
 }
 \concept{var QR_matrix manipulation}

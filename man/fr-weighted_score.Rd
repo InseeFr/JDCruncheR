@@ -21,7 +21,7 @@ Permet de pondérer un score déjà calculé en fonction de variables.
 # Chemin menant au fichier demetra_m.csv
 demetra_path <- file.path(
     system.file("extdata", package = "JDCruncheR"),
-    "WS/ws_ipi/Output/SAProcessing-1",
+    "WS/WS_world/Output/SAProcessing-1",
     "demetra_m.csv"
 )
 

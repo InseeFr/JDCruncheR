@@ -44,8 +44,8 @@ quality report's series.
 \seealso{
 \link[=fr-add_indicator]{Traduction française}
 
-Other var QR_matrix manipulation: 
+Other var QR_matrix manipulation:
 \code{\link{QR_var_manipulation}},
-\code{\link{recode_indicator_num}()}
+\code{\link[=recode_indicator_num]{recode_indicator_num()}}
 }
 \concept{var QR_matrix manipulation}

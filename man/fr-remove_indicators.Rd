@@ -26,7 +26,7 @@ n'en retenir que certains (fonction \code{retain_indicators()}) d'objets
 # Chemin menant au fichier demetra_m.csv
 demetra_path <- file.path(
     system.file("extdata", package = "JDCruncheR"),
-    "WS/ws_ipi/Output/SAProcessing-1",
+    "WS/WS_world/Output/SAProcessing-1",
     "demetra_m.csv"
 )
 

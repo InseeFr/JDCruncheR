@@ -48,7 +48,9 @@ reference:
 - title: Quality report
   desc: Functions to generate, edit and display a quality report
   contents:
+  - '`extract_JVS`'
   - '`extract_QR`'
+  - '`JVS_matrix`'
   - '`QR_matrix`'
   - '`rbind.QR_matrix`'
   - '`print.QR_matrix`'
@@ -65,11 +67,16 @@ reference:
 - title: Export
   desc: Functions to export a quality report
   contents:
-  - '`export_xlsx.mQR_matrix`'
-  - '`export_xlsx.QR_matrix`'
-  - '`export_xlsx`'
+  - '`write.JVS_matrix`'
+  - '`write.mQR_matrix`'
+  - '`write.QR_matrix`'
+  - '`write`'
 - title: Threshold
   desc: Functions to manage, reset and custom thresholds
   contents:
   - '`get_thresholds`'
   - '`set_thresholds`'
+- title: Deprecated
+  desc: Deprecated functions
+  contents:
+  - '`deprecated-JDCruncheR`'
