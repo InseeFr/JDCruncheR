@@ -18,7 +18,7 @@ jobs:
 
     steps:
 
-      - uses: TanguyBarthelemy/r-release-action@v1.1.0
+      - uses: TanguyBarthelemy/r-release-action@main
         with:
           tag: ${{ github.event.inputs.tag }}
           main-branch: "main"
