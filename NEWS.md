@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * New function `extract_JVS` to extract the JVS plug-in
 * New function to export QR, mQR and JVS matrix object: `write()`
 * New vignette to explain how to use `extract_JVS` and the whole process.
+* New contributor: Eulalie Delaune
 
 ### Fixed
 

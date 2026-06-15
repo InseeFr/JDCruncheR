@@ -1,16 +1,20 @@
 Type: Package
 Package: JDCruncheR
 Title: 'JDemetra+' Quality Report Generator
-Version: 0.3.6.9000
+Version: 0.4.0
 Authors@R: c(
     person(given = "Tanguy", 
            family = "Barthelemy", 
            role = c("aut", "cre", "art"),
            email ="tanguy.barthelemy@insee.fr"),
+    person(given = "Eulalie", 
+           family = "Delaune", 
+           role = c("aut"),
+           email ="eulalie.delaune-virrion@insee.fr"),
     person(given = "Alain",
            family = "Quartier-la-Tente",
            role = "aut",
-           email = "alain.quartier-la-tente@insee.fr",
+           email = "alain.quartier@yahoo.fr",
            comment = c(ORCID = "0000-0001-7890-3857")),
     person(given = NULL, 
            family = "Institut national de la statistique et des études économiques",

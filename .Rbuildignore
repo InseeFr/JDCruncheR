@@ -49,3 +49,4 @@ LICENSE
 ^air\.toml$
 ^\.positai$
 ^\.claude$
+^CRAN-SUBMISSION$

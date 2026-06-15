@@ -25,7 +25,8 @@ Useful links:
 Authors:
 \itemize{
   \item Tanguy Barthelemy \email{tanguy.barthelemy@insee.fr} [artist]
-  \item Alain Quartier-la-Tente \email{alain.quartier-la-tente@insee.fr} (\href{https://orcid.org/0000-0001-7890-3857}{ORCID})
+  \item Eulalie Delaune \email{eulalie.delaune-virrion@insee.fr}
+  \item Alain Quartier-la-Tente \email{alain.quartier@yahoo.fr} (\href{https://orcid.org/0000-0001-7890-3857}{ORCID})
   \item Anna Smyk \email{anna.smyk@insee.fr}
 }
 
