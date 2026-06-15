@@ -1,6 +1,8 @@
 # Changelog
 
-## JDCruncheR 0.3.6.9000
+## JDCruncheR 0.4.0
+
+CRAN release: 2026-06-12
 
 All notable changes to this project will be documented in this file.
 
@@ -18,6 +20,7 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   [`write()`](https://inseefr.github.io/JDCruncheR/reference/write.md)
 - New vignette to explain how to use `extract_JVS` and the whole
   process.
+- New contributor: Eulalie Delaune
 
 #### Fixed
 

@@ -23,7 +23,9 @@ Authors:
 
 - Tanguy Barthelemy <tanguy.barthelemy@insee.fr> \[artist\]
 
-- Alain Quartier-la-Tente <alain.quartier-la-tente@insee.fr>
+- Eulalie Delaune <eulalie.delaune-virrion@insee.fr>
+
+- Alain Quartier-la-Tente <alain.quartier@yahoo.fr>
   ([ORCID](https://orcid.org/0000-0001-7890-3857))
 
 - Anna Smyk <anna.smyk@insee.fr>
